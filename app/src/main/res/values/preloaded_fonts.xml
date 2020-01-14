@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="preloaded_fonts" translatable="false">
+        <item>@font/days_one</item>
+        <item>@font/gorditas</item>
+        <item>@font/gorditas_bold</item>
+        <item>@font/raleway</item>
+        <item>@font/raleway_bold</item>
+        <item>@font/raleway_bold_italic</item>
+        <item>@font/raleway_light</item>
+        <item>@font/raleway_semibold</item>
+    </array>
+</resources>

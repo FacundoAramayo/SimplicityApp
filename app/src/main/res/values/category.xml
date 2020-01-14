@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--this id_category must be same with id_category server database-->
+    <!--<item>cat_id same with server database value</item> -->
+    <integer-array name="id_category">
+        <item>0</item> <!--FEATURED-->
+        <item>2</item> <!--SHOPPING-->
+        <item>3</item> <!--PHARMACY-->
+        <item>4</item> <!--GYM-->
+        <item>5</item> <!--RESTAURANTS-->
+        <item>6</item> <!--BAR-->
+        <item>7</item> <!--FAST FOOD-->
+        <item>8</item> <!--DELIVERY-->
+        <item>9</item> <!--ICE CREAM STORES-->
+        <item>10</item> <!--HOTELS-->
+        <item>11</item> <!--TEMPORARY RENT-->
+        <item>12</item> <!--TOURIST DESTINATION-->
+        <item>13</item> <!--MONEY-->
+        <item>14</item> <!--BILL PAYMENTS-->
+        <item>15</item> <!--APARTMENT RENTAL-->
+        <item>16</item> <!--TAXI-->
+        <item>17</item> <!--GAS STATION-->
+        <item>18</item> <!--TRANSPORTATION-->
+    </integer-array>
+
+    <string-array name="category_name">
+        <item>Featured</item>
+        <item>Shopping</item>
+        <item>Pharmacy</item>
+        <item>Gym</item>
+        <item>Restaurants</item>
+        <item>Bar</item>
+        <item>Fast Food</item>
+        <item>Delivery</item>
+        <item>Ice Cream Store</item>
+        <item>Hotels</item>
+        <item>Temporary Rent</item>
+        <item>Tourist Destination</item>
+        <item>Money</item>
+        <item>Bill Payments</item>
+        <item>Apartment Rental</item>
+        <item>Taxi</item>
+        <item>Gas Station</item>
+        <item>Transportation</item>
+    </string-array>
+
+    <integer-array name="category_icon">
+        <item>@drawable/ic_nav_featured</item>
+        <item>@drawable/ic_nav_shopping</item>
+        <item>@drawable/ic_nav_pharmacy</item>
+        <item>@drawable/ic_nav_gym</item>
+        <item>@drawable/ic_nav_food</item>
+        <item>@drawable/ic_nav_bar</item>
+        <item>@drawable/ic_nav_fast_food</item>
+        <item>@drawable/ic_nav_delivery</item>
+        <item>@drawable/ic_store</item>
+        <item>@drawable/ic_nav_hotels</item>
+        <item>@drawable/ic_nav_temporary_rent</item>
+        <item>@drawable/ic_nav_tour</item>
+        <item>@drawable/ic_nav_money</item>
+        <item>@drawable/ic_nav_bill_payments</item>
+
+        <item>@drawable/ic_nav_apartment_rental</item>
+        <item>@drawable/ic_nav_taxi</item>
+        <item>@drawable/ic_nav_gas_station</item>
+        <item>@drawable/ic_nav_transport</item>
+
+    </integer-array>
+
+
+</resources>

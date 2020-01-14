@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".app.modules.start.ui.ActivityWelcome$PlaceholderFragment"
+    android:background="@drawable/gradient_bg_1">
+
+
+    <ImageView
+        android:id="@+id/img_welcome"
+        android:layout_width="250dp"
+        android:layout_height="210dp"
+        android:layout_above="@+id/tv_welcome_title"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/imagen13"
+        tools:layout_editor_absoluteX="132dp"
+        tools:layout_editor_absoluteY="130dp"
+        android:layout_marginBottom="25dp"/>
+
+    <TextView
+        android:id="@+id/tv_welcome_title"
+        android:layout_width="@dimen/text_title_width"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:fontFamily="@font/gorditas"
+        android:gravity="center_horizontal"
+        android:text="@string/welcome_title_2"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="@android:color/white"
+        tools:layout_editor_absoluteX="166dp"
+        tools:layout_editor_absoluteY="270dp" />
+
+    <TextView
+        android:id="@+id/tv_welcome_description"
+        android:layout_width="@dimen/text_desc_width"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_welcome_title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="35dp"
+        android:fontFamily="@font/raleway_light"
+        android:gravity="center"
+        android:text="@string/welcome_description_2"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="15sp"
+        android:textColor="@android:color/white" />
+
+
+</RelativeLayout>
