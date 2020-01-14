@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "952435693298",
+    "firebase_url": "https://simplicity-app-7830.firebaseio.com",
+    "project_id": "simplicity-app-7830",
+    "storage_bucket": "simplicity-app-7830.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:952435693298:android:b50b918029efdbb2c9626b",
+        "android_client_info": {
+          "package_name": "com.simplicityapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "952435693298-e22spc0j5pnf1r5qsk3hv3k2lu5tas8q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBU1DdVV8niV8y085zeocdXUN6zL6YUrg4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "952435693298-e22spc0j5pnf1r5qsk3hv3k2lu5tas8q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
