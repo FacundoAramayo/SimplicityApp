@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "952435693298-um98fh0nnq4ahjrqq5k2j1t7lh1bqqtl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.simplicityapp",
+            "certificate_hash": "78676c15bf61f55a43586fa20858dedff808e3a7"
+          }
+        },
+        {
+          "client_id": "952435693298-i52nrp3hnrflubgrs6aukljhaqjdgmq8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.simplicityapp",
+            "certificate_hash": "38afbb2d9b296a275fb76283c51f936ecca2dab4"
+          }
+        },
+        {
           "client_id": "952435693298-e22spc0j5pnf1r5qsk3hv3k2lu5tas8q.apps.googleusercontent.com",
           "client_type": 3
         }
