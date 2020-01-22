@@ -31,6 +31,9 @@ public class AdapterPlaceGrid extends RecyclerView.Adapter<RecyclerView.ViewHold
     private final int VIEW_PROG = 0;
     private boolean loading;
 
+    private int orientation = 0;
+    private int width = 0;
+    private final double viewWidthFactor = 0.85;
     private Context ctx;
     private List<Place> items = new ArrayList<>();
 
@@ -76,10 +79,12 @@ public class AdapterPlaceGrid extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
     }
 
-    public AdapterPlaceGrid(Context ctx, RecyclerView view, List<Place> items) {
+    public AdapterPlaceGrid(Context ctx, RecyclerView view, List<Place> items, int orientation, int width) {
         this.ctx = ctx;
         this.items = items;
         lastItemViewDetector(view);
+        this.orientation = orientation;
+        this.width = width;
     }
 
     @Override
@@ -87,6 +92,10 @@ public class AdapterPlaceGrid extends RecyclerView.Adapter<RecyclerView.ViewHold
         RecyclerView.ViewHolder vh;
         if (viewType == VIEW_ITEM) {
             View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_place, parent, false);
+            if (orientation == StaggeredGridLayoutManager.HORIZONTAL) {
+                int viewWidth = (int) (width * viewWidthFactor);
+                v.setLayoutParams(new StaggeredGridLayoutManager.LayoutParams(viewWidth, StaggeredGridLayoutManager.LayoutParams.MATCH_PARENT));
+            }
             vh = new ViewHolder(v);
         } else {
             View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_loading, parent, false);

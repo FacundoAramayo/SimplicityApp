@@ -120,7 +120,7 @@
     <group android:id="@+id/bottom_menu_drawer">
         <item
             android:id="@+id/nav_subscription"
-            android:icon="@drawable/ic_menu_send"
+            android:icon="@drawable/ic_subscription"
             android:title="@string/title_nav_subscription" />
         <item
             android:id="@+id/nav_suggestions"

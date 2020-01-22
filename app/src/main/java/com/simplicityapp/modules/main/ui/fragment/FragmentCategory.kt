@@ -80,7 +80,7 @@ class FragmentCategory : Fragment() {
         recyclerView?.addItemDecoration(SpacingItemDecoration(UITools.getGridSpanCount(activity!!), UITools.dpToPx(activity!!, 4), true))
 
         //set data and list adapter
-        adapter = AdapterPlaceGrid(activity, recyclerView, ArrayList())
+        adapter = AdapterPlaceGrid(activity, recyclerView, ArrayList(), StaggeredGridLayoutManager.VERTICAL, 0)
         recyclerView?.adapter = adapter
 
         // on item list clicked

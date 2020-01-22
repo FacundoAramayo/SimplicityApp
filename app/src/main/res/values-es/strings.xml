@@ -133,7 +133,8 @@
     <!--=== DeviceTools ============================================================================== -->
     <string name="sharePlace">Mira este lugar </string>
     <string name="shareLocated">ubicado en</string>
-    <string name="shareApp">Usa la app</string>
+    <string name="shareApp">Usando la app</string>
+    <string name="shareAppButton">Compartir la aplicación</string>
     <string name="shareUsing">Compartir mediante…</string>
 
     <!-- ==================== OTHERS STRING ==================================================== -->
@@ -183,5 +184,8 @@
     <string name="register">Registrar</string>
     <string name="delete">Eliminar datos</string>
     <string name="scan">Escanear DNI</string>
+
+    <string name="help_us_grow">¡Ayúdanos a crecer!</string>
+    <string name="have_you_a_commerce">¿Tienes un comercio?</string>
 
 </resources>

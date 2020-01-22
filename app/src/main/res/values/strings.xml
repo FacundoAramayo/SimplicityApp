@@ -142,6 +142,7 @@
     <string name="sharePlace">View good place</string>
     <string name="shareLocated">located at</string>
     <string name="shareApp">Using app</string>
+    <string name="shareAppButton">Share app</string>
     <string name="shareUsing">Share using</string>
 
     <!-- ==================== OTHERS STRING ==================================================== -->
@@ -247,5 +248,8 @@
     <string name="register">Register</string>
     <string name="delete">Delete</string>
     <string name="scan">SCAN</string>
+
+    <string name="help_us_grow">Help us grow!</string>
+    <string name="have_you_a_commerce">Have you a commerce?</string>
 
 </resources>

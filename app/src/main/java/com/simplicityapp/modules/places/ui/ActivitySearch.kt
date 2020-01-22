@@ -133,7 +133,7 @@ class ActivitySearch : AppCompatActivity(), ActivityInterface {
 
     private fun initComponents() {
         //set data and list adapter
-        mAdapter = AdapterPlaceGrid(this, recyclerView, ArrayList())
+        mAdapter = AdapterPlaceGrid(this, recyclerView, ArrayList(), StaggeredGridLayoutManager.VERTICAL, 0)
         recyclerView?.adapter = mAdapter
         mAdapter?.setOnItemClickListener { v, obj -> ActivityPlaceDetail.navigate(this@ActivitySearch, v.findViewById(R.id.lyt_content), obj) }
 
