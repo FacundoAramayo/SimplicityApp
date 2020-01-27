@@ -86,7 +86,6 @@ class FragmentHome : Fragment() {
 
     private fun startAnimationTitle() {
         val animationDrawable: AnimationDrawable = lyt_title_animated_background?.background as AnimationDrawable
-        //animationDrawable.setEnterFadeDuration(1000)
         animationDrawable.setExitFadeDuration(3500)
         animationDrawable.start()
     }

@@ -1,15 +1,15 @@
 package com.simplicityapp.modules.start.ui
 
 import android.content.Intent
+import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 
 import android.widget.Button
+import android.widget.RelativeLayout
 import android.widget.Toast
 
 import androidx.appcompat.app.AppCompatActivity
@@ -111,11 +111,29 @@ class ActivityWelcome : AppCompatActivity(), ActivityInterface {
             var rootView = inflater.inflate(R.layout.fragment_welcome_1, container, false)
 
             when (section_number) {
-                1 -> rootView = inflater.inflate(R.layout.fragment_welcome_1, container, false)
-                2 -> rootView = inflater.inflate(R.layout.fragment_welcome_2, container, false)
-                3 -> rootView = inflater.inflate(R.layout.fragment_welcome_3, container, false)
+                1 -> {
+                    rootView = inflater.inflate(R.layout.fragment_welcome_1, container, false)
+                    val mainLayout = rootView.findViewById<RelativeLayout>(R.id.main_layout)
+                    startBackgroundAnimation(mainLayout)
+                }
+                2 -> {
+                    rootView = inflater.inflate(R.layout.fragment_welcome_2, container, false)
+                    val mainLayout = rootView.findViewById<RelativeLayout>(R.id.main_layout)
+                    startBackgroundAnimation(mainLayout)
+                }
+                3 -> {
+                    rootView = inflater.inflate(R.layout.fragment_welcome_3, container, false)
+                    val mainLayout = rootView.findViewById<RelativeLayout>(R.id.main_layout)
+                    startBackgroundAnimation(mainLayout)
+                }
             }
             return rootView
+        }
+
+        private fun startBackgroundAnimation(mainLayout: RelativeLayout) {
+            val animationDrawable: AnimationDrawable = mainLayout.background as AnimationDrawable
+            animationDrawable.setExitFadeDuration(3500)
+            animationDrawable.start()
         }
 
         companion object {

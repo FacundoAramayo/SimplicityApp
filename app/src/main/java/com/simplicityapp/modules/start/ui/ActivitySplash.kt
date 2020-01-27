@@ -2,7 +2,9 @@ package com.simplicityapp.modules.start.ui
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
+import android.widget.RelativeLayout
 
 import androidx.appcompat.app.AppCompatActivity
 
@@ -29,6 +31,12 @@ class ActivitySplash : AppCompatActivity() {
         sharedPref = SharedPref(this)
 
         chooseNextActivity()
+        startUI()
+    }
+
+    private fun startUI() {
+        val mainLayout = findViewById<RelativeLayout>(R.id.main_layout)
+        startBackgroundAnimation(mainLayout)
     }
 
     private fun chooseNextActivity() {
@@ -68,6 +76,12 @@ class ActivitySplash : AppCompatActivity() {
         val i = Intent(this@ActivitySplash, ActivityMain::class.java)
         ActionTools.startActivityWithDelay(ActivitySplashInstance,this@ActivitySplash, i)
         AnalyticsConstants.logEvent(AnalyticsConstants.OPEN_APP_TYPE, AnalyticsConstants.UPGRADE_RUN)
+    }
+
+    private fun startBackgroundAnimation(mainLayout: RelativeLayout) {
+        val animationDrawable: AnimationDrawable = mainLayout.background as AnimationDrawable
+        animationDrawable.setExitFadeDuration(3500)
+        animationDrawable.start()
     }
 
     val ActivitySplashInstance: ActivitySplash

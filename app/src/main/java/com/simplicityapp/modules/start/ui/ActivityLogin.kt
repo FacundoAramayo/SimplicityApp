@@ -2,12 +2,14 @@ package com.simplicityapp.modules.start.ui
 
 import android.Manifest
 import android.content.Intent
+import android.graphics.drawable.AnimationDrawable
 
 
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.CheckBox
+import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 
@@ -45,6 +47,7 @@ class ActivityLogin : AppCompatActivity(), ActivityInterface, View.OnClickListen
     private var sharedPref: SharedPref? = null
     private var signInButton: SignInButton? = null
     private var gso: GoogleSignInOptions? = null
+    private var mainLayout: LinearLayout? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,6 +67,14 @@ class ActivityLogin : AppCompatActivity(), ActivityInterface, View.OnClickListen
         signInButton = findViewById(R.id.sign_in_button)
         signInButton?.isEnabled = false
         checkBox = findViewById(R.id.checkBox)
+        mainLayout = findViewById(R.id.main_layout)
+        startBackgroundAnimation()
+    }
+
+    private fun startBackgroundAnimation() {
+        val animationDrawable: AnimationDrawable = mainLayout?.background as AnimationDrawable
+        animationDrawable.setExitFadeDuration(3500)
+        animationDrawable.start()
     }
 
     override fun initListeners() {
