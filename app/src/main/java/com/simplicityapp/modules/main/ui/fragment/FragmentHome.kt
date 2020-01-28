@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.util.Log
 import android.view.*
+import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -22,6 +23,7 @@ import com.simplicityapp.base.data.Constant
 import com.simplicityapp.base.data.SharedPref
 import com.simplicityapp.base.data.ThisApplication
 import com.simplicityapp.base.data.database.DatabaseHandler
+import com.simplicityapp.base.utils.ActionTools
 import com.simplicityapp.base.utils.Tools
 import com.simplicityapp.base.utils.UITools
 import com.simplicityapp.base.widget.SpacingItemDecoration
@@ -42,6 +44,8 @@ class FragmentHome : Fragment() {
     private var lyt_title_animated_background: LinearLayout? = null
     private var text_progress: TextView? = null
     private var snackbar_retry: Snackbar? = null
+    private var button_share_app: Button? = null
+    private var button_home_subscription: Button? = null
 
     private var db: DatabaseHandler? = null
     private var sharedPref: SharedPref? = null
@@ -69,6 +73,8 @@ class FragmentHome : Fragment() {
         lyt_progress = root_view?.findViewById(R.id.lyt_progress)
         lyt_title_animated_background = root_view?.findViewById(R.id.lyt_title_animated_background)
         text_progress = root_view?.findViewById<View>(R.id.text_progress) as TextView
+        button_share_app = root_view?.findViewById(R.id.button_home_share_app)
+        button_home_subscription = root_view?.findViewById(R.id.button_home_subscription)
 
         recyclerView?.layoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.HORIZONTAL)
         recyclerView?.addItemDecoration(SpacingItemDecoration(UITools.getGridSpanCount(activity!!) , UITools.dpToPx(activity!!, 4), true))
@@ -79,6 +85,14 @@ class FragmentHome : Fragment() {
 
         // on item list clicked
         adapter?.setOnItemClickListener { v, obj -> ActivityPlaceDetail.navigate((activity as ActivityMain?)!!, v.findViewById(R.id.lyt_content), obj) }
+
+        button_share_app?.setOnClickListener {
+            activity?.let { it1 -> ActionTools.methodShare(it1) }
+        }
+
+        button_home_subscription?.setOnClickListener {
+            activity?.let { it1 -> ActionTools.directUrl(it1, Constant.LINK_TO_SUBSCRIPTION_FORM) }
+        }
 
         startAnimationTitle()
         startLoadMoreAdapter()
@@ -194,7 +208,7 @@ class FragmentHome : Fragment() {
 
             override fun onFailure(call: Call<CallbackListPlace>?, t: Throwable) {
                 if (call != null && !call.isCanceled) {
-                    Log.e("onFailure", t.message)
+                    Log.e("FragmentHome", "onFailire ${t.message}")
                     val conn = Tools.checkConnection(context!!)
                     if (conn) {
                         onFailureRetry(page_no, getString(R.string.refresh_failed))

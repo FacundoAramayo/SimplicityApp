@@ -166,9 +166,10 @@
     <!--=== DeviceTools ============================================================================== -->
     <string name="sharePlace">Mira este lugar </string>
     <string name="shareLocated">ubicado en</string>
-    <string name="shareApp">Usando la app</string>
+    <string name="findInApp">Encuéntralo en la aplicación </string>
     <string name="shareAppButton">Compartir la aplicación</string>
     <string name="shareUsing">Compartir mediante…</string>
+    <string name="shareApp">Simplicity App está disponible en Google Play Store. Descárgala ahora</string>
 
     <!-- ==================== OTHERS STRING ==================================================== -->
     <string name="action_settings">Configuración</string>
@@ -211,6 +212,10 @@
     <string name="error_invalid_password">La contraseña es muy corta</string>
     <string name="loading">Cargando…</string>
 
+    <!-- Floatting Action Buttons -->
+    <string name="fab_map">Mapa</string>
+    <string name="fab_search">Buscar</string>
+    <string name="fab_favs">Favoritos</string>
 
     <!-- Strings related to user -->
     <string name="register_your_data">Por favor, registra tus datos</string>

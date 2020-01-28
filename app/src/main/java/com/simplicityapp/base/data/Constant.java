@@ -45,6 +45,13 @@ public class Constant {
     // OAuth Credentials
     public static final String OAUTH_WEB_CLIENT_ID = "554896515826-iilaie2tmb9td9gv7ejgp4ea9b2hvlg0.apps.googleusercontent.com";
 
+    //URL TO FORMS
+    public static final String LINK_TO_SUBSCRIPTION_FORM = "http://bit.ly/2TZkzQN";
+    public static final String LINK_TO_SUGGESTIONS_FORM = "http://bit.ly/36tYrkd";
+
+    //PARAMS SEND EMAIL
+    public static final String CONTACT_EMAIL = "contacto@simplicityapp.com.ar";
+    public static final String SUBJECT_EMAIL = "CONTACTO MEDIANTE SIMPLICITY APP";
 
     /**
      * ------------------- DON'T EDIT THIS ---------------------------------------------------------

@@ -27,7 +27,6 @@
         android:allowBackup="true"
         android:theme="@style/AppTheme">
         <activity android:name=".modules.start.ui.ActivityWelcome"
-            android:label="@string/title_activity_welcome"
             android:theme="@style/AppTheme" />
         <activity android:name=".modules.start.ui.ActivityLogin"
             android:label="@string/title_activity_login" />

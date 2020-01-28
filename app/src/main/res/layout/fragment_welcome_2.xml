@@ -14,7 +14,7 @@
         android:layout_height="210dp"
         android:layout_above="@+id/tv_welcome_title"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/imagen13"
+        android:src="@drawable/welcome_2"
         tools:layout_editor_absoluteX="132dp"
         tools:layout_editor_absoluteY="130dp"
         android:layout_marginBottom="25dp"/>

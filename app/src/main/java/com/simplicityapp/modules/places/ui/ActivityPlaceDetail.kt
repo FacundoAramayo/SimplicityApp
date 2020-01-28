@@ -156,7 +156,6 @@ class ActivityPlaceDetail : AppCompatActivity() {
     override fun onResume() {
         loadPlaceData()
         if (description != null) description!!.onResume()
-        prepareAds()
         super.onResume()
     }
 
@@ -299,21 +298,6 @@ class ActivityPlaceDetail : AppCompatActivity() {
         val intent = Intent(this@ActivityPlaceDetail, ActivityMaps::class.java)
         intent.putExtra(ActivityMaps.EXTRA_OBJ, place)
         startActivity(intent)
-    }
-
-    private fun prepareAds() {
-        /*
-        if (AppConfig.ADS_PLACE_DETAILS_BANNER && DeviceTools.checkConnection(getApplicationContext())) {
-            AdView mAdView = (AdView) findViewById(R.id.ad_view);
-            AdRequest adRequest = new AdRequest.Builder()
-                    .addNetworkExtrasBundle(AdMobAdapter.class, GDPR.getBundleAd(this)).build();
-            // Start loading the ad in the background.
-            mAdView.loadAd(adRequest);
-        } else {
-            ((RelativeLayout) findViewById(R.id.banner_layout)).setVisibility(View.GONE);
-        }
-
-         */
     }
 
     override fun onDestroy() {

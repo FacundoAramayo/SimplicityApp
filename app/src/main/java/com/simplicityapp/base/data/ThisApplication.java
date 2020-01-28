@@ -8,10 +8,6 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.google.android.gms.analytics.GoogleAnalytics;
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.StandardExceptionParser;
-import com.google.android.gms.analytics.Tracker;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -20,12 +16,10 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 
-import com.simplicityapp.R;
 import com.simplicityapp.base.connection.API;
 import com.simplicityapp.base.connection.RestAdapter;
 import com.simplicityapp.base.connection.callbacks.CallbackDevice;
 import com.simplicityapp.base.utils.Tools;
-import com.simplicityapp.base.utils.UITools;
 import com.simplicityapp.modules.settings.model.DeviceInfo;
 import retrofit2.Call;
 import retrofit2.Response;

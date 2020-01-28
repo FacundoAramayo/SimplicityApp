@@ -5,23 +5,23 @@
     <!--<item>cat_id same with server database value</item> -->
     <integer-array name="id_category">
         <item>0</item> <!--FEATURED-->
-        <item>2</item> <!--SHOPPING-->
-        <item>3</item> <!--PHARMACY-->
-        <item>4</item> <!--GYM-->
-        <item>5</item> <!--RESTAURANTS-->
-        <item>6</item> <!--BAR-->
-        <item>7</item> <!--FAST FOOD-->
-        <item>8</item> <!--DELIVERY-->
-        <item>9</item> <!--ICE CREAM STORES-->
-        <item>10</item> <!--HOTELS-->
-        <item>11</item> <!--TEMPORARY RENT-->
-        <item>12</item> <!--TOURIST DESTINATION-->
-        <item>13</item> <!--MONEY-->
-        <item>14</item> <!--BILL PAYMENTS-->
-        <item>15</item> <!--APARTMENT RENTAL-->
-        <item>16</item> <!--TAXI-->
-        <item>17</item> <!--GAS STATION-->
-        <item>18</item> <!--TRANSPORTATION-->
+        <item>1</item> <!--SHOPPING-->
+        <item>2</item> <!--PHARMACY-->
+        <item>3</item> <!--GYM-->
+        <item>4</item> <!--RESTAURANTS-->
+        <item>5</item> <!--BAR-->
+        <item>6</item> <!--FAST FOOD-->
+        <item>7</item> <!--DELIVERY-->
+        <item>8</item> <!--ICE CREAM STORES-->
+        <item>9</item> <!--HOTELS-->
+        <item>10</item> <!--TEMPORARY RENT-->
+        <item>11</item> <!--TOURIST DESTINATION-->
+        <item>12</item> <!--MONEY-->
+        <item>13</item> <!--BILL PAYMENTS-->
+        <item>14</item> <!--APARTMENT RENTAL-->
+        <item>15</item> <!--TAXI-->
+        <item>16</item> <!--GAS STATION-->
+        <item>17</item> <!--TRANSPORTATION-->
     </integer-array>
 
     <string-array name="category_name">

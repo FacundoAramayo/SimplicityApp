@@ -102,7 +102,7 @@
                             android:layout_height="210dp"
                             tools:layout_editor_absoluteX="132dp"
                             tools:layout_editor_absoluteY="130dp"
-                            app:srcCompat="@drawable/imagen15" />
+                            app:srcCompat="@drawable/welcome_1" />
 
                         <Button
                             android:layout_width="match_parent"
@@ -111,6 +111,7 @@
                             android:layout_margin="10dp"
                             android:paddingLeft="10dp"
                             android:paddingRight="10dp"
+                            android:id="@+id/button_home_share_app"
                             android:background="@drawable/gradient_box_rounded_1"
                             android:fontFamily="@font/raleway_semibold"
                             android:drawableLeft="@drawable/ic_share"
@@ -152,7 +153,7 @@
                             android:layout_height="210dp"
                             tools:layout_editor_absoluteX="132dp"
                             tools:layout_editor_absoluteY="130dp"
-                            app:srcCompat="@drawable/imagen10" />
+                            app:srcCompat="@drawable/welcome_3" />
 
                         <Button
                             android:layout_width="match_parent"
@@ -161,6 +162,7 @@
                             android:layout_margin="10dp"
                             android:paddingLeft="10dp"
                             android:paddingRight="10dp"
+                            android:id="@+id/button_home_subscription"
                             android:background="@drawable/gradient_box_rounded_3"
                             android:fontFamily="@font/raleway_semibold"
                             android:drawableTint="@android:color/white"

@@ -4,7 +4,6 @@ import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.view.WindowManager
@@ -98,7 +97,6 @@ class ActivitySearch : AppCompatActivity(), ActivityInterface {
 
     override fun initListeners() {
         mAdapterSuggestion?.setOnItemClickListener { view, viewModel, pos ->
-            Log.d("LOG-", "OnClick AdapterSuggestion")
             etSearch?.setText(viewModel)
             lytSuggestion?.visibility = View.GONE
             hideKeyboard()

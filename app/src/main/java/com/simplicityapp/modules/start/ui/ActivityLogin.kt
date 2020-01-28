@@ -208,10 +208,10 @@ class ActivityLogin : AppCompatActivity(), ActivityInterface, View.OnClickListen
             }
 
         }
-        Log.d("LOG-", "Result")
         if (!checkingPermissions()) {
             checkBox?.isChecked = false
         } else {
+            Log.d("LOG-", "Permissions OK")
             checkBox?.isChecked = true
             signInButton!!.isEnabled = true
         }

@@ -15,7 +15,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Vibrator;
 import android.util.Log;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -176,7 +175,7 @@ public class FcmMessagingService extends FirebaseMessagingService {
 
             @Override
             public void onFailed(String string) {
-                Log.e("onFailed", "on Failed");
+                Log.e("FcmMessagingService", "on Failed");
                 if (retry_count <= Constant.LOAD_IMAGE_NOTIF_RETRY) {
                     retry_count++;
                     loadRetryImageFromUrl(ctx, fcmNotification, callback);
@@ -192,7 +191,6 @@ public class FcmMessagingService extends FirebaseMessagingService {
     Runnable myRunnable;
 
     private void glideLoadImageFromUrl(final Context ctx, final String url, final CallbackImageNotif callback) {
-        Log.d("LOG-", "LOG image from: " + url);
         myRunnable = new Runnable() {
             @Override
             public void run() {

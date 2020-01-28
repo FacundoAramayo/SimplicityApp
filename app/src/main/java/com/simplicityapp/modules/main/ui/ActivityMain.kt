@@ -33,6 +33,7 @@ import com.simplicityapp.modules.main.ui.fragment.FragmentCategory
 import com.simplicityapp.modules.main.ui.fragment.FragmentHome
 import com.simplicityapp.R
 import com.simplicityapp.base.analytics.AnalyticsConstants
+import com.simplicityapp.base.data.Constant.*
 import com.simplicityapp.base.utils.ActionTools
 import com.simplicityapp.modules.places.ui.ActivitySearch
 
@@ -299,6 +300,18 @@ class ActivityMain : AppCompatActivity() {
             R.id.nav_transport -> {
                 openFragmentCategory(title, 17, AnalyticsConstants.ACTION_TRANSPORT)
             }
+
+            //COMMERCE ITEMS
+            R.id.nav_subscription -> {
+                ActionTools.directUrl(this, LINK_TO_SUBSCRIPTION_FORM)
+            }
+            R.id.nav_suggestions -> {
+                ActionTools.directUrl(this, LINK_TO_SUGGESTIONS_FORM)
+            }
+            R.id.nav_get_in_touch -> {
+                ActionTools.sendEmail(CONTACT_EMAIL, SUBJECT_EMAIL, "", this)
+            }
+
         }
         /* IMPORTANT : cat[index_array], index is start from 0 */
 

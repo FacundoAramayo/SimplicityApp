@@ -187,7 +187,6 @@ class FragmentCategory : Fragment() {
             override fun onResponse(call: Call<CallbackListPlace>, response: Response<CallbackListPlace>) {
                 val resp = response.body()
                 var gson = Gson()
-                Log.d("LOG-", "response1: " + gson.toJson(resp))
                 if (resp != null) {
                     count_total = resp.count_total
                     if (page_no == 1) db!!.refreshTablePlace()
