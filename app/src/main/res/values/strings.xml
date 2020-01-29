@@ -9,7 +9,7 @@
 
     <!--=== GOOGLE API KEY STRING ============================================================== -->
     <!-- API KEY FOR MAP -->
-    <string name="api_key" translatable="false">AIzaSyBRCUcPlH5lXNF20rXK84wQQCtr7gGJNlw</string>
+    <string name="api_key" translatable="false">AIzaSyBU1DdVV8niV8y085zeocdXUN6zL6YUrg4</string>
 
 
     <!--=== Nav Drawer Menu Items ============================================================== -->
