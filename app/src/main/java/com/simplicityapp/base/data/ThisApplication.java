@@ -8,6 +8,8 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -20,9 +22,13 @@ import com.simplicityapp.base.connection.API;
 import com.simplicityapp.base.connection.RestAdapter;
 import com.simplicityapp.base.connection.callbacks.CallbackDevice;
 import com.simplicityapp.base.utils.Tools;
+import com.simplicityapp.modules.places.model.Place;
 import com.simplicityapp.modules.settings.model.DeviceInfo;
 import retrofit2.Call;
 import retrofit2.Response;
+
+import static com.simplicityapp.base.analytics.AnalyticsConstants.PLACE_ACTION;
+import static com.simplicityapp.base.analytics.AnalyticsConstants.SCREEN_VIEW;
 
 public class ThisApplication extends Application {
 
@@ -106,11 +112,26 @@ public class ThisApplication extends Application {
     }
 
 
-    /**
+    /*
      * --------------------------------------------------------------------------------------------
      * For Google Analytics
      */
+    private Bundle getGoogleUserInformation() {
+        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
+        Bundle params = new Bundle();
+        if (acct != null) {
+            params.putString("personName", acct.getDisplayName());
+            params.putString("personGivenName", acct.getGivenName());
+            params.putString("personFamilyName", acct.getFamilyName());
+            params.putString("personEmail", acct.getEmail());
+            params.putString("personId", acct.getId());
+            params.putString("personPhoto", acct.getPhotoUrl().toString());
+        }
+        return params;
+    }
+
     public synchronized FirebaseAnalytics getFirebaseAnalytics() {
+        getGoogleUserInformation();
         if (firebaseAnalytics == null && AppConfig.ENABLE_ANALYTICS) {
             // Obtain the Firebase Analytics.
             firebaseAnalytics = FirebaseAnalytics.getInstance(this);
@@ -118,27 +139,44 @@ public class ThisApplication extends Application {
         return firebaseAnalytics;
     }
 
-    public void trackScreenView(String event, String item) {
+    public void trackScreenView(String screenName, String category, String item) {
+        getGoogleUserInformation();
         if (firebaseAnalytics != null || AppConfig.ENABLE_ANALYTICS) {
             Bundle params = new Bundle();
-            event = event.replaceAll("[^A-Za-z0-9_]", "");
-            params.putString("event", event);
+            screenName = screenName.replaceAll("[^A-Za-z0-9_]", "");
+            category = category.replaceAll("[^A-Za-z0-9_]", "");
+            params.putString("screenName", screenName);
+            params.putString("category", category);
             params.putString("item", item);
+            params.putBundle("userInformation", getGoogleUserInformation());
+            firebaseAnalytics.logEvent(SCREEN_VIEW, params);
+        }
+    }
+
+    public void trackEvent(String event, String label) {
+        if (firebaseAnalytics != null || AppConfig.ENABLE_ANALYTICS) {
+            Bundle params = new Bundle();
+            //label = label.replaceAll("[^A-Za-z0-9_]", "");
+            params.putString("label", label);
+            params.putBundle("userInformation", getGoogleUserInformation());
             firebaseAnalytics.logEvent(event, params);
         }
     }
 
-    public void trackEvent(String category, String action, String label) {
+    public void trackPlaceAction(Place place, String action) {
         if (firebaseAnalytics != null || AppConfig.ENABLE_ANALYTICS) {
             Bundle params = new Bundle();
-            category = category.replaceAll("[^A-Za-z0-9_]", "");
             action = action.replaceAll("[^A-Za-z0-9_]", "");
-            label = label.replaceAll("[^A-Za-z0-9_]", "");
-            params.putString("category", category);
             params.putString("action", action);
-            params.putString("label", label);
-            firebaseAnalytics.logEvent("EVENT", params);
+            params.putString("placeName", place.getName());
+            params.putString("placeAddress", place.getAddress());
+            params.putString("placeLat", String.valueOf(place.getLat()));
+            params.putString("placeLng", String.valueOf(place.getLng()));
+
+            params.putBundle("userInformation", getGoogleUserInformation());
+            firebaseAnalytics.logEvent(PLACE_ACTION, params);
         }
+
     }
 
     /**

@@ -51,7 +51,7 @@ public class Constant {
 
     //PARAMS SEND EMAIL
     public static final String CONTACT_EMAIL = "contacto@simplicityapp.com.ar";
-    public static final String SUBJECT_EMAIL = "CONTACTO MEDIANTE SIMPLICITY APP";
+    public static final String SUBJECT_EMAIL = "CONTACTO - APLICACIÓN";
 
     /**
      * ------------------- DON'T EDIT THIS ---------------------------------------------------------

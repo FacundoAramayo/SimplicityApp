@@ -30,7 +30,8 @@ import com.simplicityapp.base.data.SharedPref
 import com.simplicityapp.base.utils.PermissionUtil
 
 import androidx.core.content.PermissionChecker.PERMISSION_GRANTED
-import com.simplicityapp.base.data.Constant
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.simplicityapp.base.analytics.AnalyticsConstants.Companion.logEvent
 import com.simplicityapp.base.ui.ActivityInterface
 import com.simplicityapp.base.utils.Tools
 
@@ -108,7 +109,7 @@ class ActivityLogin : AppCompatActivity(), ActivityInterface, View.OnClickListen
         }
     }
 
-    //TODO: Configurar web_client_id -> Verificar si esto es lo implementado por nosotros
+
     private fun configureGoogleSignIn() {
         Log.d("Web_client_id", getString(R.string.web_client_id))
         gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -165,6 +166,7 @@ class ActivityLogin : AppCompatActivity(), ActivityInterface, View.OnClickListen
     private fun signIn() {
         val signInIntent = mGoogleSignInClient!!.signInIntent
         startActivityForResult(signInIntent, RC_SIGN_IN)
+        logEvent(FirebaseAnalytics.Event.LOGIN)
     }
 
     private fun signOut() {
@@ -211,7 +213,7 @@ class ActivityLogin : AppCompatActivity(), ActivityInterface, View.OnClickListen
         if (!checkingPermissions()) {
             checkBox?.isChecked = false
         } else {
-            Log.d("LOG-", "Permissions OK")
+            Log.d(TAG, "Permissions OK")
             checkBox?.isChecked = true
             signInButton!!.isEnabled = true
         }

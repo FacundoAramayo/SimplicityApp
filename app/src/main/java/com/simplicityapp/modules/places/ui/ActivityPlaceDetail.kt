@@ -46,9 +46,17 @@ import com.simplicityapp.modules.main.ui.ActivityMain
 import com.simplicityapp.modules.places.model.Images
 import com.simplicityapp.modules.places.model.Place
 import com.simplicityapp.R
+import com.simplicityapp.base.analytics.AnalyticsConstants.Companion.ACTION_PLACE_ADDRESS
+import com.simplicityapp.base.analytics.AnalyticsConstants.Companion.ACTION_PLACE_NAVIGATE_MAP
+import com.simplicityapp.base.analytics.AnalyticsConstants.Companion.ACTION_PLACE_OPEN_MAP
+import com.simplicityapp.base.analytics.AnalyticsConstants.Companion.ACTION_PLACE_PHONE
+import com.simplicityapp.base.analytics.AnalyticsConstants.Companion.ACTION_PLACE_WEBSITE
 import com.simplicityapp.base.analytics.AnalyticsConstants.Companion.FAVORITES_ADD
 import com.simplicityapp.base.analytics.AnalyticsConstants.Companion.FAVORITES_REMOVE
 import com.simplicityapp.base.analytics.AnalyticsConstants.Companion.VIEW_PLACE
+import com.simplicityapp.base.analytics.AnalyticsConstants.Companion.logEvent
+import com.simplicityapp.base.analytics.AnalyticsConstants.Companion.logPlaceAction
+import com.simplicityapp.base.analytics.AnalyticsConstants.Companion.logScreenView
 import com.simplicityapp.base.utils.ActionTools
 import com.simplicityapp.base.utils.Tools
 import com.simplicityapp.base.utils.UITools
@@ -102,19 +110,19 @@ class ActivityPlaceDetail : AppCompatActivity() {
                 db!!.deleteFavorites(place!!.place_id)
                 Snackbar.make(parent_view!!, place!!.name + " " + getString(R.string.remove_favorite), Snackbar.LENGTH_SHORT).show()
                 // analytics tracking
-                ThisApplication.getInstance().trackEvent(Constant.AnalyticsEvent.FAVORITES.name, FAVORITES_REMOVE, place!!.name)
+                logEvent(FAVORITES_REMOVE, place?.name.orEmpty())
                 fabToggle(false)
             } else {
                 db!!.addFavorites(place!!.place_id)
                 Snackbar.make(parent_view!!, place!!.name + " " + getString(R.string.add_favorite), Snackbar.LENGTH_SHORT).show()
                 // analytics tracking
-                ThisApplication.getInstance().trackEvent(Constant.AnalyticsEvent.FAVORITES.name, FAVORITES_ADD, place!!.name)
+                logEvent(FAVORITES_ADD, place?.name.orEmpty())
                 fabToggle(true)
             }
         }
 
         // analytics tracking
-        ThisApplication.getInstance().trackScreenView(VIEW_PLACE, place!!.name!!)
+        logScreenView(SCREEN_NAME, VIEW_PLACE, place?.name.orEmpty())
     }
 
 
@@ -163,17 +171,19 @@ class ActivityPlaceDetail : AppCompatActivity() {
     fun clickLayout(view: View) {
         when (view.id) {
             R.id.lyt_address -> if (!place!!.isDraft) {
+                logPlaceAction(place!!, ACTION_PLACE_ADDRESS)
                 val uri = Uri.parse("http://maps.google.com/maps?q=loc: ${place!!.lat},${place!!.lng}")
                 val intent = Intent(Intent.ACTION_VIEW, uri)
                 startActivity(intent)
             }
             R.id.lyt_phone -> if (!place!!.isDraft && place!!.phone != "-" && place!!.phone!!.trim { it <= ' ' } != "") {
+                logPlaceAction(place!!, ACTION_PLACE_PHONE)
                 ActionTools.Companion.dialNumber(this, place!!.phone!!)
-                //TODO: LOG EVENTS ThisApplication.getInstance().trackEvent()
             } else {
                 Snackbar.make(parent_view!!, R.string.fail_dial_number, Snackbar.LENGTH_SHORT).show()
             }
             R.id.lyt_website -> if (!place!!.isDraft && place!!.website != "-" && place!!.website!!.trim { it <= ' ' } != "") {
+                logPlaceAction(place!!, ACTION_PLACE_WEBSITE)
                 ActionTools.directUrl(this, place!!.website!!)
             } else {
                 Snackbar.make(parent_view!!, R.string.fail_open_website, Snackbar.LENGTH_SHORT).show()
@@ -286,7 +296,7 @@ class ActivityPlaceDetail : AppCompatActivity() {
         }
 
         (findViewById<View>(R.id.bt_navigate) as Button).setOnClickListener {
-            //Toast.makeText(getApplicationContext(),"OPEN", Toast.LENGTH_LONG).show();
+            logPlaceAction(place!!, ACTION_PLACE_NAVIGATE_MAP)
             val navigation = Intent(Intent.ACTION_VIEW, Uri.parse("http://maps.google.com/maps?daddr=${place!!.lat},${place!!.lng}"))
             startActivity(navigation)
         }
@@ -295,6 +305,7 @@ class ActivityPlaceDetail : AppCompatActivity() {
     }
 
     private fun openPlaceInMap() {
+        logPlaceAction(place!!, ACTION_PLACE_OPEN_MAP)
         val intent = Intent(this@ActivityPlaceDetail, ActivityMaps::class.java)
         intent.putExtra(ActivityMaps.EXTRA_OBJ, place)
         startActivity(intent)
@@ -399,6 +410,7 @@ class ActivityPlaceDetail : AppCompatActivity() {
 
     companion object {
 
+        private val SCREEN_NAME = "PLACE_DETAILS"
         private val EXTRA_OBJ = "key.EXTRA_OBJ"
         private val EXTRA_NOTIF_FLAG = "key.EXTRA_NOTIF_FLAG"
 

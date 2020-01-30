@@ -1,6 +1,8 @@
 package com.simplicityapp.base.analytics
 
+import android.os.Bundle
 import com.simplicityapp.base.data.ThisApplication
+import com.simplicityapp.modules.places.model.Place
 
 class AnalyticsConstants {
 
@@ -9,10 +11,12 @@ class AnalyticsConstants {
          * --------------------------------Analytics Tags-------------------------------------------
          */
         const val GENERIC_TAG = "GENERIC_EVENT"
-        const val OPEN_APP_TYPE = "OPEN_APP_TYPE"
+        const val SCREEN_VIEW = "SCREEN_VIEW"
+        const val PLACE_ACTION = "PLACE_ACTION"
         const val OPTIONS_ITEMS_SELECTED = "OPTIONS_ITEMS_SELECTED"
-        const val MENU_ITEMS_SELECTED = "MENU_ITEMS_SELECTED"
-        const val HOME_FAB_OPTION_SELECTED = "HOME_FAB_OPTION_SELECTED"
+        const val SELECT_MENU_ITEM = "SELECT_MENU_ITEM"
+        const val SELECT_HOME_ITEM = "SELECT_HOME_ITEM"
+        const val SELECT_FAB_OPTION = "SELECT_FAB_OPTION"
 
         const val VIEW_PLACE = "VIEW_PLACE"
         const val VIEW_CONTENT = "VIEW_CONTENT"
@@ -34,6 +38,9 @@ class AnalyticsConstants {
         const val ACTION_SEARCH = "ACTION_SEARCH"
         const val ACTION_FAVORITES = "ACTION_FAVORITES"
         const val ACTION_NOTIFICATIONS = "ACTION_NOTIFICATIONS"
+        const val SUBSCRIPTION_FORM = "SUBSCRIPTION_FORM"
+        const val SUGGESTIONS_FORM = "SUGGESTIONS_FORM"
+        const val GET_IN_TOUCH = "GET_IN_TOUCH"
         const val ACTION_PROFILE = "ACTION_PROFILE"
         const val ACTION_FEATURED = "ACTION_FEATURED"
         const val ACTION_SHOPPING = "ACTION_SHOPPING"
@@ -68,12 +75,22 @@ class AnalyticsConstants {
         const val ACTION_PLACE_OPEN_MAP = "ACTION_PLACE_OPEN_MAP"
         const val ACTION_PLACE_NAVIGATE_MAP = "ACTION_PLACE_NAVIGATE_MAP"
 
+        const val ACTION_SHARE_APP = "ACTION_SHARE_APP"
+
 
         /**
          * --------------------------------Analytics Methods----------------------------------------
          */
-        fun logEvent(tag: String, action: String) {
-            ThisApplication.getInstance().trackEvent(tag, action, "-")
+        fun logEvent(event: String, label: String? = "") {
+            ThisApplication.getInstance().trackEvent(event, label.orEmpty())
+        }
+
+        fun logScreenView(screenName: String, category: String? = "", item: String? = "") {
+            ThisApplication.getInstance().trackScreenView(screenName, category.orEmpty(), item.orEmpty())
+        }
+
+        fun logPlaceAction(place: Place, action: String) {
+            ThisApplication.getInstance().trackPlaceAction(place, action)
         }
     }
 

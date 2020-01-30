@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.widget.RelativeLayout
 
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.analytics.FirebaseAnalytics
 
 import com.simplicityapp.BuildConfig
 import com.simplicityapp.R
@@ -63,19 +64,19 @@ class ActivitySplash : AppCompatActivity() {
     private fun startActivityWelcomeDelay() {
         val i = Intent(this@ActivitySplash, ActivityWelcome::class.java)
         ActionTools.startActivityWithDelay(ActivitySplashInstance,this@ActivitySplash, i)
-        AnalyticsConstants.logEvent(AnalyticsConstants.OPEN_APP_TYPE, AnalyticsConstants.FIRST_RUN)
+        AnalyticsConstants.logEvent(FirebaseAnalytics.Event.APP_OPEN, AnalyticsConstants.FIRST_RUN)
     }
 
     private fun startActivityMainDelay() {
         val i = Intent(this@ActivitySplash, ActivityMain::class.java)
         ActionTools.startActivityWithDelay(ActivitySplashInstance,this@ActivitySplash, i)
-        AnalyticsConstants.logEvent(AnalyticsConstants.OPEN_APP_TYPE, AnalyticsConstants.NORMAL_RUN)
+        AnalyticsConstants.logEvent(FirebaseAnalytics.Event.APP_OPEN, AnalyticsConstants.NORMAL_RUN)
     }
 
     private fun startActivityUpgradeDelay() {
         val i = Intent(this@ActivitySplash, ActivityMain::class.java)
         ActionTools.startActivityWithDelay(ActivitySplashInstance,this@ActivitySplash, i)
-        AnalyticsConstants.logEvent(AnalyticsConstants.OPEN_APP_TYPE, AnalyticsConstants.UPGRADE_RUN)
+        AnalyticsConstants.logEvent(FirebaseAnalytics.Event.APP_OPEN, AnalyticsConstants.UPGRADE_RUN)
     }
 
     private fun startBackgroundAnimation(mainLayout: RelativeLayout) {

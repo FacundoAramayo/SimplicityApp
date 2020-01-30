@@ -109,20 +109,20 @@ class ActivityMain : AppCompatActivity() {
             val intent = Intent(this, ActivityMaps::class.java)
             startActivity(intent)
             fab?.collapse()
-            AnalyticsConstants.logEvent(AnalyticsConstants.HOME_FAB_OPTION_SELECTED, AnalyticsConstants.ACTION_FLOATING_BUTTON_MAP)
+            AnalyticsConstants.logEvent(AnalyticsConstants.SELECT_FAB_OPTION, AnalyticsConstants.ACTION_FLOATING_BUTTON_MAP)
         }
 
         fab_button_search?.setOnClickListener {
             val intent = Intent(this, ActivitySearch::class.java)
             startActivity(intent)
             fab?.collapse()
-            AnalyticsConstants.logEvent(AnalyticsConstants.HOME_FAB_OPTION_SELECTED, AnalyticsConstants.ACTION_FLOATING_BUTTON_SEARCH)
+            AnalyticsConstants.logEvent(AnalyticsConstants.SELECT_FAB_OPTION, AnalyticsConstants.ACTION_FLOATING_BUTTON_SEARCH)
         }
 
         fab_button_favorites?.setOnClickListener {
             onItemSelected(R.id.nav_favorites, getString(R.string.title_nav_fav))
             fab?.collapse()
-            AnalyticsConstants.logEvent(AnalyticsConstants.HOME_FAB_OPTION_SELECTED, AnalyticsConstants.ACTION_FLOATING_BUTTON_FAVORITES)
+            AnalyticsConstants.logEvent(AnalyticsConstants.SELECT_FAB_OPTION, AnalyticsConstants.ACTION_FLOATING_BUTTON_FAVORITES)
         }
 
     }
@@ -195,7 +195,7 @@ class ActivityMain : AppCompatActivity() {
         home = false
         bundle.putInt(FragmentCategory.TAG_CATEGORY, cat!![categoryId])
         actionBar?.title = title
-        AnalyticsConstants.logEvent(AnalyticsConstants.MENU_ITEMS_SELECTED, analyticsAction)
+        AnalyticsConstants.logEvent(AnalyticsConstants.SELECT_MENU_ITEM, analyticsAction)
     }
 
     private fun onItemSelected(id: Int, title: String): Boolean {
@@ -205,25 +205,25 @@ class ActivityMain : AppCompatActivity() {
                 fragment = FragmentHome()
                 home = true
                 actionBar?.title = title
-                AnalyticsConstants.logEvent(AnalyticsConstants.MENU_ITEMS_SELECTED, AnalyticsConstants.ACTION_HOME)
+                AnalyticsConstants.logEvent(AnalyticsConstants.SELECT_MENU_ITEM, AnalyticsConstants.ACTION_HOME)
             }
             R.id.nav_all -> {
                 fragment = FragmentCategory()
                 home = false
                 bundle.putInt(FragmentCategory.TAG_CATEGORY, -1)
                 actionBar?.title = title
-                AnalyticsConstants.logEvent(AnalyticsConstants.MENU_ITEMS_SELECTED, AnalyticsConstants.ACTION_ALL_PLACES)
+                AnalyticsConstants.logEvent(AnalyticsConstants.SELECT_MENU_ITEM, AnalyticsConstants.ACTION_ALL_PLACES)
             }
             R.id.nav_map -> {
                 val i = Intent(applicationContext, ActivityMaps::class.java)
                 home = false
-                AnalyticsConstants.logEvent(AnalyticsConstants.MENU_ITEMS_SELECTED, AnalyticsConstants.ACTION_MAP)
+                AnalyticsConstants.logEvent(AnalyticsConstants.SELECT_MENU_ITEM, AnalyticsConstants.ACTION_MAP)
                 startActivity(i)
             }
             R.id.nav_search -> {
                 val i = Intent(applicationContext, ActivitySearch::class.java)
                 home = false
-                AnalyticsConstants.logEvent(AnalyticsConstants.MENU_ITEMS_SELECTED, AnalyticsConstants.ACTION_SEARCH)
+                AnalyticsConstants.logEvent(AnalyticsConstants.SELECT_MENU_ITEM, AnalyticsConstants.ACTION_SEARCH)
                 startActivity(i)
             }
             R.id.nav_favorites -> {
@@ -231,18 +231,18 @@ class ActivityMain : AppCompatActivity() {
                 home = false
                 bundle.putInt(FragmentCategory.TAG_CATEGORY, -2)
                 actionBar?.title = title
-                AnalyticsConstants.logEvent(AnalyticsConstants.MENU_ITEMS_SELECTED, AnalyticsConstants.ACTION_FAVORITES)
+                AnalyticsConstants.logEvent(AnalyticsConstants.SELECT_MENU_ITEM, AnalyticsConstants.ACTION_FAVORITES)
             }
             R.id.nav_news -> {
                 val i = Intent(this, ActivityNotifications::class.java)
                 home = false
-                AnalyticsConstants.logEvent(AnalyticsConstants.MENU_ITEMS_SELECTED, AnalyticsConstants.ACTION_NOTIFICATIONS)
+                AnalyticsConstants.logEvent(AnalyticsConstants.SELECT_MENU_ITEM, AnalyticsConstants.ACTION_NOTIFICATIONS)
                 startActivity(i)
             }
             R.id.nav_profile -> {
 //                val j = Intent(this, ActivityProfile::class.java)
 //                home = false
-//                AnalyticsConstants.logEvent(AnalyticsConstants.MENU_ITEMS_SELECTED, AnalyticsConstants.ACTION_PROFILE)
+//                AnalyticsConstants.logEvent(AnalyticsConstants.SELECT_MENU_ITEM, AnalyticsConstants.ACTION_PROFILE)
 //                startActivity(j)
             }
 
@@ -303,13 +303,16 @@ class ActivityMain : AppCompatActivity() {
 
             //COMMERCE ITEMS
             R.id.nav_subscription -> {
+                AnalyticsConstants.logEvent(AnalyticsConstants.SELECT_MENU_ITEM, AnalyticsConstants.SUBSCRIPTION_FORM)
                 ActionTools.directUrl(this, LINK_TO_SUBSCRIPTION_FORM)
             }
             R.id.nav_suggestions -> {
+                AnalyticsConstants.logEvent(AnalyticsConstants.SELECT_MENU_ITEM, AnalyticsConstants.SUGGESTIONS_FORM)
                 ActionTools.directUrl(this, LINK_TO_SUGGESTIONS_FORM)
             }
             R.id.nav_get_in_touch -> {
-                ActionTools.sendEmail(CONTACT_EMAIL, SUBJECT_EMAIL, "", this)
+                AnalyticsConstants.logEvent(AnalyticsConstants.SELECT_MENU_ITEM, AnalyticsConstants.GET_IN_TOUCH)
+                ActionTools.sendEmail(CONTACT_EMAIL, SUBJECT_EMAIL, "\n\n--\nMensaje enviado desde Simplicity App.", this)
             }
 
         }

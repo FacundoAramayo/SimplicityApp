@@ -113,7 +113,7 @@ public class ActivitySetting extends PreferenceActivity {
             public boolean onPreferenceChange(Preference preference, Object o) {
                 boolean flag = (boolean) o;
                 // analytics tracking
-                ThisApplication.getInstance().trackEvent(Constant.AnalyticsEvent.NOTIFICATION.name(), (flag ? "ENABLE" : "DISABLE"), "-");
+                ThisApplication.getInstance().trackEvent(Constant.AnalyticsEvent.NOTIFICATION.name(), (flag ? "ENABLE" : "DISABLE"));
                 return true;
             }
         });
@@ -136,7 +136,7 @@ public class ActivitySetting extends PreferenceActivity {
             public boolean onPreferenceClick(Preference preference) {
                 dialogColorChooser(ActivitySetting.this);
                 // analytics tracking
-                ThisApplication.getInstance().trackEvent(Constant.AnalyticsEvent.THEME.name(), "CHANGE", "-");
+                ThisApplication.getInstance().trackEvent(Constant.AnalyticsEvent.THEME.name(), "CHANGE");
                 return true;
             }
         });

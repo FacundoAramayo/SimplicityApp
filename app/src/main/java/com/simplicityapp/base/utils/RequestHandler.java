@@ -67,7 +67,6 @@ public class RequestHandler {
             if (responseCode == HttpsURLConnection.HTTP_OK) {
                 BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
                 response = br.readLine();
-                //TODO IMPORTANTE REVISAR
 //                response = "ok";
                 Log.d("Response code", String.valueOf(responseCode));
                 Log.d("Response", "Value: " + response);

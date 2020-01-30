@@ -87,7 +87,7 @@ public class ActivityNotifications extends AppCompatActivity {
         mAdapter.setOnItemClickListener(new AdapterContentInfo.OnItemClickListener() {
             @Override
             public void onItemClick(View v, ContentInfo obj, int position) {
-                ActivityNotificationDetails.navigate(ActivityNotifications.this, obj, false);
+                ActivityNotificationDetails.Companion.navigate(ActivityNotifications.this, obj, false);
             }
         });
 

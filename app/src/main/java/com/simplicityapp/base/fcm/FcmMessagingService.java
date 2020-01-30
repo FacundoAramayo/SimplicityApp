@@ -110,7 +110,7 @@ public class FcmMessagingService extends FirebaseMessagingService {
             intent = ActivityPlaceDetail.Companion.navigateBase(this, fcmNotification.getPlace(), true);
         } else if (fcmNotification.getNews() != null) {
             new DatabaseHandler(this).refreshTableContentInfo();
-            intent = ActivityNotificationDetails.navigateBase(this, fcmNotification.getNews(), true);
+            intent = ActivityNotificationDetails.Companion.navigateBase(this, fcmNotification.getNews(), true);
         }
 
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

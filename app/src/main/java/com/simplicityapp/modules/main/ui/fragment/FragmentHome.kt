@@ -16,6 +16,7 @@ import com.google.android.material.snackbar.Snackbar
 
 import com.simplicityapp.R
 import com.simplicityapp.base.adapter.AdapterPlaceGrid
+import com.simplicityapp.base.analytics.AnalyticsConstants
 import com.simplicityapp.base.connection.RestAdapter
 import com.simplicityapp.base.connection.callbacks.CallbackListPlace
 import com.simplicityapp.base.data.AppConfig
@@ -87,10 +88,12 @@ class FragmentHome : Fragment() {
         adapter?.setOnItemClickListener { v, obj -> ActivityPlaceDetail.navigate((activity as ActivityMain?)!!, v.findViewById(R.id.lyt_content), obj) }
 
         button_share_app?.setOnClickListener {
+            AnalyticsConstants.logEvent(AnalyticsConstants.SELECT_HOME_ITEM, AnalyticsConstants.SUBSCRIPTION_FORM)
             activity?.let { it1 -> ActionTools.methodShare(it1) }
         }
 
         button_home_subscription?.setOnClickListener {
+            AnalyticsConstants.logEvent(AnalyticsConstants.SELECT_HOME_ITEM, AnalyticsConstants.ACTION_SHARE_APP)
             activity?.let { it1 -> ActionTools.directUrl(it1, Constant.LINK_TO_SUBSCRIPTION_FORM) }
         }
 

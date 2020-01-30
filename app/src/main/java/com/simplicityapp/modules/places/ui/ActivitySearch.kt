@@ -21,6 +21,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.google.firebase.analytics.FirebaseAnalytics
 
 import java.util.ArrayList
 
@@ -31,6 +32,7 @@ import com.simplicityapp.base.utils.Tools
 import com.simplicityapp.base.utils.UITools
 import com.simplicityapp.base.widget.SpacingItemDecoration
 import com.simplicityapp.R
+import com.simplicityapp.base.analytics.AnalyticsConstants
 import com.simplicityapp.base.ui.ActivityInterface
 
 class ActivitySearch : AppCompatActivity(), ActivityInterface {
@@ -180,6 +182,7 @@ class ActivitySearch : AppCompatActivity(), ActivityInterface {
         lytSuggestion?.visibility = View.GONE
         showNotFoundView()
         val query = etSearch!!.text.toString().trim { it <= ' ' }
+        AnalyticsConstants.logEvent(FirebaseAnalytics.Event.SEARCH, query)
         if (query != "") {
             mAdapterSuggestion!!.addSearchHistory(query)
             mAdapter?.resetListData()
