@@ -24,7 +24,8 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
+import java.util.Collections
 
 class Tools {
 
@@ -206,10 +207,10 @@ class Tools {
             if (PermissionUtil.isLocationGranted(ctx)) {
                 val manager = ctx.getSystemService(Context.LOCATION_SERVICE) as LocationManager
                 if (manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-                    var loc: Location? = ThisApplication.getInstance().location
+                    var loc: Location? = ThisApplication.instance?.location
                     if (loc == null) {
                         loc = getLastKnownLocation(ctx)
-                        ThisApplication.getInstance().location = loc
+                        ThisApplication.instance?.location = loc
                     }
                     if (loc != null) {
                         return LatLng(loc.latitude, loc.longitude)

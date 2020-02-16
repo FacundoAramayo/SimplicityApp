@@ -166,7 +166,7 @@
                             android:background="@drawable/gradient_box_rounded_3"
                             android:fontFamily="@font/raleway_semibold"
                             android:drawableTint="@android:color/white"
-                            android:text="@string/title_nav_subscription"
+                            android:text="@string/title_home_subscription"
                             android:textColor="#fff" />
                     </LinearLayout>
 

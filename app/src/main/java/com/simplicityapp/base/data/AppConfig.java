@@ -16,6 +16,9 @@ public class AppConfig {
     // this flag if you want to hide menu news info
     public static final boolean ENABLE_CONTENT_INFO = true;
 
+    // if we want hide empty categories in menu
+    public static final boolean ENABLE_EMPTY_CATEGORIES = false;
+
     // flag for save image offline
     public static final boolean IMAGE_CACHE = true;
 
@@ -23,7 +26,7 @@ public class AppConfig {
     public static final boolean LAZY_LOAD = false;
 
     // flag for tracking analytics
-    public static final boolean ENABLE_ANALYTICS = true;
+    public static final boolean ENABLE_ANALYTICS = false;
 
     // clear image cache when receive push notifications
     public static final boolean REFRESH_IMG_NOTIF = true;
@@ -55,5 +58,11 @@ public class AppConfig {
 
     // si la app abrió luego de una actualización, utilizar lo siguiente
     public static final int UPGRADE_RUN = 1;
+
+    // si la DB cuenta con menos de este valor, actualizar siempre que inicie para traer nuevos contenidos
+    public static final int LIMIT_PLACES_TO_UPDATE = 100;
+
+    // flag para notificar cuando se inició por primera vez
+    public static final String FIRST_RUN_FLAG = "FIRST_RUN";
 
 }

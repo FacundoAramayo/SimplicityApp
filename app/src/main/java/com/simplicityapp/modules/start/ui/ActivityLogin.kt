@@ -30,8 +30,10 @@ import com.simplicityapp.base.data.SharedPref
 import com.simplicityapp.base.utils.PermissionUtil
 
 import androidx.core.content.PermissionChecker.PERMISSION_GRANTED
-import com.google.firebase.analytics.FirebaseAnalytics
-import com.simplicityapp.base.analytics.AnalyticsConstants.Companion.logEvent
+import com.simplicityapp.base.analytics.AnalyticsConstants
+import com.simplicityapp.base.data.AppConfig.FIRST_RUN
+import com.simplicityapp.base.data.AppConfig.FIRST_RUN_FLAG
+import com.simplicityapp.base.data.Constant.LOG_TAG
 import com.simplicityapp.base.ui.ActivityInterface
 import com.simplicityapp.base.utils.Tools
 
@@ -102,7 +104,7 @@ class ActivityLogin : AppCompatActivity(), ActivityInterface, View.OnClickListen
                 val account = task.getResult(ApiException::class.java)
                 firebaseAuthWithGoogle(account!!)
             } catch (e: ApiException) {
-                Log.w(TAG, "Google sign in failed", e)
+                Log.w(LOG_TAG, "Google sign in failed", e)
                 updateUI(null)
             }
 
@@ -111,7 +113,7 @@ class ActivityLogin : AppCompatActivity(), ActivityInterface, View.OnClickListen
 
 
     private fun configureGoogleSignIn() {
-        Log.d("Web_client_id", getString(R.string.web_client_id))
+        Log.d(LOG_TAG,"Web_client_id: " + getString(R.string.web_client_id))
         gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.web_client_id))
             .requestEmail()
@@ -119,29 +121,27 @@ class ActivityLogin : AppCompatActivity(), ActivityInterface, View.OnClickListen
     }
 
     private fun firebaseAuthWithGoogle(acct: GoogleSignInAccount) {
-        Log.d(TAG, "firebaseAuthWithGoogle:" + acct.id!!)
+        Log.d(LOG_TAG, "firebaseAuthWithGoogle:" + acct.id!!)
         val credential = GoogleAuthProvider.getCredential(acct.idToken, null)
         mAuth!!.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
-                    Log.d(TAG, "signInWithCredential:success")
+                    Log.d(LOG_TAG, "signInWithCredential: success")
                     val user = mAuth?.currentUser
                     updateUI(user)
                 } else {
                     // If sign in fails, display a message to the user.
-                    Log.w(TAG, "signInWithCredential:failure", task.exception)
+                    Log.w(LOG_TAG, "signInWithCredential: failure", task.exception)
                     Snackbar.make(findViewById(R.id.main_layout), "Authentication Failed.", Snackbar.LENGTH_SHORT).show()
                     updateUI(null)
                 }
             }
     }
 
-    fun checkingPermissions(): Boolean {
+    private fun checkingPermissions(): Boolean {
         return checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) &&
-                checkPermission(Manifest.permission.ACCESS_FINE_LOCATION) &&
-                checkPermission(Manifest.permission.READ_CONTACTS) &&
-                checkPermission(Manifest.permission.GET_ACCOUNTS)
+                checkPermission(Manifest.permission.ACCESS_FINE_LOCATION)
     }
 
     private fun checkPermission(permission: String): Boolean {
@@ -150,9 +150,10 @@ class ActivityLogin : AppCompatActivity(), ActivityInterface, View.OnClickListen
 
     private fun checkBoxListener() {
         if (checkBox?.isChecked!!) {
+            AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.TERMS_AND_CONDITIONS_PREVIOUS)
             if (Tools.needRequestPermission()) {
                 val permission = PermissionUtil.getDeniedPermission(this@ActivityLogin)
-                if (permission.size != 0) {
+                if (permission.isNotEmpty()) {
                     requestPermissions(permission, 200)
                 } else {
                     signInButton?.isEnabled = true
@@ -166,7 +167,7 @@ class ActivityLogin : AppCompatActivity(), ActivityInterface, View.OnClickListen
     private fun signIn() {
         val signInIntent = mGoogleSignInClient!!.signInIntent
         startActivityForResult(signInIntent, RC_SIGN_IN)
-        logEvent(FirebaseAnalytics.Event.LOGIN)
+        AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.LOGIN_SUCCESS)
     }
 
     private fun signOut() {
@@ -188,6 +189,7 @@ class ActivityLogin : AppCompatActivity(), ActivityInterface, View.OnClickListen
 
             findViewById<View>(R.id.sign_in_button).visibility = View.GONE
             val i = Intent(this@ActivityLogin, ActivityMain::class.java)
+            i.putExtra(FIRST_RUN_FLAG, true)
             startActivity(i)
             finish()
         }
@@ -213,7 +215,8 @@ class ActivityLogin : AppCompatActivity(), ActivityInterface, View.OnClickListen
         if (!checkingPermissions()) {
             checkBox?.isChecked = false
         } else {
-            Log.d(TAG, "Permissions OK")
+            AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.TERMS_AND_CONDITIONS_SUCCESS)
+            Log.d(LOG_TAG, "Permissions OK")
             checkBox?.isChecked = true
             signInButton!!.isEnabled = true
         }

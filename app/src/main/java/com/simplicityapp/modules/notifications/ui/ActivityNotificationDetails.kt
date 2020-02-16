@@ -33,9 +33,7 @@ import com.simplicityapp.modules.main.ui.ActivityMain
 import com.simplicityapp.modules.start.ui.ActivitySplash
 import com.simplicityapp.modules.notifications.model.ContentInfo
 import com.simplicityapp.R
-
-import com.simplicityapp.base.analytics.AnalyticsConstants.Companion.VIEW_CONTENT
-import com.simplicityapp.base.analytics.AnalyticsConstants.Companion.logScreenView
+import com.simplicityapp.base.analytics.AnalyticsConstants
 
 class ActivityNotificationDetails : AppCompatActivity() {
 
@@ -62,7 +60,7 @@ class ActivityNotificationDetails : AppCompatActivity() {
         displayData()
 
         // analytics tracking
-        logScreenView(SCREEN_NAME, VIEW_CONTENT, contentInfo?.title.orEmpty());
+        AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.VIEW_NOTIFICATION, contentInfo?.title.orEmpty())
     }
 
     private fun initComponent() {
@@ -102,6 +100,12 @@ class ActivityNotificationDetails : AppCompatActivity() {
         )
 
         (findViewById<View>(R.id.lyt_image) as MaterialRippleLayout).setOnClickListener {
+            AnalyticsConstants.logAnalyticsEvent(
+                AnalyticsConstants.SELECT_NOTIFICATION_OPEN_PHOTO,
+                null,
+                null,
+                null
+            )
             val images_list = ArrayList<String>()
             images_list.add(Constant.getURLimgNews(contentInfo!!.image))
             val i = Intent(this@ActivityNotificationDetails, ActivityFullScreenImage::class.java)
@@ -132,6 +136,12 @@ class ActivityNotificationDetails : AppCompatActivity() {
             onBackAction()
             return true
         } else if (id == R.id.action_share) {
+            AnalyticsConstants.logAnalyticsEvent(
+                AnalyticsConstants.SELECT_NOTIFICATION_ITEM_SHARE,
+                null,
+                null,
+                null
+            )
             ActionTools.methodShareNews(this, contentInfo!!)
         }
         return super.onOptionsItemSelected(item)
@@ -165,6 +175,12 @@ class ActivityNotificationDetails : AppCompatActivity() {
 
         // activity transition
         fun navigate(activity: Activity, obj: ContentInfo, from_notif: Boolean?) {
+            AnalyticsConstants.logAnalyticsEvent(
+                AnalyticsConstants.SELECT_NOTIFICATIONS_LIST_OPEN_ITEM,
+                null,
+                null,
+                null
+            )
             val i = navigateBase(activity, obj, from_notif)
             activity.startActivity(i)
         }

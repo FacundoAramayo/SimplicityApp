@@ -10,6 +10,7 @@ import android.util.Log;
 import com.simplicityapp.R;
 
 import static com.simplicityapp.base.data.Constant.APP_NAME_MIN;
+import static com.simplicityapp.base.data.Constant.LOG_TAG;
 
 public class SharedPref {
 
@@ -131,7 +132,7 @@ public class SharedPref {
     public boolean isOpenAppCounterReach() {
         int counter = sharedPreferences.getInt("OPEN_COUNTER_KEY", MAX_OPEN_COUNTER) + 1;
         setOpenAppCounter(counter);
-        Log.e("COUNTER", "" + counter);
+        Log.e(LOG_TAG, "SharedPref, COUNTER " + counter);
         return (counter >= MAX_OPEN_COUNTER);
     }
 

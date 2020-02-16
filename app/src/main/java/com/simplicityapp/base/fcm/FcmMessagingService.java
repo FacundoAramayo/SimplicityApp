@@ -43,6 +43,8 @@ import com.simplicityapp.modules.notifications.model.ContentInfo;
 import com.simplicityapp.modules.places.model.Place;
 import com.simplicityapp.base.utils.PermissionUtil;
 
+import static com.simplicityapp.base.data.Constant.LOG_TAG;
+
 public class FcmMessagingService extends FirebaseMessagingService {
 
     private static int VIBRATION_TIME = 500; // in millisecond
@@ -175,7 +177,7 @@ public class FcmMessagingService extends FirebaseMessagingService {
 
             @Override
             public void onFailed(String string) {
-                Log.e("FcmMessagingService", "on Failed");
+                Log.e(LOG_TAG, "FcmMessagingService, on Failed");
                 if (retry_count <= Constant.LOAD_IMAGE_NOTIF_RETRY) {
                     retry_count++;
                     loadRetryImageFromUrl(ctx, fcmNotification, callback);

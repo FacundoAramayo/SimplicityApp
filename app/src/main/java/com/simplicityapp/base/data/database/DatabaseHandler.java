@@ -24,6 +24,7 @@ import com.simplicityapp.modules.places.model.Category;
 import com.simplicityapp.modules.places.model.Images;
 import com.simplicityapp.modules.places.model.Place;
 
+import static com.simplicityapp.base.data.Constant.LOG_TAG;
 import static com.simplicityapp.base.data.database.DatabaseConstants.*;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
@@ -142,7 +143,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     // Upgrading database
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        Log.d("DB ", "onUpgrade "+oldVersion+" to "+newVersion);
+        Log.d(LOG_TAG, "DB, onUpgrade "+oldVersion+" to "+newVersion);
         if(oldVersion < newVersion) {
             // Drop older table if existed
             truncateDB(db);
@@ -390,7 +391,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             category.setIcon(cur.getInt(2));
         } catch (Exception e) {
             e.printStackTrace();
-            Log.e("Db Error", e.toString());
+            Log.e(LOG_TAG, "Db Error: " + e.toString());
             return null;
         }
         return category;
@@ -400,8 +401,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     // get list News Info
     public List<ContentInfo> getContentInfoByPage(int limit, int offset) {
 
-        Log.d("DB", "Size : " + getContentInfoSize());
-        Log.d("DB", "Limit : " + limit + " Offset : " + offset);
+        Log.d(LOG_TAG,"DB, Size : " + getContentInfoSize());
+        Log.d(LOG_TAG, "DB, Limit : " + limit + " Offset : " + offset);
         List<ContentInfo> list = new ArrayList<>();
         StringBuilder sb = new StringBuilder();
         sb.append(" SELECT DISTINCT n.* FROM "+TABLE_NEWS_INFO+" n ");

@@ -33,6 +33,8 @@ import com.simplicityapp.base.utils.Tools
 import com.simplicityapp.base.utils.UITools
 import com.simplicityapp.base.widget.SpacingItemDecoration
 import com.google.gson.Gson
+import com.simplicityapp.base.analytics.AnalyticsConstants
+import com.simplicityapp.base.data.Constant.LOG_TAG
 import retrofit2.Call
 import retrofit2.Response
 
@@ -84,7 +86,7 @@ class FragmentCategory : Fragment() {
         recyclerView?.adapter = adapter
 
         // on item list clicked
-        adapter?.setOnItemClickListener { v, obj -> ActivityPlaceDetail.navigate((activity as ActivityMain?)!!, v.findViewById(R.id.lyt_content), obj) }
+        adapter?.setOnItemClickListener { v, obj -> ActivityPlaceDetail.navigate((activity as ActivityMain?)!!, v.findViewById(R.id.lyt_content), obj, AnalyticsConstants.SELECT_CATEGORY_PLACE) }
 
         recyclerView?.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(v: RecyclerView, state: Int) {
@@ -128,7 +130,7 @@ class FragmentCategory : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.action_refresh) {
-            ThisApplication.getInstance().location = null
+            ThisApplication.instance?.location = null
             sharedPref?.lastPlacePage = 1
             sharedPref?.isRefreshPlaces = true
             text_progress?.text = ""
@@ -186,7 +188,6 @@ class FragmentCategory : Fragment() {
         callback!!.enqueue(object : retrofit2.Callback<CallbackListPlace> {
             override fun onResponse(call: Call<CallbackListPlace>, response: Response<CallbackListPlace>) {
                 val resp = response.body()
-                var gson = Gson()
                 if (resp != null) {
                     count_total = resp.count_total
                     if (page_no == 1) db!!.refreshTablePlace()
@@ -202,7 +203,7 @@ class FragmentCategory : Fragment() {
 
             override fun onFailure(call: Call<CallbackListPlace>?, t: Throwable) {
                 if (call != null && !call.isCanceled) {
-                    Log.e("onFailure", t.message)
+                    Log.e(LOG_TAG, "FragmentCategory, onFailure: " + t.message)
                     val conn = Tools.checkConnection(context!!)
                     if (conn) {
                         onFailureRetry(page_no, getString(R.string.refresh_failed))

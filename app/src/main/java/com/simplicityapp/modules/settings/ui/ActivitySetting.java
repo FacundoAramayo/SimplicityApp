@@ -38,9 +38,7 @@ import androidx.appcompat.widget.Toolbar;
 import com.google.android.material.snackbar.Snackbar;
 
 import com.simplicityapp.base.data.AppConfig;
-import com.simplicityapp.base.data.Constant;
 import com.simplicityapp.base.data.SharedPref;
-import com.simplicityapp.base.data.ThisApplication;
 import com.simplicityapp.base.utils.ActionTools;
 import com.simplicityapp.base.utils.PermissionUtil;
 import com.simplicityapp.R;
@@ -112,8 +110,6 @@ public class ActivitySetting extends PreferenceActivity {
             @Override
             public boolean onPreferenceChange(Preference preference, Object o) {
                 boolean flag = (boolean) o;
-                // analytics tracking
-                ThisApplication.getInstance().trackEvent(Constant.AnalyticsEvent.NOTIFICATION.name(), (flag ? "ENABLE" : "DISABLE"));
                 return true;
             }
         });
@@ -135,8 +131,6 @@ public class ActivitySetting extends PreferenceActivity {
         themePref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             public boolean onPreferenceClick(Preference preference) {
                 dialogColorChooser(ActivitySetting.this);
-                // analytics tracking
-                ThisApplication.getInstance().trackEvent(Constant.AnalyticsEvent.THEME.name(), "CHANGE");
                 return true;
             }
         });

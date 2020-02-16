@@ -16,7 +16,7 @@
         <ImageView
             android:layout_width="90dp"
             android:layout_height="90dp"
-            android:src="@drawable/empty_logo"
+            android:src="@drawable/searching"
             android:tint="@color/colorPrimary" />
 
         <TextView

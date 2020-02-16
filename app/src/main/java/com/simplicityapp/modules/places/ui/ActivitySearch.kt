@@ -135,7 +135,7 @@ class ActivitySearch : AppCompatActivity(), ActivityInterface {
         //set data and list adapter
         mAdapter = AdapterPlaceGrid(this, recyclerView, ArrayList(), StaggeredGridLayoutManager.VERTICAL, 0)
         recyclerView?.adapter = mAdapter
-        mAdapter?.setOnItemClickListener { v, obj -> ActivityPlaceDetail.navigate(this@ActivitySearch, v.findViewById(R.id.lyt_content), obj) }
+        mAdapter?.setOnItemClickListener { v, obj -> ActivityPlaceDetail.navigate(this@ActivitySearch, v.findViewById(R.id.lyt_content), obj, AnalyticsConstants.SELECT_SEARCHED_PLACE) }
 
         //set data and list adapter suggestion
         mAdapterSuggestion = AdapterSuggestionSearch(this)
@@ -182,7 +182,7 @@ class ActivitySearch : AppCompatActivity(), ActivityInterface {
         lytSuggestion?.visibility = View.GONE
         showNotFoundView()
         val query = etSearch!!.text.toString().trim { it <= ' ' }
-        AnalyticsConstants.logEvent(FirebaseAnalytics.Event.SEARCH, query)
+        AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SEARCH_PLACE, query)
         if (query != "") {
             mAdapterSuggestion!!.addSearchHistory(query)
             mAdapter?.resetListData()

@@ -3,10 +3,10 @@ package com.simplicityapp.base.data.database
 object DatabaseConstants {
 
     // Database Version
-    const val DATABASE_VERSION = 5
+    const val DATABASE_VERSION = 1
 
     // Database Name
-    const val DATABASE_NAME = "the_city"
+    const val DATABASE_NAME = "simplicity_app"
 
     // Main Table Name
     const val TABLE_PLACE = "place"

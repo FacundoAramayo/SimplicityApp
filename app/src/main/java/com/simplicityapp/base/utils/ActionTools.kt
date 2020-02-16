@@ -11,6 +11,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat.startActivity
 import com.simplicityapp.R
+import com.simplicityapp.base.data.Constant.LOG_TAG
 import com.simplicityapp.modules.notifications.model.ContentInfo
 import com.simplicityapp.modules.places.model.Place
 import java.util.*
@@ -138,7 +139,7 @@ class ActionTools {
             catch (e: Exception){
                 //if any thing goes wrong for example no email client application or any exception
                 //get and show exception message
-                Log.e("EMAIL_ERROR", e.message)
+                Log.e(LOG_TAG,"EMAIL_ERROR: " + e.message)
             }
 
         }

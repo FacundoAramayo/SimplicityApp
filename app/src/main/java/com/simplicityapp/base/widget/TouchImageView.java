@@ -12,6 +12,8 @@ import android.view.View;
 
 import androidx.appcompat.widget.AppCompatImageView;
 
+import static com.simplicityapp.base.data.Constant.LOG_TAG;
+
 public class TouchImageView extends AppCompatImageView {
 
     Matrix matrix;
@@ -201,7 +203,7 @@ public class TouchImageView extends AppCompatImageView {
             int bmWidth = drawable.getIntrinsicWidth();
             int bmHeight = drawable.getIntrinsicHeight();
 
-            Log.d("bmSize", "bmWidth: " + bmWidth + " bmHeight : " + bmHeight);
+            Log.d(LOG_TAG, "bmSize, bmWidth: " + bmWidth + " bmHeight : " + bmHeight);
 
             float scaleX = (float) viewWidth / (float) bmWidth;
             float scaleY = (float) viewHeight / (float) bmHeight;

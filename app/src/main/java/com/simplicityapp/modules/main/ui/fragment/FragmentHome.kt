@@ -20,7 +20,9 @@ import com.simplicityapp.base.analytics.AnalyticsConstants
 import com.simplicityapp.base.connection.RestAdapter
 import com.simplicityapp.base.connection.callbacks.CallbackListPlace
 import com.simplicityapp.base.data.AppConfig
+import com.simplicityapp.base.data.AppConfig.LIMIT_PLACES_TO_UPDATE
 import com.simplicityapp.base.data.Constant
+import com.simplicityapp.base.data.Constant.LOG_TAG
 import com.simplicityapp.base.data.SharedPref
 import com.simplicityapp.base.data.ThisApplication
 import com.simplicityapp.base.data.database.DatabaseHandler
@@ -85,15 +87,17 @@ class FragmentHome : Fragment() {
         recyclerView?.adapter = adapter
 
         // on item list clicked
-        adapter?.setOnItemClickListener { v, obj -> ActivityPlaceDetail.navigate((activity as ActivityMain?)!!, v.findViewById(R.id.lyt_content), obj) }
+        adapter?.setOnItemClickListener {
+                v, obj -> ActivityPlaceDetail.navigate((activity as ActivityMain?)!!, v.findViewById(R.id.lyt_content), obj, AnalyticsConstants.SELECT_HOME_FEATURED_BANNER)
+        }
 
         button_share_app?.setOnClickListener {
-            AnalyticsConstants.logEvent(AnalyticsConstants.SELECT_HOME_ITEM, AnalyticsConstants.SUBSCRIPTION_FORM)
+            AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_HOME_SHARE_APP)
             activity?.let { it1 -> ActionTools.methodShare(it1) }
         }
 
         button_home_subscription?.setOnClickListener {
-            AnalyticsConstants.logEvent(AnalyticsConstants.SELECT_HOME_ITEM, AnalyticsConstants.ACTION_SHARE_APP)
+            AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_HOME_OPEN_REGISTER_FORM)
             activity?.let { it1 -> ActionTools.directUrl(it1, Constant.LINK_TO_SUBSCRIPTION_FORM) }
         }
 
@@ -122,8 +126,8 @@ class FragmentHome : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        if (sharedPref!!.isRefreshPlaces || db?.placesSize == 0) {
-            actionRefresh(sharedPref!!.lastPlacePage)
+        if (sharedPref!!.isRefreshPlaces || db?.placesSize!! < LIMIT_PLACES_TO_UPDATE) {
+            refreshContent()
         } else {
             startLoadMoreAdapter()
         }
@@ -134,14 +138,19 @@ class FragmentHome : Fragment() {
         super.onCreateOptionsMenu(menu, inflater)
     }
 
+    private fun refreshContent() {
+        ThisApplication.instance?.location = null
+        sharedPref?.lastPlacePage = 1
+        sharedPref?.isRefreshPlaces = true
+        text_progress?.text = ""
+        if (snackbar_retry != null) snackbar_retry?.dismiss()
+        actionRefresh(sharedPref!!.lastPlacePage)
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.action_refresh) {
-            ThisApplication.getInstance().location = null
-            sharedPref?.lastPlacePage = 1
-            sharedPref?.isRefreshPlaces = true
-            text_progress?.text = ""
-            if (snackbar_retry != null) snackbar_retry?.dismiss()
-            actionRefresh(sharedPref!!.lastPlacePage)
+            AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_HOME_REFRESH)
+            refreshContent()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -211,7 +220,7 @@ class FragmentHome : Fragment() {
 
             override fun onFailure(call: Call<CallbackListPlace>?, t: Throwable) {
                 if (call != null && !call.isCanceled) {
-                    Log.e("FragmentHome", "onFailire ${t.message}")
+                    Log.e(LOG_TAG, "FragmentHome - onFailire ${t.message}")
                     val conn = Tools.checkConnection(context!!)
                     if (conn) {
                         onFailureRetry(page_no, getString(R.string.refresh_failed))

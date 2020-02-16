@@ -33,6 +33,7 @@ import com.google.maps.android.clustering.view.DefaultClusterRenderer;
 import java.util.HashMap;
 import java.util.List;
 
+import com.simplicityapp.base.analytics.AnalyticsConstants;
 import com.simplicityapp.base.data.Constant;
 import com.simplicityapp.base.data.database.DatabaseHandler;
 import com.simplicityapp.base.utils.Tools;
@@ -120,7 +121,7 @@ public class ActivityMaps extends AppCompatActivity implements OnMapReadyCallbac
                 } else {
                     place = ext_place;
                 }
-                ActivityPlaceDetail.Companion.navigate(ActivityMaps.this, parent_view, place);
+                ActivityPlaceDetail.Companion.navigate(ActivityMaps.this, parent_view, place, AnalyticsConstants.SELECT_MAP_PLACE);
             }
         });
 
@@ -217,6 +218,7 @@ public class ActivityMaps extends AppCompatActivity implements OnMapReadyCallbac
         } else {
             String category_text;
             if (item.getItemId() != R.id.menu_category) {
+                AnalyticsConstants.Companion.logAnalyticsEvent(AnalyticsConstants.SELECT_MAP_CATEGORY, null, null, null);
                 category_text = item.getTitle().toString();
                 switch (item.getItemId()) {
                     case R.id.nav_all:

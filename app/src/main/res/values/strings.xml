@@ -41,11 +41,20 @@
     <string name="title_nav_taxi">Taxi</string>
     <string name="title_nav_gas_station">Gas Station</string>
     <string name="title_nav_transport">Transportation</string>
+    <string name="title_nav_transport_tickets">Bus Tickets</string>
+    <string name="title_nav_clothing_stores">Clothes Stores</string>
+    <string name="title_nav_big_stores">Big Stores</string>
+    <string name="title_nav_industrial_stores">Industrial Stores</string>
+    <string name="title_nav_art">Art and design</string>
+    <string name="title_nav_jobs">Jobs</string>
+    <string name="title_nav_emergency">Emergency</string>
 
     <string name="title_nav_subscription">Add my commerce</string>
     <string name="title_nav_website">Website</string>
     <string name="title_nav_get_in_touch">Get in touch</string>
     <string name="title_nav_suggestions">Suggestions</string>
+
+    <string name="title_home_subscription">Add my commerce</string>
 
     <!--=== activity FullScreenImage =========================================================== -->
     <string name="image_of">%1$d of %2$d</string>

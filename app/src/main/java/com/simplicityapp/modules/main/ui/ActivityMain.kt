@@ -3,6 +3,7 @@ package com.simplicityapp.modules.main.ui
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -33,6 +34,7 @@ import com.simplicityapp.modules.main.ui.fragment.FragmentCategory
 import com.simplicityapp.modules.main.ui.fragment.FragmentHome
 import com.simplicityapp.R
 import com.simplicityapp.base.analytics.AnalyticsConstants
+import com.simplicityapp.base.data.AppConfig.FIRST_RUN_FLAG
 import com.simplicityapp.base.data.Constant.*
 import com.simplicityapp.base.utils.ActionTools
 import com.simplicityapp.modules.places.ui.ActivitySearch
@@ -58,6 +60,7 @@ class ActivityMain : AppCompatActivity() {
 
     var fragment: Fragment? = null
     val bundle = Bundle()
+    var firstRun: Boolean = false
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,6 +68,9 @@ class ActivityMain : AppCompatActivity() {
         overridePendingTransition(R.anim.enter_slide_in, R.anim.enter_slide_out)
         setContentView(R.layout.activity_main_places)
         instance = this
+
+        firstRun = intent?.extras?.get(FIRST_RUN_FLAG) as? Boolean? ?: false
+        Log.d("LOG-", "$FIRST_RUN_FLAG: $firstRun")
 
         db = DatabaseHandler(this)
         sharedPref = SharedPref(this)
@@ -83,11 +89,11 @@ class ActivityMain : AppCompatActivity() {
     }
 
     private fun initUI() {
+        cat = resources.getIntArray(R.array.id_category)
         initToolbar()
         initDrawerMenu()
         initFabButtons()
-        cat = resources.getIntArray(R.array.id_category)
-        onItemSelected(R.id.nav_home, getString(R.string.title_home))
+        onItemSelected(R.id.nav_home, getString(R.string.title_home), false)
     }
 
     private fun initToolbar() {
@@ -109,20 +115,20 @@ class ActivityMain : AppCompatActivity() {
             val intent = Intent(this, ActivityMaps::class.java)
             startActivity(intent)
             fab?.collapse()
-            AnalyticsConstants.logEvent(AnalyticsConstants.SELECT_FAB_OPTION, AnalyticsConstants.ACTION_FLOATING_BUTTON_MAP)
+            AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_HOME_FAB_MAP)
         }
 
         fab_button_search?.setOnClickListener {
             val intent = Intent(this, ActivitySearch::class.java)
             startActivity(intent)
             fab?.collapse()
-            AnalyticsConstants.logEvent(AnalyticsConstants.SELECT_FAB_OPTION, AnalyticsConstants.ACTION_FLOATING_BUTTON_SEARCH)
+            AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_HOME_FAB_SEARCH)
         }
 
         fab_button_favorites?.setOnClickListener {
-            onItemSelected(R.id.nav_favorites, getString(R.string.title_nav_fav))
+            onItemSelected(R.id.nav_favorites, getString(R.string.title_nav_fav), false)
             fab?.collapse()
-            AnalyticsConstants.logEvent(AnalyticsConstants.SELECT_FAB_OPTION, AnalyticsConstants.ACTION_FLOATING_BUTTON_FAVORITES)
+            AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_HOME_FAB_FAVORITES)
         }
 
     }
@@ -145,15 +151,57 @@ class ActivityMain : AppCompatActivity() {
         /*CONFIG UI WITH AppConfig*/
         if (!AppConfig.ENABLE_CONTENT_INFO) navigationView?.menu?.removeItem(R.id.nav_news)
         if (!AppConfig.ENABLE_USER_PROFILE) navigationView?.menu?.removeItem(R.id.nav_profile)
+        if (!AppConfig.ENABLE_EMPTY_CATEGORIES and firstRun.not()) { removeEmptyCategories() }
 
         val nav_header = navigationView?.getHeaderView(0)
         nav_header_lyt = nav_header?.findViewById<View>(R.id.nav_header_lyt) as RelativeLayout
         //nav_header_lyt.setBackgroundColor(DeviceTools.colorBrighter(sharedPref.getThemeColorInt()));
         nav_header.findViewById<View>(R.id.menu_nav_setting).setOnClickListener {
+            AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_OPEN_SETTINGS)
             val i = Intent(applicationContext, ActivitySetting::class.java)
             startActivity(i)
         }
 
+    }
+
+    private fun removeEmptyCategories() {
+        cat?.forEach {
+            val placesByCategory = db?.getAllPlaceByCategory(it)?.size
+            if (placesByCategory == 0) {
+                val categoryId = getMenuItemId(it)
+                categoryId?.let { navigationView?.menu?.removeItem(categoryId) }
+            }
+        }
+    }
+
+    private fun getMenuItemId(categoryId: Int): Int? {
+        return when (categoryId) {
+            0 -> R.id.nav_featured
+            2 -> R.id.nav_pharmacy
+            3 -> R.id.nav_gym
+            4 -> R.id.nav_food
+            5 -> R.id.nav_bar
+            6 -> R.id.nav_fast_food
+            7 -> R.id.nav_delivery
+            8 -> R.id.nav_ice_cream_store
+            9 -> R.id.nav_hotels
+            10 -> R.id.nav_temporary_rent
+            11 -> R.id.nav_tour
+            12 -> R.id.nav_money
+            13 -> R.id.nav_bill_payments
+            14 -> R.id.nav_apartment_rental
+            15 -> R.id.nav_taxi
+            16 -> R.id.nav_gas_station
+            17 -> R.id.nav_transport
+            18 -> R.id.nav_transport_tickets
+            19 -> R.id.nav_clothing_stores
+            20 -> R.id.nav_big_stores
+            21 -> R.id.nav_industrial_stores
+            22 -> R.id.nav_art_and_design
+            23 -> R.id.nav_jobs
+            24 -> R.id.nav_emergency
+            else -> null
+        }
     }
 
     override fun onBackPressed() {
@@ -173,57 +221,58 @@ class ActivityMain : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.action_settings -> {
+                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_TOOLBAR_SETTINGS)
                 val i = Intent(applicationContext, ActivitySetting::class.java)
-                AnalyticsConstants.logEvent(AnalyticsConstants.OPTIONS_ITEMS_SELECTED, AnalyticsConstants.ACTION_SETTINGS)
                 startActivity(i)
             }
             R.id.action_rate -> {
+                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_TOOLBAR_RATE)
                 ActionTools.rateAction(this@ActivityMain)
-                AnalyticsConstants.logEvent(AnalyticsConstants.OPTIONS_ITEMS_SELECTED, AnalyticsConstants.ACTION_RATE)
             }
             R.id.action_about -> {
+                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_TOOLBAR_ABOUT)
                 ActionTools.aboutAction(this@ActivityMain)
-                AnalyticsConstants.logEvent(AnalyticsConstants.OPTIONS_ITEMS_SELECTED, AnalyticsConstants.ACTION_ABOUT)
             }
         }
 
         return super.onOptionsItemSelected(item)
     }
 
-    private fun openFragmentCategory(title: String, categoryId: Int, analyticsAction: String) {
+    private fun openFragmentCategory(title: String, categoryId: Int) {
         fragment = FragmentCategory()
         home = false
         bundle.putInt(FragmentCategory.TAG_CATEGORY, cat!![categoryId])
         actionBar?.title = title
-        AnalyticsConstants.logEvent(AnalyticsConstants.SELECT_MENU_ITEM, analyticsAction)
     }
 
-    private fun onItemSelected(id: Int, title: String): Boolean {
+    private fun onItemSelected(id: Int, title: String, logAnalytics: Boolean = true): Boolean {
 
         when (id) {
             R.id.nav_home -> {
                 fragment = FragmentHome()
                 home = true
                 actionBar?.title = title
-                AnalyticsConstants.logEvent(AnalyticsConstants.SELECT_MENU_ITEM, AnalyticsConstants.ACTION_HOME)
+                if (logAnalytics) {
+                    AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_HOME)
+                }
             }
             R.id.nav_all -> {
                 fragment = FragmentCategory()
                 home = false
                 bundle.putInt(FragmentCategory.TAG_CATEGORY, -1)
                 actionBar?.title = title
-                AnalyticsConstants.logEvent(AnalyticsConstants.SELECT_MENU_ITEM, AnalyticsConstants.ACTION_ALL_PLACES)
+                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_ALL_PLACES)
             }
             R.id.nav_map -> {
                 val i = Intent(applicationContext, ActivityMaps::class.java)
                 home = false
-                AnalyticsConstants.logEvent(AnalyticsConstants.SELECT_MENU_ITEM, AnalyticsConstants.ACTION_MAP)
+                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_MAP)
                 startActivity(i)
             }
             R.id.nav_search -> {
                 val i = Intent(applicationContext, ActivitySearch::class.java)
                 home = false
-                AnalyticsConstants.logEvent(AnalyticsConstants.SELECT_MENU_ITEM, AnalyticsConstants.ACTION_SEARCH)
+                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_SEARCH)
                 startActivity(i)
             }
             R.id.nav_favorites -> {
@@ -231,12 +280,12 @@ class ActivityMain : AppCompatActivity() {
                 home = false
                 bundle.putInt(FragmentCategory.TAG_CATEGORY, -2)
                 actionBar?.title = title
-                AnalyticsConstants.logEvent(AnalyticsConstants.SELECT_MENU_ITEM, AnalyticsConstants.ACTION_FAVORITES)
+                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_FAVORITES)
             }
             R.id.nav_news -> {
                 val i = Intent(this, ActivityNotifications::class.java)
                 home = false
-                AnalyticsConstants.logEvent(AnalyticsConstants.SELECT_MENU_ITEM, AnalyticsConstants.ACTION_NOTIFICATIONS)
+                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_NOTIFICATIONS)
                 startActivity(i)
             }
             R.id.nav_profile -> {
@@ -247,71 +296,116 @@ class ActivityMain : AppCompatActivity() {
             }
 
             R.id.nav_featured -> {
-                openFragmentCategory(title, 0, AnalyticsConstants.ACTION_FEATURED)
+                openFragmentCategory(title, 0)
+                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_FEATURED)
             }
             R.id.nav_shopping -> {
-                openFragmentCategory(title, 1, AnalyticsConstants.ACTION_SHOPPING)
+                openFragmentCategory(title, 1)
             }
             R.id.nav_pharmacy -> {
-                openFragmentCategory(title, 2, AnalyticsConstants.ACTION_PHARMACY)
+                openFragmentCategory(title, 2)
+                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_PHARMACY)
             }
             R.id.nav_gym -> {
-                openFragmentCategory(title, 3, AnalyticsConstants.ACTION_GYM)
+                openFragmentCategory(title, 3)
+                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_GYM_CENTER)
             }
             R.id.nav_food -> {
-                openFragmentCategory(title, 4, AnalyticsConstants.ACTION_FOOD)
+                openFragmentCategory(title, 4)
+                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_RESTAURANTS)
             }
             R.id.nav_bar -> {
-                openFragmentCategory(title, 5, AnalyticsConstants.ACTION_BAR)
+                openFragmentCategory(title, 5)
+                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_BAR)
             }
             R.id.nav_fast_food -> {
-                openFragmentCategory(title, 6, AnalyticsConstants.ACTION_FAST_FOOD)
+                openFragmentCategory(title, 6)
+                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_FAST_FOOD)
             }
             R.id.nav_delivery -> {
-                openFragmentCategory(title, 7, AnalyticsConstants.ACTION_DELIVERY)
+                openFragmentCategory(title, 7)
+                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_DELIVERY)
             }
             R.id.nav_ice_cream_store -> {
-                openFragmentCategory(title, 8, AnalyticsConstants.ACTION_ICE_CREAM_STORE)
+                openFragmentCategory(title, 8)
+                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_ICE_CREAM)
             }
             R.id.nav_hotels -> {
-                openFragmentCategory(title, 9, AnalyticsConstants.ACTION_HOTELS)
+                openFragmentCategory(title, 9)
+                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_HOTEL)
             }
             R.id.nav_temporary_rent -> {
-                openFragmentCategory(title, 10, AnalyticsConstants.ACTION_TEMPORARY_RENT)
+                openFragmentCategory(title, 10)
+                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_TEMPORARY_RENT)
             }
             R.id.nav_tour -> {
-                openFragmentCategory(title, 11, AnalyticsConstants.ACTION_TOUR)
+                openFragmentCategory(title, 11)
+                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_TOURIST_DESTINATION)
             }
             R.id.nav_money -> {
-                openFragmentCategory(title, 12, AnalyticsConstants.ACTION_MONEY)
+                openFragmentCategory(title, 12)
+                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_MONEY)
             }
             R.id.nav_bill_payments -> {
-                openFragmentCategory(title, 13, AnalyticsConstants.ACTION_BILL_PAYMENTS)
+                openFragmentCategory(title, 13)
+                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_BILL_PAYMENTS)
             }
             R.id.nav_apartment_rental -> {
-                openFragmentCategory(title, 14, AnalyticsConstants.ACTION_APARTMENT_RENTAL)
+                openFragmentCategory(title, 14)
+                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_APARTMENT_RENTAL)
             }
             R.id.nav_taxi -> {
-                openFragmentCategory(title, 15, AnalyticsConstants.ACTION_TAXI)
+                openFragmentCategory(title, 15)
+                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_TAXI)
             }
             R.id.nav_gas_station -> {
-                openFragmentCategory(title, 16, AnalyticsConstants.ACTION_GAS_STATION)
+                openFragmentCategory(title, 16)
+                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_GAS_STATION)
             }
             R.id.nav_transport -> {
-                openFragmentCategory(title, 17, AnalyticsConstants.ACTION_TRANSPORT)
+                openFragmentCategory(title, 17)
+                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_TRANSPORT)
+            }
+            R.id.nav_transport_tickets -> {
+                openFragmentCategory(title, 18)
+                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_TRANSPORT_TICKETS)
+            }
+            R.id.nav_clothing_stores -> {
+                openFragmentCategory(title, 19)
+                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_CLOTHING_STORES)
+            }
+            R.id.nav_big_stores -> {
+                openFragmentCategory(title, 20)
+                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_BIG_STORES)
+            }
+            R.id.nav_industrial_stores -> {
+                openFragmentCategory(title, 21)
+                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_INDUSTRIAL_STORES)
+            }
+            R.id.nav_art_and_design -> {
+                openFragmentCategory(title, 22)
+                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_ART)
+            }
+            R.id.nav_jobs -> {
+                openFragmentCategory(title, 23)
+                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_JOBS)
+            }
+            R.id.nav_emergency -> {
+                openFragmentCategory(title, 24)
+                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_EMERGENCIES)
             }
 
             //COMMERCE ITEMS
             R.id.nav_subscription -> {
-                AnalyticsConstants.logEvent(AnalyticsConstants.SELECT_MENU_ITEM, AnalyticsConstants.SUBSCRIPTION_FORM)
+                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_OPEN_REGISTER_FORM)
                 ActionTools.directUrl(this, LINK_TO_SUBSCRIPTION_FORM)
             }
             R.id.nav_suggestions -> {
-                AnalyticsConstants.logEvent(AnalyticsConstants.SELECT_MENU_ITEM, AnalyticsConstants.SUGGESTIONS_FORM)
+                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_OPEN_SUGGESTION_FORM)
                 ActionTools.directUrl(this, LINK_TO_SUGGESTIONS_FORM)
             }
             R.id.nav_get_in_touch -> {
-                AnalyticsConstants.logEvent(AnalyticsConstants.SELECT_MENU_ITEM, AnalyticsConstants.GET_IN_TOUCH)
+                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_OPEN_GET_IN_TOUCH)
                 ActionTools.sendEmail(CONTACT_EMAIL, SUBJECT_EMAIL, "\n\n--\nMensaje enviado desde Simplicity App.", this)
             }
 

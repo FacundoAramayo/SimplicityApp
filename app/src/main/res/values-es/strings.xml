@@ -26,7 +26,8 @@
     <string name="title_nav_gym">Gimnasios</string>
     <string name="title_nav_food">Restaurantes</string>
     <string name="title_nav_bar">Bares</string>
-    <string name="title_nav_fast_food">Comida rápida</string>
+    <string name="title_nav_fast_food">Confiterías
+    </string>
     <string name="title_nav_delivery">Delivery</string>
     <string name="title_nav_icecream_store">Heladerías</string>
     <string name="title_nav_hotels">Hoteles</string>
@@ -38,11 +39,21 @@
     <string name="title_nav_taxi">Remiserías</string>
     <string name="title_nav_gas_station">Estación de servicio</string>
     <string name="title_nav_transport">Transporte urbano</string>
+    <string name="title_nav_transport_tickets">Carga de boletos</string>
+    <string name="title_nav_clothing_stores">Indumentaria</string>
+    <string name="title_nav_big_stores">Grandes tiendas</string>
+    <string name="title_nav_industrial_stores">Ferreterías</string>
+    <string name="title_nav_art">Arte y diseño</string>
+    <string name="title_nav_jobs">Oficios</string>
+    <string name="title_nav_emergency">Emergencias</string>
 
     <string name="title_nav_subscription">Registrar mi comercio</string>
     <string name="title_nav_website">Ir al sitio web</string>
     <string name="title_nav_get_in_touch">Contacto</string>
     <string name="title_nav_suggestions">Sugerencias</string>
+
+    <string name="title_home_subscription">Ofrecer mis productos/servicios</string>
+
 
     <!--=== activity FullScreenImage =========================================================== -->
     <string name="image_of">%1$d of %2$d</string>
@@ -109,12 +120,12 @@
     <string name="title_dialog_theme">Tema de la app</string>
     <string name="grant_permission_account_storage">Grant account, storage permission to enable</string>
     <string name="content_term">
-        SmartSolutions creó Simplicity App como una aplicación gratuita. SmartSolutions proporciona este SERVICIO sin costo y está diseñado para usarse tal cual.
+        SmartSolutions creó Simplicity App como una aplicación gratuita. SmartSolutions proporciona este SERVICIO sin costo y está diseñado para usarse tal cuál.
         \n\nEsta página se usa para informar a los visitantes sobre nuestras políticas con la recopilación, uso y divulgación de información personal si alguien decide usar nuestro servicio.
         \n\nSi elige utilizar nuestro Servicio, acepta la recopilación y el uso de información en relación con esta política. La información personal que recopilamos se utiliza para proporcionar y mejorar el Servicio. No utilizaremos ni compartiremos su información con nadie, excepto como se describe en esta Política de Privacidad.
 
         \n\n\nRecolección de información y uso
-        \n\nPara una mejor experiencia, mientras usa nuestro Servicio, es posible que le solicitemos que nos brinde cierta información de identificación personal, que incluye, entre otros, almacenamiento, ubicación y contactos. La información que solicitamos será retenida por nosotros y utilizada como se describe en esta política de privacidad.
+        \n\nPara una mejor experiencia, mientras usa nuestro Servicio, le solicitaremos que nos brinde acceso a cierta información de identificación personal, que incluye, su dirección de correo electrónico y su nombre, como así también al almacenamiento (solamente para poder almacener las imágenes y los datos necesarios para que la aplicación funcione) y a su ubicación. La información que solicitamos será retenida por nosotros y utilizada como se describe en esta política de privacidad.
         \n\nLa aplicación utiliza servicios de terceros que pueden recopilar información utilizada para identificarlo. Para más información, visite las Políticas de Privacidad de los proovedores de servicios utilizados por la aplicación:
         \n - Google Play Services
         \n - Firebase Analytics
@@ -224,6 +235,6 @@
     <string name="scan">Escanear DNI</string>
 
     <string name="help_us_grow">¡Ayúdanos a crecer!</string>
-    <string name="have_you_a_commerce">¿Tienes un comercio?</string>
+    <string name="have_you_a_commerce">¿Tienes un comercio o algún oficio?</string>
 
 </resources>

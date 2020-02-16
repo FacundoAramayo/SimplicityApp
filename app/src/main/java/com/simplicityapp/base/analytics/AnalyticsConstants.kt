@@ -1,96 +1,111 @@
 package com.simplicityapp.base.analytics
 
-import android.os.Bundle
 import com.simplicityapp.base.data.ThisApplication
-import com.simplicityapp.modules.places.model.Place
 
 class AnalyticsConstants {
 
     companion object {
         /**
-         * --------------------------------Analytics Tags-------------------------------------------
+         * --------------------------------Analytics Events-------------------------------------------
          */
-        const val GENERIC_TAG = "GENERIC_EVENT"
-        const val SCREEN_VIEW = "SCREEN_VIEW"
-        const val PLACE_ACTION = "PLACE_ACTION"
-        const val OPTIONS_ITEMS_SELECTED = "OPTIONS_ITEMS_SELECTED"
-        const val SELECT_MENU_ITEM = "SELECT_MENU_ITEM"
-        const val SELECT_HOME_ITEM = "SELECT_HOME_ITEM"
-        const val SELECT_FAB_OPTION = "SELECT_FAB_OPTION"
+
+        const val TERMS_AND_CONDITIONS_PREVIOUS = "TERMS_AND_CONDITIONS_PREVIOUS"
+        const val TERMS_AND_CONDITIONS_SUCCESS = "TERMS_AND_CONDITIONS_SUCCESS"
+
+        const val LOGIN_SUCCESS = "LOGIN_SUCCESS"
 
         const val VIEW_PLACE = "VIEW_PLACE"
-        const val VIEW_CONTENT = "VIEW_CONTENT"
+        const val VIEW_NOTIFICATION = "VIEW_NOTIFICATION"
+
+        const val SELECT_HOME_FAB_MAP = "SELECT_HOME_FAB_MAP"
+        const val SELECT_HOME_FAB_SEARCH = "SELECT_HOME_FAB_SEARCH"
+        const val SELECT_HOME_FAB_FAVORITES = "SELECT_HOME_FAB_FAVORITES"
+        const val SELECT_HOME_SHARE_APP = "SELECT_HOME_SHARE_APP"
+        const val SELECT_HOME_OPEN_REGISTER_FORM = "SELECT_HOME_OPEN_REGISTER_FORM"
+        const val SELECT_HOME_REFRESH = "SELECT_HOME_REFRESH"
+
+        const val SELECT_HOME_FEATURED_BANNER = "SELECT_HOME_FEATURED_BANNER"
+
+        const val SELECT_TOOLBAR_SETTINGS = "SELECT_TOOLBAR_SETTINGS"
+        const val SELECT_TOOLBAR_RATE = "SELECT_TOOLBAR_RATE"
+        const val SELECT_TOOLBAR_ABOUT = "SELECT_TOOLBAR_ABOUT"
+
+        const val SELECT_MENU_HOME = "SELECT_MENU_HOME"
+        const val SELECT_MENU_ALL_PLACES = "SELECT_MENU_ALL_PLACES"
+        const val SELECT_MENU_MAP = "SELECT_MENU_MAP"
+        const val SELECT_MENU_SEARCH = "SELECT_MENU_SEARCH"
+        const val SELECT_MENU_FAVORITES = "SELECT_MENU_FAVORITES"
+        const val SELECT_MENU_NOTIFICATIONS = "SELECT_MENU_NOTIFICATIONS"
+
+        const val SELECT_MENU_CATEGORY_FEATURED = "SELECT_MENU_CATEGORY_FEATURED"
+        const val SELECT_MENU_CATEGORY_STORE = "SELECT_MENU_CATEGORY_STORE"
+        const val SELECT_MENU_CATEGORY_DELIVERY = "SELECT_MENU_CATEGORY_DELIVERY"
+        const val SELECT_MENU_CATEGORY_FAST_FOOD = "SELECT_MENU_CATEGORY_FAST_FOOD"
+        const val SELECT_MENU_CATEGORY_RESTAURANTS = "SELECT_MENU_CATEGORY_RESTAURANTS"
+        const val SELECT_MENU_CATEGORY_BAR = "SELECT_MENU_CATEGORY_BAR"
+        const val SELECT_MENU_CATEGORY_ICE_CREAM = "SELECT_MENU_CATEGORY_ICE_CREAM"
+        const val SELECT_MENU_CATEGORY_GYM_CENTER = "SELECT_MENU_CATEGORY_GYM_CENTER"
+        const val SELECT_MENU_CATEGORY_CLOTHING_STORES = "SELECT_MENU_CATEGORY_CLOTHING_STORES"
+        const val SELECT_MENU_CATEGORY_BIG_STORES = "SELECT_MENU_CATEGORY_BIG_STORES"
+        const val SELECT_MENU_CATEGORY_INDUSTRIAL_STORES = "SELECT_MENU_CATEGORY_INDUSTRIAL_STORES"
+        const val SELECT_MENU_CATEGORY_BILL_PAYMENTS = "SELECT_MENU_CATEGORY_BILL_PAYMENTS"
+        const val SELECT_MENU_CATEGORY_ART = "SELECT_MENU_CATEGORY_ART"
+        const val SELECT_MENU_CATEGORY_JOBS = "SELECT_MENU_CATEGORY_JOBS"
+        const val SELECT_MENU_CATEGORY_MONEY = "SELECT_MENU_CATEGORY_MONEY"
+        const val SELECT_MENU_CATEGORY_TOURIST_DESTINATION = "SELECT_MENU_CATEGORY_TOURIST_DESTINATION"
+        const val SELECT_MENU_CATEGORY_HOTEL = "SELECT_MENU_CATEGORY_HOTEL"
+        const val SELECT_MENU_CATEGORY_APARTMENT_RENTAL = "SELECT_MENU_CATEGORY_APARTMENT_RENTAL"
+        const val SELECT_MENU_CATEGORY_TEMPORARY_RENT = "SELECT_MENU_CATEGORY_TEMPORARY_RENT"
+        const val SELECT_MENU_CATEGORY_TAXI = "SELECT_MENU_CATEGORY_TAXI"
+        const val SELECT_MENU_CATEGORY_GAS_STATION = "SELECT_MENU_CATEGORY_GAS_STATION"
+        const val SELECT_MENU_CATEGORY_TRANSPORT = "SELECT_MENU_CATEGORY_TRANSPORT"
+        const val SELECT_MENU_CATEGORY_TRANSPORT_TICKETS = "SELECT_MENU_CATEGORY_TRANSPORT_TICKETS"
+        const val SELECT_MENU_CATEGORY_PHARMACY = "SELECT_MENU_CATEGORY_PHARMACY"
+        const val SELECT_MENU_CATEGORY_EMERGENCIES = "SELECT_MENU_CATEGORY_EMERGENCIES"
+
+        const val SELECT_MENU_OPEN_REGISTER_FORM = "SELECT_MENU_OPEN_REGISTER_FORM"
+        const val SELECT_MENU_OPEN_SUGGESTION_FORM = "SELECT_MENU_OPEN_SUGGESTION_FORM"
+        const val SELECT_MENU_OPEN_GET_IN_TOUCH = "SELECT_MENU_OPEN_GET_IN_TOUCH"
+        const val SELECT_MENU_OPEN_SETTINGS = "SELECT_MENU_OPEN_SETTINGS"
+
+        const val SELECT_PLACE_ADDRESS = "SELECT_PLACE_ADDRESS"
+        const val SELECT_PLACE_PHONE = "SELECT_PLACE_PHONE"
+        const val SELECT_PLACE_WEB_SITE = "SELECT_PLACE_WEB_SITE"
+        const val SELECT_PLACE_PHOTO = "SELECT_PLACE_PHOTO"
+        const val SELECT_PLACE_DESCRIPTION_CONTENT = "SELECT_PLACE_DESCRIPTION_CONTENT"
+        const val SELECT_PLACE_OPEN_MAP = "SELECT_PLACE_OPEN_MAP"
+        const val SELECT_PLACE_OPEN_NAVIGATION = "SELECT_PLACE_OPEN_NAVIGATION"
+        const val SELECT_PLACE_SHARE = "SELECT_PLACE_SHARE"
+        const val SELECT_PLACE_FAVORITES_ADD = "SELECT_PLACE_FAVORITES_ADD"
+        const val SELECT_PLACE_FAVORITES_REMOVE = "SELECT_PLACE_FAVORITES_REMOVE"
+
+        const val SELECT_NOTIFICATIONS_LIST_REFRESH = "SELECT_NOTIFICATIONS_LIST_REFRESH"
+        const val SELECT_NOTIFICATIONS_LIST_OPEN_ITEM = "SELECT_NOTIFICATIONS_LIST_OPEN_ITEM"
+
+        const val SELECT_NOTIFICATION_ITEM_SHARE = "SELECT_NOTIFICATION_ITEM_SHARE"
+        const val SELECT_NOTIFICATION_OPEN_PHOTO = "SELECT_NOTIFICATION_OPEN_PHOTO"
+
+        const val SELECT_MAP_CATEGORY = "SELECT_MAP_CATEGORY"
+        const val SELECT_MAP_PLACE = "SELECT_MAP_PLACE"
+
+        const val SEARCH_PLACE = "SEARCH_PLACE"
+        const val SELECT_SEARCHED_PLACE = "SELECT_SEARCHED_PLACE"
+
+        const val SELECT_CATEGORY_PLACE = "SELECT_CATEGORY_PLACE"
 
         /**
-         * --------------------------------Analytics Actions----------------------------------------
+         * --------------------------------Analytics Params----------------------------------------
          */
         const val FIRST_RUN = "FIRST_RUN"
         const val NORMAL_RUN = "NORMAL_RUN"
         const val UPGRADE_RUN = "UPGRADE_RUN"
 
-        const val ACTION_SETTINGS = "ACTION_SETTINGS"
-        const val ACTION_RATE = "ACTION_RATE"
-        const val ACTION_ABOUT = "ACTION_ABOUT"
-
-        const val ACTION_HOME = "ACTION_HOME"
-        const val ACTION_ALL_PLACES = "ACTION_ALL_PLACES"
-        const val ACTION_MAP = "ACTION_MAP"
-        const val ACTION_SEARCH = "ACTION_SEARCH"
-        const val ACTION_FAVORITES = "ACTION_FAVORITES"
-        const val ACTION_NOTIFICATIONS = "ACTION_NOTIFICATIONS"
-        const val SUBSCRIPTION_FORM = "SUBSCRIPTION_FORM"
-        const val SUGGESTIONS_FORM = "SUGGESTIONS_FORM"
-        const val GET_IN_TOUCH = "GET_IN_TOUCH"
-        const val ACTION_PROFILE = "ACTION_PROFILE"
-        const val ACTION_FEATURED = "ACTION_FEATURED"
-        const val ACTION_SHOPPING = "ACTION_SHOPPING"
-        const val ACTION_PHARMACY = "ACTION_PHARMACY"
-        const val ACTION_GYM = "ACTION_GYM"
-        const val ACTION_FOOD = "ACTION_FOOD"
-        const val ACTION_BAR = "ACTION_BAR"
-        const val ACTION_FAST_FOOD = "ACTION_FAST_FOOD"
-        const val ACTION_DELIVERY = "ACTION_DELIVERY"
-        const val ACTION_ICE_CREAM_STORE = "ACTION_ICE_CREAM_STORE"
-        const val ACTION_HOTELS = "ACTION_HOTELS"
-        const val ACTION_TEMPORARY_RENT = "ACTION_TEMPORARY_RENT"
-        const val ACTION_TOUR = "ACTION_TOUR"
-        const val ACTION_MONEY = "ACTION_MONEY"
-        const val ACTION_BILL_PAYMENTS = "ACTION_BILL_PAYMENTS"
-        const val ACTION_APARTMENT_RENTAL = "ACTION_APARTMENT_RENTAL"
-        const val ACTION_TAXI = "ACTION_TAXI"
-        const val ACTION_GAS_STATION = "ACTION_GAS_STATION"
-        const val ACTION_TRANSPORT = "ACTION_TRANSPORT"
-
-        const val ACTION_FLOATING_BUTTON_MAP = "ACTION_FLOATING_BUTTON_MAP"
-        const val ACTION_FLOATING_BUTTON_SEARCH = "ACTION_FLOATING_BUTTON_SEARCH"
-        const val ACTION_FLOATING_BUTTON_FAVORITES = "ACTION_FLOATING_BUTTON_FAVORITES"
-
-        const val FAVORITES_ADD = "FAVORITES_ADD"
-        const val FAVORITES_REMOVE = "FAVORITES_REMOVE"
-
-        const val ACTION_PLACE_PHONE = "ACTION_PLACE_PHONE"
-        const val ACTION_PLACE_WEBSITE = "ACTION_PLACE_WEBSITE"
-        const val ACTION_PLACE_ADDRESS = "ACTION_PLACE_ADDRESS"
-
-        const val ACTION_PLACE_OPEN_MAP = "ACTION_PLACE_OPEN_MAP"
-        const val ACTION_PLACE_NAVIGATE_MAP = "ACTION_PLACE_NAVIGATE_MAP"
-
-        const val ACTION_SHARE_APP = "ACTION_SHARE_APP"
-
-
         /**
          * --------------------------------Analytics Methods----------------------------------------
          */
-        fun logEvent(event: String, label: String? = "") {
-            ThisApplication.getInstance().trackEvent(event, label.orEmpty())
-        }
 
-        fun logScreenView(screenName: String, category: String? = "", item: String? = "") {
-            ThisApplication.getInstance().trackScreenView(screenName, category.orEmpty(), item.orEmpty())
-        }
-
-        fun logPlaceAction(place: Place, action: String) {
-            ThisApplication.getInstance().trackPlaceAction(place, action)
+        fun logAnalyticsEvent(event: String, label: String? = null, user: Boolean? = null, fullUser: Boolean? = null) {
+            ThisApplication.instance?.trackEvent(event, label,  user, fullUser)
         }
     }
 

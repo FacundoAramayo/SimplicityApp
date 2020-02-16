@@ -53,7 +53,7 @@ class ActivityWelcome : AppCompatActivity(), ActivityInterface {
     }
 
     override fun initListeners() {
-        AnalyticsConstants.logEvent(FirebaseAnalytics.Event.TUTORIAL_BEGIN)
+        AnalyticsConstants.logAnalyticsEvent(FirebaseAnalytics.Event.TUTORIAL_BEGIN)
         val pageListener = PageListener()
         mViewPager?.addOnPageChangeListener(pageListener)
 
@@ -67,7 +67,7 @@ class ActivityWelcome : AppCompatActivity(), ActivityInterface {
             if (mViewPager?.currentItem != 2) {
                 mViewPager?.currentItem = mViewPager!!.currentItem.plus(1)
             } else {
-                AnalyticsConstants.logEvent(FirebaseAnalytics.Event.TUTORIAL_COMPLETE)
+                AnalyticsConstants.logAnalyticsEvent(FirebaseAnalytics.Event.TUTORIAL_COMPLETE)
                 val i = Intent(this@ActivityWelcome, ActivityLogin::class.java)
                 startActivity(i)
                 finish()

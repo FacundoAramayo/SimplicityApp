@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.simplicityapp.R;
+import com.simplicityapp.base.analytics.AnalyticsConstants;
 import com.simplicityapp.base.utils.ActionTools;
 import com.simplicityapp.base.utils.Tools;
 import com.simplicityapp.base.utils.UITools;
@@ -184,6 +185,14 @@ public class ActivityNotifications extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume() {
+        if (Tools.Companion.checkConnection(this)) {
+            refreshNotifications();
+        }
+        super.onResume();
+    }
+
+    @Override
     public void onDestroy() {
         super.onDestroy();
         firstProgress(false);
@@ -241,11 +250,8 @@ public class ActivityNotifications extends AppCompatActivity {
         if (id == android.R.id.home) {
             onBackPressed();
         } else if (id == R.id.action_refresh) {
-            if (callbackCall != null && callbackCall.isExecuted()) callbackCall.cancel();
-            showFailedView(false, "");
-            MODE = "ONLINE";
-            post_total = 0;
-            requestAction(1);
+            AnalyticsConstants.Companion.logAnalyticsEvent(AnalyticsConstants.SELECT_NOTIFICATIONS_LIST_REFRESH, null, null, null);
+            refreshNotifications();
         } else if (id == R.id.action_settings) {
             Intent i = new Intent(getApplicationContext(), ActivitySetting.class);
             startActivity(i);
@@ -255,6 +261,14 @@ public class ActivityNotifications extends AppCompatActivity {
             ActionTools.Companion.aboutAction(ActivityNotifications.this);
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void refreshNotifications() {
+        if (callbackCall != null && callbackCall.isExecuted()) callbackCall.cancel();
+        showFailedView(false, "");
+        MODE = "ONLINE";
+        post_total = 0;
+        requestAction(1);
     }
 
     @Override

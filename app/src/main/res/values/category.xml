@@ -22,6 +22,13 @@
         <item>15</item> <!--TAXI-->
         <item>16</item> <!--GAS STATION-->
         <item>17</item> <!--TRANSPORTATION-->
+        <item>18</item> <!--TRANSPORT TICKET-->
+        <item>19</item> <!--CLOTHING STORES-->
+        <item>20</item> <!--BIG STORES-->
+        <item>21</item> <!--INDUSTRIAL STORES-->
+        <item>22</item> <!--ART AND DESIGN-->
+        <item>23</item> <!--JOBS-->
+        <item>24</item> <!--EMERGENCY-->
     </integer-array>
 
     <string-array name="category_name">
@@ -43,6 +50,13 @@
         <item>Taxi</item>
         <item>Gas Station</item>
         <item>Transportation</item>
+        <item>Ticket</item>
+        <item>Clothes</item>
+        <item>Big Shops</item>
+        <item>Industrial Shops</item>
+        <item>Art and Design</item>
+        <item>Jobs</item>
+        <item>Emergency</item>
     </string-array>
 
     <integer-array name="category_icon">
@@ -50,7 +64,7 @@
         <item>@drawable/ic_nav_shopping</item>
         <item>@drawable/ic_nav_pharmacy</item>
         <item>@drawable/ic_nav_gym</item>
-        <item>@drawable/ic_nav_food</item>
+        <item>@drawable/ic_nav_restaurant</item>
         <item>@drawable/ic_nav_bar</item>
         <item>@drawable/ic_nav_fast_food</item>
         <item>@drawable/ic_nav_delivery</item>
@@ -65,6 +79,13 @@
         <item>@drawable/ic_nav_taxi</item>
         <item>@drawable/ic_nav_gas_station</item>
         <item>@drawable/ic_nav_transport</item>
+        <item>@drawable/ic_nav_transport_ticket</item>
+        <item>@drawable/ic_nav_clothing_store</item>
+        <item>@android:drawable/ic_dialog_alert</item>
+        <item>@android:drawable/ic_dialog_alert</item>
+        <item>@android:drawable/ic_dialog_alert</item>
+        <item>@android:drawable/ic_dialog_alert</item>
+        <item>@android:drawable/ic_dialog_alert</item>
 
     </integer-array>
 
