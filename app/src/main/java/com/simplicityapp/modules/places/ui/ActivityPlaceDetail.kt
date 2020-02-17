@@ -20,6 +20,7 @@ import android.widget.TextView
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.cardview.widget.CardView
 import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.ViewCompat
@@ -60,8 +61,10 @@ import com.simplicityapp.base.analytics.AnalyticsConstants.Companion.logAnalytic
 import com.simplicityapp.base.utils.ActionTools
 import com.simplicityapp.base.utils.Tools
 import com.simplicityapp.base.utils.UITools
+import kotlinx.android.synthetic.main.include_place_details_content.*
 import retrofit2.Call
 import retrofit2.Response
+import java.lang.Exception
 import java.util.*
 
 class ActivityPlaceDetail : AppCompatActivity() {
@@ -70,6 +73,8 @@ class ActivityPlaceDetail : AppCompatActivity() {
     private var fab: FloatingActionButton? = null
     private var description: WebView? = null
     private var parent_view: View? = null
+    private var photosView: CardView? = null
+    private var descriptionView: CardView? = null
     private var googleMap: GoogleMap? = null
     private var db: DatabaseHandler? = null
     private var fabIsShowing = true
@@ -86,6 +91,8 @@ class ActivityPlaceDetail : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_place_details)
         parent_view = findViewById(android.R.id.content)
+        photosView = findViewById(R.id.cardview_photos)
+        descriptionView = findViewById(R.id.cardview_description)
 
         db = DatabaseHandler(this)
         // animation transition
@@ -140,6 +147,14 @@ class ActivityPlaceDetail : AppCompatActivity() {
         (findViewById<View>(R.id.phone) as TextView).text = if (p.phone == "-" || p.phone!!.trim { it <= ' ' } == "") getString(R.string.no_phone_number) else p.phone
         (findViewById<View>(R.id.website) as TextView).text = if (p.website == "-" || p.website!!.trim { it <= ' ' } == "") getString(R.string.no_website) else p.website
 
+        try {
+            if (p.description?.replace("&nbsp;", "").isNullOrBlank()) {
+                cardview_description.visibility = GONE
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
         description = findViewById<View>(R.id.description) as WebView
         var html_data = "<style>img{max-width:100%;height:auto;} iframe{width:100%;}</style> "
         html_data += p.description
@@ -159,6 +174,13 @@ class ActivityPlaceDetail : AppCompatActivity() {
         }
 
         setImageGallery(db!!.getListImageByPlaceId(p.place_id))
+        try {
+            if ((p.images.size > 1).not()) {
+                cardview_photos.visibility = GONE
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
     override fun onResume() {
@@ -211,6 +233,7 @@ class ActivityPlaceDetail : AppCompatActivity() {
             i.putStringArrayListExtra(ActivityFullScreenImage.EXTRA_IMGS, new_images_str)
             startActivity(i)
         }
+        place?.images = new_images
     }
 
     private fun fabToggle(isFavorite: Boolean) {
