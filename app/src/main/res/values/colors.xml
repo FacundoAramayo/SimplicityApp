@@ -10,10 +10,8 @@
 
     <color name="colorSeparatorLight">#789CAF</color>
     <color name="colorSeparator">#AFB8C4</color>
-    <color name="colorSeparatorDark">#546E7A</color>
 
     <color name="colorMarker">#D23D85</color>
-    <color name="colorAlert">#E75B65</color>
 
     <color name="colorLink">#2196F3</color>
 
@@ -22,10 +20,6 @@
     <color name="grey_hard">#96989A</color>
     <color name="grey_dark">#332C2B</color>
 
-    <color name="icon_drawer_color">#727272</color>
-
-    <color name="dark_overlay">#73000000</color>
-    <color name="dark_soft_overlay">#33000000</color>
     <color name="grid_title_bg">#FFFFFF</color>
 
     <color name="map_background">#EFEBEF</color>

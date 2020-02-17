@@ -17,10 +17,9 @@
 
     <dimen name="elevation_card">1dp</dimen>
     <dimen name="card_corner_radius">10dp</dimen>
-    <dimen name="elevation_low">9dp</dimen>
-    <dimen name="elevation_high">12dp</dimen>
-    <dimen name="status_bar_height">25dp</dimen>
-    <dimen name="fab_margin">16dp</dimen>
+
+    <dimen name="icon_top_margin">24dp</dimen>
+    <dimen name="icon_bottom_margin">24dp</dimen>
 
     <!--for item recycle-->
     <dimen name="item_place_height">195dp</dimen>
@@ -37,17 +36,8 @@
     <!--for detail activity-->
     <dimen name="image_toolbar_height">270dp</dimen>
     <dimen name="collapse_toolbar_height">110dp</dimen>
-    <dimen name="maps_white_gradient_height">45dp</dimen>
 
     <dimen name="news_item_img">150dp</dimen>
     <dimen name="map_marker_size">40dp</dimen>
-    <dimen name="appbar_padding_top">8dp</dimen>
-
-    <dimen name="icon_top_margin">24dp</dimen>
-    <dimen name="icon_bottom_margin">24dp</dimen>
-    <dimen name="title_bottom_margin">16dp</dimen>
-    <dimen name="field_width_standard">160dp</dimen>
-    <dimen name="nav_header_vertical_spacing">8dp</dimen>
-    <dimen name="nav_header_height">176dp</dimen>
 
 </resources>

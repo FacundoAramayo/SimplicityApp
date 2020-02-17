@@ -8,7 +8,6 @@ public class Constant {
 
     // Edit WEB_URL with your url. Make sure you have backslash('/') in the end url
     public static String WEB_URL = "http://ciudadanovirtualdemo.smartsolutions.com.ar/";
-    //public static String WEB_URL = "http://ciudadanovirtualdemo.smartsolutions.com.ar/";
 
     /*Córdoba*/
 //    public static final double city_lat = -31.4200833;

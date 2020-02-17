@@ -93,7 +93,7 @@ class ActivitySearch : AppCompatActivity(), ActivityInterface {
         recyclerSuggestion?.layoutManager = LinearLayoutManager(this)
         recyclerSuggestion?.setHasFixedSize(true)
 
-        lytNoItem = findViewById(R.id.lyt_no_item) as View
+        lytNoItem = findViewById<View>(R.id.lyt_no_item)
     }
 
     override fun initListeners() {

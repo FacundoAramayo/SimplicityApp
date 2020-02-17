@@ -32,7 +32,6 @@ import com.simplicityapp.base.data.ThisApplication
 import com.simplicityapp.base.utils.Tools
 import com.simplicityapp.base.utils.UITools
 import com.simplicityapp.base.widget.SpacingItemDecoration
-import com.google.gson.Gson
 import com.simplicityapp.base.analytics.AnalyticsConstants
 import com.simplicityapp.base.data.Constant.LOG_TAG
 import retrofit2.Call
