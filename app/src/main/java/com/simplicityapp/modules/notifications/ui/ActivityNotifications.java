@@ -1,6 +1,5 @@
 package com.simplicityapp.modules.notifications.ui;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -250,7 +249,7 @@ public class ActivityNotifications extends AppCompatActivity {
         if (id == android.R.id.home) {
             onBackPressed();
         } else if (id == R.id.action_refresh) {
-            AnalyticsConstants.Companion.logAnalyticsEvent(AnalyticsConstants.SELECT_NOTIFICATIONS_LIST_REFRESH, null, null, null);
+            AnalyticsConstants.Companion.logAnalyticsEvent(AnalyticsConstants.SELECT_NOTIFICATIONS_LIST_REFRESH, null, true, false);
             refreshNotifications();
         } else if (id == R.id.action_settings) {
             Intent i = new Intent(getApplicationContext(), ActivitySetting.class);

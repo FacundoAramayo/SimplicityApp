@@ -12,8 +12,6 @@ class AnalyticsConstants {
         const val TERMS_AND_CONDITIONS_PREVIOUS = "TERMS_AND_CONDITIONS_PREVIOUS"
         const val TERMS_AND_CONDITIONS_SUCCESS = "TERMS_AND_CONDITIONS_SUCCESS"
 
-        const val LOGIN_SUCCESS = "LOGIN_SUCCESS"
-
         const val VIEW_PLACE = "VIEW_PLACE"
         const val VIEW_NOTIFICATION = "VIEW_NOTIFICATION"
 
@@ -100,12 +98,23 @@ class AnalyticsConstants {
         const val NORMAL_RUN = "NORMAL_RUN"
         const val UPGRADE_RUN = "UPGRADE_RUN"
 
+        const val CONTENT_PLACE = "CONTENT_PLACE"
+        const val CONTENT_NOTIFICATION = "CONTENT_NOTIFICATION"
+
         /**
          * --------------------------------Analytics Methods----------------------------------------
          */
 
         fun logAnalyticsEvent(event: String, label: String? = null, user: Boolean? = null, fullUser: Boolean? = null) {
             ThisApplication.instance?.trackEvent(event, label,  user, fullUser)
+        }
+
+        fun logAnalyticsSignUp() {
+            ThisApplication.instance?.trackAnalyticsSignUp()
+        }
+
+        fun logAnalyticsShare(contentType: String, item: String) {
+            ThisApplication.instance?.logAnalyticsShare(contentType, item)
         }
     }
 

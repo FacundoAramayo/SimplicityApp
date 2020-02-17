@@ -6,7 +6,6 @@ import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.MotionEvent
@@ -42,12 +41,12 @@ import com.simplicityapp.base.connection.callbacks.CallbackPlaceDetails
 import com.simplicityapp.base.data.Constant
 import com.simplicityapp.base.data.database.DatabaseHandler
 import com.simplicityapp.base.data.SharedPref
-import com.simplicityapp.base.data.ThisApplication
 import com.simplicityapp.modules.main.ui.ActivityMain
 import com.simplicityapp.modules.places.model.Images
 import com.simplicityapp.modules.places.model.Place
 import com.simplicityapp.R
 import com.simplicityapp.base.analytics.AnalyticsConstants
+import com.simplicityapp.base.analytics.AnalyticsConstants.Companion.CONTENT_PLACE
 import com.simplicityapp.base.analytics.AnalyticsConstants.Companion.SELECT_PLACE_ADDRESS
 import com.simplicityapp.base.analytics.AnalyticsConstants.Companion.SELECT_PLACE_FAVORITES_ADD
 import com.simplicityapp.base.analytics.AnalyticsConstants.Companion.SELECT_PLACE_FAVORITES_REMOVE
@@ -57,6 +56,7 @@ import com.simplicityapp.base.analytics.AnalyticsConstants.Companion.SELECT_PLAC
 import com.simplicityapp.base.analytics.AnalyticsConstants.Companion.SELECT_PLACE_WEB_SITE
 import com.simplicityapp.base.analytics.AnalyticsConstants.Companion.VIEW_PLACE
 import com.simplicityapp.base.analytics.AnalyticsConstants.Companion.logAnalyticsEvent
+import com.simplicityapp.base.analytics.AnalyticsConstants.Companion.logAnalyticsShare
 import com.simplicityapp.base.utils.ActionTools
 import com.simplicityapp.base.utils.Tools
 import com.simplicityapp.base.utils.UITools
@@ -110,13 +110,13 @@ class ActivityPlaceDetail : AppCompatActivity() {
                 db!!.deleteFavorites(place!!.place_id)
                 Snackbar.make(parent_view!!, place!!.name + " " + getString(R.string.remove_favorite), Snackbar.LENGTH_SHORT).show()
                 // analytics tracking
-                logAnalyticsEvent(SELECT_PLACE_FAVORITES_REMOVE, place?.name.orEmpty())
+                logAnalyticsEvent(SELECT_PLACE_FAVORITES_REMOVE, place?.name.orEmpty(), user= true, fullUser = false)
                 fabToggle(false)
             } else {
                 db!!.addFavorites(place!!.place_id)
                 Snackbar.make(parent_view!!, place!!.name + " " + getString(R.string.add_favorite), Snackbar.LENGTH_SHORT).show()
                 // analytics tracking
-                logAnalyticsEvent(SELECT_PLACE_FAVORITES_ADD, place?.name.orEmpty())
+                logAnalyticsEvent(SELECT_PLACE_FAVORITES_ADD, place?.name.orEmpty(), user= true, fullUser = false)
                 fabToggle(true)
             }
         }
@@ -171,19 +171,19 @@ class ActivityPlaceDetail : AppCompatActivity() {
     fun clickLayout(view: View) {
         when (view.id) {
             R.id.lyt_address -> if (!place!!.isDraft) {
-                logAnalyticsEvent(SELECT_PLACE_ADDRESS, place?.name.orEmpty())
+                logAnalyticsEvent(SELECT_PLACE_ADDRESS, place?.name.orEmpty(), true, false)
                 val uri = Uri.parse("http://maps.google.com/maps?q=loc: ${place!!.lat},${place!!.lng}")
                 val intent = Intent(Intent.ACTION_VIEW, uri)
                 startActivity(intent)
             }
             R.id.lyt_phone -> if (!place!!.isDraft && place!!.phone != "-" && place!!.phone!!.trim { it <= ' ' } != "") {
-                logAnalyticsEvent(SELECT_PLACE_PHONE, place?.name.orEmpty())
+                logAnalyticsEvent(SELECT_PLACE_PHONE, place?.name.orEmpty(), true, false)
                 ActionTools.Companion.dialNumber(this, place!!.phone!!)
             } else {
                 Snackbar.make(parent_view!!, R.string.fail_dial_number, Snackbar.LENGTH_SHORT).show()
             }
             R.id.lyt_website -> if (!place!!.isDraft && place!!.website != "-" && place!!.website!!.trim { it <= ' ' } != "") {
-                logAnalyticsEvent(SELECT_PLACE_WEB_SITE, place?.name.orEmpty())
+                logAnalyticsEvent(SELECT_PLACE_WEB_SITE, place?.name.orEmpty(), true, false)
                 ActionTools.directUrl(this, place!!.website!!)
             } else {
                 Snackbar.make(parent_view!!, R.string.fail_open_website, Snackbar.LENGTH_SHORT).show()
@@ -205,7 +205,7 @@ class ActivityPlaceDetail : AppCompatActivity() {
         val adapter = AdapterImageList(this, new_images)
         galleryRecycler.adapter = adapter
         adapter.setOnItemClickListener { view, viewModel, pos ->
-            logAnalyticsEvent(AnalyticsConstants.SELECT_PLACE_PHOTO)
+            logAnalyticsEvent(AnalyticsConstants.SELECT_PLACE_PHOTO, place?.name, user= true, fullUser = false)
             val i = Intent(this@ActivityPlaceDetail, ActivityFullScreenImage::class.java)
             i.putExtra(ActivityFullScreenImage.EXTRA_POS, pos)
             i.putStringArrayListExtra(ActivityFullScreenImage.EXTRA_IMGS, new_images_str)
@@ -276,7 +276,8 @@ class ActivityPlaceDetail : AppCompatActivity() {
             return true
         } else if (id == R.id.action_share) {
             if (!place!!.isDraft) {
-                logAnalyticsEvent(AnalyticsConstants.SELECT_PLACE_SHARE)
+                logAnalyticsEvent(AnalyticsConstants.SELECT_PLACE_SHARE, place?.name, user= true, fullUser = false)
+                logAnalyticsShare(CONTENT_PLACE, place?.name.orEmpty())
                 ActionTools.methodShare(this@ActivityPlaceDetail, place!!)
             }
         }
@@ -298,7 +299,7 @@ class ActivityPlaceDetail : AppCompatActivity() {
         }
 
         (findViewById<View>(R.id.bt_navigate) as Button).setOnClickListener {
-            logAnalyticsEvent(SELECT_PLACE_OPEN_NAVIGATION, place?.name.orEmpty())
+            logAnalyticsEvent(SELECT_PLACE_OPEN_NAVIGATION, place?.name.orEmpty(), user= true, fullUser = false)
             val navigation = Intent(Intent.ACTION_VIEW, Uri.parse("http://maps.google.com/maps?daddr=${place!!.lat},${place!!.lng}"))
             startActivity(navigation)
         }
@@ -307,7 +308,7 @@ class ActivityPlaceDetail : AppCompatActivity() {
     }
 
     private fun openPlaceInMap() {
-        logAnalyticsEvent(SELECT_PLACE_OPEN_MAP, place?.name.orEmpty())
+        logAnalyticsEvent(SELECT_PLACE_OPEN_MAP, place?.name.orEmpty(), user= true, fullUser = false)
         val intent = Intent(this@ActivityPlaceDetail, ActivityMaps::class.java)
         intent.putExtra(ActivityMaps.EXTRA_OBJ, place)
         startActivity(intent)
@@ -418,7 +419,7 @@ class ActivityPlaceDetail : AppCompatActivity() {
 
         // give preparation animation activity transition
         fun navigate(activity: AppCompatActivity, sharedView: View, p: Place, analyticsEvent: String) {
-            logAnalyticsEvent(analyticsEvent, p.name)
+            logAnalyticsEvent(analyticsEvent, p.name, true, false)
             val intent = Intent(activity, ActivityPlaceDetail::class.java)
             intent.putExtra(EXTRA_OBJ, p)
             val options = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, sharedView, EXTRA_OBJ)

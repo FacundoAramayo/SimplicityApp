@@ -21,7 +21,6 @@ import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.google.firebase.analytics.FirebaseAnalytics
 
 import java.util.ArrayList
 
@@ -182,7 +181,7 @@ class ActivitySearch : AppCompatActivity(), ActivityInterface {
         lytSuggestion?.visibility = View.GONE
         showNotFoundView()
         val query = etSearch!!.text.toString().trim { it <= ' ' }
-        AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SEARCH_PLACE, query)
+        AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SEARCH_PLACE, query, user = true, fullUser = false)
         if (query != "") {
             mAdapterSuggestion!!.addSearchHistory(query)
             mAdapter?.resetListData()

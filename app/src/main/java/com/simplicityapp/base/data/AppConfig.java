@@ -26,7 +26,7 @@ public class AppConfig {
     public static final boolean LAZY_LOAD = false;
 
     // flag for tracking analytics
-    public static final boolean ENABLE_ANALYTICS = false;
+    public static final boolean ENABLE_ANALYTICS = true;
 
     // clear image cache when receive push notifications
     public static final boolean REFRESH_IMG_NOTIF = true;

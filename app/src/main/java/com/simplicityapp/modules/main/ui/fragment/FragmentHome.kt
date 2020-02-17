@@ -92,12 +92,12 @@ class FragmentHome : Fragment() {
         }
 
         button_share_app?.setOnClickListener {
-            AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_HOME_SHARE_APP)
+            AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_HOME_SHARE_APP, user = true, fullUser = false)
             activity?.let { it1 -> ActionTools.methodShare(it1) }
         }
 
         button_home_subscription?.setOnClickListener {
-            AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_HOME_OPEN_REGISTER_FORM)
+            AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_HOME_OPEN_REGISTER_FORM, user = true, fullUser = true)
             activity?.let { it1 -> ActionTools.directUrl(it1, Constant.LINK_TO_SUBSCRIPTION_FORM) }
         }
 

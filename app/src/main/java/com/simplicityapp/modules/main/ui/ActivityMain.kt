@@ -3,7 +3,6 @@ package com.simplicityapp.modules.main.ui
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -70,7 +69,9 @@ class ActivityMain : AppCompatActivity() {
         instance = this
 
         firstRun = intent?.extras?.get(FIRST_RUN_FLAG) as? Boolean? ?: false
-        Log.d("LOG-", "$FIRST_RUN_FLAG: $firstRun")
+        if (firstRun) {
+            AnalyticsConstants.logAnalyticsSignUp()
+        }
 
         db = DatabaseHandler(this)
         sharedPref = SharedPref(this)
@@ -280,12 +281,14 @@ class ActivityMain : AppCompatActivity() {
                 home = false
                 bundle.putInt(FragmentCategory.TAG_CATEGORY, -2)
                 actionBar?.title = title
-                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_FAVORITES)
+                if (logAnalytics) {
+                    AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_FAVORITES, user = true, fullUser = false)
+                }
             }
             R.id.nav_news -> {
                 val i = Intent(this, ActivityNotifications::class.java)
                 home = false
-                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_NOTIFICATIONS)
+                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_NOTIFICATIONS, user = true, fullUser = false)
                 startActivity(i)
             }
             R.id.nav_profile -> {
@@ -297,115 +300,115 @@ class ActivityMain : AppCompatActivity() {
 
             R.id.nav_featured -> {
                 openFragmentCategory(title, 0)
-                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_FEATURED)
+                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_FEATURED, user = true, fullUser = false)
             }
             R.id.nav_shopping -> {
                 openFragmentCategory(title, 1)
             }
             R.id.nav_pharmacy -> {
                 openFragmentCategory(title, 2)
-                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_PHARMACY)
+                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_PHARMACY, user = true, fullUser = false)
             }
             R.id.nav_gym -> {
                 openFragmentCategory(title, 3)
-                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_GYM_CENTER)
+                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_GYM_CENTER, user = true, fullUser = false)
             }
             R.id.nav_food -> {
                 openFragmentCategory(title, 4)
-                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_RESTAURANTS)
+                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_RESTAURANTS, user = true, fullUser = false)
             }
             R.id.nav_bar -> {
                 openFragmentCategory(title, 5)
-                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_BAR)
+                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_BAR, user = true, fullUser = false)
             }
             R.id.nav_fast_food -> {
                 openFragmentCategory(title, 6)
-                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_FAST_FOOD)
+                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_FAST_FOOD, user = true, fullUser = false)
             }
             R.id.nav_delivery -> {
                 openFragmentCategory(title, 7)
-                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_DELIVERY)
+                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_DELIVERY, user = true, fullUser = false)
             }
             R.id.nav_ice_cream_store -> {
                 openFragmentCategory(title, 8)
-                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_ICE_CREAM)
+                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_ICE_CREAM, user = true, fullUser = false)
             }
             R.id.nav_hotels -> {
                 openFragmentCategory(title, 9)
-                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_HOTEL)
+                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_HOTEL, user = true, fullUser = false)
             }
             R.id.nav_temporary_rent -> {
                 openFragmentCategory(title, 10)
-                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_TEMPORARY_RENT)
+                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_TEMPORARY_RENT, user = true, fullUser = false)
             }
             R.id.nav_tour -> {
                 openFragmentCategory(title, 11)
-                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_TOURIST_DESTINATION)
+                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_TOURIST_DESTINATION, user = true, fullUser = false)
             }
             R.id.nav_money -> {
                 openFragmentCategory(title, 12)
-                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_MONEY)
+                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_MONEY, user = true, fullUser = false)
             }
             R.id.nav_bill_payments -> {
                 openFragmentCategory(title, 13)
-                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_BILL_PAYMENTS)
+                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_BILL_PAYMENTS, user = true, fullUser = false)
             }
             R.id.nav_apartment_rental -> {
                 openFragmentCategory(title, 14)
-                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_APARTMENT_RENTAL)
+                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_APARTMENT_RENTAL, user = true, fullUser = false)
             }
             R.id.nav_taxi -> {
                 openFragmentCategory(title, 15)
-                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_TAXI)
+                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_TAXI, user = true, fullUser = false)
             }
             R.id.nav_gas_station -> {
                 openFragmentCategory(title, 16)
-                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_GAS_STATION)
+                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_GAS_STATION, user = true, fullUser = false)
             }
             R.id.nav_transport -> {
                 openFragmentCategory(title, 17)
-                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_TRANSPORT)
+                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_TRANSPORT, user = true, fullUser = false)
             }
             R.id.nav_transport_tickets -> {
                 openFragmentCategory(title, 18)
-                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_TRANSPORT_TICKETS)
+                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_TRANSPORT_TICKETS, user = true, fullUser = false)
             }
             R.id.nav_clothing_stores -> {
                 openFragmentCategory(title, 19)
-                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_CLOTHING_STORES)
+                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_CLOTHING_STORES, user = true, fullUser = false)
             }
             R.id.nav_big_stores -> {
                 openFragmentCategory(title, 20)
-                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_BIG_STORES)
+                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_BIG_STORES, user = true, fullUser = false)
             }
             R.id.nav_industrial_stores -> {
                 openFragmentCategory(title, 21)
-                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_INDUSTRIAL_STORES)
+                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_INDUSTRIAL_STORES, user = true, fullUser = false)
             }
             R.id.nav_art_and_design -> {
                 openFragmentCategory(title, 22)
-                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_ART)
+                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_ART, user = true, fullUser = false)
             }
             R.id.nav_jobs -> {
                 openFragmentCategory(title, 23)
-                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_JOBS)
+                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_JOBS, user = true, fullUser = false)
             }
             R.id.nav_emergency -> {
                 openFragmentCategory(title, 24)
-                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_EMERGENCIES)
+                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_CATEGORY_EMERGENCIES, user = true, fullUser = false)
             }
 
             //COMMERCE ITEMS
             R.id.nav_subscription -> {
-                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_OPEN_REGISTER_FORM)
+                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_OPEN_REGISTER_FORM, user = true, fullUser = true)
                 ActionTools.directUrl(this, LINK_TO_SUBSCRIPTION_FORM)
             }
             R.id.nav_suggestions -> {
-                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_OPEN_SUGGESTION_FORM)
+                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_OPEN_SUGGESTION_FORM, user = true, fullUser = true)
                 ActionTools.directUrl(this, LINK_TO_SUGGESTIONS_FORM)
             }
             R.id.nav_get_in_touch -> {
-                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_OPEN_GET_IN_TOUCH)
+                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_OPEN_GET_IN_TOUCH, user = true, fullUser = false)
                 ActionTools.sendEmail(CONTACT_EMAIL, SUBJECT_EMAIL, "\n\n--\nMensaje enviado desde Simplicity App.", this)
             }
 

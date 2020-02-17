@@ -28,7 +28,6 @@ import com.simplicityapp.base.utils.Tools
 import com.simplicityapp.base.utils.UITools
 import com.simplicityapp.modules.settings.ui.ActivityFullScreenImage
 import com.simplicityapp.base.data.Constant
-import com.simplicityapp.base.data.ThisApplication
 import com.simplicityapp.modules.main.ui.ActivityMain
 import com.simplicityapp.modules.start.ui.ActivitySplash
 import com.simplicityapp.modules.notifications.model.ContentInfo
@@ -102,9 +101,9 @@ class ActivityNotificationDetails : AppCompatActivity() {
         (findViewById<View>(R.id.lyt_image) as MaterialRippleLayout).setOnClickListener {
             AnalyticsConstants.logAnalyticsEvent(
                 AnalyticsConstants.SELECT_NOTIFICATION_OPEN_PHOTO,
-                null,
-                null,
-                null
+                contentInfo?.image,
+                true,
+                false
             )
             val images_list = ArrayList<String>()
             images_list.add(Constant.getURLimgNews(contentInfo!!.image))
@@ -138,9 +137,13 @@ class ActivityNotificationDetails : AppCompatActivity() {
         } else if (id == R.id.action_share) {
             AnalyticsConstants.logAnalyticsEvent(
                 AnalyticsConstants.SELECT_NOTIFICATION_ITEM_SHARE,
-                null,
-                null,
-                null
+                contentInfo?.title,
+                true,
+                false
+            )
+            AnalyticsConstants.logAnalyticsShare(
+                AnalyticsConstants.CONTENT_NOTIFICATION,
+                contentInfo?.title.orEmpty()
             )
             ActionTools.methodShareNews(this, contentInfo!!)
         }
@@ -177,9 +180,9 @@ class ActivityNotificationDetails : AppCompatActivity() {
         fun navigate(activity: Activity, obj: ContentInfo, from_notif: Boolean?) {
             AnalyticsConstants.logAnalyticsEvent(
                 AnalyticsConstants.SELECT_NOTIFICATIONS_LIST_OPEN_ITEM,
-                null,
-                null,
-                null
+                obj.title,
+                true,
+                false
             )
             val i = navigateBase(activity, obj, from_notif)
             activity.startActivity(i)

@@ -31,7 +31,6 @@ import com.simplicityapp.base.utils.PermissionUtil
 
 import androidx.core.content.PermissionChecker.PERMISSION_GRANTED
 import com.simplicityapp.base.analytics.AnalyticsConstants
-import com.simplicityapp.base.data.AppConfig.FIRST_RUN
 import com.simplicityapp.base.data.AppConfig.FIRST_RUN_FLAG
 import com.simplicityapp.base.data.Constant.LOG_TAG
 import com.simplicityapp.base.ui.ActivityInterface
@@ -167,7 +166,6 @@ class ActivityLogin : AppCompatActivity(), ActivityInterface, View.OnClickListen
     private fun signIn() {
         val signInIntent = mGoogleSignInClient!!.signInIntent
         startActivityForResult(signInIntent, RC_SIGN_IN)
-        AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.LOGIN_SUCCESS)
     }
 
     private fun signOut() {
