@@ -171,10 +171,13 @@ public class AdapterPlaceGrid extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
     }
 
-    public void insertData(List<Place> items) {
+    public void insertData(List<Place> items, boolean shuffle) {
         setLoaded();
         int positionStart = getItemCount();
         int itemCount = items.size();
+        if (shuffle) {
+            items = Tools.Companion.shuffleItems(items);
+        }
         this.items.addAll(items);
         notifyItemRangeInserted(positionStart, itemCount);
     }

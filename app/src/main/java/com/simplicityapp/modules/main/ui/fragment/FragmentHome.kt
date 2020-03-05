@@ -162,7 +162,7 @@ class FragmentHome : Fragment() {
     private fun startLoadMoreAdapter() {
         adapter?.resetListData()
         val items = db?.getPlacesByPage(category_id, Constant.LIMIT_LOADMORE, 0)
-        adapter?.insertData(items)
+        adapter?.insertData(items, true)
         val item_count = db!!.getPlacesSize(category_id)
         // detect when scroll reach bottom
         adapter?.setOnLoadMoreListener { current_page ->
@@ -179,7 +179,7 @@ class FragmentHome : Fragment() {
         adapter?.setLoading()
         Handler().postDelayed({
             val items = db?.getPlacesByPage(category_id, Constant.LIMIT_LOADMORE, next_page * Constant.LIMIT_LOADMORE)
-            adapter?.insertData(items)
+            adapter?.insertData(items, false)
         }, 500)
     }
 

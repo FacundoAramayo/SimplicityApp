@@ -137,6 +137,13 @@ class Tools {
         }
 
         /*
+        -------------------------------------- List Tools ------------------------------------------
+        */
+        fun shuffleItems(items: List<Place>): List<Place> {
+            return items.shuffled()
+        }
+
+        /*
         -------------------------------------- Location Tools --------------------------------------
         */
 
