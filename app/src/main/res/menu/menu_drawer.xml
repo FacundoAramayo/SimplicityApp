@@ -148,7 +148,7 @@
     <group android:id="@+id/bottom_menu_drawer">
         <item
             android:id="@+id/nav_subscription"
-            android:icon="@drawable/ic_subscription"
+            android:icon="@drawable/ic_open_register_form"
             android:title="@string/title_nav_subscription" />
         <item
             android:id="@+id/nav_suggestions"
@@ -159,6 +159,20 @@
             android:icon="@drawable/ic_info_web"
             android:title="@string/title_nav_get_in_touch" />
     </group>
+
+
+
+    <group android:id="@+id/settings_menu_drawer">
+        <item
+            android:id="@+id/nav_rate_app"
+            android:icon="@drawable/ic_subscription"
+            android:title="@string/pref_title_rate" />
+        <item
+            android:id="@+id/nav_setting"
+            android:icon="@drawable/ic_nav_setting"
+            android:title="@string/activity_title_settings" />
+    </group>
+
     <!--Tourist Destination-->
     <!--Food & Drink-->
     <!--Hotels-->

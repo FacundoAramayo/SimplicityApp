@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
 
@@ -40,7 +39,7 @@ import com.simplicityapp.modules.places.ui.ActivitySearch
 
 class ActivityMain : AppCompatActivity() {
 
-    internal var home = false
+    private var home = false
 
 
     var actionBar: ActionBar? = null
@@ -53,13 +52,13 @@ class ActivityMain : AppCompatActivity() {
     private var navigationView: NavigationView? = null
     private var db: DatabaseHandler? = null
     private var sharedPref: SharedPref? = null
-    private var nav_header_lyt: RelativeLayout? = null
 
     private var exitTime: Long = 0
 
     var fragment: Fragment? = null
     val bundle = Bundle()
     var firstRun: Boolean = false
+    private var backToHome = false
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -154,15 +153,6 @@ class ActivityMain : AppCompatActivity() {
         if (!AppConfig.ENABLE_USER_PROFILE) navigationView?.menu?.removeItem(R.id.nav_profile)
         if (!AppConfig.ENABLE_EMPTY_CATEGORIES and firstRun.not()) { removeEmptyCategories() }
 
-        val nav_header = navigationView?.getHeaderView(0)
-        nav_header_lyt = nav_header?.findViewById<View>(R.id.nav_header_lyt) as RelativeLayout
-        //nav_header_lyt.setBackgroundColor(DeviceTools.colorBrighter(sharedPref.getThemeColorInt()));
-        nav_header.findViewById<View>(R.id.menu_nav_setting).setOnClickListener {
-            AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_OPEN_SETTINGS)
-            val i = Intent(applicationContext, ActivitySetting::class.java)
-            startActivity(i)
-        }
-
     }
 
     private fun removeEmptyCategories() {
@@ -206,6 +196,10 @@ class ActivityMain : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
+        if (backToHome) {
+            onItemSelected(R.id.nav_home, resources.getString(R.string.title_home), false)
+            return
+        }
         val drawer = findViewById<View>(R.id.drawer_layout) as DrawerLayout
         if (!drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.openDrawer(GravityCompat.START)
@@ -246,8 +240,8 @@ class ActivityMain : AppCompatActivity() {
         actionBar?.title = title
     }
 
-    private fun onItemSelected(id: Int, title: String, logAnalytics: Boolean = true): Boolean {
-
+    fun onItemSelected(id: Int, title: String, logAnalytics: Boolean = true, backToHome: Boolean = false): Boolean {
+        this.backToHome = backToHome
         when (id) {
             R.id.nav_home -> {
                 fragment = FragmentHome()
@@ -412,6 +406,17 @@ class ActivityMain : AppCompatActivity() {
                 ActionTools.sendEmail(CONTACT_EMAIL, SUBJECT_EMAIL, "\n\n--\nMensaje enviado desde Simplicity App.", this)
             }
 
+            //SETTINGS
+            R.id.nav_rate_app -> {
+                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_RATE_APP)
+                ActionTools.rateAction(this@ActivityMain)
+            }
+            R.id.nav_setting -> {
+                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_OPEN_SETTINGS)
+                val i = Intent(applicationContext, ActivitySetting::class.java)
+                startActivity(i)
+            }
+
         }
         /* IMPORTANT : cat[index_array], index is start from 0 */
 
@@ -445,12 +450,6 @@ class ActivityMain : AppCompatActivity() {
 
     override fun onResume() {
         updateFavoritesCounter(navigationView!!, R.id.nav_favorites, db!!.favoritesSize)
-        if (actionBar != null) {
-            //DeviceTools.setActionBarColor(this, actionBar!!)
-        }
-        if (nav_header_lyt != null) {
-            //nav_header_lyt.setBackgroundColor(DeviceTools.colorBrighter(sharedPref.getThemeColorInt()));
-        }
         super.onResume()
     }
 
@@ -472,6 +471,8 @@ class ActivityMain : AppCompatActivity() {
 
     companion object {
         var active = false
+
+        const val BACK_TO_HOME = "BACK_TO_HOME"
 
         private lateinit var instance: ActivityMain
 

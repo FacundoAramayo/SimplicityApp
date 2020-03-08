@@ -4,15 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@android:color/white">
+    android:background="@drawable/bg_app">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/primary_color_box_rounded_bordered"
+        android:background="@drawable/primary_color_box_rounded_bordered_white"
         android:layout_margin="10dp"
-        app:elevation="0dp"
+        app:elevation="25dp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <androidx.appcompat.widget.Toolbar
@@ -22,7 +22,7 @@
             android:background="@android:color/white"
             android:paddingRight="@dimen/spacing_middle"
             android:layout_margin="5dp"
-            android:theme="@style/AppTheme.Toolbar"
+            android:theme="@style/AppTheme.Toolbar.Search"
             app:contentInsetStartWithNavigation="0dp"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 

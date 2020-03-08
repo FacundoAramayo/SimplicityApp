@@ -9,11 +9,6 @@ public class Constant {
     // Edit WEB_URL with your url. Make sure you have backslash('/') in the end url
     public static String WEB_URL = "http://ciudadanovirtualdemo.smartsolutions.com.ar/";
 
-    /*Córdoba*/
-//    public static final double city_lat = -31.4200833;
-//    public static final double city_lng = -64.1887761;
-//    public static final float city_zoom = 12;
-
     /*Tartagal*/
     public static final double city_lat = -22.5167622;
     public static final double city_lng = -63.8056084;
@@ -30,19 +25,6 @@ public class Constant {
     public static final String PREFS_NAME = "MAIN_PREF";
     public static final String PREF_VERSION_CODE_KEY = APP_NAME_MIN + ".build.VERSION_CODE_KEY";
     public static final int DOESNT_EXIST_CODE = -1;
-
-
-
-    // Google analytics event category
-    public enum AnalyticsEvent {
-        FAVORITES,
-        THEME,
-        NOTIFICATION,
-        REFRESH
-    }
-
-    // OAuth Credentials
-    public static final String OAUTH_WEB_CLIENT_ID = "554896515826-iilaie2tmb9td9gv7ejgp4ea9b2hvlg0.apps.googleusercontent.com";
 
     //URL TO FORMS
     public static final String LINK_TO_SUBSCRIPTION_FORM = "http://bit.ly/2TZkzQN";

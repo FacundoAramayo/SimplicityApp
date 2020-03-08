@@ -1,20 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animation-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@drawable/gradient_box_accent_5"
-        android:duration="4000"/>
-    <item android:drawable="@drawable/gradient_box_accent_6"
-        android:duration="3500"/>
-    <item android:drawable="@drawable/gradient_box_accent_7"
-        android:duration="4000"/>
-    <item android:drawable="@drawable/gradient_box_accent_8"
-        android:duration="3500"/>
     <item android:drawable="@drawable/gradient_box_accent_1"
         android:duration="4000"/>
     <item android:drawable="@drawable/gradient_box_accent_2"
         android:duration="3500"/>
     <item android:drawable="@drawable/gradient_box_accent_3"
         android:duration="4000"/>
-    <item android:drawable="@drawable/gradient_box_accent_4"
+    <item android:drawable="@drawable/gradient_box_accent_2"
         android:duration="3500"/>
 
 </animation-list>

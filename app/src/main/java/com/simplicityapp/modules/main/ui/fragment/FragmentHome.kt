@@ -49,6 +49,10 @@ class FragmentHome : Fragment() {
     private var snackbar_retry: Snackbar? = null
     private var button_share_app: Button? = null
     private var button_home_subscription: Button? = null
+    private var btnQuickAccessDelivery: LinearLayout? = null
+    private var btnQuickAccessTaxi: LinearLayout? = null
+    private var btnQuickAccessEmergency: LinearLayout? = null
+    private var btnQuickAccessPharmacy: LinearLayout? = null
 
     private var db: DatabaseHandler? = null
     private var sharedPref: SharedPref? = null
@@ -57,6 +61,7 @@ class FragmentHome : Fragment() {
     private var callback: Call<CallbackListPlace>? = null
 
     private var onProcess = false
+    private var backToHome = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         root_view = inflater.inflate(R.layout.fragment_home, null)
@@ -78,6 +83,10 @@ class FragmentHome : Fragment() {
         text_progress = root_view?.findViewById<View>(R.id.text_progress) as TextView
         button_share_app = root_view?.findViewById(R.id.button_home_share_app)
         button_home_subscription = root_view?.findViewById(R.id.button_home_subscription)
+        btnQuickAccessDelivery = root_view?.findViewById(R.id.lyt_quick_access_delivery)
+        btnQuickAccessTaxi = root_view?.findViewById(R.id.lyt_quick_access_taxi)
+        btnQuickAccessEmergency = root_view?.findViewById(R.id.lyt_quick_access_emergency)
+        btnQuickAccessPharmacy = root_view?.findViewById(R.id.lyt_quick_access_pharmacy)
 
         recyclerView?.layoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.HORIZONTAL)
         recyclerView?.addItemDecoration(SpacingItemDecoration(UITools.getGridSpanCount(activity!!) , UITools.dpToPx(activity!!, 4), true))
@@ -99,6 +108,27 @@ class FragmentHome : Fragment() {
         button_home_subscription?.setOnClickListener {
             AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_HOME_OPEN_REGISTER_FORM, user = true, fullUser = true)
             activity?.let { it1 -> ActionTools.directUrl(it1, Constant.LINK_TO_SUBSCRIPTION_FORM) }
+        }
+
+        btnQuickAccessDelivery?.setOnClickListener {
+            backToHome = true
+            AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_HOME_QUICK_ACCESS_DELIVERY, user = true, fullUser = true)
+            ActivityMain.ActivityMainInstance.onItemSelected(R.id.nav_delivery, resources.getString(R.string.title_nav_delivery), false, true)
+        }
+
+        btnQuickAccessTaxi?.setOnClickListener {
+            AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_HOME_QUICK_ACCESS_TAXI, user = true, fullUser = true)
+            ActivityMain.ActivityMainInstance.onItemSelected(R.id.nav_taxi, resources.getString(R.string.title_nav_taxi), false, true)
+        }
+
+        btnQuickAccessEmergency?.setOnClickListener {
+            AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_HOME_QUICK_ACCESS_EMERGENCY, user = true, fullUser = true)
+            ActivityMain.ActivityMainInstance.onItemSelected(R.id.nav_emergency, resources.getString(R.string.title_nav_emergency), false, true)
+        }
+
+        btnQuickAccessPharmacy?.setOnClickListener {
+            AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_HOME_QUICK_ACCESS_PHARMACY, user = true, fullUser = true)
+            ActivityMain.ActivityMainInstance.onItemSelected(R.id.nav_pharmacy, resources.getString(R.string.title_nav_pharmacy), false, true)
         }
 
         startAnimationTitle()

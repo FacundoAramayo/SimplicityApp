@@ -160,7 +160,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/raleway_bold"
+                android:fontFamily="@font/raleway_semibold"
                 android:paddingLeft="@dimen/spacing_large"
                 android:paddingTop="@dimen/spacing_large"
                 android:paddingBottom="@dimen/spacing_medium"
@@ -211,7 +211,7 @@
                 android:id="@+id/textView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/raleway_bold"
+                android:fontFamily="@font/raleway_semibold"
                 android:padding="@dimen/spacing_large"
                 android:text="@string/description_title"
                 android:textAppearance="@style/TextAppearance.AppCompat.Title"
@@ -222,7 +222,7 @@
                 android:layout_height="1px"
                 android:layout_marginBottom="@dimen/spacing_small"
                 android:layout_marginTop="@dimen/spacing_small"
-                android:background="@color/grey_soft" />
+                android:background="@color/grey_medium" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -230,7 +230,7 @@
                 android:paddingBottom="@dimen/spacing_large"
                 android:paddingLeft="@dimen/spacing_medium"
                 android:paddingRight="@dimen/spacing_medium"
-                android:paddingTop="@dimen/spacing_middle">
+                android:paddingTop="@dimen/spacing_medium">
 
                 <WebView
                     android:id="@+id/description"
@@ -265,7 +265,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/raleway_bold"
+                android:fontFamily="@font/raleway_semibold"
                 android:padding="@dimen/spacing_large"
                 android:text="@string/map_title"
                 android:textAppearance="@style/TextAppearance.AppCompat.Title"
@@ -295,7 +295,7 @@
                     style="?android:attr/borderlessButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/raleway_bold"
+                    android:fontFamily="@font/raleway_semibold"
                     android:text="@string/map_view"
                     android:textColor="@color/colorAccent" />
 
@@ -304,7 +304,7 @@
                     style="?android:attr/borderlessButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/raleway_bold"
+                    android:fontFamily="@font/raleway_semibold"
                     android:text="@string/map_navigate"
                     android:textColor="@color/colorAccent" />
             </LinearLayout>

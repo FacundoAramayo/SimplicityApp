@@ -52,8 +52,13 @@
     <string name="title_nav_get_in_touch">Contacto</string>
     <string name="title_nav_suggestions">Sugerencias</string>
 
-    <string name="title_home_subscription">Ofrecer mis productos/servicios</string>
+    <string name="title_home_subscription">Registrarme</string>
 
+    <string name="title_home_quick_access">Acceso rápido</string>
+    <string name="item_home_quick_access_delivery">Delivery</string>
+    <string name="item_home_quick_access_taxi">Remis</string>
+    <string name="item_home_quick_access_emergency">SOS</string>
+    <string name="item_home_quick_access_pharmacy">Farmacia</string>
 
     <!--=== activity FullScreenImage =========================================================== -->
     <string name="image_of">%1$d of %2$d</string>
@@ -99,7 +104,7 @@
     <string name="pref_title_vibrate">Vibración</string>
     <string name="pref_title_cache">Vaciar caché de imágenes</string>
     <string name="pref_title_theme">Color del tema</string>
-    <string name="pref_title_rate">Valorar</string>
+    <string name="pref_title_rate">Valorar aplicaciòn</string>
     <string name="pref_title_about">Acerca de</string>
     <string name="pref_ringtone_silent">Silenciar</string>
     <string name="pref_title_copyright">Copyright</string>
@@ -166,19 +171,19 @@
 
 
     <!--=== activity Splash ==================================================================== -->
-    <string name="splash_welcome_text">¡BIENVENIDO!</string>
+    <string name="splash_welcome_text">BIENVENIDO</string>
     <string name="splash_desc_text">Navega por todos los lugares de Simplicity App</string>
 
     <!--=== fragment Category ================================================================== -->
     <string name="refresh_failed">Actualización falló</string>
-    <string name="load_of">Load %1$d of %2$d</string>
+    <string name="load_of">Cargando %1$d de %2$d</string>
     <string name="load_success">Carga de datos satisfactoria</string>
 
     <!--=== DeviceTools ============================================================================== -->
     <string name="sharePlace">Mira este lugar </string>
     <string name="shareLocated">ubicado en</string>
     <string name="findInApp">Encuéntralo en la aplicación </string>
-    <string name="shareAppButton">Compartir la aplicación</string>
+    <string name="shareAppButton">Compartir</string>
     <string name="shareUsing">Compartir mediante…</string>
     <string name="shareApp">Simplicity App está disponible en Google Play Store. Descárgala ahora</string>
 
@@ -234,7 +239,7 @@
     <string name="delete">Eliminar datos</string>
     <string name="scan">Escanear DNI</string>
 
-    <string name="help_us_grow">¡Ayúdanos a crecer!</string>
-    <string name="have_you_a_commerce">¿Tienes un comercio o algún oficio?</string>
+    <string name="help_us_grow">¡Comparte la app!</string>
+    <string name="have_you_a_commerce">Registra tu comercio</string>
 
 </resources>

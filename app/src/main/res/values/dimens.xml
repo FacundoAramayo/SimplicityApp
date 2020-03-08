@@ -29,7 +29,7 @@
     <!--for drawer menu-->
     <dimen name="drawer_menu_width">250dp</dimen>
 
-    <dimen name="splash_icon_size">230dp</dimen>
+    <dimen name="splash_icon_size">250dp</dimen>
     <dimen name="text_desc_width">270dp</dimen>
     <dimen name="text_title_width">310dp</dimen>
 

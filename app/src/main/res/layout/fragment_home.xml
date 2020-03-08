@@ -15,6 +15,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:visibility="visible"
+                android:paddingBottom="@dimen/spacing_xlarge"
                 android:gravity="center_vertical">
 
                 <LinearLayout
@@ -55,7 +56,7 @@
                     android:fontFamily="@font/raleway_bold"
                     android:maxLines="1"
                     android:singleLine="true"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
                     android:textColor="@color/colorPrimary"
                     android:text="@string/title_nav_featured"
                     android:layout_marginLeft="10dp"
@@ -72,104 +73,297 @@
                     android:padding="5dp"
                     app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/raleway_bold"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                    android:textColor="@color/colorPrimary"
+                    android:text="@string/title_home_quick_access"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="25dp"
+                    />
+
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    style="@style/AppTheme.CardView"
-                    android:layout_marginBottom="10dp"
-                    android:elevation="5dp"
-                    android:background="@drawable/white_text_box_rounded">
+                    android:orientation="horizontal">
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        style="@style/CardView">
+                        android:layout_weight="1"
+                        android:id="@+id/lyt_quick_access_delivery"
+                        style="@style/AppTheme.CardView"
+                        android:layout_marginBottom="10dp"
+                        android:elevation="5dp"
+                        android:background="@drawable/gradient_box_rounded_1">
 
-                        <TextView
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_margin="10dp"
-                            android:fontFamily="@font/raleway_bold"
-                            android:textColor="@color/colorPrimary"
-                            android:text="@string/help_us_grow"
-                            android:textAlignment="center"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+                            android:orientation="vertical"
+                            style="@style/CardView">
 
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="210dp"
-                            tools:layout_editor_absoluteX="132dp"
-                            tools:layout_editor_absoluteY="130dp"
-                            app:srcCompat="@drawable/welcome_1" />
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                tools:layout_editor_absoluteX="132dp"
+                                tools:layout_editor_absoluteY="130dp"
+                                app:srcCompat="@drawable/ic_nav_delivery" />
 
-                        <Button
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_margin="10dp"
-                            android:paddingLeft="10dp"
-                            android:paddingRight="10dp"
-                            android:id="@+id/button_home_share_app"
-                            android:background="@drawable/gradient_box_rounded_1"
-                            android:fontFamily="@font/raleway_semibold"
-                            android:drawableLeft="@drawable/ic_share"
-                            android:drawableTint="@android:color/white"
-                            android:text="@string/shareAppButton"
-                            android:textColor="#fff" />
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="20dp"
+                                android:layout_gravity="center_horizontal"
+                                android:fontFamily="@font/raleway_light"
+                                android:textColor="@color/white"
+                                android:text="@string/item_home_quick_access_delivery"
+                                android:maxLines="1"
+                                android:ellipsize="end"
+                                android:textAlignment="center"/>
+
+                        </LinearLayout>
+
+
                     </LinearLayout>
 
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:id="@+id/lyt_quick_access_taxi"
+                        style="@style/AppTheme.CardView"
+                        android:layout_marginBottom="10dp"
+                        android:elevation="5dp"
+                        android:background="@drawable/gradient_box_rounded_1">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            style="@style/CardView">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                tools:layout_editor_absoluteX="132dp"
+                                tools:layout_editor_absoluteY="130dp"
+                                app:srcCompat="@drawable/ic_nav_taxi" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="20dp"
+                                android:layout_gravity="center_horizontal"
+                                android:fontFamily="@font/raleway_light"
+                                android:textColor="@color/white"
+                                android:text="@string/item_home_quick_access_taxi"
+                                android:maxLines="1"
+                                android:ellipsize="end"
+                                android:textAlignment="center"/>
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:id="@+id/lyt_quick_access_emergency"
+                        style="@style/AppTheme.CardView"
+                        android:layout_marginBottom="10dp"
+                        android:elevation="5dp"
+                        android:background="@drawable/gradient_box_rounded_1">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            style="@style/CardView">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                tools:layout_editor_absoluteX="132dp"
+                                tools:layout_editor_absoluteY="130dp"
+                                app:srcCompat="@drawable/ic_nav_emergency" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="20dp"
+                                android:layout_gravity="center_horizontal"
+                                android:fontFamily="@font/raleway_light"
+                                android:textColor="@color/white"
+                                android:text="@string/item_home_quick_access_emergency"
+                                android:maxLines="1"
+                                android:ellipsize="end"
+                                android:textAlignment="center"/>
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:id="@+id/lyt_quick_access_pharmacy"
+                        style="@style/AppTheme.CardView"
+                        android:layout_marginBottom="10dp"
+                        android:elevation="5dp"
+                        android:background="@drawable/gradient_box_rounded_1">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            style="@style/CardView">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                tools:layout_editor_absoluteX="132dp"
+                                tools:layout_editor_absoluteY="130dp"
+                                app:srcCompat="@drawable/ic_nav_pharmacy" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="20dp"
+                                android:layout_gravity="center_horizontal"
+                                android:fontFamily="@font/raleway_light"
+                                android:textColor="@color/white"
+                                android:text="@string/item_home_quick_access_pharmacy"
+                                android:maxLines="1"
+                                android:ellipsize="end"
+                                android:textAlignment="center"/>
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    style="@style/AppTheme.CardView"
-                    android:layout_marginBottom="15dp"
-                    android:elevation="5dp"
-                    android:background="@drawable/white_text_box_rounded">
+                    android:orientation="horizontal">
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        style="@style/CardView">
+                        android:layout_weight="1"
+                        style="@style/AppTheme.CardView"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginBottom="10dp"
+                        android:elevation="5dp"
+                        android:background="@drawable/white_text_box_rounded">
 
-                        <TextView
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_margin="10dp"
-                            android:fontFamily="@font/raleway_bold"
-                            android:textColor="@color/colorPrimary"
-                            android:text="@string/have_you_a_commerce"
-                            android:textAlignment="center"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+                            android:orientation="vertical"
+                            style="@style/CardView">
 
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="210dp"
-                            tools:layout_editor_absoluteX="132dp"
-                            tools:layout_editor_absoluteY="130dp"
-                            app:srcCompat="@drawable/welcome_3" />
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_margin="10dp"
+                                android:fontFamily="@font/raleway_semibold"
+                                android:textColor="@color/colorPrimary"
+                                android:text="@string/help_us_grow"
+                                android:visibility="gone"
+                                android:textAlignment="center"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
-                        <Button
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_margin="10dp"
-                            android:paddingLeft="10dp"
-                            android:paddingRight="10dp"
-                            android:id="@+id/button_home_subscription"
-                            android:background="@drawable/gradient_box_rounded_3"
-                            android:fontFamily="@font/raleway_semibold"
-                            android:drawableTint="@android:color/white"
-                            android:text="@string/title_home_subscription"
-                            android:textColor="#fff" />
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="90dp"
+                                tools:layout_editor_absoluteX="132dp"
+                                tools:layout_editor_absoluteY="130dp"
+                                android:layout_marginBottom="5dp"
+                                app:srcCompat="@drawable/welcome_1" />
+
+                            <Button
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_margin="5dp"
+                                android:paddingLeft="10dp"
+                                android:paddingRight="10dp"
+                                android:id="@+id/button_home_share_app"
+                                android:background="@drawable/gradient_box_rounded_1"
+                                android:fontFamily="@font/raleway_semibold"
+                                android:drawableLeft="@drawable/ic_share"
+                                android:drawableTint="@android:color/white"
+                                android:text="@string/shareAppButton"
+                                android:textColor="#fff" />
+                        </LinearLayout>
+
+
                     </LinearLayout>
 
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        style="@style/AppTheme.CardView"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginBottom="15dp"
+                        android:elevation="5dp"
+                        android:background="@drawable/white_text_box_rounded">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            style="@style/CardView">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_margin="10dp"
+                                android:fontFamily="@font/raleway_semibold"
+                                android:textColor="@color/colorPrimary"
+                                android:text="@string/have_you_a_commerce"
+                                android:visibility="gone"
+                                android:textAlignment="center"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="90dp"
+                                tools:layout_editor_absoluteX="132dp"
+                                tools:layout_editor_absoluteY="130dp"
+                                android:layout_marginBottom="5dp"
+                                app:srcCompat="@drawable/welcome_3" />
+
+                            <Button
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_margin="5dp"
+                                android:paddingLeft="10dp"
+                                android:paddingRight="10dp"
+                                android:id="@+id/button_home_subscription"
+                                android:background="@drawable/gradient_box_rounded_1"
+                                android:fontFamily="@font/raleway_semibold"
+                                android:drawableTint="@android:color/white"
+                                android:text="@string/title_home_subscription"
+                                android:textColor="#fff" />
+                        </LinearLayout>
+
+
+                    </LinearLayout>
 
                 </LinearLayout>
 

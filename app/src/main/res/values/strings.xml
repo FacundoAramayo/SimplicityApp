@@ -56,6 +56,12 @@
 
     <string name="title_home_subscription">Add my commerce</string>
 
+    <string name="title_home_quick_access">Quick access</string>
+    <string name="item_home_quick_access_delivery">Delivery</string>
+    <string name="item_home_quick_access_taxi">Taxi</string>
+    <string name="item_home_quick_access_emergency">SOS</string>
+    <string name="item_home_quick_access_pharmacy">Pharmacy</string>
+
     <!--=== activity FullScreenImage =========================================================== -->
     <string name="image_of">%1$d of %2$d</string>
 
