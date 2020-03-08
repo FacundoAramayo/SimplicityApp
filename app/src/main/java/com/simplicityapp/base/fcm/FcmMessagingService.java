@@ -31,8 +31,8 @@ import java.util.Map;
 
 import com.simplicityapp.base.utils.UITools;
 import com.simplicityapp.modules.notifications.ui.ActivityNotificationDetails;
+import com.simplicityapp.modules.notifications.ui.ActivityNotifications;
 import com.simplicityapp.modules.places.ui.ActivityPlaceDetail;
-import com.simplicityapp.modules.start.ui.ActivitySplash;
 import com.simplicityapp.R;
 import com.simplicityapp.base.data.AppConfig;
 import com.simplicityapp.base.data.Constant;
@@ -106,7 +106,7 @@ public class FcmMessagingService extends FirebaseMessagingService {
 
     private void displayNotificationIntent(FcmNotification fcmNotification, Bitmap bitmap) {
         playRingtoneVibrate(this);
-        Intent intent = new Intent(this, ActivitySplash.class);
+        Intent intent = new Intent(this, ActivityNotifications.class);
 
         if (fcmNotification.getPlace() != null) {
             intent = ActivityPlaceDetail.Companion.navigateBase(this, fcmNotification.getPlace(), true);
@@ -127,9 +127,7 @@ public class FcmMessagingService extends FirebaseMessagingService {
         builder.setAutoCancel(true);
         builder.setContentIntent(pendingIntent);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            builder.setPriority(Notification.PRIORITY_HIGH);
-        }
+        builder.setPriority(Notification.PRIORITY_HIGH);
 
         if (bitmap != null) {
             builder.setStyle(new NotificationCompat.BigPictureStyle().bigPicture(bitmap).setSummaryText(fcmNotification.getContent()));
@@ -139,7 +137,7 @@ public class FcmMessagingService extends FirebaseMessagingService {
 
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel channel = new NotificationChannel(channelId, channelId, NotificationManager.IMPORTANCE_LOW);
+            NotificationChannel channel = new NotificationChannel(channelId, channelId, NotificationManager.IMPORTANCE_DEFAULT);
             notificationManager.createNotificationChannel(channel);
         }
         int unique_id = (int) System.currentTimeMillis();
