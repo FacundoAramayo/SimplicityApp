@@ -16,3 +16,4 @@ app/release/output.json
 app/release/app-release.apk
 app/debug/output.json
 app/debug/app-debug.apk
+*.apk
