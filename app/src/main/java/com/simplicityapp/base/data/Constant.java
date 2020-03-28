@@ -8,6 +8,7 @@ public class Constant {
 
     // Edit WEB_URL with your url. Make sure you have backslash('/') in the end url
     public static String WEB_URL = "http://ciudadanovirtualdemo.smartsolutions.com.ar/";
+    public static String WEB_URL_DEV = "http://simplicityapp.com.ar/content_manager/";
 
     /*Tartagal*/
     public static final double city_lat = -22.5167622;
@@ -40,10 +41,10 @@ public class Constant {
 
     // image file url
     public static String getURLimgPlace(String file_name) {
-        return WEB_URL + "uploads/place/" + file_name;
+        return AppConfig.getWebURL() + "uploads/place/" + file_name;
     }
     public static String getURLimgNews(String file_name) {
-        return WEB_URL + "uploads/news/" + file_name;
+        return AppConfig.getWebURL() + "uploads/news/" + file_name;
     }
 
     // this limit value used for give pagination (request and display) to decrease payload

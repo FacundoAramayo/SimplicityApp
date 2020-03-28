@@ -5,7 +5,7 @@ import com.google.gson.GsonBuilder;
 import java.util.concurrent.TimeUnit;
 
 import com.simplicityapp.BuildConfig;
-import com.simplicityapp.base.data.Constant;
+import com.simplicityapp.base.data.AppConfig;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import okhttp3.logging.HttpLoggingInterceptor.Level;
@@ -28,7 +28,7 @@ public class RestAdapter {
                 .build();
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Constant.WEB_URL)
+                .baseUrl(AppConfig.getWebURL())
                 .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().setLenient().create()))
                 .client(okHttpClient)
                 .build();
@@ -54,7 +54,7 @@ public class RestAdapter {
                 .build();
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Constant.WEB_URL)
+                .baseUrl(AppConfig.getWebURL())
                 .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().setLenient().create()))
                 .client(okHttpClient)
                 .build();

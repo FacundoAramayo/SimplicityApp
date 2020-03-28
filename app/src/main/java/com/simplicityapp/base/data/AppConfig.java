@@ -1,5 +1,7 @@
 package com.simplicityapp.base.data;
 
+import com.simplicityapp.BuildConfig;
+
 public class AppConfig {
 
     // flag for display ads
@@ -26,7 +28,11 @@ public class AppConfig {
     public static final boolean LAZY_LOAD = false;
 
     // flag for tracking analytics
-    public static final boolean ENABLE_ANALYTICS = true;
+    public static final boolean ENABLE_ANALYTICS = false;
+
+    public static final String WEB_CLIENT_ID = "952435693298-e22spc0j5pnf1r5qsk3hv3k2lu5tas8q.apps.googleusercontent.com";
+
+    public static final String WEB_CLIENT_ID_DEV = "738836934516-hgaduu8708t67ad92mohb671211g58mb.apps.googleusercontent.com";
 
     // clear image cache when receive push notifications
     public static final boolean REFRESH_IMG_NOTIF = true;
@@ -64,5 +70,12 @@ public class AppConfig {
 
     // flag para notificar cuando se inició por primera vez
     public static final String FIRST_RUN_FLAG = "FIRST_RUN";
+
+    public static String getWebURL() {
+        String web_url;
+        if (BuildConfig.DEBUG) { web_url = Constant.WEB_URL_DEV; }
+        else { web_url = Constant.WEB_URL; }
+        return web_url;
+    }
 
 }

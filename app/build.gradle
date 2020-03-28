@@ -6,18 +6,39 @@ apply plugin: 'kotlin-kapt'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.simplicityapp"
         minSdkVersion 23
         targetSdkVersion 28
         versionCode 3
-        versionName "1.2.0"
+        versionName "1.3.0"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+    flavorDimensions "version"
+    productFlavors {
+        prod {
+            applicationId "com.simplicityapp"
+            buildConfigField "boolean", "ANALYTICS_ENABLED", "true"
+        }
+
+        dev {
+            applicationId "com.simplicityapp.dev"
+            versionNameSuffix "-DEV"
+            buildConfigField "boolean", "ANALYTICS_ENABLED", "false"
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
+            debuggable false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+        }
+        debug {
+            minifyEnabled false
+            debuggable true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
         }
     }
     lintOptions {
