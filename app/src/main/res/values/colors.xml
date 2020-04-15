@@ -7,7 +7,8 @@
     <color name="colorPrimaryDark">#171C30</color>
 
 <!--    <color name="colorAccent">#EA68AF</color>-->
-    <color name="colorAccent">#FF0198</color>
+    <color name="colorAccent">#c2185b</color>
+    <color name="colorAccentGradient">#FF0198</color>
 
     <color name="colorSeparatorLight">#789CAF</color>
     <color name="colorSeparator">#AFB8C4</color>

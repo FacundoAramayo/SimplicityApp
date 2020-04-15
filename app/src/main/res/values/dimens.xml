@@ -21,6 +21,9 @@
     <dimen name="icon_top_margin">24dp</dimen>
     <dimen name="icon_bottom_margin">24dp</dimen>
 
+    <!--for item gradients-->
+    <dimen name="gradient_radius">2500</dimen>
+
     <!--for item recycle-->
     <dimen name="item_place_height">195dp</dimen>
     <dimen name="item_place_width">180dp</dimen>

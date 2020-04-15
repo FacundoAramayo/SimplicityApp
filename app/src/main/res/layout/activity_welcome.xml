@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:background="@color/colorPrimary">
+    android:background="@drawable/gradient_box_list">
 
 
 
@@ -32,7 +32,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:fontFamily="@font/raleway_semibold"
+            android:fontFamily="@font/raleway"
             android:text="@string/welcome_back"
             android:textAppearance="@style/TextAppearance.AppCompat.Title.Inverse"
             android:theme="@style/Widget.AppCompat.Button.Colored"
@@ -44,7 +44,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:fontFamily="@font/raleway_semibold"
+            android:fontFamily="@font/raleway"
             android:text="@string/welcome_next"
             android:textAppearance="@style/TextAppearance.AppCompat.Title.Inverse"
             android:theme="@style/Widget.AppCompat.Button.Colored" />

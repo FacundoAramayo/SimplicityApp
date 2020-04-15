@@ -3,17 +3,16 @@ package com.simplicityapp.modules.start.ui
 import android.content.Intent
 import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
 import android.widget.Button
-import android.widget.RelativeLayout
 import android.widget.Toast
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
@@ -33,6 +32,7 @@ class ActivityWelcome : AppCompatActivity(), ActivityInterface {
 
     private var mViewPager: ViewPager? = null
     private var toolbar: Toolbar? = null
+    private var mainLayout: CoordinatorLayout? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,10 +46,13 @@ class ActivityWelcome : AppCompatActivity(), ActivityInterface {
         btnBack = findViewById<View>(R.id.btn_welcome_back) as Button
         btnNext = findViewById<View>(R.id.btn_welcome_next) as Button
         toolbar = findViewById(R.id.toolbar)
+        mainLayout = findViewById<CoordinatorLayout>(R.id.main_content)
         setSupportActionBar(toolbar)
         mSectionsPagerAdapter = SectionsPagerAdapter(supportFragmentManager)
         mViewPager = findViewById(R.id.container)
         mViewPager?.adapter = mSectionsPagerAdapter
+
+        startBackgroundAnimation(mainLayout)
     }
 
     override fun initListeners() {
@@ -75,13 +78,18 @@ class ActivityWelcome : AppCompatActivity(), ActivityInterface {
         }
     }
 
+    private fun startBackgroundAnimation(mainLayout: CoordinatorLayout?) {
+        val animationDrawable: AnimationDrawable = mainLayout?.background as AnimationDrawable
+        animationDrawable.setExitFadeDuration(3500)
+        animationDrawable.start()
+    }
+
     override fun getArguments() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     private inner class PageListener : ViewPager.SimpleOnPageChangeListener() {
         override fun onPageSelected(position: Int) {
-            //Log.i("PageListener", "page selected $position")
             currentPage = position
             when (position + 1) {
                 1 -> {
@@ -117,27 +125,15 @@ class ActivityWelcome : AppCompatActivity(), ActivityInterface {
             when (section_number) {
                 1 -> {
                     rootView = inflater.inflate(R.layout.fragment_welcome_1, container, false)
-                    val mainLayout = rootView.findViewById<RelativeLayout>(R.id.main_layout)
-                    startBackgroundAnimation(mainLayout)
                 }
                 2 -> {
                     rootView = inflater.inflate(R.layout.fragment_welcome_2, container, false)
-                    val mainLayout = rootView.findViewById<RelativeLayout>(R.id.main_layout)
-                    startBackgroundAnimation(mainLayout)
                 }
                 3 -> {
                     rootView = inflater.inflate(R.layout.fragment_welcome_3, container, false)
-                    val mainLayout = rootView.findViewById<RelativeLayout>(R.id.main_layout)
-                    startBackgroundAnimation(mainLayout)
                 }
             }
             return rootView
-        }
-
-        private fun startBackgroundAnimation(mainLayout: RelativeLayout) {
-            val animationDrawable: AnimationDrawable = mainLayout.background as AnimationDrawable
-            animationDrawable.setExitFadeDuration(3500)
-            animationDrawable.start()
         }
 
         companion object {
@@ -147,7 +143,6 @@ class ActivityWelcome : AppCompatActivity(), ActivityInterface {
                 val fragment = PlaceholderFragment()
                 val args = Bundle()
                 args.putInt(ARG_SECTION_NUMBER, sectionNumber)
-                Log.d("Section number", sectionNumber.toString())
                 fragment.arguments = args
                 return fragment
             }

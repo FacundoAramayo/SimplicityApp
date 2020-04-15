@@ -23,6 +23,8 @@ class ActivitySplash : AppCompatActivity() {
     private var sharedPref: SharedPref? = null
     private lateinit var instance: ActivitySplash
 
+    private var animationDrawable: AnimationDrawable? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
@@ -62,26 +64,29 @@ class ActivitySplash : AppCompatActivity() {
 
     private fun startActivityWelcomeDelay() {
         val i = Intent(this@ActivitySplash, ActivityWelcome::class.java)
+        animationDrawable?.stop()
         ActionTools.startActivityWithDelay(ActivitySplashInstance,this@ActivitySplash, i)
         AnalyticsConstants.logAnalyticsEvent(FirebaseAnalytics.Event.APP_OPEN, AnalyticsConstants.FIRST_RUN)
     }
 
     private fun startActivityMainDelay() {
         val i = Intent(this@ActivitySplash, ActivityMain::class.java)
+        animationDrawable?.stop()
         ActionTools.startActivityWithDelay(ActivitySplashInstance,this@ActivitySplash, i)
         AnalyticsConstants.logAnalyticsEvent(FirebaseAnalytics.Event.APP_OPEN, AnalyticsConstants.NORMAL_RUN)
     }
 
     private fun startActivityUpgradeDelay() {
         val i = Intent(this@ActivitySplash, ActivityMain::class.java)
+        animationDrawable?.stop()
         ActionTools.startActivityWithDelay(ActivitySplashInstance,this@ActivitySplash, i)
         AnalyticsConstants.logAnalyticsEvent(FirebaseAnalytics.Event.APP_OPEN, AnalyticsConstants.UPGRADE_RUN)
     }
 
     private fun startBackgroundAnimation(mainLayout: RelativeLayout) {
-        val animationDrawable: AnimationDrawable = mainLayout.background as AnimationDrawable
-        animationDrawable.setExitFadeDuration(3500)
-        animationDrawable.start()
+        animationDrawable = mainLayout.background as AnimationDrawable
+        animationDrawable?.setExitFadeDuration(900)
+        animationDrawable?.start()
     }
 
     val ActivitySplashInstance: ActivitySplash

@@ -205,12 +205,12 @@
     <string name="RETRY">REINTENTAR</string>
     <string name="DETAILS">DETALLES</string>
     <string name="FAILED">FALLÓ</string>
-    <string name="welcome_description">Te damos la bienvenida a Simplicity App. Una herramienta digital rápida y gratuita que te será muy útil en tu ciudad.</string>
-    <string name="welcome_description_2">Comercios, lugares y servicios disponibles en tu teléfono para hacer tu vida más fácil.\n¡Pronto mucho más!</string>
-    <string name="welcome_description_3">Si tienes un negocio o emprendimiento, esta es la forma más fácil y económica de promocionarlo.\n¡Llega a más clientes hoy mismo!</string>
+    <string name="welcome_description">Te damos la bienvenida. Simplicity App es una plataforma comercial intuitiva que te será muy útil en tu día a día.</string>
+    <string name="welcome_description_2">Comercios, productos, servicios, profesionales y oficios\n¡Te hacemos la vida más fácil!</string>
+    <string name="welcome_description_3">Si tienes un negocio o un emprendimiento esta es la forma más efectiva de promocionarlo.\n¡Y podés empezar GRATIS!</string>
     <string name="welcome_title">¡Hola!</string>
-    <string name="welcome_title_2">Todo en un solo lugar</string>
-    <string name="welcome_title_3">Haz crecer tu comercio</string>
+    <string name="welcome_title_2">La guía más completa</string>
+    <string name="welcome_title_3">Publicita tu comercio</string>
     <string name="welcome_next">SIGUIENTE</string>
     <string name="welcome_back">ATRÁS</string>
     <string name="welcome_start">COMENZAR</string>

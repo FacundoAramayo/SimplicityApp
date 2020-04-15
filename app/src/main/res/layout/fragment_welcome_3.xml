@@ -4,7 +4,7 @@
     android:id="@+id/main_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_box_accent_list">
+    tools:background="@color/colorPrimary">
 
 
     <ImageView
@@ -23,7 +23,7 @@
         android:layout_width="@dimen/text_title_width"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:fontFamily="@font/gorditas"
+        android:fontFamily="@font/raleway_bold"
         android:gravity="center_horizontal"
         android:text="@string/welcome_title_3"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
