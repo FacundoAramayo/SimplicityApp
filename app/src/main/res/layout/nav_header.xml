@@ -15,38 +15,31 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@color/colorPrimaryDark"
-            android:paddingBottom="@dimen/spacing_middle"
-            android:paddingLeft="@dimen/spacing_large"
-            android:paddingRight="@dimen/spacing_large"
-            android:paddingTop="@dimen/spacing_middle">
+            android:background="@color/grid_title_bg">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="@dimen/action_bar_margin"
+                android:elevation="@dimen/elevation_container"
+                android:background="@drawable/container_gradient_rounded_bordered"
                 android:orientation="horizontal">
 
-
-                <LinearLayout
+                <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="right"
-                    android:orientation="horizontal">
+                    android:layout_height="70dp"
+                    android:textAlignment="center"
+                    app:srcCompat="@drawable/simplicity_logo_transparent" />
 
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="70dp"
-                        android:textAlignment="center"
-                        app:srcCompat="@drawable/simplicity_logo_transparent" />
-
-                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/spacing_small"
                 android:layout_marginTop="@dimen/spacing_medium"
+                android:layout_marginBottom="@dimen/action_bar_margin"
+                android:layout_marginStart="@dimen/spacing_large"
+                android:layout_marginEnd="@dimen/action_bar_margin"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -62,7 +55,7 @@
                         android:fontFamily="@font/raleway_semibold"
                         android:text="@string/city_name"
                         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                        android:textColor="@android:color/white" />
+                        android:textColor="@color/colorPrimaryDark" />
 
                     <TextView
                         android:id="@+id/textView"
@@ -71,7 +64,7 @@
                         android:fontFamily="@font/raleway"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:text="@string/city_address"
-                        android:textColor="@android:color/white" />
+                        android:textColor="@color/colorPrimaryDark" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -80,7 +73,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0px"
+            android:layout_height="@dimen/spacing_xsmall"
             android:background="@color/grey_soft" />
     </LinearLayout>
 

@@ -113,7 +113,7 @@ public class ActivityNotifications extends AppCompatActivity {
 
     private void displayApiResult(final List<ContentInfo> items) {
         mAdapter.insertData(items);
-        firstProgress(false);
+        showProgress(false);
         if (items.size() == 0) {
             showNoItemView(true);
         }
@@ -159,7 +159,7 @@ public class ActivityNotifications extends AppCompatActivity {
     private void onFailRequest(int page_no) {
         failed_page = page_no;
         mAdapter.setLoaded();
-        firstProgress(false);
+        showProgress(false);
         if (Tools.Companion.checkConnection(this)) {
             showFailedView(true, getString(R.string.refresh_failed));
         } else {
@@ -171,7 +171,7 @@ public class ActivityNotifications extends AppCompatActivity {
         showFailedView(false, "");
         showNoItemView(false);
         if (page_no == 1) {
-            firstProgress(true);
+            showProgress(true);
         } else {
             mAdapter.setLoading();
         }
@@ -194,7 +194,7 @@ public class ActivityNotifications extends AppCompatActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        firstProgress(false);
+        showProgress(false);
         if (callbackCall != null && callbackCall.isExecuted()) {
             callbackCall.cancel();
         }
@@ -229,7 +229,7 @@ public class ActivityNotifications extends AppCompatActivity {
         }
     }
 
-    private void firstProgress(final boolean show) {
+    private void showProgress(final boolean show) {
         if (show) {
             lyt_progress.setVisibility(View.VISIBLE);
         } else {

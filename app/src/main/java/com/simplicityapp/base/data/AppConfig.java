@@ -73,7 +73,7 @@ public class AppConfig {
 
     public static String getWebURL() {
         String web_url;
-        if (BuildConfig.DEBUG) { web_url = Constant.WEB_URL_DEV; }
+        if (BuildConfig.FLAVOR.equals("dev")) { web_url = Constant.WEB_URL_DEV; }
         else { web_url = Constant.WEB_URL; }
         return web_url;
     }

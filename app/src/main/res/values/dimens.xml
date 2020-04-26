@@ -4,25 +4,38 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
 
     <!--genaral spacing-->
-    <dimen name="spacing_xsmall">2dp</dimen>
-    <dimen name="spacing_small">3dp</dimen>
-    <dimen name="spacing_medium">5dp</dimen>
-    <dimen name="spacing_middle">10dp</dimen>
-    <dimen name="spacing_large">15dp</dimen>
+    <dimen name="spacing_empty">0dp</dimen>
+    <dimen name="spacing_micro">0.5dp</dimen>
+    <dimen name="spacing_xsmall">1dp</dimen>
+    <dimen name="spacing_small">2dp</dimen>
+    <dimen name="spacing_medium">4dp</dimen>
+    <dimen name="spacing_middle">8dp</dimen>
+    <dimen name="spacing_normal">12dp</dimen>
+    <dimen name="spacing_large">16dp</dimen>
     <dimen name="spacing_mlarge">20dp</dimen>
-    <dimen name="spacing_mxlarge">25dp</dimen>
-    <dimen name="spacing_xlarge">35dp</dimen>
-    <dimen name="spacing_xmlarge">40dp</dimen>
-    <dimen name="spacing_xxlarge">50dp</dimen>
+    <dimen name="spacing_mxlarge">24dp</dimen>
+    <dimen name="spacing_xlarge">28dp</dimen>
+    <dimen name="spacing_xmlarge">36dp</dimen>
+    <dimen name="spacing_xxlarge">40dp</dimen>
 
-    <dimen name="elevation_card">1dp</dimen>
+    <dimen name="margin_card">8dp</dimen>
+    <dimen name="elevation_card">4dp</dimen>
+    <dimen name="elevation_container">4dp</dimen>
+    <dimen name="elevation_action_bar">8dp</dimen>
     <dimen name="card_corner_radius">10dp</dimen>
+
+    <dimen name="action_bar_margin">8dp</dimen>
 
     <dimen name="icon_top_margin">24dp</dimen>
     <dimen name="icon_bottom_margin">24dp</dimen>
 
+    <dimen name="news_list_height">200dp</dimen>
+
+    <dimen name="text_size_medium">12sp</dimen>
+    <dimen name="text_size_small">10sp</dimen>
+
     <!--for item gradients-->
-    <dimen name="gradient_radius">2500</dimen>
+    <dimen name="gradient_radius">3000</dimen>
 
     <!--for item recycle-->
     <dimen name="item_place_height">195dp</dimen>
@@ -41,6 +54,9 @@
     <dimen name="collapse_toolbar_height">110dp</dimen>
 
     <dimen name="news_item_img">150dp</dimen>
+    <dimen name="news_item_img_horizontal_list">80dp</dimen>
     <dimen name="map_marker_size">40dp</dimen>
+
+    <dimen name="horizontal_image_button_height">40dp</dimen>
 
 </resources>

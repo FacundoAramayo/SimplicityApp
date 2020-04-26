@@ -112,22 +112,17 @@ class ActivityMain : AppCompatActivity() {
         fab_button_favorites = findViewById(R.id.fb_button_favorites)
 
         fab_button_map?.setOnClickListener {
-            val intent = Intent(this, ActivityMaps::class.java)
-            startActivity(intent)
-            fab?.collapse()
+            mapIntent()
             AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_HOME_FAB_MAP)
         }
 
         fab_button_search?.setOnClickListener {
-            val intent = Intent(this, ActivitySearch::class.java)
-            startActivity(intent)
-            fab?.collapse()
+            searchIntent()
             AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_HOME_FAB_SEARCH)
         }
 
         fab_button_favorites?.setOnClickListener {
-            onItemSelected(R.id.nav_favorites, getString(R.string.title_nav_fav), false)
-            fab?.collapse()
+            favoritesIntent()
             AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_HOME_FAB_FAVORITES)
         }
 
@@ -164,6 +159,25 @@ class ActivityMain : AppCompatActivity() {
             }
         }
     }
+
+    fun searchIntent() {
+        val intent = Intent(this, ActivitySearch::class.java)
+        startActivity(intent)
+        fab?.collapse()
+    }
+
+    fun mapIntent() {
+        val intent = Intent(this, ActivityMaps::class.java)
+        startActivity(intent)
+        fab?.collapse()
+    }
+
+    fun favoritesIntent() {
+        onItemSelected(R.id.nav_favorites, getString(R.string.title_nav_fav), false)
+        fab?.collapse()
+    }
+
+
 
     private fun getMenuItemId(categoryId: Int): Int? {
         return when (categoryId) {

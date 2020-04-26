@@ -30,6 +30,7 @@ import com.google.gson.Gson;
 import java.util.Map;
 
 import com.simplicityapp.base.utils.UITools;
+import com.simplicityapp.modules.main.ui.ActivityMain;
 import com.simplicityapp.modules.notifications.ui.ActivityNotificationDetails;
 import com.simplicityapp.modules.notifications.ui.ActivityNotifications;
 import com.simplicityapp.modules.places.ui.ActivityPlaceDetail;
@@ -106,7 +107,7 @@ public class FcmMessagingService extends FirebaseMessagingService {
 
     private void displayNotificationIntent(FcmNotification fcmNotification, Bitmap bitmap) {
         playRingtoneVibrate(this);
-        Intent intent = new Intent(this, ActivityNotifications.class);
+        Intent intent = new Intent(this, ActivityMain.class);
 
         if (fcmNotification.getPlace() != null) {
             intent = ActivityPlaceDetail.Companion.navigateBase(this, fcmNotification.getPlace(), true);

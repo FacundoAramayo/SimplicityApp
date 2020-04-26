@@ -17,6 +17,12 @@
 
 
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/shape_bottom"
+        android:layout_gravity="bottom"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_gravity="bottom"

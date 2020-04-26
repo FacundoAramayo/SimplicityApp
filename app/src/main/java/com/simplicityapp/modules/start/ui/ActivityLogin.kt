@@ -115,7 +115,7 @@ class ActivityLogin : AppCompatActivity(), ActivityInterface, View.OnClickListen
 
 
     private fun configureGoogleSignIn() {
-        val webClientId = if (BuildConfig.DEBUG) { WEB_CLIENT_ID_DEV }
+        val webClientId = if (BuildConfig.FLAVOR == "dev") { WEB_CLIENT_ID_DEV }
         else { WEB_CLIENT_ID }
         gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(webClientId)

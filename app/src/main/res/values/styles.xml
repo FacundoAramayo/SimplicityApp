@@ -49,6 +49,20 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="AppTheme.ActionBar" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:background">@drawable/bg_app</item>
+    </style>
+
+    <style name="AppTheme.FrameToolbar" parent="ThemeOverlay.AppCompat.Light">
+
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">?attr/actionBarSize</item>
+        <item name="android:layout_margin">@dimen/action_bar_margin</item>
+        <item name="android:background">@drawable/container_rounded_bordered</item>
+        <item name="android:elevation">@dimen/elevation_action_bar</item>
+    </style>
+
+
     <style name="AppTheme.Toolbar" parent="ThemeOverlay.AppCompat.Light">
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:textColorPrimary">@color/colorPrimary</item>
@@ -108,21 +122,33 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
-    
+
     <style name="AppTheme.CardView">
-        <item name="android:paddingTop">10dp</item>
-        <item name="android:paddingBottom">10dp</item>
-        <item name="android:paddingLeft">10dp</item>
-        <item name="android:paddingRight">10dp</item>
-        <item name="android:layout_marginTop">8dp</item>
-        <item name="android:layout_marginBottom">2dp</item>
-        <item name="android:layout_marginLeft">10dp</item>
-        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:paddingTop">@dimen/spacing_middle</item>
+        <item name="android:paddingBottom">@dimen/spacing_middle</item>
+        <item name="android:paddingLeft">@dimen/spacing_middle</item>
+        <item name="android:paddingRight">@dimen/spacing_middle</item>
+        <item name="android:layout_marginTop">@dimen/spacing_medium</item>
+        <item name="android:layout_marginBottom">@dimen/spacing_small</item>
+        <item name="android:layout_marginLeft">@dimen/spacing_middle</item>
+        <item name="android:layout_marginRight">@dimen/spacing_middle</item>
+
+    </style>
+
+    <style name="AppTheme.QuickAccessButtons">
+        <item name="android:paddingTop">@dimen/spacing_middle</item>
+        <item name="android:paddingBottom">@dimen/spacing_middle</item>
+        <item name="android:paddingLeft">@dimen/spacing_middle</item>
+        <item name="android:paddingRight">@dimen/spacing_middle</item>
+        <item name="android:layout_marginTop">@dimen/spacing_medium</item>
+        <item name="android:layout_marginBottom">@dimen/spacing_medium</item>
+        <item name="android:layout_marginLeft">@dimen/spacing_medium</item>
+        <item name="android:layout_marginRight">@dimen/spacing_medium</item>
 
     </style>
 
     <style name="menu_labels_style">
-        <item name="android:background">@drawable/primary_color_box_rounded_bordered_white</item>
+        <item name="android:background">@drawable/container_rounded_bordered</item>
         <item name="android:paddingTop">10dp</item>
         <item name="android:paddingBottom">10dp</item>
         <item name="android:paddingLeft">15dp</item>

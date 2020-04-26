@@ -58,6 +58,7 @@
 
     <string name="title_home_quick_access">Quick access</string>
     <string name="item_home_quick_access_delivery">Delivery</string>
+    <string name="item_home_quick_access_gastronomy">Gastronomy</string>
     <string name="item_home_quick_access_taxi">Taxi</string>
     <string name="item_home_quick_access_emergency">SOS</string>
     <string name="item_home_quick_access_pharmacy">Pharmacy</string>

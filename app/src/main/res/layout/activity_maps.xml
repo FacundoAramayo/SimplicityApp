@@ -3,22 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white">
+    android:background="@drawable/bg_app">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@drawable/primary_color_box_rounded_bordered_white"
-        app:elevation="0dp"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        android:layout_alignParentStart="true">
+        app:elevation="@dimen/spacing_empty"
+        style="@style/AppTheme.ActionBar">
 
         <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_margin="5dp"
-            android:layout_height="?attr/actionBarSize"
+            style="@style/AppTheme.FrameToolbar"
             app:layout_scrollFlags="scroll|enterAlways">
 
             <include layout="@layout/toolbar" />
@@ -32,6 +27,7 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/appbar"
         android:background="@drawable/map_rounded_bordered"
+        android:elevation="@dimen/elevation_container"
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"

@@ -7,17 +7,16 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="1dp"
+        android:layout_margin="@dimen/margin_card"
         android:clipToPadding="false"
-        app:cardBackgroundColor="@android:color/white"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="1dp"
+        android:background="@drawable/container_rounded_bordered"
+        app:cardCornerRadius="@dimen/card_corner_radius"
+        app:cardElevation="@dimen/elevation_card"
         app:cardUseCompatPadding="false">
 
         <com.balysv.materialripple.MaterialRippleLayout
             android:id="@+id/lyt_parent"
             style="@style/RippleStyleBlack"
-            android:background="@drawable/primary_color_box_rounded_bordered"
             android:layout_width="match_parent"
             android:layout_height="@dimen/item_place_height">
 

@@ -17,7 +17,7 @@
     <string name="title_nav_map">Ver mapa</string>
     <string name="title_nav_search">Buscar</string>
     <string name="title_nav_fav">Favoritos</string>
-    <string name="title_nav_news">Notificaciones</string>
+    <string name="title_nav_news">Novedades</string>
     <string name="title_nav_profile">Perfil</string>
 
     <string name="title_nav_featured">Lugares destacados</string>
@@ -56,6 +56,7 @@
 
     <string name="title_home_quick_access">Acceso rápido</string>
     <string name="item_home_quick_access_delivery">Delivery</string>
+    <string name="item_home_quick_access_gastronomy">Gastronomía</string>
     <string name="item_home_quick_access_taxi">Remis</string>
     <string name="item_home_quick_access_emergency">SOS</string>
     <string name="item_home_quick_access_pharmacy">Farmacia</string>
