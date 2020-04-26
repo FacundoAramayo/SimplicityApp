@@ -183,7 +183,7 @@ class FragmentHome : Fragment() {
         super.onDestroyView()
     }
 
-    override fun onPause() {
+    override fun onStop() {
         if (snackbar_retry != null) snackbar_retry?.dismiss()
         if (callbackPlaces != null && callbackPlaces!!.isExecuted) {
             callbackPlaces?.cancel()
@@ -191,7 +191,7 @@ class FragmentHome : Fragment() {
         if (callbackNews != null && callbackNews!!.isExecuted) {
             callbackNews?.cancel()
         }
-        super.onPause()
+        super.onStop()
     }
 
     override fun onResume() {
@@ -375,7 +375,7 @@ class FragmentHome : Fragment() {
             isLoadComplete(true)
             startLoadMoreFeaturedAdapter()
             sharedPref!!.isRefreshPlaces = false
-            Snackbar.make(root_view!!, R.string.load_success, Snackbar.LENGTH_LONG).show()
+            root_view?.let { Snackbar.make(it, R.string.load_success, Snackbar.LENGTH_LONG).show() }
             return
         }
         Handler().postDelayed({ onRefreshFeatured(page_no + 1) }, 500)

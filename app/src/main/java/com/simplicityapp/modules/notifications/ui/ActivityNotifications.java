@@ -192,8 +192,8 @@ public class ActivityNotifications extends AppCompatActivity {
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
+    public void onStop() {
+        super.onStop();
         showProgress(false);
         if (callbackCall != null && callbackCall.isExecuted()) {
             callbackCall.cancel();

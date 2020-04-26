@@ -441,12 +441,14 @@ class ActivityPlaceDetail : AppCompatActivity() {
         private val EXTRA_NOTIF_FLAG = "key.EXTRA_NOTIF_FLAG"
 
         // give preparation animation activity transition
-        fun navigate(activity: AppCompatActivity, sharedView: View, p: Place, analyticsEvent: String) {
+        fun navigate(activity: AppCompatActivity?, sharedView: View, p: Place, analyticsEvent: String) {
             logAnalyticsEvent(analyticsEvent, p.name, true, false)
             val intent = Intent(activity, ActivityPlaceDetail::class.java)
             intent.putExtra(EXTRA_OBJ, p)
-            val options = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, sharedView, EXTRA_OBJ)
-            ActivityCompat.startActivity(activity, intent, options.toBundle())
+            activity?.let {
+                val options = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, sharedView, EXTRA_OBJ)
+                ActivityCompat.startActivity(activity, intent, options.toBundle())
+            }
         }
 
         fun navigateBase(context: Context, obj: Place, from_notif: Boolean?): Intent {

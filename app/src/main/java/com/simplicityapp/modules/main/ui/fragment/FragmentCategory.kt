@@ -85,7 +85,7 @@ class FragmentCategory : Fragment() {
         recyclerView?.adapter = adapter
 
         // on item list clicked
-        adapter?.setOnItemClickListener { v, obj -> ActivityPlaceDetail.navigate((activity as ActivityMain?)!!, v.findViewById(R.id.lyt_content), obj, AnalyticsConstants.SELECT_CATEGORY_PLACE) }
+        adapter?.setOnItemClickListener { v, obj -> ActivityPlaceDetail.navigate((activity as? ActivityMain?), v.findViewById(R.id.lyt_content), obj, AnalyticsConstants.SELECT_CATEGORY_PLACE) }
 
         recyclerView?.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(v: RecyclerView, state: Int) {
