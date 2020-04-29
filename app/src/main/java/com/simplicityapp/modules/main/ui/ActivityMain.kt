@@ -32,7 +32,6 @@ import com.simplicityapp.modules.main.ui.fragment.FragmentCategory
 import com.simplicityapp.modules.main.ui.fragment.FragmentHome
 import com.simplicityapp.R
 import com.simplicityapp.base.analytics.AnalyticsConstants
-import com.simplicityapp.base.data.AppConfig.FIRST_RUN_FLAG
 import com.simplicityapp.base.data.Constant.*
 import com.simplicityapp.base.utils.ActionTools
 import com.simplicityapp.modules.places.ui.ActivitySearch
@@ -55,9 +54,9 @@ class ActivityMain : AppCompatActivity() {
 
     private var exitTime: Long = 0
 
-    var fragment: Fragment? = null
-    val bundle = Bundle()
-    var firstRun: Boolean = false
+    private var fragment: Fragment? = null
+    private val bundle = Bundle()
+    private var firstRun: Boolean = false
     private var backToHome = false
 
 
@@ -67,8 +66,8 @@ class ActivityMain : AppCompatActivity() {
         setContentView(R.layout.activity_main_places)
         instance = this
 
-        firstRun = intent?.extras?.get(FIRST_RUN_FLAG) as? Boolean? ?: false
-        if (firstRun) {
+        if (intent?.extras?.get(IS_FIRST_OPEN) == true) {
+            firstRun = true
             AnalyticsConstants.logAnalyticsSignUp()
         }
 

@@ -32,9 +32,9 @@ import com.simplicityapp.base.utils.PermissionUtil
 import androidx.core.content.PermissionChecker.PERMISSION_GRANTED
 import com.simplicityapp.BuildConfig
 import com.simplicityapp.base.analytics.AnalyticsConstants
-import com.simplicityapp.base.data.AppConfig.FIRST_RUN_FLAG
 import com.simplicityapp.base.data.AppConfig.WEB_CLIENT_ID
 import com.simplicityapp.base.data.AppConfig.WEB_CLIENT_ID_DEV
+import com.simplicityapp.base.data.Constant
 import com.simplicityapp.base.data.Constant.LOG_TAG
 import com.simplicityapp.base.ui.ActivityInterface
 import com.simplicityapp.base.utils.Tools
@@ -191,7 +191,7 @@ class ActivityLogin : AppCompatActivity(), ActivityInterface, View.OnClickListen
 
             findViewById<View>(R.id.sign_in_button).visibility = View.GONE
             val i = Intent(this@ActivityLogin, ActivityMain::class.java)
-            i.putExtra(FIRST_RUN_FLAG, true)
+            i.putExtra(Constant.IS_FIRST_OPEN, true)
             startActivity(i)
             finish()
         }

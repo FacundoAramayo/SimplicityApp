@@ -7,9 +7,9 @@ import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.simplicityapp.BuildConfig;
 import com.simplicityapp.R;
 
-import static com.simplicityapp.base.data.Constant.APP_NAME_MIN;
 import static com.simplicityapp.base.data.Constant.LOG_TAG;
 
 public class SharedPref {
@@ -19,13 +19,13 @@ public class SharedPref {
     private SharedPreferences prefs;
     public static final int MAX_OPEN_COUNTER = 15;
 
-    private static final String FCM_PREF_KEY = APP_NAME_MIN + ".data.FCM_PREF_KEY";
-    private static final String SERVER_FLAG_KEY = APP_NAME_MIN + ".data.SERVER_FLAG_KEY";
-    private static final String THEME_COLOR_KEY = APP_NAME_MIN + ".data.THEME_COLOR_KEY";
+    private static final String FCM_PREF_KEY = BuildConfig.APPLICATION_ID + ".data.FCM_PREF_KEY";
+    private static final String SERVER_FLAG_KEY = BuildConfig.APPLICATION_ID + ".data.SERVER_FLAG_KEY";
+    private static final String THEME_COLOR_KEY = BuildConfig.APPLICATION_ID + ".data.THEME_COLOR_KEY";
     private static final String LAST_PLACE_PAGE = "LAST_PLACE_PAGE_KEY";
 
     // need refresh
-    public static final String REFRESH_PLACES = APP_NAME_MIN + ".data.REFRESH_PLACES";
+    public static final String REFRESH_PLACES = BuildConfig.APPLICATION_ID + ".data.REFRESH_PLACES";
 
     public SharedPref(Context context) {
         this.context = context;

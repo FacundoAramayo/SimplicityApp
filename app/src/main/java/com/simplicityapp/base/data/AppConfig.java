@@ -68,14 +68,8 @@ public class AppConfig {
     // si la DB cuenta con menos de este valor, actualizar siempre que inicie para traer nuevos contenidos
     public static final int LIMIT_PLACES_TO_UPDATE = 100;
 
-    // flag para notificar cuando se inició por primera vez
-    public static final String FIRST_RUN_FLAG = "FIRST_RUN";
-
     public static String getWebURL() {
-        String web_url;
-        if (BuildConfig.FLAVOR.equals("dev")) { web_url = Constant.WEB_URL_DEV; }
-        else { web_url = Constant.WEB_URL; }
-        return web_url;
+        return BuildConfig.SERVER_URL;
     }
 
 }

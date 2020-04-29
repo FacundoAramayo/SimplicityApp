@@ -3,7 +3,7 @@
 
     <string name="city_name">Dpto. San Martín, Salta</string>
     <string name="city_address">Argentina</string>
-    <string name="about_text">Simplicity App es una aplicación con fines comerciales desarrollada por SmartSolutions
+    <string name="about_text">Simplicity App
         \nTodos los derechos reservados © 2019–2020</string>
     <string name="welcome_to_app_message">Bienvenidos a Simplicity App</string>
 
@@ -94,8 +94,8 @@
     <string name="please_fill">Por favor, complete la entrada de búsqueda</string>
 
     <!--=== activity Setting =================================================================== -->
-    <string name="developer_name">SmartSolutions</string>
-    <string name="copyright">Copyright © 2019–2020 SmartSolutions. \nTodos los derechos reservados</string>
+    <string name="developer_name">Simplicity App</string>
+    <string name="copyright">Copyright © 2019–2020 Simplicity App. \nTodos los derechos reservados</string>
     <string name="pref_category_notif">Notificaciones</string>
     <string name="pref_category_display">Pantalla</string>
     <string name="pref_category_other">Otros</string>
@@ -126,25 +126,29 @@
     <string name="title_dialog_theme">Tema de la app</string>
     <string name="grant_permission_account_storage">Grant account, storage permission to enable</string>
     <string name="content_term">
-        SmartSolutions creó Simplicity App como una aplicación gratuita. SmartSolutions proporciona este SERVICIO sin costo y está diseñado para usarse tal cuál.
-        \n\nEsta página se usa para informar a los visitantes sobre nuestras políticas con la recopilación, uso y divulgación de información personal si alguien decide usar nuestro servicio.
+        \nSimplicity App proporciona esta aplicación como un SERVICIO sin costo y está diseñado para usarse tal cuál.
+        \n\nEsta sección se usa para informar a los visitantes sobre nuestras políticas con la recopilación, uso y divulgación de información personal si alguien decide usar nuestro servicio.
         \n\nSi elige utilizar nuestro Servicio, acepta la recopilación y el uso de información en relación con esta política. La información personal que recopilamos se utiliza para proporcionar y mejorar el Servicio. No utilizaremos ni compartiremos su información con nadie, excepto como se describe en esta Política de Privacidad.
 
-        \n\n\nRecolección de información y uso
-        \n\nPara una mejor experiencia, mientras usa nuestro Servicio, le solicitaremos que nos brinde acceso a cierta información de identificación personal, que incluye, su dirección de correo electrónico y su nombre, como así también al almacenamiento (solamente para poder almacener las imágenes y los datos necesarios para que la aplicación funcione) y a su ubicación. La información que solicitamos será retenida por nosotros y utilizada como se describe en esta política de privacidad.
+        \n\nResponsabilidad sobre el servicio
+        \n\nSimplicity App publicita y difunde servicios, comercios, productos y anuncios de los clientes, pero no se responsabiliza por transacciones, eventualidades, y quejas que vinculen indirectamente a la plataforma.
+        \n\nRecolección de información y uso
+        \nSimplicity App puede regular los contenidos y en base a quejas de los usuarios, también quitarlos.
+        \nLos comercios y servicios registrados en la plataforma pueden ofrecer pagos online. Simplicity App solo se responsabiliza por aquellas transacciones marcadas como "TRANSACCIÓN MEDIANTE SIMPLICITY APP".
+        \n\nPara una mejor experiencia, mientras usa nuestro Servicio, es posible que le solicitemos que nos brinde cierta información de identificación personal, que incluye, entre otros, almacenamiento, ubicación y contactos. La información que solicitamos será retenida por nosotros y utilizada como se describe en esta política de privacidad.
         \n\nLa aplicación utiliza servicios de terceros que pueden recopilar información utilizada para identificarlo. Para más información, visite las Políticas de Privacidad de los proovedores de servicios utilizados por la aplicación:
         \n - Google Play Services
         \n - Firebase Analytics
         \n - Firebase Crashlytics
 
-        \n\n\nRegistro de datos
+        \n\nRegistro de datos
         \n\nQueremos informarle que cada vez que utiliza nuestro Servicio, en caso de un error en la aplicación, recopilamos datos e información (a través de productos de terceros) en su teléfono. Estos datos incluir información como la dirección del Protocolo de Internet ("IP") de su dispositivo, el nombre del dispositivo, la versión del sistema operativo, la configuración de la aplicación cuando utiliza nuestro Servicio, la hora y la fecha de uso del Servicio y otras estadísticas.
 
-        \n\n\nCookies
+        \n\nCookies
         \n\nLas cookies son archivos con una pequeña cantidad de datos que se usan comúnmente como identificadores únicos anónimos. Estos se envían a su navegador desde los sitios web que visita y se almacenan en la memoria interna de su dispositivo.
         \n\nEste servicio no utiliza estas "cookies" explícitamente. Sin embargo, la aplicación puede usar código de terceros y bibliotecas que usan "cookies" para recopilar información y mejorar sus servicios. Tiene la opción de aceptar o rechazar estas cookies y saber cuándo se envía una cookie a su dispositivo. Si elige rechazar nuestras cookies, es posible que no pueda usar algunas partes de este Servicio.
 
-        \n\n\nProveedores de servicio
+        \n\nProveedores de servicio
         \n\nPodemos emplear a empresas e individuos de terceros debido a las siguientes razones:
         \n - Para facilitar nuestro servicio;
         \n - Para proporcionar el Servicio en nuestro nombre;
@@ -152,19 +156,19 @@
         \n - Para ayudarnos a analizar cómo se utiliza nuestro Servicio.
         \n\nQueremos informar a los usuarios de este Servicio que estos terceros tienen acceso a su Información personal. El motivo es realizar las tareas que se les asignan en nuestro nombre. Sin embargo, están obligados a no divulgar ni utilizar la información para ningún otro propósito.
 
-        \n\n\nSeguridad
+        \n\nSeguridad
         \n\nValoramos su confianza en proporcionarnos su información personal, por lo tanto, nos esforzamos por utilizar medios comercialmente aceptables para protegerla. Pero recuerde que ningún método de transmisión por Internet o método de almacenamiento electrónico es 100% seguro y confiable, y no podemos garantizar su seguridad absoluta.
 
-        \n\n\nEnlaces a otros sitios
+        \n\nEnlaces a otros sitios
         \n\nEste servicio puede contener enlaces a otros sitios. Si hace clic en un enlace de un tercero, será dirigido a ese sitio. Tenga en cuenta que estos sitios externos no son operados por nosotros. Por lo tanto, le recomendamos encarecidamente que revise la Política de privacidad de estos sitios web. No tenemos control ni asumimos ninguna responsabilidad por el contenido, las políticas de privacidad o las prácticas de sitios o servicios de terceros.
 
-        \n\n\nPrivacidad de los niños
+        \n\nPrivacidad de los niños
         \n\nEstos Servicios no se dirigen a ninguna persona menor de 13 años. No recopilamos intencionalmente información de identificación personal de niños menores de 13 años. En el caso de que descubramos que un niño menor de 13 años nos ha proporcionado información personal, la eliminamos inmediatamente de nuestros servidores. Si usted es padre o tutor y sabe que su hijo nos ha proporcionado información personal, contáctenos para que podamos realizar las acciones necesarias.
 
-        \n\n\nCambios a esta política de privacidad
+        \n\nCambios a esta política de privacidad
         \n\nPodemos actualizar nuestra Política de privacidad de vez en cuando. Por lo tanto, se recomienda que revise esta página periódicamente en busca de cambios. Le notificaremos cualquier cambio publicando la nueva Política de privacidad en esta página. Estos cambios son efectivos inmediatamente después de su publicación en esta página.
 
-        \n\n\nContáctenos
+        \n\nContáctenos
         \n\nSi tiene alguna pregunta o sugerencia sobre nuestra Política de privacidad, no dude en contactarnos en contacto@simplicityapp.com.ar.
 
     </string>

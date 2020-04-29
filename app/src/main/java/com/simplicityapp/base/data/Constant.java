@@ -1,14 +1,12 @@
 package com.simplicityapp.base.data;
 
+import com.simplicityapp.BuildConfig;
+
 public class Constant {
 
     /**
      * -------------------- EDIT THIS  -------------------------------------------------------------
      */
-
-    // Edit WEB_URL with your url. Make sure you have backslash('/') in the end url
-    public static String WEB_URL = "http://ciudadanovirtualdemo.smartsolutions.com.ar/";
-    public static String WEB_URL_DEV = "http://simplicityapp.com.ar/content_manager/";
 
     /*Tartagal*/
     public static final double city_lat = -22.5167622;
@@ -19,12 +17,11 @@ public class Constant {
     TAGS
      */
 
-    public static final String APP_NAME_MIN = "simplicityapp";
     // for search logs Tag
-    public static final String LOG_TAG = APP_NAME_MIN + "_LOG";
+    public static final String LOG_TAG = BuildConfig.APPLICATION_ID + "-";
 
     public static final String PREFS_NAME = "MAIN_PREF";
-    public static final String PREF_VERSION_CODE_KEY = APP_NAME_MIN + ".build.VERSION_CODE_KEY";
+    public static final String PREF_VERSION_CODE_KEY = BuildConfig.APPLICATION_ID + ".build.VERSION_CODE_KEY";
     public static final int DOESNT_EXIST_CODE = -1;
 
     //URL TO FORMS
@@ -55,5 +52,8 @@ public class Constant {
 
     // retry load image notification
     public static int LOAD_IMAGE_NOTIF_RETRY = 3;
+
+    //Bundle keys
+    public static String IS_FIRST_OPEN = "IS_FIRST_OPEN";
 
 }

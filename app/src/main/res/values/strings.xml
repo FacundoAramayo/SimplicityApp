@@ -3,7 +3,7 @@
 
     <string name="city_name">Dpto. San Martín, Salta</string>
     <string name="city_address">Argentina</string>
-    <string name="about_text">Simplicity App is a commercial app developed by SmartSolutions
+    <string name="about_text">Simplicity App
         \nAll rights reserved © 2019–2020</string>
     <string name="welcome_to_app_message">Welcome to Simplicity App</string>
 
@@ -97,8 +97,8 @@
 
     <!--=== activity Setting =================================================================== -->
     <string name="default_notification_channel_id">Default</string>
-    <string name="developer_name">SmartSolutions</string>
-    <string name="copyright">Copyright © 2019–2020 SmartSolutions. \nAll right reserved</string>
+    <string name="developer_name">Simplicity App</string>
+    <string name="copyright">Copyright © 2019–2020 Simplicity App. \nAll right reserved</string>
     <string name="pref_category_notif">Notifications</string>
     <string name="pref_category_display">Display</string>
     <string name="pref_category_other">Others</string>
