@@ -117,13 +117,13 @@ class ActivityPlaceDetail : AppCompatActivity() {
                 db!!.deleteFavorites(place!!.place_id)
                 Snackbar.make(parent_view!!, place!!.name + " " + getString(R.string.remove_favorite), Snackbar.LENGTH_SHORT).show()
                 // analytics tracking
-                logAnalyticsEvent(SELECT_PLACE_FAVORITES_REMOVE, place?.name.orEmpty(), user= true, fullUser = false)
+                logAnalyticsEvent(SELECT_PLACE_FAVORITES_REMOVE, place?.name.orEmpty(), true)
                 fabToggle(false)
             } else {
                 db!!.addFavorites(place!!.place_id)
                 Snackbar.make(parent_view!!, place!!.name + " " + getString(R.string.add_favorite), Snackbar.LENGTH_SHORT).show()
                 // analytics tracking
-                logAnalyticsEvent(SELECT_PLACE_FAVORITES_ADD, place?.name.orEmpty(), user= true, fullUser = false)
+                logAnalyticsEvent(SELECT_PLACE_FAVORITES_ADD, place?.name.orEmpty(), true)
                 fabToggle(true)
             }
         }
@@ -193,19 +193,19 @@ class ActivityPlaceDetail : AppCompatActivity() {
     fun clickLayout(view: View) {
         when (view.id) {
             R.id.lyt_address -> if (!place!!.isDraft) {
-                logAnalyticsEvent(SELECT_PLACE_ADDRESS, place?.name.orEmpty(), true, false)
+                logAnalyticsEvent(SELECT_PLACE_ADDRESS, place?.name.orEmpty(), false)
                 val uri = Uri.parse("http://maps.google.com/maps?q=loc: ${place!!.lat},${place!!.lng}")
                 val intent = Intent(Intent.ACTION_VIEW, uri)
                 startActivity(intent)
             }
             R.id.lyt_phone -> if (!place!!.isDraft && place!!.phone != "-" && place!!.phone!!.trim { it <= ' ' } != "") {
-                logAnalyticsEvent(SELECT_PLACE_PHONE, place?.name.orEmpty(), true, false)
+                logAnalyticsEvent(SELECT_PLACE_PHONE, place?.name.orEmpty(), false)
                 ActionTools.Companion.dialNumber(this, place!!.phone!!)
             } else {
                 Snackbar.make(parent_view!!, R.string.fail_dial_number, Snackbar.LENGTH_SHORT).show()
             }
             R.id.lyt_website -> if (!place!!.isDraft && place!!.website != "-" && place!!.website!!.trim { it <= ' ' } != "") {
-                logAnalyticsEvent(SELECT_PLACE_WEB_SITE, place?.name.orEmpty(), true, false)
+                logAnalyticsEvent(SELECT_PLACE_WEB_SITE, place?.name.orEmpty(), false)
                 ActionTools.directUrl(this, place!!.website!!)
             } else {
                 Snackbar.make(parent_view!!, R.string.fail_open_website, Snackbar.LENGTH_SHORT).show()
@@ -227,7 +227,7 @@ class ActivityPlaceDetail : AppCompatActivity() {
         val adapter = AdapterImageList(this, new_images)
         galleryRecycler.adapter = adapter
         adapter.setOnItemClickListener { view, viewModel, pos ->
-            logAnalyticsEvent(AnalyticsConstants.SELECT_PLACE_PHOTO, place?.name, user= true, fullUser = false)
+            logAnalyticsEvent(AnalyticsConstants.SELECT_PLACE_PHOTO, place?.name, false)
             val i = Intent(this@ActivityPlaceDetail, ActivityFullScreenImage::class.java)
             i.putExtra(ActivityFullScreenImage.EXTRA_POS, pos)
             i.putStringArrayListExtra(ActivityFullScreenImage.EXTRA_IMGS, new_images_str)
@@ -298,8 +298,8 @@ class ActivityPlaceDetail : AppCompatActivity() {
             backAction()
             return true
         } else if (id == R.id.action_share) {
-            if (!place!!.isDraft) {
-                logAnalyticsEvent(AnalyticsConstants.SELECT_PLACE_SHARE, place?.name, user= true, fullUser = false)
+            if (place?.isDraft == false) {
+                logAnalyticsEvent(AnalyticsConstants.SELECT_PLACE_SHARE, place?.name, false)
                 logAnalyticsShare(CONTENT_PLACE, place?.name.orEmpty())
                 ActionTools.methodShare(this@ActivityPlaceDetail, place!!)
             }
@@ -322,7 +322,7 @@ class ActivityPlaceDetail : AppCompatActivity() {
         }
 
         (findViewById<View>(R.id.bt_navigate) as Button).setOnClickListener {
-            logAnalyticsEvent(SELECT_PLACE_OPEN_NAVIGATION, place?.name.orEmpty(), user= true, fullUser = false)
+            logAnalyticsEvent(SELECT_PLACE_OPEN_NAVIGATION, place?.name.orEmpty(), false)
             val navigation = Intent(Intent.ACTION_VIEW, Uri.parse("http://maps.google.com/maps?daddr=${place!!.lat},${place!!.lng}"))
             startActivity(navigation)
         }
@@ -331,7 +331,7 @@ class ActivityPlaceDetail : AppCompatActivity() {
     }
 
     private fun openPlaceInMap() {
-        logAnalyticsEvent(SELECT_PLACE_OPEN_MAP, place?.name.orEmpty(), user= true, fullUser = false)
+        logAnalyticsEvent(SELECT_PLACE_OPEN_MAP, place?.name.orEmpty(), false)
         val intent = Intent(this@ActivityPlaceDetail, ActivityMaps::class.java)
         intent.putExtra(ActivityMaps.EXTRA_OBJ, place)
         startActivity(intent)
@@ -442,7 +442,7 @@ class ActivityPlaceDetail : AppCompatActivity() {
 
         // give preparation animation activity transition
         fun navigate(activity: AppCompatActivity?, sharedView: View, p: Place, analyticsEvent: String) {
-            logAnalyticsEvent(analyticsEvent, p.name, true, false)
+            logAnalyticsEvent(analyticsEvent, p.name, false)
             val intent = Intent(activity, ActivityPlaceDetail::class.java)
             intent.putExtra(EXTRA_OBJ, p)
             activity?.let {

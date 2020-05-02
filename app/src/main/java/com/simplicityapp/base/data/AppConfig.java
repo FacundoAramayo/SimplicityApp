@@ -27,13 +27,6 @@ public class AppConfig {
     // if you place data more than 200 items please set TRUE
     public static final boolean LAZY_LOAD = false;
 
-    // flag for tracking analytics
-    public static final boolean ENABLE_ANALYTICS = false;
-
-    public static final String WEB_CLIENT_ID = "952435693298-e22spc0j5pnf1r5qsk3hv3k2lu5tas8q.apps.googleusercontent.com";
-
-    public static final String WEB_CLIENT_ID_DEV = "738836934516-hgaduu8708t67ad92mohb671211g58mb.apps.googleusercontent.com";
-
     // clear image cache when receive push notifications
     public static final boolean REFRESH_IMG_NOTIF = true;
 

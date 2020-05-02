@@ -181,7 +181,7 @@ class ActivitySearch : AppCompatActivity(), ActivityInterface {
         lytSuggestion?.visibility = View.GONE
         showNotFoundView()
         val query = etSearch!!.text.toString().trim { it <= ' ' }
-        AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SEARCH_PLACE, query, user = true, fullUser = false)
+        AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SEARCH_PLACE, query, false)
         if (query != "") {
             mAdapterSuggestion!!.addSearchHistory(query)
             mAdapter?.resetListData()

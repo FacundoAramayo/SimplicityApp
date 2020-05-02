@@ -8,9 +8,12 @@ import android.util.Log
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.tasks.OnFailureListener
+import com.google.firebase.BuildConfig
 import com.google.firebase.FirebaseApp
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.iid.FirebaseInstanceId
+import com.simplicityapp.base.analytics.AnalyticsConstants.Companion.SHARE
+import com.simplicityapp.base.analytics.AnalyticsConstants.Companion.SIGN_UP
 
 import com.simplicityapp.base.connection.RestAdapter
 import com.simplicityapp.base.connection.callbacks.CallbackDevice
@@ -105,7 +108,7 @@ class ThisApplication : Application() {
             params.putString("personName", acct.displayName)
             params.putString("personEmail", acct.email)
             params.putString("personId", acct.id)
-            params.putString("personPhoto", acct.photoUrl!!.toString())
+            params.putString("personPhoto", acct.photoUrl?.toString())
         }
     }
 
@@ -118,15 +121,17 @@ class ThisApplication : Application() {
 
     @Synchronized
     fun getFirebaseAnalytics(): FirebaseAnalytics? {
-        if (firebaseAnalytics == null && AppConfig.ENABLE_ANALYTICS) {
+        if (firebaseAnalytics == null && com.simplicityapp.BuildConfig.ANALYTICS_ENABLED) {
             // Obtain the Firebase Analytics.
             firebaseAnalytics = FirebaseAnalytics.getInstance(this)
         }
         return firebaseAnalytics
     }
 
-    fun trackEvent(event: String, label: String?, user: Boolean?, fullUser: Boolean?) {
-        if (firebaseAnalytics != null || AppConfig.ENABLE_ANALYTICS) {
+    fun trackEvent(event: String,
+                   label: String?,
+                   user: Boolean?) {
+        if (firebaseAnalytics != null) {
             val params = Bundle()
 
             label?.let {
@@ -134,32 +139,25 @@ class ThisApplication : Application() {
                 params.putString("label", it)
             }
 
-            user?.let {
-                if (it.not()) return
-                fullUser?.let {
-                    if (fullUser) {
-                        putGoogleUserInformation(params)
-                    } else {
-                        putUserEmail(params)
-                    }
-                }
+            if (user == true) {
+                putGoogleUserInformation(params)
             }
 
-            firebaseAnalytics!!.logEvent(event, params)
+            firebaseAnalytics?.logEvent(event, params)
         }
     }
 
     fun trackAnalyticsSignUp() {
         val bundle = Bundle()
         putGoogleUserInformation(bundle)
-        firebaseAnalytics?.logEvent(FirebaseAnalytics.Event.SIGN_UP, bundle)
+        firebaseAnalytics?.logEvent(SIGN_UP, bundle)
     }
 
     fun logAnalyticsShare(contentType: String, item: String) {
         val bundle = Bundle()
         bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, contentType)
         bundle.putString(FirebaseAnalytics.Param.ITEM_ID, item)
-        firebaseAnalytics?.logEvent(FirebaseAnalytics.Event.SHARE, bundle)
+        firebaseAnalytics?.logEvent(SHARE, bundle)
     }
 
     companion object {

@@ -12,6 +12,7 @@ import com.google.firebase.analytics.FirebaseAnalytics
 import com.simplicityapp.BuildConfig
 import com.simplicityapp.R
 import com.simplicityapp.base.analytics.AnalyticsConstants
+import com.simplicityapp.base.analytics.AnalyticsConstants.Companion.APP_OPEN
 import com.simplicityapp.base.data.AppConfig
 import com.simplicityapp.base.data.Constant
 import com.simplicityapp.base.data.SharedPref
@@ -66,21 +67,21 @@ class ActivitySplash : AppCompatActivity() {
         val i = Intent(this@ActivitySplash, ActivityWelcome::class.java)
         animationDrawable?.stop()
         ActionTools.startActivityWithDelay(ActivitySplashInstance,this@ActivitySplash, i)
-        AnalyticsConstants.logAnalyticsEvent(FirebaseAnalytics.Event.APP_OPEN, AnalyticsConstants.FIRST_RUN)
+        AnalyticsConstants.logAnalyticsEvent(APP_OPEN, AnalyticsConstants.FIRST_RUN)
     }
 
     private fun startActivityMainDelay() {
         val i = Intent(this@ActivitySplash, ActivityMain::class.java)
         animationDrawable?.stop()
         ActionTools.startActivityWithDelay(ActivitySplashInstance,this@ActivitySplash, i)
-        AnalyticsConstants.logAnalyticsEvent(FirebaseAnalytics.Event.APP_OPEN, AnalyticsConstants.NORMAL_RUN)
+        AnalyticsConstants.logAnalyticsEvent(APP_OPEN, AnalyticsConstants.NORMAL_RUN)
     }
 
     private fun startActivityUpgradeDelay() {
         val i = Intent(this@ActivitySplash, ActivityMain::class.java)
         animationDrawable?.stop()
         ActionTools.startActivityWithDelay(ActivitySplashInstance,this@ActivitySplash, i)
-        AnalyticsConstants.logAnalyticsEvent(FirebaseAnalytics.Event.APP_OPEN, AnalyticsConstants.UPGRADE_RUN)
+        AnalyticsConstants.logAnalyticsEvent(APP_OPEN, AnalyticsConstants.UPGRADE_RUN)
     }
 
     private fun startBackgroundAnimation(mainLayout: RelativeLayout) {

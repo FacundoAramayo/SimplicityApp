@@ -87,7 +87,7 @@ public class ActivityNotifications extends AppCompatActivity {
         mAdapter.setOnItemClickListener(new AdapterContentInfo.OnItemClickListener() {
             @Override
             public void onItemClick(View v, ContentInfo obj, int position) {
-                ActivityNotificationDetails.Companion.navigate(ActivityNotifications.this, obj, false);
+                ActivityNotificationDetails.Companion.navigate(ActivityNotifications.this, obj, false, AnalyticsConstants.SELECT_NOTIFICATION_OPEN_LIST_ITEM);
             }
         });
 
@@ -249,7 +249,7 @@ public class ActivityNotifications extends AppCompatActivity {
         if (id == android.R.id.home) {
             onBackPressed();
         } else if (id == R.id.action_refresh) {
-            AnalyticsConstants.Companion.logAnalyticsEvent(AnalyticsConstants.SELECT_NOTIFICATIONS_LIST_REFRESH, null, true, false);
+            AnalyticsConstants.Companion.logAnalyticsEvent(AnalyticsConstants.SELECT_NOTIFICATION_ACTION, AnalyticsConstants.REFRESH_LIST, false);
             refreshNotifications();
         } else if (id == R.id.action_settings) {
             Intent i = new Intent(getApplicationContext(), ActivitySetting.class);

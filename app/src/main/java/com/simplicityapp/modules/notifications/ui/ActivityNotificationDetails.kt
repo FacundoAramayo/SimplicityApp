@@ -100,10 +100,7 @@ class ActivityNotificationDetails : AppCompatActivity() {
 
         (findViewById<View>(R.id.lyt_image) as MaterialRippleLayout).setOnClickListener {
             AnalyticsConstants.logAnalyticsEvent(
-                AnalyticsConstants.SELECT_NOTIFICATION_OPEN_PHOTO,
-                contentInfo?.image,
-                true,
-                false
+                AnalyticsConstants.SELECT_NOTIFICATION_OPEN_PHOTO, contentInfo?.image
             )
             val images_list = ArrayList<String>()
             images_list.add(Constant.getURLimgNews(contentInfo!!.image))
@@ -136,10 +133,7 @@ class ActivityNotificationDetails : AppCompatActivity() {
             return true
         } else if (id == R.id.action_share) {
             AnalyticsConstants.logAnalyticsEvent(
-                AnalyticsConstants.SELECT_NOTIFICATION_ITEM_SHARE,
-                contentInfo?.title,
-                true,
-                false
+                AnalyticsConstants.SELECT_NOTIFICATION_ITEM_SHARE, contentInfo?.title
             )
             AnalyticsConstants.logAnalyticsShare(
                 AnalyticsConstants.CONTENT_NOTIFICATION,
@@ -177,12 +171,8 @@ class ActivityNotificationDetails : AppCompatActivity() {
         private val SCREEN_NAME = "NOTIFICATIONS_DETAILS"
 
         // activity transition
-        fun navigate(activity: Activity, obj: ContentInfo, from_notif: Boolean?) {
-            AnalyticsConstants.logAnalyticsEvent(
-                AnalyticsConstants.SELECT_NOTIFICATIONS_LIST_OPEN_ITEM,
-                obj.title,
-                true,
-                false
+        fun navigate(activity: Activity, obj: ContentInfo, from_notif: Boolean?, analyticsEvent: String) {
+            AnalyticsConstants.logAnalyticsEvent(analyticsEvent, obj.title
             )
             val i = navigateBase(activity, obj, from_notif)
             activity.startActivity(i)

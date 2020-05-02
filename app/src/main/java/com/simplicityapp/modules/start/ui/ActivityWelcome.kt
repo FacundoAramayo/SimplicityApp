@@ -15,10 +15,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
-import com.google.firebase.analytics.FirebaseAnalytics
 
 import com.simplicityapp.R
 import com.simplicityapp.base.analytics.AnalyticsConstants
+import com.simplicityapp.base.analytics.AnalyticsConstants.Companion.TUTORIAL_BEGIN
+import com.simplicityapp.base.analytics.AnalyticsConstants.Companion.TUTORIAL_COMPLETE
 import com.simplicityapp.base.ui.ActivityInterface
 
 class ActivityWelcome : AppCompatActivity(), ActivityInterface {
@@ -54,7 +55,7 @@ class ActivityWelcome : AppCompatActivity(), ActivityInterface {
     }
 
     override fun initListeners() {
-        AnalyticsConstants.logAnalyticsEvent(FirebaseAnalytics.Event.TUTORIAL_BEGIN)
+        AnalyticsConstants.logAnalyticsEvent(TUTORIAL_BEGIN)
         val pageListener = PageListener()
         mViewPager?.addOnPageChangeListener(pageListener)
 
@@ -68,7 +69,7 @@ class ActivityWelcome : AppCompatActivity(), ActivityInterface {
             if (mViewPager?.currentItem != 2) {
                 mViewPager?.currentItem = mViewPager!!.currentItem.plus(1)
             } else {
-                AnalyticsConstants.logAnalyticsEvent(FirebaseAnalytics.Event.TUTORIAL_COMPLETE)
+                AnalyticsConstants.logAnalyticsEvent(TUTORIAL_COMPLETE)
                 val i = Intent(this@ActivityWelcome, ActivityLogin::class.java)
                 startActivity(i)
                 finish()
@@ -159,7 +160,6 @@ class ActivityWelcome : AppCompatActivity(), ActivityInterface {
     }
 
     companion object {
-
         private var currentPage: Int = 0
     }
 }

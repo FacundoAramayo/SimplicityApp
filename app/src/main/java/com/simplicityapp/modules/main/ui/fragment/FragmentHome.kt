@@ -119,53 +119,53 @@ class FragmentHome : Fragment() {
         initRecyclerNews()
 
         button_share_app?.setOnClickListener {
-            AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_HOME_SHARE_APP, user = true, fullUser = false)
+            AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_HOME_ACTION, AnalyticsConstants.SHARE_APP, true)
             activity?.let { it1 -> ActionTools.methodShare(it1) }
         }
 
         button_home_subscription?.setOnClickListener {
-            AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_HOME_OPEN_REGISTER_FORM, user = true, fullUser = true)
+            AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_HOME_ACTION, AnalyticsConstants.OPEN_REGISTER_FORM, true)
             activity?.let { it1 -> ActionTools.directUrl(it1, Constant.LINK_TO_SUBSCRIPTION_FORM) }
         }
 
         btnQuickAccessGastronomy?.setOnClickListener {
             backToHome = true
-            AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_HOME_QUICK_ACCESS_DELIVERY, user = true, fullUser = true)
+            AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_HOME_QUICK_ACCESS, AnalyticsConstants.QUICK_ACCESS_DELIVERY)
             ActivityMain.ActivityMainInstance.onItemSelected(R.id.nav_delivery, resources.getString(R.string.title_nav_delivery), false, true)
         }
 
         btnQuickAccessTaxi?.setOnClickListener {
-            AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_HOME_QUICK_ACCESS_TAXI, user = true, fullUser = true)
+            AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_HOME_QUICK_ACCESS, AnalyticsConstants.QUICK_ACCESS_TAXI)
             ActivityMain.ActivityMainInstance.onItemSelected(R.id.nav_taxi, resources.getString(R.string.title_nav_taxi), false, true)
         }
 
         btnQuickAccessJobs?.setOnClickListener {
-            AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_HOME_QUICK_ACCESS_JOBS, user = true, fullUser = true)
+            AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_HOME_QUICK_ACCESS, AnalyticsConstants.QUICK_ACCESS_JOBS)
             ActivityMain.ActivityMainInstance.onItemSelected(R.id.nav_jobs, resources.getString(R.string.title_nav_jobs), false, true)
         }
 
         btnQuickAccessPharmacy?.setOnClickListener {
-            AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_HOME_QUICK_ACCESS_PHARMACY, user = true, fullUser = true)
+            AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_HOME_QUICK_ACCESS, AnalyticsConstants.QUICK_ACCESS_PHARMACY)
             ActivityMain.ActivityMainInstance.onItemSelected(R.id.nav_pharmacy, resources.getString(R.string.title_nav_pharmacy), false, true)
         }
 
         btnQuickAccessSearch?.setOnClickListener {
-            AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_HOME_QUICK_ACCESS_SEARCH, user = true, fullUser = true)
+            AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_HOME_QUICK_ACCESS, AnalyticsConstants.QUICK_ACCESS_SEARCH)
             ActivityMain.ActivityMainInstance.searchIntent()
         }
 
         btnQuickAccessFavorites?.setOnClickListener {
-            AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_HOME_QUICK_ACCESS_FAVORITES, user = true, fullUser = true)
+            AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_HOME_QUICK_ACCESS, AnalyticsConstants.QUICK_ACCESS_FAVORITES)
             ActivityMain.ActivityMainInstance.favoritesIntent()
         }
 
         btnQuickAccessMap?.setOnClickListener {
-            AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_HOME_QUICK_ACCESS_MAP, user = true, fullUser = true)
+            AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_HOME_QUICK_ACCESS, AnalyticsConstants.QUICK_ACCESS_MAP)
             ActivityMain.ActivityMainInstance.mapIntent()
         }
 
         btnQuickAccessEmergency?.setOnClickListener {
-            AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_HOME_QUICK_ACCESS_EMERGENCY, user = true, fullUser = true)
+            AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_HOME_QUICK_ACCESS, AnalyticsConstants.QUICK_ACCESS_EMERGENCY)
             ActivityMain.ActivityMainInstance.onItemSelected(R.id.nav_emergency, resources.getString(R.string.title_nav_emergency), false, true)
         }
 
@@ -236,7 +236,7 @@ class FragmentHome : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.action_refresh) {
-            AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_HOME_REFRESH)
+            AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_TOOLBAR_ACTION, AnalyticsConstants.REFRESH)
             refreshContent()
             refreshNews()
         }
@@ -402,7 +402,8 @@ class FragmentHome : Fragment() {
             navigate(
                 activity!!,
                 obj,
-                false
+                false,
+                AnalyticsConstants.SELECT_HOME_NEWS
             )
         })
 

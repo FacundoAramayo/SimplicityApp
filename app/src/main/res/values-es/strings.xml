@@ -196,7 +196,7 @@
     <string name="action_settings">Configuración</string>
     <string name="no_internet">"No hay conexión a Internet"</string>
     <string name="task_running">Tarea aún en ejecución</string>
-    <string name="no_item">Nada por aquí…</string>
+    <string name="no_item">Aún no hay nada por aquí…</string>
 
     <!--Basic action Text-->
     <string name="OK">OK</string>

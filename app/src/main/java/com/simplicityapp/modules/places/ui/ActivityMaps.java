@@ -218,7 +218,7 @@ public class ActivityMaps extends AppCompatActivity implements OnMapReadyCallbac
         } else {
             String category_text;
             if (item.getItemId() != R.id.menu_category) {
-                AnalyticsConstants.Companion.logAnalyticsEvent(AnalyticsConstants.SELECT_MAP_CATEGORY, item.getTitle().toString(), null, null);
+                AnalyticsConstants.Companion.logAnalyticsEvent(AnalyticsConstants.SELECT_MAP_CATEGORY, item.getTitle().toString(), false);
                 category_text = item.getTitle().toString();
                 switch (item.getItemId()) {
                     case R.id.nav_all:
