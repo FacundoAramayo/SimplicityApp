@@ -78,7 +78,7 @@ class FragmentCategory : Fragment() {
         text_progress = root_view?.findViewById<View>(R.id.text_progress) as TextView
 
         recyclerView?.layoutManager = StaggeredGridLayoutManager(UITools.getGridSpanCount(activity!!), StaggeredGridLayoutManager.VERTICAL)
-        recyclerView?.addItemDecoration(SpacingItemDecoration(UITools.getGridSpanCount(activity!!), UITools.dpToPx(activity!!, 4), true))
+        recyclerView?.addItemDecoration(SpacingItemDecoration(UITools.getGridSpanCount(activity!!), UITools.dpToPx(4), true))
 
         //set data and list adapter
         adapter = AdapterPlaceGrid(activity, recyclerView, ArrayList(), StaggeredGridLayoutManager.VERTICAL, 0)

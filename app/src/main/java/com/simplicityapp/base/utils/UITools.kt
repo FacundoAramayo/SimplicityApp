@@ -2,11 +2,13 @@ package com.simplicityapp.base.utils
 
 import android.app.Activity
 import android.content.Context
+import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.util.DisplayMetrics
+import android.util.Log
 import android.util.TypedValue
 import android.view.View
 import android.widget.ImageView
@@ -16,6 +18,8 @@ import com.simplicityapp.base.data.SharedPref
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
+import kotlin.math.ceil
+
 
 class UITools {
 
@@ -80,6 +84,27 @@ class UITools {
             return bitmap
         }
 
+        fun createBitmapFromView(view: View, width: Int, height: Int): Bitmap {
+            val statusBarHeight = dpToPx(24)
+            if (width > 0 && height > 0) {
+                view.measure(View.MeasureSpec.makeMeasureSpec(dpToPx(width), View.MeasureSpec.EXACTLY),
+                    View.MeasureSpec.makeMeasureSpec(dpToPx(height), View.MeasureSpec.EXACTLY))
+            }
+            view.layout(0, statusBarHeight, view.measuredWidth, view.measuredHeight + statusBarHeight)
+
+            val bitmap = Bitmap.createBitmap(
+                view.measuredWidth,
+                view.measuredHeight, Bitmap.Config.ARGB_8888
+            )
+            val canvas = Canvas(bitmap)
+            val background = view.background
+
+            background?.draw(canvas)
+            view.draw(canvas)
+
+            return bitmap;
+        }
+
         fun colorDarker(color: Int): Int {
             val hsv = FloatArray(3)
             Color.colorToHSV(color, hsv)
@@ -95,8 +120,8 @@ class UITools {
         }
 
 
-        fun dpToPx(c: Context, dp: Int): Int {
-            val r = c.resources
+        fun dpToPx(dp: Int): Int {
+            val r = Resources.getSystem()
             return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp.toFloat(), r.displayMetrics))
         }
 

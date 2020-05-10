@@ -274,7 +274,7 @@ class FragmentHome : Fragment() {
     //FEATURED LIST METHODS
     private fun initRecyclerFeatured() {
         recyclerFeatured?.layoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.HORIZONTAL)
-        recyclerFeatured?.addItemDecoration(SpacingItemDecoration(UITools.getGridSpanCount(activity!!) , UITools.dpToPx(activity!!, 4), true))
+        recyclerFeatured?.addItemDecoration(SpacingItemDecoration(UITools.getGridSpanCount(activity!!) , UITools.dpToPx(4), true))
 
         //set data and list adapter
         adapterFeatured = AdapterPlaceGrid(activity, recyclerFeatured, ArrayList(), StaggeredGridLayoutManager.HORIZONTAL, getScreenWidth())

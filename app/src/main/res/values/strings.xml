@@ -1,4 +1,8 @@
 <resources>
+
+    <string name="empty_string" translatable="false"></string>
+
+
     <string name="app_name">Simplicity App</string>
 
     <string name="city_name">Dpto. San Martín, Salta</string>
@@ -23,7 +27,7 @@
     <string name="title_nav_news">News</string>
     <string name="title_nav_profile">Profile</string>
 
-    <string name="title_nav_featured">Featured Places</string>
+    <string name="title_nav_featured">Featured</string>
     <string name="title_nav_shop">Shopping</string>
     <string name="title_nav_pharmacy">Pharmacy</string>
     <string name="title_nav_gym">Gym Center</string>
@@ -85,8 +89,9 @@
     <string name="fail_open_website">Cannot open website</string>
     <string name="unable_create_map">Sorry! unable to create maps</string>
     <string name="failed_load_details">Failed load place details</string>
+    <string name="how_to_get">How to get?</string>
     <string name="photos_title">Photos</string>
-    <string name="description_title">Description</string>
+    <string name="description_title">Contenido</string>
     <string name="map_title">Map</string>
     <string name="map_view">VIEW</string>
     <string name="map_navigate">NAVIGATE</string>

@@ -32,6 +32,10 @@ public class Constant {
     public static final String CONTACT_EMAIL = "contacto@simplicityapp.com.ar";
     public static final String SUBJECT_EMAIL = "CONTACTO - APLICACIÓN";
 
+
+    //WEB VIEW CONFIGS
+    public static final String WEB_VIEW_HTML_CONFIG = "<style>img{max-width:100%;height:auto;} iframe{width:100%;}</style> ";
+
     /**
      * ------------------- DON'T EDIT THIS ---------------------------------------------------------
      */

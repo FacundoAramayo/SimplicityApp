@@ -20,7 +20,7 @@
     <string name="title_nav_news">Novedades</string>
     <string name="title_nav_profile">Perfil</string>
 
-    <string name="title_nav_featured">Lugares destacados</string>
+    <string name="title_nav_featured">Destacados</string>
     <string name="title_nav_shop">Comercios</string>
     <string name="title_nav_pharmacy">Farmacias</string>
     <string name="title_nav_gym">Gimnasios</string>
@@ -83,8 +83,9 @@
     <string name="fail_open_website">No se puede abrir el sitio web</string>
     <string name="unable_create_map">¡Lo siento! No se puede crear mapas</string>
     <string name="failed_load_details">Falló la carga de detalles del lugar</string>
+    <string name="how_to_get">¿Cómo llegar?</string>
     <string name="photos_title">Fotos</string>
-    <string name="description_title">Descripción</string>
+    <string name="description_title">Contenido</string>
     <string name="map_title">Mapa</string>
     <string name="map_view">Abrir</string>
     <string name="map_navigate">¿Cómo llegar?</string>

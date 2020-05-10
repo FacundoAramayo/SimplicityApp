@@ -11,286 +11,280 @@ import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.View
 import android.view.View.GONE
+import android.view.WindowManager
 import android.webkit.WebChromeClient
-import android.webkit.WebView
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
-
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
-import androidx.cardview.widget.CardView
 import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.ViewCompat
-import androidx.core.view.isVisible
+import androidx.palette.graphics.Palette
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.MapFragment
-import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.CollapsingToolbarLayout
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
-
-import com.simplicityapp.modules.settings.ui.ActivityFullScreenImage
 import com.simplicityapp.base.adapter.AdapterImageList
 import com.simplicityapp.base.connection.RestAdapter
 import com.simplicityapp.base.connection.callbacks.CallbackPlaceDetails
 import com.simplicityapp.base.data.Constant
 import com.simplicityapp.base.data.database.DatabaseHandler
 import com.simplicityapp.base.data.SharedPref
-import com.simplicityapp.modules.main.ui.ActivityMain
-import com.simplicityapp.modules.places.model.Images
-import com.simplicityapp.modules.places.model.Place
-import com.simplicityapp.R
 import com.simplicityapp.base.analytics.AnalyticsConstants
 import com.simplicityapp.base.analytics.AnalyticsConstants.Companion.CONTENT_PLACE
 import com.simplicityapp.base.analytics.AnalyticsConstants.Companion.SELECT_PLACE_ADDRESS
 import com.simplicityapp.base.analytics.AnalyticsConstants.Companion.SELECT_PLACE_FAVORITES_ADD
 import com.simplicityapp.base.analytics.AnalyticsConstants.Companion.SELECT_PLACE_FAVORITES_REMOVE
-import com.simplicityapp.base.analytics.AnalyticsConstants.Companion.SELECT_PLACE_OPEN_MAP
 import com.simplicityapp.base.analytics.AnalyticsConstants.Companion.SELECT_PLACE_OPEN_NAVIGATION
 import com.simplicityapp.base.analytics.AnalyticsConstants.Companion.SELECT_PLACE_PHONE
 import com.simplicityapp.base.analytics.AnalyticsConstants.Companion.SELECT_PLACE_WEB_SITE
 import com.simplicityapp.base.analytics.AnalyticsConstants.Companion.VIEW_PLACE
 import com.simplicityapp.base.analytics.AnalyticsConstants.Companion.logAnalyticsEvent
 import com.simplicityapp.base.analytics.AnalyticsConstants.Companion.logAnalyticsShare
+import com.simplicityapp.base.data.Constant.WEB_VIEW_HTML_CONFIG
 import com.simplicityapp.base.utils.ActionTools
 import com.simplicityapp.base.utils.Tools
 import com.simplicityapp.base.utils.UITools
-import kotlinx.android.synthetic.main.include_place_details_content.*
+import com.simplicityapp.databinding.ActivityPlaceDetailsBinding
+import com.simplicityapp.modules.main.ui.ActivityMain
+import com.simplicityapp.modules.places.model.Images
+import com.simplicityapp.modules.places.model.Place
+import com.simplicityapp.modules.settings.ui.ActivityFullScreenImage
+import com.simplicityapp.R
+import java.lang.Exception
 import retrofit2.Call
 import retrofit2.Response
-import java.lang.Exception
-import java.util.*
 
 class ActivityPlaceDetail : AppCompatActivity() {
 
     private var place: Place? = null
-    private var fab: FloatingActionButton? = null
-    private var description: WebView? = null
-    private var parent_view: View? = null
-    private var photosView: CardView? = null
-    private var descriptionView: CardView? = null
-    private var googleMap: GoogleMap? = null
+    private var parentView: View? = null
     private var db: DatabaseHandler? = null
-    private var fabIsShowing = true
-
     private var onProcess = false
     private var isFromNotif = false
     private var callback: Call<CallbackPlaceDetails>? = null
-    private var lyt_progress: View? = null
-    private var lyt_distance: View? = null
-    private var distance = -1f
     private var snackbar: Snackbar? = null
+    private lateinit var binding: ActivityPlaceDetailsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_place_details)
-        parent_view = findViewById(android.R.id.content)
-        photosView = findViewById(R.id.cardview_photos)
-        descriptionView = findViewById(R.id.cardview_description)
+        binding = ActivityPlaceDetailsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        parentView = findViewById(android.R.id.content)
+        setOnClickListeners(applicationContext)
 
         db = DatabaseHandler(this)
-        // animation transition
-        ViewCompat.setTransitionName(findViewById(R.id.app_bar_layout), EXTRA_OBJ)
+        ViewCompat.setTransitionName(binding.placeAppBarLayout, EXTRA_OBJ)
 
         place = intent.getSerializableExtra(EXTRA_OBJ) as Place
         isFromNotif = intent.getBooleanExtra(EXTRA_NOTIF_FLAG, false)
-
-        fab = findViewById<View>(R.id.fab) as FloatingActionButton
-        lyt_progress = findViewById(R.id.lyt_progress)
-        lyt_distance = findViewById(R.id.lyt_distance)
-        UITools.displayImage(this, findViewById<View>(R.id.image) as ImageView, Constant.getURLimgPlace(place!!.image))
-        distance = place!!.distance
-
         configFab()
         setupToolbar(place!!.name)
-        initMap()
 
-        // handle when favorite button clicked
-        fab!!.setOnClickListener {
-            if (db!!.isFavoritesExist(place!!.place_id)) {
-                db!!.deleteFavorites(place!!.place_id)
-                Snackbar.make(parent_view!!, place!!.name + " " + getString(R.string.remove_favorite), Snackbar.LENGTH_SHORT).show()
-                // analytics tracking
-                logAnalyticsEvent(SELECT_PLACE_FAVORITES_REMOVE, place?.name.orEmpty(), true)
-                fabToggle(false)
-            } else {
-                db!!.addFavorites(place!!.place_id)
-                Snackbar.make(parent_view!!, place!!.name + " " + getString(R.string.add_favorite), Snackbar.LENGTH_SHORT).show()
-                // analytics tracking
-                logAnalyticsEvent(SELECT_PLACE_FAVORITES_ADD, place?.name.orEmpty(), true)
-                fabToggle(true)
-            }
-        }
-
-        // analytics tracking
         logAnalyticsEvent(VIEW_PLACE, place?.name.orEmpty())
     }
 
+    private fun displayData(place: Place) {
+        val distance = place.distance
 
-    private fun displayData(p: Place) {
-
-        if (p.phone == "") {
-            (findViewById<View>(R.id.lyt_phone) as LinearLayout).visibility = GONE
-        }
-
-        if (p.website == "") {
-            (findViewById<View>(R.id.lyt_website) as LinearLayout).visibility = GONE
-        }
-
-        (findViewById<View>(R.id.address) as TextView).text = p.address
-        (findViewById<View>(R.id.phone) as TextView).text = if (p.phone == "-" || p.phone!!.trim { it <= ' ' } == "") getString(R.string.no_phone_number) else p.phone
-        (findViewById<View>(R.id.website) as TextView).text = if (p.website == "-" || p.website!!.trim { it <= ' ' } == "") getString(R.string.no_website) else p.website
-
-        try {
-            if (p.description?.replace("&nbsp;", "").isNullOrBlank()) {
-                cardview_description.visibility = GONE
+        binding.details.apply {
+            if (place.phone.isNullOrEmpty()) {
+                placeLytPhone?.visibility = GONE
             }
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-
-        description = findViewById<View>(R.id.description) as WebView
-        var html_data = "<style>img{max-width:100%;height:auto;} iframe{width:100%;}</style> "
-        html_data += p.description
-        description!!.settings.builtInZoomControls = true
-        description!!.setBackgroundColor(Color.TRANSPARENT)
-        description!!.webChromeClient = WebChromeClient()
-        description!!.loadData(html_data, "text/html; charset=UTF-8", null)
-        description!!.settings.javaScriptEnabled = true
-        // disable scroll on touch
-        description!!.setOnTouchListener { v, event -> event.action == MotionEvent.ACTION_MOVE }
-
-        if (distance == -1f) {
-            lyt_distance!!.visibility = View.GONE
-        } else {
-            lyt_distance!!.visibility = View.VISIBLE
-            (findViewById<View>(R.id.distance) as TextView).text = Tools.getFormatedDistance(distance)
-        }
-
-        setImageGallery(db!!.getListImageByPlaceId(p.place_id))
-        try {
-            if ((p.images.size > 1).not()) {
-                cardview_photos.visibility = GONE
+            if (place.website.isNullOrEmpty()) {
+                placeLytWebsite?.visibility = GONE
             }
-        } catch (e: Exception) {
-            e.printStackTrace()
+            placeAddress?.text = place.address
+            placePhone?.text = if (place.phone == "-" || place.phone!!.trim { it <= ' ' } == "") getString(R.string.no_phone_number) else place.phone
+            placeWebsite?.text = if (place.website == "-" || place.website!!.trim { it <= ' ' } == "") getString(R.string.no_website) else place.website
+
+            try {
+                if (place.description?.replace("&nbsp;", "").isNullOrBlank() or
+                    (place.description?.length!! < 20)) {
+                    placeCardViewDescription?.visibility = GONE
+                }
+            } catch (e: Exception) { e.printStackTrace() }
+
+            val htmlData = WEB_VIEW_HTML_CONFIG + place.description
+            placeDescriptionWebView?.settings?.builtInZoomControls = true
+            placeDescriptionWebView?.setBackgroundColor(Color.TRANSPARENT)
+            placeDescriptionWebView?.webChromeClient = WebChromeClient()
+            placeDescriptionWebView?.loadData(htmlData, "text/html; charset=UTF-8", null)
+            placeDescriptionWebView?.settings?.javaScriptEnabled = true
+            // disable scroll on touch
+            placeDescriptionWebView?.setOnTouchListener { v, event -> event.action == MotionEvent.ACTION_MOVE }
+
+            if (distance == -1f) {
+                placeLytDistance?.visibility = View.GONE
+            } else {
+                placeLytDistance?.visibility = View.VISIBLE
+                placeDistance?.text = Tools.getFormatedDistance(distance)
+            }
+
+            setImageGallery(db!!.getListImageByPlaceId(place.place_id))
+            try {
+                if ((place.images.size > 1).not()) {
+                    placeCardViewPhotos?.visibility = GONE
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
     }
 
     override fun onResume() {
         loadPlaceData()
-        if (description != null) description!!.onResume()
+        setToolbarColor()
+        binding.details.placeDescriptionWebView?.onResume()
         super.onResume()
     }
 
-    // this method name same with android:onClick="clickLayout" at layout xml
-    fun clickLayout(view: View) {
-        when (view.id) {
-            R.id.lyt_address -> if (!place!!.isDraft) {
-                logAnalyticsEvent(SELECT_PLACE_ADDRESS, place?.name.orEmpty(), false)
-                val uri = Uri.parse("http://maps.google.com/maps?q=loc: ${place!!.lat},${place!!.lng}")
-                val intent = Intent(Intent.ACTION_VIEW, uri)
-                startActivity(intent)
+    private fun setOnClickListeners(context: Context) {
+        binding.details.apply {
+            placeAddress?.setOnClickListener {
+                if (!place!!.isDraft) {
+                    logAnalyticsEvent(SELECT_PLACE_ADDRESS, place?.name.orEmpty(), false)
+                    val uri =
+                        Uri.parse("http://maps.google.com/maps?q=loc: ${place!!.lat},${place!!.lng}")
+                    val intent = Intent(Intent.ACTION_VIEW, uri)
+                    startActivity(intent)
+                }
             }
-            R.id.lyt_phone -> if (!place!!.isDraft && place!!.phone != "-" && place!!.phone!!.trim { it <= ' ' } != "") {
-                logAnalyticsEvent(SELECT_PLACE_PHONE, place?.name.orEmpty(), false)
-                ActionTools.Companion.dialNumber(this, place!!.phone!!)
-            } else {
-                Snackbar.make(parent_view!!, R.string.fail_dial_number, Snackbar.LENGTH_SHORT).show()
+            placeHowToGet?.setOnClickListener {
+                logAnalyticsEvent(SELECT_PLACE_OPEN_NAVIGATION, place?.name.orEmpty(), false)
+                val navigation = Intent(Intent.ACTION_VIEW, Uri.parse("http://maps.google.com/maps?daddr=${place!!.lat},${place!!.lng}"))
+                startActivity(navigation)
             }
-            R.id.lyt_website -> if (!place!!.isDraft && place!!.website != "-" && place!!.website!!.trim { it <= ' ' } != "") {
-                logAnalyticsEvent(SELECT_PLACE_WEB_SITE, place?.name.orEmpty(), false)
-                ActionTools.directUrl(this, place!!.website!!)
+            placeLytPhone?.setOnClickListener {
+                if (!place!!.isDraft && place!!.phone != "-" && place!!.phone!!.trim { it <= ' ' } != "") {
+                    logAnalyticsEvent(SELECT_PLACE_PHONE, place?.name.orEmpty(), false)
+                    ActionTools.dialNumber(context, place!!.phone!!)
+                } else {
+                    Snackbar.make(parentView!!, R.string.fail_dial_number, Snackbar.LENGTH_SHORT).show()
+                }
+            }
+            placeLytWebsite?.setOnClickListener {
+                if (!place!!.isDraft && place!!.website != "-" && place!!.website!!.trim { it <= ' ' } != "") {
+                    logAnalyticsEvent(SELECT_PLACE_WEB_SITE, place?.name.orEmpty(), false)
+                    ActionTools.directUrl(context, place!!.website!!)
+                } else {
+                    Snackbar.make(parentView!!, R.string.fail_open_website, Snackbar.LENGTH_SHORT).show()
+                }
+            }
+        }
+        binding.placeFab.setOnClickListener {
+            if (db!!.isFavoritesExist(place!!.place_id)) {
+                db!!.deleteFavorites(place!!.place_id)
+                Snackbar.make(parentView!!, place!!.name + " " + getString(R.string.remove_favorite), Snackbar.LENGTH_SHORT).show()
+                logAnalyticsEvent(SELECT_PLACE_FAVORITES_REMOVE, place?.name.orEmpty(), true)
+                fabToggle(false)
             } else {
-                Snackbar.make(parent_view!!, R.string.fail_open_website, Snackbar.LENGTH_SHORT).show()
+                db!!.addFavorites(place!!.place_id)
+                Snackbar.make(parentView!!, place!!.name + " " + getString(R.string.add_favorite), Snackbar.LENGTH_SHORT).show()
+                logAnalyticsEvent(SELECT_PLACE_FAVORITES_ADD, place?.name.orEmpty(), true)
+                fabToggle(true)
             }
         }
     }
 
     private fun setImageGallery(images: List<Images>) {
-        val new_images = ArrayList<Images>()
-        val new_images_str = ArrayList<String>()
-        new_images.add(Images(place!!.place_id, place!!.image))
-        new_images.addAll(images)
-        for (img in new_images) {
-            new_images_str.add(Constant.getURLimgPlace(img.name))
+        val newImages = ArrayList<Images>()
+        val newImagesStr = ArrayList<String>()
+        newImages.add(Images(place!!.place_id, place!!.image))
+        newImages.addAll(images)
+        for (img in newImages) {
+            newImagesStr.add(Constant.getURLimgPlace(img.name))
         }
 
-        val galleryRecycler = findViewById<View>(R.id.galleryRecycler) as RecyclerView
-        galleryRecycler.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        val adapter = AdapterImageList(this, new_images)
-        galleryRecycler.adapter = adapter
+        val adapter = AdapterImageList(this, newImages)
+        binding.details.placeGalleryRecycler?.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        binding.details.placeGalleryRecycler?.adapter = adapter
+
         adapter.setOnItemClickListener { view, viewModel, pos ->
             logAnalyticsEvent(AnalyticsConstants.SELECT_PLACE_PHOTO, place?.name, false)
             val i = Intent(this@ActivityPlaceDetail, ActivityFullScreenImage::class.java)
             i.putExtra(ActivityFullScreenImage.EXTRA_POS, pos)
-            i.putStringArrayListExtra(ActivityFullScreenImage.EXTRA_IMGS, new_images_str)
+            i.putStringArrayListExtra(ActivityFullScreenImage.EXTRA_IMGS, newImagesStr)
             startActivity(i)
         }
-        place?.images = new_images
+        place?.images = newImages
     }
 
     private fun fabToggle(isFavorite: Boolean) {
         if (isFavorite) {
-            fab!!.setImageResource(R.drawable.ic_nav_favorites)
+            binding.placeFab.setImageResource(R.drawable.ic_nav_favorites)
         } else {
-            fab!!.setImageResource(R.drawable.ic_nav_favorites_outline)
+            binding.placeFab.setImageResource(R.drawable.ic_nav_favorites_outline)
         }
     }
 
     private fun configFab() {
         if (db!!.isFavoritesExist(place!!.place_id)) {
-            fab!!.setImageResource(R.drawable.ic_nav_favorites)
+            binding.placeFab.setImageResource(R.drawable.ic_nav_favorites)
         } else {
-            fab!!.setImageResource(R.drawable.ic_nav_favorites_outline)
+            binding.placeFab.setImageResource(R.drawable.ic_nav_favorites_outline)
         }
     }
 
     private fun setupToolbar(name: String?) {
-        val toolbar = findViewById<View>(R.id.toolbar) as Toolbar
-        setSupportActionBar(toolbar)
+        setSupportActionBar(binding.placeToolbar)
         val actionBar = supportActionBar
-        actionBar!!.setDisplayHomeAsUpEnabled(true)
-        actionBar.title = ""
+        actionBar?.setDisplayHomeAsUpEnabled(true)
+        actionBar?.title = resources.getString(R.string.empty_string)
 
-        (findViewById<View>(R.id.toolbar_title) as TextView).text = name
+        binding.placeToolbarTitle.text = name
+        binding.placeImage.apply {
+            UITools.displayImage(context, this, Constant.getURLimgPlace(place!!.image))
+        }
+    }
 
-        val collapsing_toolbar = findViewById<View>(R.id.collapsing_toolbar) as CollapsingToolbarLayout
-        collapsing_toolbar.setContentScrimColor(SharedPref(this).themeColorInt)
-        (findViewById<View>(R.id.app_bar_layout) as AppBarLayout).addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
-            if (collapsing_toolbar.height + verticalOffset < 2 * ViewCompat.getMinimumHeight(collapsing_toolbar)) {
-                hideFab()
-            } else {
-                showFab()
+    private fun setToolbarColor() {
+        Handler().postDelayed({
+            val bitmap = UITools.createBitmapFromView(binding.placeImage as View, 0, 0)
+            binding.placeCollapsingToolbar.apply {
+                bitmap.let {
+                    val builder = Palette.Builder(bitmap)
+                    val palette = builder.generate()
+
+                    palette.vibrantSwatch?.let {
+                        setToolbarColor(
+                            this,
+                            palette.getVibrantColor(SharedPref(context).themeColorInt),
+                            palette.getVibrantColor(resources.getColor(R.color.colorPrimaryDark))
+                        )
+                        return@apply
+                    }
+
+                    palette.darkVibrantSwatch?.let {
+                        setToolbarColor(
+                            this,
+                            palette.getDarkVibrantColor(SharedPref(context).themeColorInt),
+                            palette.getDarkVibrantColor(resources.getColor(R.color.colorPrimaryDark))
+                        )
+                        return@apply
+                    }
+
+                    palette.lightVibrantSwatch?.let {
+                        setToolbarColor(
+                            this,
+                            palette.getLightVibrantColor(SharedPref(context).themeColorInt),
+                            palette.getLightVibrantColor(resources.getColor(R.color.colorPrimaryDark))
+                        )
+                    }
+
+                }
             }
-        })
+        }, 800)
     }
 
-    private fun showFab() {
-        if (!fabIsShowing) {
-            fab?.isVisible = true
-            fabIsShowing = true
-        }
-    }
-
-    private fun hideFab() {
-        if (fabIsShowing) {
-            fab?.isVisible = false
-            fabIsShowing = false
-        }
+    private fun setToolbarColor(toolbar: CollapsingToolbarLayout, color: Int, colorDark: Int) {
+        window?.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+        window?.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        window?.statusBarColor = colorDark
+        toolbar.setContentScrimColor(color)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_activity_place_details, menu)
         return true
     }
-
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val id = item.itemId
@@ -307,36 +301,6 @@ class ActivityPlaceDetail : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun initMap() {
-        if (googleMap == null) {
-            val mapFragment1 = fragmentManager.findFragmentById(R.id.mapPlaces) as MapFragment
-            mapFragment1.getMapAsync { gMap ->
-                googleMap = gMap
-                if (googleMap == null) {
-                    Snackbar.make(parent_view!!, R.string.unable_create_map, Snackbar.LENGTH_SHORT).show()
-                } else {
-                    // config map
-                    googleMap = Tools.configStaticMap(this@ActivityPlaceDetail, googleMap!!, place!!)
-                }
-            }
-        }
-
-        (findViewById<View>(R.id.bt_navigate) as Button).setOnClickListener {
-            logAnalyticsEvent(SELECT_PLACE_OPEN_NAVIGATION, place?.name.orEmpty(), false)
-            val navigation = Intent(Intent.ACTION_VIEW, Uri.parse("http://maps.google.com/maps?daddr=${place!!.lat},${place!!.lng}"))
-            startActivity(navigation)
-        }
-        (findViewById<View>(R.id.bt_view) as Button).setOnClickListener { openPlaceInMap() }
-        (findViewById<View>(R.id.map) as LinearLayout).setOnClickListener { openPlaceInMap() }
-    }
-
-    private fun openPlaceInMap() {
-        logAnalyticsEvent(SELECT_PLACE_OPEN_MAP, place?.name.orEmpty(), false)
-        val intent = Intent(this@ActivityPlaceDetail, ActivityMaps::class.java)
-        intent.putExtra(ActivityMaps.EXTRA_OBJ, place)
-        startActivity(intent)
-    }
-
     override fun onDestroy() {
         if (callback != null && callback!!.isExecuted) callback!!.cancel()
         super.onDestroy()
@@ -348,7 +312,7 @@ class ActivityPlaceDetail : AppCompatActivity() {
 
     override fun onPause() {
         super.onPause()
-        if (description != null) description!!.onPause()
+        binding.details.placeDescriptionWebView?.onPause()
     }
 
     private fun backAction() {
@@ -376,7 +340,7 @@ class ActivityPlaceDetail : AppCompatActivity() {
 
     private fun requestDetailsPlace(place_id: Int) {
         if (onProcess) {
-            Snackbar.make(parent_view!!, R.string.task_running, Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(parentView!!, R.string.task_running, Snackbar.LENGTH_SHORT).show()
             return
         }
         onProcess = true
@@ -412,13 +376,13 @@ class ActivityPlaceDetail : AppCompatActivity() {
             showProgressbar(false)
             onProcess = false
             displayData(resp!!)
-        }, 1000)
+        }, 800)
     }
 
     private fun onFailureRetry(msg: String) {
         showProgressbar(false)
         onProcess = false
-        snackbar = Snackbar.make(parent_view!!, msg, Snackbar.LENGTH_INDEFINITE)
+        snackbar = Snackbar.make(parentView!!, msg, Snackbar.LENGTH_INDEFINITE)
         snackbar!!.setAction(R.string.RETRY) { loadPlaceData() }
         snackbar!!.show()
         retryDisplaySnackbar()
@@ -431,12 +395,10 @@ class ActivityPlaceDetail : AppCompatActivity() {
     }
 
     private fun showProgressbar(show: Boolean) {
-        lyt_progress!!.visibility = if (show) View.VISIBLE else View.GONE
+        binding.placeLytProgress.root.visibility = if (show) View.VISIBLE else View.GONE
     }
 
     companion object {
-
-        private val SCREEN_NAME = "PLACE_DETAILS"
         private val EXTRA_OBJ = "key.EXTRA_OBJ"
         private val EXTRA_NOTIF_FLAG = "key.EXTRA_NOTIF_FLAG"
 

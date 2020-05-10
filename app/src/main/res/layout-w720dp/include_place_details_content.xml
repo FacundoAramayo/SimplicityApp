@@ -29,14 +29,13 @@
                 android:padding="@dimen/spacing_medium">
 
                 <LinearLayout
-                    android:id="@+id/lyt_distance"
+                    android:id="@+id/place_lyt_distance"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
+                    android:clickable="false"
                     android:gravity="center_vertical"
                     android:minHeight="@dimen/spacing_xxlarge"
-                    android:onClick="clickLayout"
                     android:orientation="horizontal">
 
                     <ImageView
@@ -44,27 +43,27 @@
                         android:layout_height="@dimen/spacing_mlarge"
                         android:layout_margin="@dimen/spacing_middle"
                         android:src="@drawable/ic_info_distance"
-                        android:tint="@color/grey_hard" />
+                        android:tint="@color/colorPrimary" />
 
                     <TextView
-                        android:id="@+id/distance"
+                        android:id="@+id/place_distance"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/spacing_medium"
+                        android:fontFamily="@font/raleway_semibold"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textColor="@color/material_grey_800" />
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/lyt_address"
+                    android:id="@+id/place_lyt_address"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="?attr/selectableItemBackground"
                     android:clickable="true"
                     android:gravity="center_vertical"
                     android:minHeight="@dimen/spacing_xxlarge"
-                    android:onClick="clickLayout"
                     android:orientation="horizontal">
 
                     <ImageView
@@ -72,27 +71,57 @@
                         android:layout_height="@dimen/spacing_mlarge"
                         android:layout_margin="@dimen/spacing_middle"
                         android:src="@drawable/ic_info_address"
-                        android:tint="@color/grey_hard" />
+                        android:tint="@color/colorPrimary" />
 
-                    <TextView
-                        android:id="@+id/address"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/spacing_medium"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                        android:textColor="@color/material_grey_800" />
+                        android:weightSum="3"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:gravity="center_vertical"
+                        android:minHeight="@dimen/spacing_xxlarge"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/place_address"
+                            android:layout_width="@dimen/spacing_empty"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:layout_margin="@dimen/spacing_medium"
+                            android:fontFamily="@font/raleway_semibold"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                            android:maxLines="1"
+                            android:ellipsize="end"
+                            android:textColor="@color/colorLink" />
+
+                        <TextView
+                            android:id="@+id/place_how_to_get"
+                            android:layout_width="@dimen/spacing_empty"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginEnd="@dimen/spacing_medium"
+                            android:maxLines="1"
+                            android:ellipsize="end"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                            android:fontFamily="@font/raleway_semibold"
+                            android:textColor="@color/colorLink"
+                            android:text="@string/how_to_get"
+                            />
+
+                    </LinearLayout>
+
+
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/lyt_phone"
+                    android:id="@+id/place_lyt_phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="?attr/selectableItemBackground"
                     android:clickable="true"
                     android:gravity="center_vertical"
                     android:minHeight="@dimen/spacing_xxlarge"
-                    android:onClick="clickLayout"
                     android:orientation="horizontal">
 
                     <ImageView
@@ -100,27 +129,27 @@
                         android:layout_height="@dimen/spacing_mlarge"
                         android:layout_margin="@dimen/spacing_middle"
                         android:src="@drawable/ic_info_phone"
-                        android:tint="@color/grey_hard" />
+                        android:tint="@color/colorPrimary" />
 
                     <TextView
-                        android:id="@+id/phone"
+                        android:id="@+id/place_phone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/spacing_medium"
+                        android:fontFamily="@font/raleway_semibold"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                        android:textColor="@color/material_grey_800" />
+                        android:textColor="@color/colorLink" />
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/lyt_website"
+                    android:id="@+id/place_lyt_website"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="?attr/selectableItemBackground"
                     android:clickable="true"
                     android:gravity="center_vertical"
                     android:minHeight="@dimen/spacing_xxlarge"
-                    android:onClick="clickLayout"
                     android:orientation="horizontal">
 
                     <ImageView
@@ -128,15 +157,16 @@
                         android:layout_height="@dimen/spacing_mlarge"
                         android:layout_margin="@dimen/spacing_middle"
                         android:src="@drawable/ic_info_web"
-                        android:tint="@color/grey_hard" />
+                        android:tint="@color/colorPrimary" />
 
                     <TextView
-                        android:id="@+id/website"
+                        android:id="@+id/place_website"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/spacing_medium"
+                        android:fontFamily="@font/raleway_semibold"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                        android:textColor="@color/material_grey_800" />
+                        android:textColor="@color/colorLink" />
 
                 </LinearLayout>
 
@@ -144,11 +174,12 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/place_card_view_photos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/spacing_medium"
             android:layout_marginLeft="@dimen/spacing_middle"
-            android:layout_marginRight="@dimen/spacing_medium"
+            android:layout_marginRight="@dimen/spacing_middle"
             android:layout_marginTop="@dimen/spacing_medium"
             app:cardCornerRadius="@dimen/card_corner_radius"
             app:cardElevation="@dimen/elevation_card">
@@ -161,18 +192,18 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-light"
-                    android:paddingBottom="@dimen/spacing_medium"
+                    android:fontFamily="@font/raleway_semibold"
                     android:paddingLeft="@dimen/spacing_large"
                     android:paddingTop="@dimen/spacing_large"
+                    android:paddingBottom="@dimen/spacing_medium"
                     android:text="@string/photos_title"
                     android:textAppearance="@style/TextAppearance.AppCompat.Title"
                     android:textColor="@color/material_grey_800" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/galleryRecycler"
+                    android:id="@+id/place_gallery_recycler"
                     android:layout_width="match_parent"
-                    android:layout_height="120dp"
+                    android:layout_height="97dp"
                     android:paddingBottom="@dimen/spacing_large"
                     android:paddingLeft="@dimen/spacing_large"
                     android:paddingRight="@dimen/spacing_large" />
@@ -188,8 +219,6 @@
             android:layout_marginBottom="@dimen/spacing_medium"
             android:layout_marginTop="@dimen/spacing_medium">
 
-<!--            <include layout="@layout/include_ad_banner" />-->
-
         </RelativeLayout>
     </LinearLayout>
 
@@ -200,10 +229,11 @@
         android:orientation="vertical">
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/place_card_view_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/spacing_medium"
-            android:layout_marginLeft="@dimen/spacing_medium"
+            android:layout_marginLeft="@dimen/spacing_middle"
             android:layout_marginRight="@dimen/spacing_middle"
             android:layout_marginTop="@dimen/spacing_large"
             app:cardCornerRadius="@dimen/card_corner_radius"
@@ -215,11 +245,12 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/place_description_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-light"
+                    android:fontFamily="@font/raleway_semibold"
                     android:padding="@dimen/spacing_large"
-                    android:text="Description"
+                    android:text="@string/description_title"
                     android:textAppearance="@style/TextAppearance.AppCompat.Title"
                     android:textColor="@color/material_grey_800" />
 
@@ -228,7 +259,7 @@
                     android:layout_height="1px"
                     android:layout_marginBottom="@dimen/spacing_small"
                     android:layout_marginTop="@dimen/spacing_small"
-                    android:background="@color/grey_soft" />
+                    android:background="@color/grey_medium" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -236,10 +267,10 @@
                     android:paddingBottom="@dimen/spacing_large"
                     android:paddingLeft="@dimen/spacing_medium"
                     android:paddingRight="@dimen/spacing_medium"
-                    android:paddingTop="@dimen/spacing_middle">
+                    android:paddingTop="@dimen/spacing_medium">
 
                     <WebView
-                        android:id="@+id/description"
+                        android:id="@+id/place_description_web_view"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/spacing_xsmall" />
@@ -250,72 +281,6 @@
 
         </androidx.cardview.widget.CardView>
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/spacing_large"
-            android:layout_marginLeft="@dimen/spacing_medium"
-            android:layout_marginRight="@dimen/spacing_middle"
-            android:layout_marginTop="@dimen/spacing_medium"
-            app:cardCornerRadius="@dimen/card_corner_radius"
-            app:cardElevation="@dimen/elevation_card">
-
-            <LinearLayout
-                android:id="@+id/map"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="?attr/selectableItemBackground"
-                android:clickable="true"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-light"
-                    android:padding="@dimen/spacing_large"
-                    android:text="@string/map_title"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                    android:textColor="@color/material_grey_800" />
-
-                <fragment
-                    android:id="@+id/mapPlaces"
-                    android:name="com.google.android.gms.maps.MapFragment"
-                    android:layout_width="match_parent"
-                    android:layout_height="250dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/spacing_large"
-                    android:layout_marginRight="@dimen/spacing_large" />
-
-
-                <LinearLayout
-                    android:id="@+id/the_item"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/spacing_large"
-                    android:gravity="right"
-                    android:orientation="horizontal">
-
-                    <Button
-                        android:id="@+id/bt_view"
-                        style="?android:attr/borderlessButtonStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/map_view"
-                        android:textColor="@color/colorAccent" />
-
-                    <Button
-                        android:id="@+id/bt_navigate"
-                        style="?android:attr/borderlessButtonStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/map_navigate"
-                        android:textColor="@color/colorAccent" />
-                </LinearLayout>
-
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
     </LinearLayout>
 
 

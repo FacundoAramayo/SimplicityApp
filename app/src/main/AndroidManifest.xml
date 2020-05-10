@@ -24,12 +24,15 @@
         android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:theme="@style/BaseTheme">
-        <activity android:name=".modules.start.ui.ActivityWelcome"
+        <activity
+            android:name=".modules.start.ui.ActivityWelcome"
             android:theme="@style/Start.BaseTheme" />
-        <activity android:name=".modules.start.ui.ActivityLogin"
+        <activity
+            android:name=".modules.start.ui.ActivityLogin"
             android:label="@string/title_activity_login"
-            android:theme="@style/Start.BaseTheme"/>
-        <activity android:name=".modules.start.ui.ActivitySplash"
+            android:theme="@style/Start.BaseTheme" />
+        <activity
+            android:name=".modules.start.ui.ActivitySplash"
             android:theme="@style/Start.BaseTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,23 +40,23 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".modules.main.ui.ActivityMain"
-            android:theme="@style/BaseTheme"
-            android:label="@string/app_name" />
-
-        <activity android:name=".modules.places.ui.ActivityMaps"
-            android:theme="@style/BaseTheme"
-            android:label="@string/activity_title_maps" />
+        <activity
+            android:name=".modules.main.ui.ActivityMain"
+            android:label="@string/app_name"
+            android:theme="@style/BaseTheme" />
+        <activity
+            android:name=".modules.places.ui.ActivityMaps"
+            android:label="@string/activity_title_maps"
+            android:theme="@style/BaseTheme" />
         <activity android:name=".modules.places.ui.ActivityPlaceDetail" />
         <activity android:name=".modules.places.ui.ActivitySearch" />
         <activity android:name=".modules.notifications.ui.ActivityNotifications" />
         <activity android:name=".modules.notifications.ui.ActivityNotificationDetails" />
-        <activity android:name=".modules.settings.ui.ActivitySetting"
+        <activity
+            android:name=".modules.settings.ui.ActivitySetting"
             android:label="@string/activity_title_settings"
             android:theme="@style/AppThemeSetting" />
-        <activity android:name=".modules.settings.ui.ActivityFullScreenImage" />
-
-        <!-- This meta-data tag is required to use Google Play Services. -->
+        <activity android:name=".modules.settings.ui.ActivityFullScreenImage" /> <!-- This meta-data tag is required to use Google Play Services. -->
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" /> <!-- Add Google Map Library -->
@@ -61,7 +64,6 @@
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="@string/api_key" />
-
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="@string/default_notification_channel_id" />
@@ -75,7 +77,9 @@
             </intent-filter>
         </service>
 
-        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
     </application>
 
 </manifest>

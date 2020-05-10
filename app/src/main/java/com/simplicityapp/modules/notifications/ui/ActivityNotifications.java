@@ -78,7 +78,7 @@ public class ActivityNotifications extends AppCompatActivity {
         lyt_progress = findViewById(R.id.lyt_progress);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.addItemDecoration(new SpacingItemDecoration(1, UITools.Companion.dpToPx(this, 4), true));
+        recyclerView.addItemDecoration(new SpacingItemDecoration(1, UITools.Companion.dpToPx(4), true));
 
 
         mAdapter = new AdapterContentInfo(this, recyclerView, new ArrayList<ContentInfo>());

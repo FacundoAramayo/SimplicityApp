@@ -88,7 +88,7 @@ class ActivitySearch : AppCompatActivity(), ActivityInterface {
         recyclerSuggestion = findViewById<View>(R.id.recyclerSuggestion) as RecyclerView
 
         recyclerView?.layoutManager = StaggeredGridLayoutManager(UITools.getGridSpanCount(this), StaggeredGridLayoutManager.VERTICAL)
-        recyclerView?.addItemDecoration(SpacingItemDecoration(UITools.getGridSpanCount(this), UITools.dpToPx(this, 4), true))
+        recyclerView?.addItemDecoration(SpacingItemDecoration(UITools.getGridSpanCount(this), UITools.dpToPx(4), true))
 
         recyclerSuggestion?.layoutManager = LinearLayoutManager(this)
         recyclerSuggestion?.setHasFixedSize(true)
