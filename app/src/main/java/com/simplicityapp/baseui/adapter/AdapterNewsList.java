@@ -8,15 +8,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.simplicityapp.R;
 import com.simplicityapp.base.config.Constant;
 import com.simplicityapp.baseui.utils.UITools;
 import com.simplicityapp.modules.notifications.model.ContentInfo;
-
+import com.simplicityapp.R;
 import java.util.ArrayList;
 import java.util.List;
 

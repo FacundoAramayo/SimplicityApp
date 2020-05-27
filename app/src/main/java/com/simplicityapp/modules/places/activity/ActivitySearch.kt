@@ -14,25 +14,22 @@ import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
-
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-
-import java.util.ArrayList
-
-import com.simplicityapp.baseui.adapter.AdapterPlaceGrid
-import com.simplicityapp.baseui.adapter.AdapterSuggestionSearch
 import com.simplicityapp.base.persistence.db.DatabaseHandler
 import com.simplicityapp.base.utils.Tools
+import com.simplicityapp.base.config.analytics.AnalyticsConstants
+import com.simplicityapp.base.BaseActivity
+import com.simplicityapp.baseui.adapter.AdapterPlaceGrid
+import com.simplicityapp.baseui.adapter.AdapterSuggestionSearch
 import com.simplicityapp.baseui.utils.UITools
 import com.simplicityapp.baseui.decorator.SpacingItemDecoration
 import com.simplicityapp.R
-import com.simplicityapp.base.config.analytics.AnalyticsConstants
-import com.simplicityapp.base.BaseActivity
+import java.util.ArrayList
 
 class ActivitySearch : AppCompatActivity(), BaseActivity {
 

@@ -9,7 +9,12 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Environment;
 import android.util.Log;
-
+import com.simplicityapp.base.utils.Tools;
+import com.simplicityapp.modules.notifications.model.ContentInfo;
+import com.simplicityapp.modules.places.model.Category;
+import com.simplicityapp.modules.places.model.Images;
+import com.simplicityapp.modules.places.model.Place;
+import com.simplicityapp.R;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -17,15 +22,7 @@ import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.simplicityapp.R;
-import com.simplicityapp.base.utils.Tools;
-import com.simplicityapp.modules.notifications.model.ContentInfo;
-import com.simplicityapp.modules.places.model.Category;
-import com.simplicityapp.modules.places.model.Images;
-import com.simplicityapp.modules.places.model.Place;
-
 import static com.simplicityapp.base.config.Constant.LOG_TAG;
-import static com.simplicityapp.base.persistence.db.DatabaseConstants.*;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
 

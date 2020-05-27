@@ -14,25 +14,21 @@ import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.widget.ImageView
 import android.widget.TextView
-
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-
 import com.balysv.materialripple.MaterialRippleLayout
-
-import java.util.ArrayList
-
+import com.simplicityapp.base.config.analytics.AnalyticsConstants
 import com.simplicityapp.base.utils.ActionTools
 import com.simplicityapp.base.utils.Tools
 import com.simplicityapp.baseui.utils.UITools
-import com.simplicityapp.modules.places.activity.ActivityFullScreenImage
 import com.simplicityapp.base.config.Constant
 import com.simplicityapp.modules.main.activity.ActivityMain
-import com.simplicityapp.modules.start.activity.ActivitySplash
 import com.simplicityapp.modules.notifications.model.ContentInfo
+import com.simplicityapp.modules.places.activity.ActivityFullScreenImage
+import com.simplicityapp.modules.start.activity.ActivitySplash
 import com.simplicityapp.R
-import com.simplicityapp.base.config.analytics.AnalyticsConstants
+import java.util.ArrayList
 
 class ActivityNotificationDetails : AppCompatActivity() {
 

@@ -11,12 +11,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -29,19 +27,17 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.maps.android.clustering.ClusterManager;
 import com.google.maps.android.clustering.view.DefaultClusterRenderer;
-
-import java.util.HashMap;
-import java.util.List;
-
 import com.simplicityapp.base.config.analytics.AnalyticsConstants;
 import com.simplicityapp.base.config.Constant;
 import com.simplicityapp.base.persistence.db.DatabaseHandler;
 import com.simplicityapp.base.utils.Tools;
+import com.simplicityapp.base.utils.PermissionUtil;
 import com.simplicityapp.baseui.utils.UITools;
 import com.simplicityapp.modules.places.model.Category;
 import com.simplicityapp.modules.places.model.Place;
-import com.simplicityapp.base.utils.PermissionUtil;
 import com.simplicityapp.R;
+import java.util.HashMap;
+import java.util.List;
 
 public class ActivityMaps extends AppCompatActivity implements OnMapReadyCallback {
 

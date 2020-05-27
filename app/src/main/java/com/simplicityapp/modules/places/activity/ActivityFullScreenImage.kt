@@ -4,15 +4,11 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton
 import android.widget.TextView
-
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
-
-
-import java.util.ArrayList
-
 import com.simplicityapp.baseui.adapter.AdapterFullScreenImage
 import com.simplicityapp.R
+import java.util.ArrayList
 
 class ActivityFullScreenImage : AppCompatActivity() {
 

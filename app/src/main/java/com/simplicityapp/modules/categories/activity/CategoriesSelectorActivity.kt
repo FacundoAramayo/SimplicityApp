@@ -4,9 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import com.simplicityapp.R
 import com.simplicityapp.modules.categories.fragment.CategoriesSelectorFragment
 import com.simplicityapp.modules.categories.fragment.CategoryFragment
+import com.simplicityapp.R
 
 class CategoriesSelectorActivity : AppCompatActivity() {
 

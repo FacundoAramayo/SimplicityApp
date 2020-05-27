@@ -5,16 +5,13 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.github.chrisbanes.photoview.PhotoView;
 import android.widget.RelativeLayout;
-
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
-
-import java.util.List;
-
-import com.simplicityapp.R;
+import com.github.chrisbanes.photoview.PhotoView;
 import com.simplicityapp.baseui.utils.UITools;
+import com.simplicityapp.R;
+import java.util.List;
 
 public class AdapterFullScreenImage extends PagerAdapter {
 

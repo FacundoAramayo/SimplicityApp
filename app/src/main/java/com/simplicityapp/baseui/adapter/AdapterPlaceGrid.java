@@ -10,20 +10,16 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
-
 import com.balysv.materialripple.MaterialRippleLayout;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import com.simplicityapp.R;
 import com.simplicityapp.base.config.Constant;
 import com.simplicityapp.base.utils.Tools;
 import com.simplicityapp.baseui.utils.UITools;
 import com.simplicityapp.modules.places.model.Place;
+import com.simplicityapp.R;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AdapterPlaceGrid extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 

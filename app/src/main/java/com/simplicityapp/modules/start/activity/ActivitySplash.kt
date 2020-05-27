@@ -5,18 +5,16 @@ import android.content.Intent
 import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import android.widget.RelativeLayout
-
 import androidx.appcompat.app.AppCompatActivity
-
-import com.simplicityapp.BuildConfig
-import com.simplicityapp.R
 import com.simplicityapp.base.config.analytics.AnalyticsConstants
 import com.simplicityapp.base.config.analytics.AnalyticsConstants.Companion.APP_OPEN
 import com.simplicityapp.base.config.AppConfig
 import com.simplicityapp.base.config.Constant
 import com.simplicityapp.base.persistence.preferences.SharedPref
 import com.simplicityapp.base.utils.ActionTools
+import com.simplicityapp.BuildConfig
 import com.simplicityapp.modules.main.activity.ActivityMain
+import com.simplicityapp.R
 
 class ActivitySplash : AppCompatActivity() {
 

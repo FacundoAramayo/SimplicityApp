@@ -10,10 +10,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat.startActivity
-import com.simplicityapp.R
 import com.simplicityapp.base.config.Constant.LOG_TAG
 import com.simplicityapp.modules.notifications.model.ContentInfo
 import com.simplicityapp.modules.places.model.Place
+import com.simplicityapp.R
 import java.util.*
 
 class ActionTools {

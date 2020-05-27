@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
-
 import androidx.appcompat.widget.AppCompatImageView;
 
 import static com.simplicityapp.base.config.Constant.LOG_TAG;

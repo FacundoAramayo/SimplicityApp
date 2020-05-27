@@ -1,18 +1,15 @@
 package com.simplicityapp.base.rest;
 
 import com.google.gson.GsonBuilder;
-
-import java.util.concurrent.TimeUnit;
-
-import com.simplicityapp.BuildConfig;
 import com.simplicityapp.base.config.AppConfig;
 import com.simplicityapp.base.connection.JsonAPI;
-
+import com.simplicityapp.BuildConfig;
+import java.util.concurrent.TimeUnit;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import okhttp3.logging.HttpLoggingInterceptor.Level;
-import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.Retrofit;
 
 public class RestAdapter {
 

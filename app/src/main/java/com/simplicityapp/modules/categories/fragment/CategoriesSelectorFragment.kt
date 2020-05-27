@@ -1,19 +1,19 @@
 package com.simplicityapp.modules.categories.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import com.simplicityapp.R
 import com.simplicityapp.baseui.utils.UITools
 import com.simplicityapp.baseui.decorator.SpacingItemDecoration
 import com.simplicityapp.databinding.CategoriesSelectorFragmentBinding
 import com.simplicityapp.baseui.adapter.AdapterCategoriesSelectorGrid
 import com.simplicityapp.modules.categories.activity.CategoriesSelectorActivity
 import com.simplicityapp.modules.categories.viewmodel.CategoriesSelectorViewModel
+import com.simplicityapp.R
 
 class CategoriesSelectorFragment : Fragment(R.layout.categories_selector_fragment) {
 

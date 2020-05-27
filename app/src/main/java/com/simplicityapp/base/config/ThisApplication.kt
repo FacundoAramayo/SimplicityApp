@@ -5,7 +5,6 @@ import android.location.Location
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
-
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.firebase.FirebaseApp
@@ -13,11 +12,10 @@ import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.iid.FirebaseInstanceId
 import com.simplicityapp.base.config.analytics.AnalyticsConstants.Companion.SHARE
 import com.simplicityapp.base.config.analytics.AnalyticsConstants.Companion.SIGN_UP
-
-import com.simplicityapp.base.rest.RestAdapter
-import com.simplicityapp.base.connection.callbacks.CallbackDevice
 import com.simplicityapp.base.config.Constant.LOG_TAG
+import com.simplicityapp.base.connection.callbacks.CallbackDevice
 import com.simplicityapp.base.persistence.preferences.SharedPref
+import com.simplicityapp.base.rest.RestAdapter
 import com.simplicityapp.base.utils.Tools
 import retrofit2.Call
 import retrofit2.Response

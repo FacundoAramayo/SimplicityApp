@@ -5,18 +5,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.balysv.materialripple.MaterialRippleLayout;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import com.simplicityapp.R;
 import com.simplicityapp.base.config.Constant;
 import com.simplicityapp.baseui.utils.UITools;
 import com.simplicityapp.modules.places.model.Images;
+import com.simplicityapp.R;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class AdapterImageList extends RecyclerView.Adapter<AdapterImageList.ViewHolder> {
 

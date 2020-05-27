@@ -6,10 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-import com.simplicityapp.R
-import com.simplicityapp.baseui.adapter.AdapterPlaceGrid
 import com.simplicityapp.baseui.utils.UITools
 import com.simplicityapp.modules.categories.model.Category
+import com.simplicityapp.R
 
 class AdapterCategoriesSelectorGrid(
     private val categories: List<Category>,

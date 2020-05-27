@@ -6,32 +6,28 @@ import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.google.android.material.snackbar.Snackbar;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import com.simplicityapp.R;
 import com.simplicityapp.base.config.analytics.AnalyticsConstants;
 import com.simplicityapp.base.utils.ActionTools;
 import com.simplicityapp.base.utils.Tools;
-import com.simplicityapp.baseui.utils.UITools;
-import com.simplicityapp.modules.settings.activity.ActivitySetting;
-import com.simplicityapp.baseui.adapter.AdapterContentInfo;
 import com.simplicityapp.base.connection.JsonAPI;
 import com.simplicityapp.base.rest.RestAdapter;
 import com.simplicityapp.base.connection.callbacks.CallbackListContentInfo;
 import com.simplicityapp.base.config.Constant;
 import com.simplicityapp.base.persistence.db.DatabaseHandler;
-import com.simplicityapp.modules.notifications.model.ContentInfo;
+import com.simplicityapp.baseui.utils.UITools;
 import com.simplicityapp.baseui.decorator.SpacingItemDecoration;
+import com.simplicityapp.baseui.adapter.AdapterContentInfo;
+import com.simplicityapp.modules.notifications.model.ContentInfo;
+import com.simplicityapp.modules.settings.activity.ActivitySetting;
+import com.simplicityapp.R;
+import java.util.ArrayList;
+import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

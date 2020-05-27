@@ -14,15 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-
 import com.google.android.material.snackbar.Snackbar
-
-import java.util.ArrayList
-
-import com.simplicityapp.modules.main.activity.ActivityMain
-import com.simplicityapp.modules.places.activity.ActivityPlaceDetail
-import com.simplicityapp.R
-import com.simplicityapp.baseui.adapter.AdapterPlaceGrid
 import com.simplicityapp.base.rest.RestAdapter
 import com.simplicityapp.base.connection.callbacks.CallbackListPlace
 import com.simplicityapp.base.config.AppConfig
@@ -31,10 +23,15 @@ import com.simplicityapp.base.persistence.db.DatabaseHandler
 import com.simplicityapp.base.persistence.preferences.SharedPref
 import com.simplicityapp.base.config.ThisApplication
 import com.simplicityapp.base.utils.Tools
-import com.simplicityapp.baseui.utils.UITools
-import com.simplicityapp.baseui.decorator.SpacingItemDecoration
 import com.simplicityapp.base.config.analytics.AnalyticsConstants
 import com.simplicityapp.base.config.Constant.LOG_TAG
+import com.simplicityapp.baseui.adapter.AdapterPlaceGrid
+import com.simplicityapp.baseui.utils.UITools
+import com.simplicityapp.baseui.decorator.SpacingItemDecoration
+import com.simplicityapp.modules.main.activity.ActivityMain
+import com.simplicityapp.modules.places.activity.ActivityPlaceDetail
+import com.simplicityapp.R
+import java.util.ArrayList
 import retrofit2.Call
 import retrofit2.Response
 

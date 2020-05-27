@@ -27,22 +27,19 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
-
 import com.google.android.material.snackbar.Snackbar;
-
 import com.simplicityapp.base.config.AppConfig;
 import com.simplicityapp.base.persistence.preferences.SharedPref;
 import com.simplicityapp.base.utils.ActionTools;
 import com.simplicityapp.base.utils.PermissionUtil;
-import com.simplicityapp.R;
 import com.simplicityapp.baseui.utils.UITools;
+import com.simplicityapp.R;
 
 /**
  * ATTENTION : To see where list of setting comes is open res/xml/setting_notification.xml

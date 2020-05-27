@@ -1,7 +1,6 @@
 package com.simplicityapp.base.config;
 
 import com.simplicityapp.BuildConfig;
-import com.simplicityapp.base.config.AppConfig;
 
 public class Constant {
 

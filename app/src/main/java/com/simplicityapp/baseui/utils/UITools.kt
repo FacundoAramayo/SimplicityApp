@@ -12,11 +12,11 @@ import android.util.TypedValue
 import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.app.ActionBar
-import com.simplicityapp.R
-import com.simplicityapp.base.persistence.preferences.SharedPref
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
+import com.simplicityapp.base.persistence.preferences.SharedPref
+import com.simplicityapp.R
 
 
 class UITools {

@@ -8,7 +8,6 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
-
 import androidx.annotation.IdRes
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -17,25 +16,23 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
-
 import com.google.android.material.navigation.NavigationView
-
 import com.simplicityapp.BuildConfig
 import com.simplicityapp.base.config.Constant
-import com.simplicityapp.modules.places.activity.ActivityMaps
-import com.simplicityapp.modules.notifications.activity.ActivityNotifications
-import com.simplicityapp.modules.settings.activity.ActivitySetting
 import com.simplicityapp.base.config.AppConfig
 import com.simplicityapp.base.persistence.db.DatabaseHandler
 import com.simplicityapp.base.persistence.preferences.SharedPref
-import com.simplicityapp.modules.categories.fragment.CategoryFragment
-import com.simplicityapp.modules.main.fragment.FragmentHome
-import com.simplicityapp.R
 import com.simplicityapp.base.config.analytics.AnalyticsConstants
 import com.simplicityapp.base.config.Constant.*
 import com.simplicityapp.base.utils.ActionTools
+import com.simplicityapp.modules.categories.fragment.CategoryFragment
+import com.simplicityapp.modules.main.fragment.FragmentHome
+import com.simplicityapp.modules.places.activity.ActivityMaps
+import com.simplicityapp.modules.notifications.activity.ActivityNotifications
+import com.simplicityapp.modules.settings.activity.ActivitySetting
 import com.simplicityapp.modules.categories.activity.CategoriesSelectorActivity
 import com.simplicityapp.modules.places.activity.ActivitySearch
+import com.simplicityapp.R
 
 class ActivityMain : AppCompatActivity() {
 

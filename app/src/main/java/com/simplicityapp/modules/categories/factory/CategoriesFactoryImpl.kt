@@ -1,12 +1,6 @@
 package com.simplicityapp.modules.categories.factory
 
-import com.simplicityapp.base.connection.callbacks.CallbackCategories
 import com.simplicityapp.modules.categories.model.Category
-import okhttp3.*
-import java.io.IOException
-import kotlin.coroutines.resume
-import kotlin.coroutines.resumeWithException
-import kotlin.coroutines.suspendCoroutine
 
 class CategoriesFactoryImpl: CategoriesFactory {
 

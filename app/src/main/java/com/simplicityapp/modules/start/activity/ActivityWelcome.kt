@@ -15,12 +15,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
-
-import com.simplicityapp.R
+import com.simplicityapp.base.BaseActivity
 import com.simplicityapp.base.config.analytics.AnalyticsConstants
 import com.simplicityapp.base.config.analytics.AnalyticsConstants.Companion.TUTORIAL_BEGIN
 import com.simplicityapp.base.config.analytics.AnalyticsConstants.Companion.TUTORIAL_COMPLETE
-import com.simplicityapp.base.BaseActivity
+import com.simplicityapp.R
 
 class ActivityWelcome : AppCompatActivity(),
     BaseActivity {

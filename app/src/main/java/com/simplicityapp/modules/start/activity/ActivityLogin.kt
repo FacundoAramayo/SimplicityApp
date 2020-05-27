@@ -3,8 +3,6 @@ package com.simplicityapp.modules.start.activity
 import android.Manifest
 import android.content.Intent
 import android.graphics.drawable.AnimationDrawable
-
-
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -12,7 +10,7 @@ import android.widget.CheckBox
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-
+import androidx.core.content.PermissionChecker.PERMISSION_GRANTED
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -23,19 +21,16 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
-
-import com.simplicityapp.R
-import com.simplicityapp.modules.main.activity.ActivityMain
 import com.simplicityapp.base.persistence.preferences.SharedPref
 import com.simplicityapp.base.utils.PermissionUtil
-
-import androidx.core.content.PermissionChecker.PERMISSION_GRANTED
-import com.simplicityapp.BuildConfig
 import com.simplicityapp.base.config.analytics.AnalyticsConstants
 import com.simplicityapp.base.config.Constant
 import com.simplicityapp.base.config.Constant.LOG_TAG
 import com.simplicityapp.base.BaseActivity
 import com.simplicityapp.base.utils.Tools
+import com.simplicityapp.BuildConfig
+import com.simplicityapp.modules.main.activity.ActivityMain
+import com.simplicityapp.R
 
 
 /**

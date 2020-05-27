@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
-
 import com.simplicityapp.BuildConfig;
 import com.simplicityapp.R;
 

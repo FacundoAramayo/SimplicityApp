@@ -15,33 +15,29 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Vibrator;
 import android.util.Log;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.google.gson.Gson;
-
-import java.util.Map;
-
-import com.simplicityapp.baseui.utils.UITools;
-import com.simplicityapp.modules.main.activity.ActivityMain;
-import com.simplicityapp.modules.notifications.activity.ActivityNotificationDetails;
-import com.simplicityapp.modules.places.activity.ActivityPlaceDetail;
-import com.simplicityapp.R;
 import com.simplicityapp.base.config.AppConfig;
 import com.simplicityapp.base.config.Constant;
 import com.simplicityapp.base.persistence.db.DatabaseHandler;
 import com.simplicityapp.base.persistence.preferences.SharedPref;
-import com.simplicityapp.modules.notifications.model.FcmNotification;
-import com.simplicityapp.modules.notifications.model.ContentInfo;
-import com.simplicityapp.modules.places.model.Place;
 import com.simplicityapp.base.utils.PermissionUtil;
+import com.simplicityapp.baseui.utils.UITools;
+import com.simplicityapp.modules.main.activity.ActivityMain;
+import com.simplicityapp.modules.notifications.activity.ActivityNotificationDetails;
+import com.simplicityapp.modules.notifications.model.ContentInfo;
+import com.simplicityapp.modules.notifications.model.FcmNotification;
+import com.simplicityapp.modules.places.activity.ActivityPlaceDetail;
+import com.simplicityapp.modules.places.model.Place;
+import com.simplicityapp.R;
+import java.util.Map;
 
 import static com.simplicityapp.base.config.Constant.LOG_TAG;
 
