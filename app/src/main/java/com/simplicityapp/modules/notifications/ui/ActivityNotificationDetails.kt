@@ -27,12 +27,12 @@ import com.simplicityapp.base.utils.ActionTools
 import com.simplicityapp.base.utils.Tools
 import com.simplicityapp.base.utils.UITools
 import com.simplicityapp.modules.settings.ui.ActivityFullScreenImage
-import com.simplicityapp.base.data.Constant
+import com.simplicityapp.base.config.Constant
 import com.simplicityapp.modules.main.ui.ActivityMain
 import com.simplicityapp.modules.start.ui.ActivitySplash
 import com.simplicityapp.modules.notifications.model.ContentInfo
 import com.simplicityapp.R
-import com.simplicityapp.base.analytics.AnalyticsConstants
+import com.simplicityapp.base.config.analytics.AnalyticsConstants
 
 class ActivityNotificationDetails : AppCompatActivity() {
 

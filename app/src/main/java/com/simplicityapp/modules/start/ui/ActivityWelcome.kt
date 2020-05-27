@@ -17,9 +17,9 @@ import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
 
 import com.simplicityapp.R
-import com.simplicityapp.base.analytics.AnalyticsConstants
-import com.simplicityapp.base.analytics.AnalyticsConstants.Companion.TUTORIAL_BEGIN
-import com.simplicityapp.base.analytics.AnalyticsConstants.Companion.TUTORIAL_COMPLETE
+import com.simplicityapp.base.config.analytics.AnalyticsConstants
+import com.simplicityapp.base.config.analytics.AnalyticsConstants.Companion.TUTORIAL_BEGIN
+import com.simplicityapp.base.config.analytics.AnalyticsConstants.Companion.TUTORIAL_COMPLETE
 import com.simplicityapp.base.ui.ActivityInterface
 
 class ActivityWelcome : AppCompatActivity(), ActivityInterface {

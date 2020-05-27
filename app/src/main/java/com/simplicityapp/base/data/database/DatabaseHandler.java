@@ -24,7 +24,7 @@ import com.simplicityapp.modules.places.model.Category;
 import com.simplicityapp.modules.places.model.Images;
 import com.simplicityapp.modules.places.model.Place;
 
-import static com.simplicityapp.base.data.Constant.LOG_TAG;
+import static com.simplicityapp.base.config.Constant.LOG_TAG;
 import static com.simplicityapp.base.data.database.DatabaseConstants.*;
 
 public class DatabaseHandler extends SQLiteOpenHelper {

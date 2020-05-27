@@ -37,8 +37,8 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.snackbar.Snackbar;
 
-import com.simplicityapp.base.data.AppConfig;
-import com.simplicityapp.base.data.SharedPref;
+import com.simplicityapp.base.config.AppConfig;
+import com.simplicityapp.base.config.SharedPref;
 import com.simplicityapp.base.utils.ActionTools;
 import com.simplicityapp.base.utils.PermissionUtil;
 import com.simplicityapp.R;

@@ -1,7 +1,7 @@
-package com.simplicityapp.base.analytics
+package com.simplicityapp.base.config.analytics
 
 import com.google.firebase.analytics.FirebaseAnalytics
-import com.simplicityapp.base.data.ThisApplication
+import com.simplicityapp.base.config.ThisApplication
 
 class AnalyticsConstants {
 

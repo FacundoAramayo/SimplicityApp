@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.simplicityapp.R;
-import com.simplicityapp.base.data.Constant;
+import com.simplicityapp.base.config.Constant;
 import com.simplicityapp.base.utils.UITools;
 import com.simplicityapp.modules.places.model.Images;
 

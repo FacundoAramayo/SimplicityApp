@@ -24,21 +24,21 @@ import com.google.android.material.snackbar.Snackbar
 import com.simplicityapp.base.adapter.AdapterImageList
 import com.simplicityapp.base.connection.RestAdapter
 import com.simplicityapp.base.connection.callbacks.CallbackPlaceDetails
-import com.simplicityapp.base.data.Constant
+import com.simplicityapp.base.config.Constant
 import com.simplicityapp.base.data.database.DatabaseHandler
-import com.simplicityapp.base.data.SharedPref
-import com.simplicityapp.base.analytics.AnalyticsConstants
-import com.simplicityapp.base.analytics.AnalyticsConstants.Companion.CONTENT_PLACE
-import com.simplicityapp.base.analytics.AnalyticsConstants.Companion.SELECT_PLACE_ADDRESS
-import com.simplicityapp.base.analytics.AnalyticsConstants.Companion.SELECT_PLACE_FAVORITES_ADD
-import com.simplicityapp.base.analytics.AnalyticsConstants.Companion.SELECT_PLACE_FAVORITES_REMOVE
-import com.simplicityapp.base.analytics.AnalyticsConstants.Companion.SELECT_PLACE_OPEN_NAVIGATION
-import com.simplicityapp.base.analytics.AnalyticsConstants.Companion.SELECT_PLACE_PHONE
-import com.simplicityapp.base.analytics.AnalyticsConstants.Companion.SELECT_PLACE_WEB_SITE
-import com.simplicityapp.base.analytics.AnalyticsConstants.Companion.VIEW_PLACE
-import com.simplicityapp.base.analytics.AnalyticsConstants.Companion.logAnalyticsEvent
-import com.simplicityapp.base.analytics.AnalyticsConstants.Companion.logAnalyticsShare
-import com.simplicityapp.base.data.Constant.WEB_VIEW_HTML_CONFIG
+import com.simplicityapp.base.config.SharedPref
+import com.simplicityapp.base.config.analytics.AnalyticsConstants
+import com.simplicityapp.base.config.analytics.AnalyticsConstants.Companion.CONTENT_PLACE
+import com.simplicityapp.base.config.analytics.AnalyticsConstants.Companion.SELECT_PLACE_ADDRESS
+import com.simplicityapp.base.config.analytics.AnalyticsConstants.Companion.SELECT_PLACE_FAVORITES_ADD
+import com.simplicityapp.base.config.analytics.AnalyticsConstants.Companion.SELECT_PLACE_FAVORITES_REMOVE
+import com.simplicityapp.base.config.analytics.AnalyticsConstants.Companion.SELECT_PLACE_OPEN_NAVIGATION
+import com.simplicityapp.base.config.analytics.AnalyticsConstants.Companion.SELECT_PLACE_PHONE
+import com.simplicityapp.base.config.analytics.AnalyticsConstants.Companion.SELECT_PLACE_WEB_SITE
+import com.simplicityapp.base.config.analytics.AnalyticsConstants.Companion.VIEW_PLACE
+import com.simplicityapp.base.config.analytics.AnalyticsConstants.Companion.logAnalyticsEvent
+import com.simplicityapp.base.config.analytics.AnalyticsConstants.Companion.logAnalyticsShare
+import com.simplicityapp.base.config.Constant.WEB_VIEW_HTML_CONFIG
 import com.simplicityapp.base.utils.ActionTools
 import com.simplicityapp.base.utils.Tools
 import com.simplicityapp.base.utils.UITools
@@ -246,7 +246,10 @@ class ActivityPlaceDetail : AppCompatActivity() {
                     palette.vibrantSwatch?.let {
                         setToolbarColor(
                             this,
-                            palette.getVibrantColor(SharedPref(context).themeColorInt),
+                            palette.getVibrantColor(
+                                SharedPref(
+                                    context
+                                ).themeColorInt),
                             palette.getVibrantColor(resources.getColor(R.color.colorPrimaryDark))
                         )
                         return@apply
@@ -255,7 +258,10 @@ class ActivityPlaceDetail : AppCompatActivity() {
                     palette.darkVibrantSwatch?.let {
                         setToolbarColor(
                             this,
-                            palette.getDarkVibrantColor(SharedPref(context).themeColorInt),
+                            palette.getDarkVibrantColor(
+                                SharedPref(
+                                    context
+                                ).themeColorInt),
                             palette.getDarkVibrantColor(resources.getColor(R.color.colorPrimaryDark))
                         )
                         return@apply
@@ -264,7 +270,10 @@ class ActivityPlaceDetail : AppCompatActivity() {
                     palette.lightVibrantSwatch?.let {
                         setToolbarColor(
                             this,
-                            palette.getLightVibrantColor(SharedPref(context).themeColorInt),
+                            palette.getLightVibrantColor(
+                                SharedPref(
+                                    context
+                                ).themeColorInt),
                             palette.getLightVibrantColor(resources.getColor(R.color.colorPrimaryDark))
                         )
                     }

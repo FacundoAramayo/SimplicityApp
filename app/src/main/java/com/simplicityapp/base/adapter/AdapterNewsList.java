@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.simplicityapp.R;
-import com.simplicityapp.base.data.Constant;
+import com.simplicityapp.base.config.Constant;
 import com.simplicityapp.base.utils.UITools;
 import com.simplicityapp.modules.notifications.model.ContentInfo;
 

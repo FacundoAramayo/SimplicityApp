@@ -1,4 +1,4 @@
-package com.simplicityapp.base.data;
+package com.simplicityapp.base.config;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -10,7 +10,7 @@ import android.util.Log;
 import com.simplicityapp.BuildConfig;
 import com.simplicityapp.R;
 
-import static com.simplicityapp.base.data.Constant.LOG_TAG;
+import static com.simplicityapp.base.config.Constant.LOG_TAG;
 
 public class SharedPref {
 

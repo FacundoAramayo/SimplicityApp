@@ -1,4 +1,4 @@
-package com.simplicityapp.modules.main.ui.fragment
+package com.simplicityapp.modules.categories.view
 
 import android.os.Bundle
 import android.os.Handler
@@ -10,6 +10,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -24,20 +25,20 @@ import com.simplicityapp.R
 import com.simplicityapp.base.adapter.AdapterPlaceGrid
 import com.simplicityapp.base.connection.RestAdapter
 import com.simplicityapp.base.connection.callbacks.CallbackListPlace
-import com.simplicityapp.base.data.AppConfig
-import com.simplicityapp.base.data.Constant
+import com.simplicityapp.base.config.AppConfig
+import com.simplicityapp.base.config.Constant
 import com.simplicityapp.base.data.database.DatabaseHandler
-import com.simplicityapp.base.data.SharedPref
-import com.simplicityapp.base.data.ThisApplication
+import com.simplicityapp.base.config.SharedPref
+import com.simplicityapp.base.config.ThisApplication
 import com.simplicityapp.base.utils.Tools
 import com.simplicityapp.base.utils.UITools
 import com.simplicityapp.base.widget.SpacingItemDecoration
-import com.simplicityapp.base.analytics.AnalyticsConstants
-import com.simplicityapp.base.data.Constant.LOG_TAG
+import com.simplicityapp.base.config.analytics.AnalyticsConstants
+import com.simplicityapp.base.config.Constant.LOG_TAG
 import retrofit2.Call
 import retrofit2.Response
 
-class FragmentCategory : Fragment() {
+class CategoryFragment : Fragment() {
 
     private var count_total: Int = 0
     private var category_id: Int = 0
@@ -85,7 +86,7 @@ class FragmentCategory : Fragment() {
         recyclerView?.adapter = adapter
 
         // on item list clicked
-        adapter?.setOnItemClickListener { v, obj -> ActivityPlaceDetail.navigate((activity as? ActivityMain?), v.findViewById(R.id.lyt_content), obj, AnalyticsConstants.SELECT_CATEGORY_PLACE) }
+        adapter?.setOnItemClickListener { v, obj -> ActivityPlaceDetail.navigate((activity as? AppCompatActivity), v.findViewById(R.id.lyt_content), obj, AnalyticsConstants.SELECT_CATEGORY_PLACE) }
 
         recyclerView?.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(v: RecyclerView, state: Int) {

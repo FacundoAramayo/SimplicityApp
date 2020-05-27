@@ -12,7 +12,7 @@ import android.view.View;
 
 import androidx.appcompat.widget.AppCompatImageView;
 
-import static com.simplicityapp.base.data.Constant.LOG_TAG;
+import static com.simplicityapp.base.config.Constant.LOG_TAG;
 
 public class TouchImageView extends AppCompatImageView {
 

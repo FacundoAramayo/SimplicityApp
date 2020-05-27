@@ -31,7 +31,7 @@ import com.simplicityapp.base.utils.Tools
 import com.simplicityapp.base.utils.UITools
 import com.simplicityapp.base.widget.SpacingItemDecoration
 import com.simplicityapp.R
-import com.simplicityapp.base.analytics.AnalyticsConstants
+import com.simplicityapp.base.config.analytics.AnalyticsConstants
 import com.simplicityapp.base.ui.ActivityInterface
 
 class ActivitySearch : AppCompatActivity(), ActivityInterface {

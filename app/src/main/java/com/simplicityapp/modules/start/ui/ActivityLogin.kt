@@ -26,14 +26,14 @@ import com.google.firebase.auth.GoogleAuthProvider
 
 import com.simplicityapp.R
 import com.simplicityapp.modules.main.ui.ActivityMain
-import com.simplicityapp.base.data.SharedPref
+import com.simplicityapp.base.config.SharedPref
 import com.simplicityapp.base.utils.PermissionUtil
 
 import androidx.core.content.PermissionChecker.PERMISSION_GRANTED
 import com.simplicityapp.BuildConfig
-import com.simplicityapp.base.analytics.AnalyticsConstants
-import com.simplicityapp.base.data.Constant
-import com.simplicityapp.base.data.Constant.LOG_TAG
+import com.simplicityapp.base.config.analytics.AnalyticsConstants
+import com.simplicityapp.base.config.Constant
+import com.simplicityapp.base.config.Constant.LOG_TAG
 import com.simplicityapp.base.ui.ActivityInterface
 import com.simplicityapp.base.utils.Tools
 

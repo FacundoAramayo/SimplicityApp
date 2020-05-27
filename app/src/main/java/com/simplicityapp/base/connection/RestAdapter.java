@@ -5,7 +5,7 @@ import com.google.gson.GsonBuilder;
 import java.util.concurrent.TimeUnit;
 
 import com.simplicityapp.BuildConfig;
-import com.simplicityapp.base.data.AppConfig;
+import com.simplicityapp.base.config.AppConfig;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import okhttp3.logging.HttpLoggingInterceptor.Level;
@@ -14,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RestAdapter {
 
-    public static API createAPI() {
+    public static JsonAPI createAPI() {
 
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.setLevel(BuildConfig.DEBUG ? Level.BODY : Level.NONE);
@@ -33,14 +33,14 @@ public class RestAdapter {
                 .client(okHttpClient)
                 .build();
 
-        return retrofit.create(API.class);
+        return retrofit.create(JsonAPI.class);
     }
 
     /**
      * createShortAPI use only for GCM registration
      * use 2 second only to connect and register
      */
-    public static API createShortAPI() {
+    public static JsonAPI createShortAPI() {
 
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.setLevel(BuildConfig.DEBUG ? Level.BODY : Level.NONE);
@@ -59,6 +59,6 @@ public class RestAdapter {
                 .client(okHttpClient)
                 .build();
 
-        return retrofit.create(API.class);
+        return retrofit.create(JsonAPI.class);
     }
 }

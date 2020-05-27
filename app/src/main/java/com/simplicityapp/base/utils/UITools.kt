@@ -8,17 +8,15 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.util.DisplayMetrics
-import android.util.Log
 import android.util.TypedValue
 import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.app.ActionBar
 import com.simplicityapp.R
-import com.simplicityapp.base.data.SharedPref
+import com.simplicityapp.base.config.SharedPref
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
-import kotlin.math.ceil
 
 
 class UITools {
@@ -26,7 +24,10 @@ class UITools {
     companion object {
 
         fun setActionBarColor(ctx: Context, actionbar: ActionBar) {
-            val colordrw = ColorDrawable(SharedPref(ctx).themeColorInt)
+            val colordrw = ColorDrawable(
+                SharedPref(
+                    ctx
+                ).themeColorInt)
             actionbar.setBackgroundDrawable(colordrw)
         }
 

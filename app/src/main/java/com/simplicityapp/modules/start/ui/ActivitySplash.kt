@@ -7,15 +7,14 @@ import android.os.Bundle
 import android.widget.RelativeLayout
 
 import androidx.appcompat.app.AppCompatActivity
-import com.google.firebase.analytics.FirebaseAnalytics
 
 import com.simplicityapp.BuildConfig
 import com.simplicityapp.R
-import com.simplicityapp.base.analytics.AnalyticsConstants
-import com.simplicityapp.base.analytics.AnalyticsConstants.Companion.APP_OPEN
-import com.simplicityapp.base.data.AppConfig
-import com.simplicityapp.base.data.Constant
-import com.simplicityapp.base.data.SharedPref
+import com.simplicityapp.base.config.analytics.AnalyticsConstants
+import com.simplicityapp.base.config.analytics.AnalyticsConstants.Companion.APP_OPEN
+import com.simplicityapp.base.config.AppConfig
+import com.simplicityapp.base.config.Constant
+import com.simplicityapp.base.config.SharedPref
 import com.simplicityapp.base.utils.ActionTools
 import com.simplicityapp.modules.main.ui.ActivityMain
 

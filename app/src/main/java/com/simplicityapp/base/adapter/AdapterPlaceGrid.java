@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.simplicityapp.R;
-import com.simplicityapp.base.data.Constant;
+import com.simplicityapp.base.config.Constant;
 import com.simplicityapp.base.utils.Tools;
 import com.simplicityapp.base.utils.UITools;
 import com.simplicityapp.modules.places.model.Place;
@@ -33,7 +33,6 @@ public class AdapterPlaceGrid extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     private int orientation = 0;
     private int width = 0;
-    private final double viewWidthFactor = 0.85;
     private Context ctx;
     private List<Place> items = new ArrayList<>();
 
@@ -93,6 +92,7 @@ public class AdapterPlaceGrid extends RecyclerView.Adapter<RecyclerView.ViewHold
         if (viewType == VIEW_ITEM) {
             View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_place, parent, false);
             if (orientation == StaggeredGridLayoutManager.HORIZONTAL) {
+                double viewWidthFactor = 0.85;
                 int viewWidth = (int) (width * viewWidthFactor);
                 v.setLayoutParams(new StaggeredGridLayoutManager.LayoutParams(viewWidth, StaggeredGridLayoutManager.LayoutParams.MATCH_PARENT));
             }

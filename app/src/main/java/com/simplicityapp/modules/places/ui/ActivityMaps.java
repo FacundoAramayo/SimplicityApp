@@ -33,8 +33,8 @@ import com.google.maps.android.clustering.view.DefaultClusterRenderer;
 import java.util.HashMap;
 import java.util.List;
 
-import com.simplicityapp.base.analytics.AnalyticsConstants;
-import com.simplicityapp.base.data.Constant;
+import com.simplicityapp.base.config.analytics.AnalyticsConstants;
+import com.simplicityapp.base.config.Constant;
 import com.simplicityapp.base.data.database.DatabaseHandler;
 import com.simplicityapp.base.utils.Tools;
 import com.simplicityapp.base.utils.UITools;

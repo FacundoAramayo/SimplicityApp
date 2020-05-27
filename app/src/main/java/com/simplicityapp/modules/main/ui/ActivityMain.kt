@@ -3,7 +3,6 @@ package com.simplicityapp.modules.main.ui
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -22,19 +21,20 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationView
 
 import com.simplicityapp.BuildConfig
-import com.simplicityapp.base.data.Constant
+import com.simplicityapp.base.config.Constant
 import com.simplicityapp.modules.places.ui.ActivityMaps
 import com.simplicityapp.modules.notifications.ui.ActivityNotifications
 import com.simplicityapp.modules.settings.ui.ActivitySetting
-import com.simplicityapp.base.data.AppConfig
+import com.simplicityapp.base.config.AppConfig
 import com.simplicityapp.base.data.database.DatabaseHandler
-import com.simplicityapp.base.data.SharedPref
-import com.simplicityapp.modules.main.ui.fragment.FragmentCategory
+import com.simplicityapp.base.config.SharedPref
+import com.simplicityapp.modules.categories.view.CategoryFragment
 import com.simplicityapp.modules.main.ui.fragment.FragmentHome
 import com.simplicityapp.R
-import com.simplicityapp.base.analytics.AnalyticsConstants
-import com.simplicityapp.base.data.Constant.*
+import com.simplicityapp.base.config.analytics.AnalyticsConstants
+import com.simplicityapp.base.config.Constant.*
 import com.simplicityapp.base.utils.ActionTools
+import com.simplicityapp.modules.categories.view.CategoriesSelectorActivity
 import com.simplicityapp.modules.places.ui.ActivitySearch
 
 class ActivityMain : AppCompatActivity() {
@@ -177,6 +177,11 @@ class ActivityMain : AppCompatActivity() {
         fab?.collapse()
     }
 
+    fun categorySelectorIntent() {
+        val intent = Intent(this, CategoriesSelectorActivity::class.java)
+        startActivity(intent)
+    }
+
 
 
     private fun getMenuItemId(categoryId: Int): Int? {
@@ -248,9 +253,9 @@ class ActivityMain : AppCompatActivity() {
     }
 
     private fun openFragmentCategory(title: String, categoryId: Int) {
-        fragment = FragmentCategory()
+        fragment = CategoryFragment()
         home = false
-        bundle.putInt(FragmentCategory.TAG_CATEGORY, cat!![categoryId])
+        bundle.putInt(CategoryFragment.TAG_CATEGORY, cat!![categoryId])
         actionBar?.title = title
     }
 
@@ -266,9 +271,10 @@ class ActivityMain : AppCompatActivity() {
                 }
             }
             R.id.nav_all -> {
-                fragment = FragmentCategory()
+                fragment =
+                    CategoryFragment()
                 home = false
-                bundle.putInt(FragmentCategory.TAG_CATEGORY, -1)
+                bundle.putInt(CategoryFragment.TAG_CATEGORY, -1)
                 actionBar?.title = title
                 AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_ACTION, AnalyticsConstants.ALL_PLACES)
             }
@@ -285,9 +291,10 @@ class ActivityMain : AppCompatActivity() {
                 startActivity(i)
             }
             R.id.nav_favorites -> {
-                fragment = FragmentCategory()
+                fragment =
+                    CategoryFragment()
                 home = false
-                bundle.putInt(FragmentCategory.TAG_CATEGORY, -2)
+                bundle.putInt(CategoryFragment.TAG_CATEGORY, -2)
                 actionBar?.title = title
                 if (logAnalytics) {
                     AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_ACTION, AnalyticsConstants.FAVORITES)

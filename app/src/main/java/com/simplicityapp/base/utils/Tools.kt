@@ -11,9 +11,9 @@ import android.provider.Settings
 import android.view.LayoutInflater
 import android.widget.ImageView
 import com.simplicityapp.R
-import com.simplicityapp.base.data.AppConfig
-import com.simplicityapp.base.data.SharedPref
-import com.simplicityapp.base.data.ThisApplication
+import com.simplicityapp.base.config.AppConfig
+import com.simplicityapp.base.config.SharedPref
+import com.simplicityapp.base.config.ThisApplication
 import com.simplicityapp.modules.places.model.Place
 import com.simplicityapp.modules.settings.model.DeviceInfo
 import com.google.android.gms.maps.CameraUpdateFactory

@@ -42,12 +42,18 @@
     <dimen name="item_place_width">180dp</dimen>
     <dimen name="item_place_tag_height">45dp</dimen>
 
+    <dimen name="item_category_height">180dp</dimen>
+    <dimen name="item_category_width">180dp</dimen>
+
     <!--for drawer menu-->
     <dimen name="drawer_menu_width">250dp</dimen>
 
     <dimen name="splash_icon_size">250dp</dimen>
     <dimen name="text_desc_width">270dp</dimen>
     <dimen name="text_title_width">310dp</dimen>
+
+    <!--for categories selector-->
+    <dimen name="categories_banner_height">100dp</dimen>
 
     <!--for detail activity-->
     <dimen name="image_toolbar_height">270dp</dimen>

@@ -19,16 +19,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.simplicityapp.R;
-import com.simplicityapp.base.analytics.AnalyticsConstants;
+import com.simplicityapp.base.config.analytics.AnalyticsConstants;
 import com.simplicityapp.base.utils.ActionTools;
 import com.simplicityapp.base.utils.Tools;
 import com.simplicityapp.base.utils.UITools;
 import com.simplicityapp.modules.settings.ui.ActivitySetting;
 import com.simplicityapp.base.adapter.AdapterContentInfo;
-import com.simplicityapp.base.connection.API;
+import com.simplicityapp.base.connection.JsonAPI;
 import com.simplicityapp.base.connection.RestAdapter;
 import com.simplicityapp.base.connection.callbacks.CallbackListContentInfo;
-import com.simplicityapp.base.data.Constant;
+import com.simplicityapp.base.config.Constant;
 import com.simplicityapp.base.data.database.DatabaseHandler;
 import com.simplicityapp.modules.notifications.model.ContentInfo;
 import com.simplicityapp.base.widget.SpacingItemDecoration;
@@ -121,7 +121,7 @@ public class ActivityNotifications extends AppCompatActivity {
 
     private void requestListContentInfo(final int page_no) {
         if (MODE.equals("ONLINE")) {
-            API api = RestAdapter.createAPI();
+            JsonAPI api = RestAdapter.createAPI();
             callbackCall = api.getContentInfoByPage(page_no, Constant.LIMIT_NEWS_REQUEST);
             callbackCall.enqueue(new Callback<CallbackListContentInfo>() {
                 @Override

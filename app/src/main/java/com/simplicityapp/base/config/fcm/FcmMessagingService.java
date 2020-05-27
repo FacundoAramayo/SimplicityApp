@@ -1,4 +1,4 @@
-package com.simplicityapp.base.fcm;
+package com.simplicityapp.base.config.fcm;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -32,19 +32,18 @@ import java.util.Map;
 import com.simplicityapp.base.utils.UITools;
 import com.simplicityapp.modules.main.ui.ActivityMain;
 import com.simplicityapp.modules.notifications.ui.ActivityNotificationDetails;
-import com.simplicityapp.modules.notifications.ui.ActivityNotifications;
 import com.simplicityapp.modules.places.ui.ActivityPlaceDetail;
 import com.simplicityapp.R;
-import com.simplicityapp.base.data.AppConfig;
-import com.simplicityapp.base.data.Constant;
+import com.simplicityapp.base.config.AppConfig;
+import com.simplicityapp.base.config.Constant;
 import com.simplicityapp.base.data.database.DatabaseHandler;
-import com.simplicityapp.base.data.SharedPref;
+import com.simplicityapp.base.config.SharedPref;
 import com.simplicityapp.modules.notifications.model.FcmNotification;
 import com.simplicityapp.modules.notifications.model.ContentInfo;
 import com.simplicityapp.modules.places.model.Place;
 import com.simplicityapp.base.utils.PermissionUtil;
 
-import static com.simplicityapp.base.data.Constant.LOG_TAG;
+import static com.simplicityapp.base.config.Constant.LOG_TAG;
 
 public class FcmMessagingService extends FirebaseMessagingService {
 

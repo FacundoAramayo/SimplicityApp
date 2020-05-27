@@ -1,4 +1,4 @@
-package com.simplicityapp.base.data;
+package com.simplicityapp.base.config;
 
 import com.simplicityapp.BuildConfig;
 
