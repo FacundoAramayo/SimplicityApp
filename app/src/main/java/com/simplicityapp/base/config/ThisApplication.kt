@@ -14,9 +14,10 @@ import com.google.firebase.iid.FirebaseInstanceId
 import com.simplicityapp.base.config.analytics.AnalyticsConstants.Companion.SHARE
 import com.simplicityapp.base.config.analytics.AnalyticsConstants.Companion.SIGN_UP
 
-import com.simplicityapp.base.connection.RestAdapter
+import com.simplicityapp.base.rest.RestAdapter
 import com.simplicityapp.base.connection.callbacks.CallbackDevice
 import com.simplicityapp.base.config.Constant.LOG_TAG
+import com.simplicityapp.base.persistence.preferences.SharedPref
 import com.simplicityapp.base.utils.Tools
 import retrofit2.Call
 import retrofit2.Response
@@ -37,7 +38,8 @@ class ThisApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         instance = this
-        sharedPref = SharedPref(this)
+        sharedPref =
+            SharedPref(this)
 
         // initialize firebase
         val firebaseApp = FirebaseApp.initializeApp(this)

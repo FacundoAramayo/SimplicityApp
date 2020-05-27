@@ -12,7 +12,7 @@ import android.view.LayoutInflater
 import android.widget.ImageView
 import com.simplicityapp.R
 import com.simplicityapp.base.config.AppConfig
-import com.simplicityapp.base.config.SharedPref
+import com.simplicityapp.base.persistence.preferences.SharedPref
 import com.simplicityapp.base.config.ThisApplication
 import com.simplicityapp.modules.places.model.Place
 import com.simplicityapp.modules.settings.model.DeviceInfo
@@ -22,6 +22,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.simplicityapp.baseui.utils.UITools
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -68,7 +69,9 @@ class Tools {
             deviceInfo.device = getDeviceName()
             deviceInfo.email = phoneID
             deviceInfo.version = getAndroidVersion()
-            deviceInfo.regid = SharedPref(context).fcmRegId
+            deviceInfo.regid = SharedPref(
+                context
+            ).fcmRegId
             deviceInfo.date_create = System.currentTimeMillis()
 
             return deviceInfo

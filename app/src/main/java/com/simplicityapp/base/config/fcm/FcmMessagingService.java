@@ -29,15 +29,15 @@ import com.google.gson.Gson;
 
 import java.util.Map;
 
-import com.simplicityapp.base.utils.UITools;
-import com.simplicityapp.modules.main.ui.ActivityMain;
-import com.simplicityapp.modules.notifications.ui.ActivityNotificationDetails;
-import com.simplicityapp.modules.places.ui.ActivityPlaceDetail;
+import com.simplicityapp.baseui.utils.UITools;
+import com.simplicityapp.modules.main.activity.ActivityMain;
+import com.simplicityapp.modules.notifications.activity.ActivityNotificationDetails;
+import com.simplicityapp.modules.places.activity.ActivityPlaceDetail;
 import com.simplicityapp.R;
 import com.simplicityapp.base.config.AppConfig;
 import com.simplicityapp.base.config.Constant;
-import com.simplicityapp.base.data.database.DatabaseHandler;
-import com.simplicityapp.base.config.SharedPref;
+import com.simplicityapp.base.persistence.db.DatabaseHandler;
+import com.simplicityapp.base.persistence.preferences.SharedPref;
 import com.simplicityapp.modules.notifications.model.FcmNotification;
 import com.simplicityapp.modules.notifications.model.ContentInfo;
 import com.simplicityapp.modules.places.model.Place;

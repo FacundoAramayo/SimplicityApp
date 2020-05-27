@@ -4,6 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.simplicityapp.modules.categories.view.CategoryActivity">
+    tools:context="com.simplicityapp.modules.categories.fragment.CategoryActivity">
 
 </androidx.constraintlayout.widget.ConstraintLayout>

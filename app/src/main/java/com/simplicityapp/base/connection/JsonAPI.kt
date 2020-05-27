@@ -6,6 +6,10 @@ import retrofit2.Call
 import retrofit2.http.*
 
 interface JsonAPI {
+
+    //TODO: Todas las peticiones deben ir a su respectivo módulo, en services, y ser suspend fun con corutinas
+
+
     /* Place API transaction ------------------------------- */
 
     @Headers(CACHE, AGENT)
@@ -37,9 +41,7 @@ interface JsonAPI {
     ): Call<CallbackDevice>?
 
 
-    @Headers(CACHE, AGENT)
-    @GET("/res/categories.json")
-    suspend fun getCategories() : CallbackCategories
+
 
     companion object {
         const val CACHE = "Cache-Control: max-age=0"
