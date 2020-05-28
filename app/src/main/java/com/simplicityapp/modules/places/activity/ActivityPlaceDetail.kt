@@ -116,7 +116,7 @@ class ActivityPlaceDetail : AppCompatActivity() {
                 placeLytDistance?.visibility = View.GONE
             } else {
                 placeLytDistance?.visibility = View.VISIBLE
-                placeDistance?.text = Tools.getFormatedDistance(distance)
+                placeDistance?.text = Tools.getFormattedDistance(distance)
             }
 
             setImageGallery(db!!.getListImageByPlaceId(place.place_id))

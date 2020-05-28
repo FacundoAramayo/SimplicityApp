@@ -35,16 +35,16 @@ import retrofit2.Response;
 public class ActivityNotifications extends AppCompatActivity {
 
     public ActionBar actionBar;
-    private View parent_view;
+    private View parentView;
     private RecyclerView recyclerView;
     private AdapterContentInfo mAdapter;
-    private View lyt_progress;
+    private View lytProgress;
     private Call<CallbackListContentInfo> callbackCall = null;
     private DatabaseHandler db;
 
     private int post_total = 0;
     private int failed_page = 0;
-    private Snackbar snackbar_retry = null;
+    private Snackbar snackbarRetry = null;
 
     // can be, ONLINE or OFFLINE
     private String MODE = "ONLINE";
@@ -54,7 +54,7 @@ public class ActivityNotifications extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         overridePendingTransition(R.anim.enter_slide_in, R.anim.enter_slide_out);
         setContentView(R.layout.activity_notifications);
-        parent_view = findViewById(android.R.id.content);
+        parentView = findViewById(android.R.id.content);
         db = new DatabaseHandler(this);
 
         initToolbar();
@@ -71,7 +71,7 @@ public class ActivityNotifications extends AppCompatActivity {
     }
 
     public void iniComponent() {
-        lyt_progress = findViewById(R.id.lyt_progress);
+        lytProgress = findViewById(R.id.lyt_progress);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(new SpacingItemDecoration(1, UITools.Companion.dpToPx(4), true));
@@ -197,20 +197,20 @@ public class ActivityNotifications extends AppCompatActivity {
     }
 
     private void showFailedView(boolean show, String message) {
-        if(snackbar_retry == null) {
-            snackbar_retry = Snackbar.make(parent_view, "", Snackbar.LENGTH_INDEFINITE);
+        if(snackbarRetry == null) {
+            snackbarRetry = Snackbar.make(parentView, "", Snackbar.LENGTH_INDEFINITE);
         }
-        snackbar_retry.setText(message);
-        snackbar_retry.setAction(R.string.RETRY, new View.OnClickListener() {
+        snackbarRetry.setText(message);
+        snackbarRetry.setAction(R.string.RETRY, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 requestAction(failed_page);
             }
         });
         if (show) {
-            snackbar_retry.show();
+            snackbarRetry.show();
         } else {
-            snackbar_retry.dismiss();
+            snackbarRetry.dismiss();
         }
     }
 
@@ -227,9 +227,9 @@ public class ActivityNotifications extends AppCompatActivity {
 
     private void showProgress(final boolean show) {
         if (show) {
-            lyt_progress.setVisibility(View.VISIBLE);
+            lytProgress.setVisibility(View.VISIBLE);
         } else {
-            lyt_progress.setVisibility(View.GONE);
+            lytProgress.setVisibility(View.GONE);
         }
     }
 

@@ -36,27 +36,19 @@ import com.simplicityapp.R
 
 class ActivityMain : AppCompatActivity() {
 
+    private val bundle = Bundle()
     private var home = false
-
-
-    var actionBar: ActionBar? = null
-    var toolbar: Toolbar? = null
+    private var backToHome = false
+    private var firstRun: Boolean = false
+    private var exitTime: Long = 0
     private var cat: IntArray? = null
-    private var fab: com.getbase.floatingactionbutton.FloatingActionsMenu? = null
-    private var fab_button_map: com.getbase.floatingactionbutton.FloatingActionButton? = null
-    private var fab_button_search: com.getbase.floatingactionbutton.FloatingActionButton? = null
-    private var fab_button_favorites: com.getbase.floatingactionbutton.FloatingActionButton? = null
     private var navigationView: NavigationView? = null
     private var db: DatabaseHandler? = null
     private var sharedPref: SharedPref? = null
-
-    private var exitTime: Long = 0
-
     private var fragment: Fragment? = null
-    private val bundle = Bundle()
-    private var firstRun: Boolean = false
-    private var backToHome = false
-
+    private var drawerLayout: DrawerLayout? = null
+    var actionBar: ActionBar? = null
+    var toolbar: Toolbar? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -90,7 +82,6 @@ class ActivityMain : AppCompatActivity() {
         cat = resources.getIntArray(R.array.id_category)
         initToolbar()
         initDrawerMenu()
-        initFabButtons()
         onItemSelected(R.id.nav_home, getString(R.string.title_home), false)
     }
 
@@ -98,47 +89,23 @@ class ActivityMain : AppCompatActivity() {
         toolbar = findViewById<View>(R.id.toolbar) as Toolbar
         setSupportActionBar(toolbar)
         actionBar = supportActionBar
-        actionBar!!.setDisplayHomeAsUpEnabled(true)
-        actionBar!!.setHomeButtonEnabled(true)
-        //DeviceTools.setActionBarColor(this, actionBar!!)
-    }
-
-    private fun initFabButtons() {
-        fab = findViewById<View>(R.id.floating_action_button) as com.getbase.floatingactionbutton.FloatingActionsMenu
-        fab_button_map = findViewById(R.id.fb_button_map)
-        fab_button_search = findViewById(R.id.fb_button_search)
-        fab_button_favorites = findViewById(R.id.fb_button_favorites)
-
-        fab_button_map?.setOnClickListener {
-            mapIntent()
-            AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_HOME_ACTION, AnalyticsConstants.FAB_MAP)
-        }
-
-        fab_button_search?.setOnClickListener {
-            searchIntent()
-            AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_HOME_ACTION, AnalyticsConstants.FAB_SEARCH)
-        }
-
-        fab_button_favorites?.setOnClickListener {
-            favoritesIntent()
-            AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_HOME_ACTION, AnalyticsConstants.FAB_FAVORITES)
-        }
-
+        actionBar?.setDisplayHomeAsUpEnabled(true)
+        actionBar?.setHomeButtonEnabled(true)
     }
 
     private fun initDrawerMenu() {
-        val drawer = findViewById<View>(R.id.drawer_layout) as DrawerLayout
-        val toggle = object : ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
+        drawerLayout = findViewById(R.id.drawer_layout)
+        val toggle = object : ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
 
             override fun onDrawerOpened(drawerView: View) {
                 updateFavoritesCounter(navigationView!!, R.id.nav_favorites, db!!.favoritesSize)
                 super.onDrawerOpened(drawerView)
             }
         }
-        drawer.setDrawerListener(toggle)
+        drawerLayout?.setDrawerListener(toggle)
         toggle.syncState()
 
-        navigationView = findViewById<View>(R.id.nav_view) as NavigationView
+        navigationView = findViewById(R.id.nav_view)
         navigationView?.setNavigationItemSelectedListener { item -> onItemSelected(item.itemId, item.title.toString()) }
 
         /*CONFIG UI WITH AppConfig*/
@@ -161,26 +128,21 @@ class ActivityMain : AppCompatActivity() {
     fun searchIntent() {
         val intent = Intent(this, ActivitySearch::class.java)
         startActivity(intent)
-        fab?.collapse()
     }
 
     fun mapIntent() {
         val intent = Intent(this, ActivityMaps::class.java)
         startActivity(intent)
-        fab?.collapse()
     }
 
     fun favoritesIntent() {
         onItemSelected(R.id.nav_favorites, getString(R.string.title_nav_fav), false)
-        fab?.collapse()
     }
 
     fun categorySelectorIntent() {
         val intent = Intent(this, CategoriesSelectorActivity::class.java)
         startActivity(intent)
     }
-
-
 
     private fun getMenuItemId(categoryId: Int): Int? {
         return when (categoryId) {
@@ -217,11 +179,11 @@ class ActivityMain : AppCompatActivity() {
             onItemSelected(R.id.nav_home, resources.getString(R.string.title_home), false)
             return
         }
-        val drawer = findViewById<View>(R.id.drawer_layout) as DrawerLayout
-        if (!drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.openDrawer(GravityCompat.START)
+
+        if (drawerLayout?.isDrawerOpen(GravityCompat.START) == false) {
+            drawerLayout?.openDrawer(GravityCompat.START)
         } else {
-            doExitApp()
+            exitApp()
         }
     }
 
@@ -458,7 +420,7 @@ class ActivityMain : AppCompatActivity() {
     }
 
 
-    fun doExitApp() {
+    private fun exitApp() {
         if (System.currentTimeMillis() - exitTime > 2000) {
             Toast.makeText(this, R.string.press_again_exit_app, Toast.LENGTH_SHORT).show()
             exitTime = System.currentTimeMillis()
@@ -482,7 +444,6 @@ class ActivityMain : AppCompatActivity() {
         active = false
     }
 
-
     private fun updateFavoritesCounter(nav: NavigationView, @IdRes itemId: Int, count: Int) {
         val view = nav.menu.findItem(itemId).actionView.findViewById<View>(R.id.counter) as TextView
         view.text = count.toString()
@@ -504,12 +465,5 @@ class ActivityMain : AppCompatActivity() {
 
                 return instance
             }
-
-        //TODO: Analizar este caso de FAB, no es el getbase
-        fun animateFab(hide: Boolean) {
-            val f_ab = ActivityMainInstance.findViewById<View>(R.id.floating_action_button) as com.getbase.floatingactionbutton.FloatingActionsMenu
-            val moveY = if (hide) 2 * f_ab.height else 0
-            f_ab.animate().translationY(moveY.toFloat()).setStartDelay(100).setDuration(400).start()
-        }
     }
 }

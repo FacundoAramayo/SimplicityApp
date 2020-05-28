@@ -24,7 +24,7 @@ public class SharedPref {
     private static final String LAST_PLACE_PAGE = "LAST_PLACE_PAGE_KEY";
 
     // need refresh
-    public static final String REFRESH_PLACES = BuildConfig.APPLICATION_ID + ".data.REFRESH_PLACES";
+    private static final String REFRESH_PLACES = BuildConfig.APPLICATION_ID + ".data.REFRESH_PLACES";
 
     public SharedPref(Context context) {
         this.context = context;

@@ -46,6 +46,9 @@ public class AppConfig {
     // flag for enable or disable activate or deactivate notifications, in Setting
     public static final boolean NOTIFICATION_SELECTOR = false;
 
+    // vibrate duration in millisecond in FCM notification
+    public static int VIBRATION_TIME = 500;
+
 
     /**************************CONSTANTS****************************/
 

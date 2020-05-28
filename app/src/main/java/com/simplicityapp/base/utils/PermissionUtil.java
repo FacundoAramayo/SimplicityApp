@@ -13,17 +13,17 @@ public abstract class PermissionUtil {
     private static final String LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
 
     /* Permission required for application */
-    public static final String[] PERMISSION_ALL = {
+    private static final String[] PERMISSION_ALL = {
             STORAGE,
             LOCATION
     };
 
     public static String[] getDeniedPermission(Activity act) {
         List<String> permissions = new ArrayList<>();
-        for (int i = 0; i < PERMISSION_ALL.length; i++) {
-            int status = act.checkSelfPermission(PERMISSION_ALL[i]);
+        for (String permission : PERMISSION_ALL) {
+            int status = act.checkSelfPermission(permission);
             if (status != PackageManager.PERMISSION_GRANTED) {
-                permissions.add(PERMISSION_ALL[i]);
+                permissions.add(permission);
             }
         }
 

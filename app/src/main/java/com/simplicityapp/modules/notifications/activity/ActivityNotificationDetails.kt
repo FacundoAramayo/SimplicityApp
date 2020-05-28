@@ -32,15 +32,15 @@ import java.util.ArrayList
 
 class ActivityNotificationDetails : AppCompatActivity() {
 
-    private var from_notif: Boolean? = null
+    private var fromNotif: Boolean? = null
 
     // extra obj
     private var contentInfo: ContentInfo? = null
 
     private var toolbar: Toolbar? = null
     private var actionBar: ActionBar? = null
-    private var parent_view: View? = null
-    private var webview: WebView? = null
+    private var parentView: View? = null
+    private var webView: WebView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,7 +48,7 @@ class ActivityNotificationDetails : AppCompatActivity() {
         setContentView(R.layout.activity_notifications_details)
 
         contentInfo = intent.getSerializableExtra(EXTRA_OBJECT) as ContentInfo
-        from_notif = intent.getBooleanExtra(EXTRA_FROM_NOTIF, false)
+        fromNotif = intent.getBooleanExtra(EXTRA_FROM_NOTIF, false)
 
         initComponent()
         initToolbar()
@@ -59,7 +59,7 @@ class ActivityNotificationDetails : AppCompatActivity() {
     }
 
     private fun initComponent() {
-        parent_view = findViewById(android.R.id.content)
+        parentView = findViewById(android.R.id.content)
     }
 
     private fun initToolbar() {
@@ -73,18 +73,18 @@ class ActivityNotificationDetails : AppCompatActivity() {
 
     private fun displayData() {
 
-        webview = findViewById<View>(R.id.content) as WebView
+        webView = findViewById<View>(R.id.content) as WebView
         var html_data = "<style>img{max-width:100%;height:auto;} iframe{width:100%;}</style> "
         html_data += contentInfo!!.full_content
-        webview!!.settings.javaScriptEnabled = true
-        webview!!.settings
-        webview!!.settings.builtInZoomControls = true
-        webview!!.setBackgroundColor(Color.TRANSPARENT)
-        webview!!.webChromeClient = WebChromeClient()
-        webview!!.loadData(html_data, "text/html; charset=UTF-8", null)
+        webView!!.settings.javaScriptEnabled = true
+        webView!!.settings
+        webView!!.settings.builtInZoomControls = true
+        webView!!.setBackgroundColor(Color.TRANSPARENT)
+        webView!!.webChromeClient = WebChromeClient()
+        webView!!.loadData(html_data, "text/html; charset=UTF-8", null)
 
         // disable scroll on touch
-        webview!!.setOnTouchListener { v, event -> event.action == MotionEvent.ACTION_MOVE }
+        webView!!.setOnTouchListener { v, event -> event.action == MotionEvent.ACTION_MOVE }
 
         (findViewById<View>(R.id.date) as TextView).text =
             Tools.getFormattedDate(contentInfo!!.last_update)
@@ -108,11 +108,11 @@ class ActivityNotificationDetails : AppCompatActivity() {
 
     override fun onPause() {
         super.onPause()
-        if (webview != null) webview!!.onPause()
+        if (webView != null) webView!!.onPause()
     }
 
     override fun onResume() {
-        if (webview != null) webview!!.onResume()
+        if (webView != null) webView!!.onResume()
         super.onResume()
     }
 
@@ -145,7 +145,7 @@ class ActivityNotificationDetails : AppCompatActivity() {
     }
 
     private fun onBackAction() {
-        if (from_notif!!) {
+        if (fromNotif!!) {
             if (ActivityMain.active) {
                 finish()
             } else {

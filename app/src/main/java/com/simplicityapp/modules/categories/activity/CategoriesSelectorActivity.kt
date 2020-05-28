@@ -19,8 +19,7 @@ class CategoriesSelectorActivity : AppCompatActivity() {
         setContentView(R.layout.categories_selector_activity)
         if (savedInstanceState == null) {
             fragmentManager = supportFragmentManager
-            fragment =
-                CategoriesSelectorFragment.newInstance()
+            fragment = CategoriesSelectorFragment.newInstance()
             fragmentManager?.beginTransaction()?.replace(R.id.container, fragment)
                 ?.commitNow()
 
@@ -31,9 +30,7 @@ class CategoriesSelectorActivity : AppCompatActivity() {
     fun openCategory(categoryId: Int) {
         fragment = CategoryFragment()
         bundle.putInt(CategoryFragment.TAG_CATEGORY, categoryId)
-
         fragment.arguments = bundle
-
         fragmentManager?.beginTransaction()?.replace(R.id.container, fragment)?.commitNow()
     }
 
@@ -44,8 +41,7 @@ class CategoriesSelectorActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         if (fragment is CategoryFragment) {
-            fragment =
-                CategoriesSelectorFragment.newInstance()
+            fragment = CategoriesSelectorFragment.newInstance()
             fragmentManager?.beginTransaction()?.replace(R.id.container, fragment)
                 ?.commitNow()
         } else {

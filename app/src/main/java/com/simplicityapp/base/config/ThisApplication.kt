@@ -20,6 +20,8 @@ import com.simplicityapp.base.utils.Tools
 import retrofit2.Call
 import retrofit2.Response
 
+private const val FCM_MAX_COUNT = 10
+
 class ThisApplication : Application() {
 
     private var callback: Call<CallbackDevice>? = null
@@ -30,8 +32,7 @@ class ThisApplication : Application() {
 
     var location: Location? = null
     private var sharedPref: SharedPref? = null
-    private var fcm_count = 0
-    private val FCM_MAX_COUNT = 10
+    private var fcmCount = 0
 
     override fun onCreate() {
         super.onCreate()
@@ -52,7 +53,7 @@ class ThisApplication : Application() {
 
     private fun obtainFirebaseToken(firebaseApp: FirebaseApp?) {
         if (!Tools.checkConnection(this)) return
-        fcm_count++
+        fcmCount++
 
         val resultTask = FirebaseInstanceId.getInstance().instanceId
         resultTask.addOnSuccessListener { instanceIdResult ->
@@ -62,7 +63,7 @@ class ThisApplication : Application() {
 
         resultTask.addOnFailureListener(OnFailureListener { e ->
             Log.e(LOG_TAG, "Constant.LOG_TAG, Failed obtain fcmID : " + e.message)
-            if (fcm_count > FCM_MAX_COUNT) return@OnFailureListener
+            if (fcmCount > FCM_MAX_COUNT) return@OnFailureListener
             obtainFirebaseToken(firebaseApp)
         })
     }

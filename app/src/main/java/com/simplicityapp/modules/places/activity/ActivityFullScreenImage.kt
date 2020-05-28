@@ -14,14 +14,14 @@ class ActivityFullScreenImage : AppCompatActivity() {
 
     private var adapter: AdapterFullScreenImage? = null
     private var viewPager: ViewPager? = null
-    private var text_page: TextView? = null
+    private var textPage: TextView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_full_screen_image)
 
         viewPager = findViewById<View>(R.id.pager) as ViewPager
-        text_page = findViewById<View>(R.id.text_page) as TextView
+        textPage = findViewById<View>(R.id.text_page) as TextView
 
         var items = ArrayList<String>()
         val i = intent
@@ -31,7 +31,7 @@ class ActivityFullScreenImage : AppCompatActivity() {
         val total = adapter!!.count
         viewPager!!.adapter = adapter
 
-        text_page!!.text = String.format(getString(R.string.image_of), position + 1, total)
+        textPage!!.text = String.format(getString(R.string.image_of), position + 1, total)
 
         // displaying selected image first
         viewPager!!.currentItem = position
@@ -41,7 +41,7 @@ class ActivityFullScreenImage : AppCompatActivity() {
             }
 
             override fun onPageSelected(pos: Int) {
-                text_page!!.text = String.format(getString(R.string.image_of), pos + 1, total)
+                textPage!!.text = String.format(getString(R.string.image_of), pos + 1, total)
             }
 
             override fun onPageScrollStateChanged(state: Int) {

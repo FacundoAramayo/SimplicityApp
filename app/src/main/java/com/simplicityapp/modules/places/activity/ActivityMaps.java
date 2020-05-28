@@ -53,18 +53,18 @@ public class ActivityMaps extends AppCompatActivity implements OnMapReadyCallbac
     private PlaceMarkerRenderer placeMarkerRenderer;
 
     // for single place
-    private Place ext_place = null;
+    private Place extPlace = null;
     private boolean isSinglePlace;
     HashMap<String, Place> hashMapPlaces = new HashMap<>();
 
     // id category
-    private int cat_id = -1;
+    private int catId = -1;
 
-    private Category cur_category;
+    private Category currentCategory;
 
     // view for custom marker
-    private ImageView icon, marker_bg;
-    private View marker_view;
+    private ImageView icon, imageView;
+    private View markerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,12 +74,12 @@ public class ActivityMaps extends AppCompatActivity implements OnMapReadyCallbac
         parent_view = findViewById(android.R.id.content);
 
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        marker_view = inflater.inflate(R.layout.maps_marker, null);
-        icon = (ImageView) marker_view.findViewById(R.id.marker_icon);
-        marker_bg = (ImageView) marker_view.findViewById(R.id.marker_bg);
+        markerView = inflater.inflate(R.layout.maps_marker, null);
+        icon = (ImageView) markerView.findViewById(R.id.marker_icon);
+        imageView = (ImageView) markerView.findViewById(R.id.marker_bg);
 
-        ext_place = (Place) getIntent().getSerializableExtra(EXTRA_OBJ);
-        isSinglePlace = (ext_place != null);
+        extPlace = (Place) getIntent().getSerializableExtra(EXTRA_OBJ);
+        isSinglePlace = (extPlace != null);
 
         db = new DatabaseHandler(this);
         initMapFragment();
@@ -93,12 +93,12 @@ public class ActivityMaps extends AppCompatActivity implements OnMapReadyCallbac
         mMap = Tools.Companion.configActivityMaps(googleMap);
         CameraUpdate location;
         if (isSinglePlace) {
-            marker_bg.setColorFilter(getResources().getColor(R.color.colorMarker));
-            MarkerOptions markerOptions = new MarkerOptions().title(ext_place.getName()).position(ext_place.getPosition());
-            markerOptions.icon(BitmapDescriptorFactory.fromBitmap(UITools.Companion.createBitmapFromView(ActivityMaps.this, marker_view)));
+            imageView.setColorFilter(getResources().getColor(R.color.colorMarker));
+            MarkerOptions markerOptions = new MarkerOptions().title(extPlace.getName()).position(extPlace.getPosition());
+            markerOptions.icon(BitmapDescriptorFactory.fromBitmap(UITools.Companion.createBitmapFromView(ActivityMaps.this, markerView)));
             mMap.addMarker(markerOptions);
-            location = CameraUpdateFactory.newLatLngZoom(ext_place.getPosition(), 12);
-            actionBar.setTitle(ext_place.getName());
+            location = CameraUpdateFactory.newLatLngZoom(extPlace.getPosition(), 12);
+            actionBar.setTitle(extPlace.getName());
         } else {
             location = CameraUpdateFactory.newLatLngZoom(new LatLng(Constant.city_lat, Constant.city_lng), Constant.city_zoom);
             mClusterManager = new ClusterManager<>(this, mMap);
@@ -115,7 +115,7 @@ public class ActivityMaps extends AppCompatActivity implements OnMapReadyCallbac
                 if (hashMapPlaces.get(marker.getId()) != null) {
                     place = (Place) hashMapPlaces.get(marker.getId());
                 } else {
-                    place = ext_place;
+                    place = extPlace;
                 }
                 ActivityPlaceDetail.Companion.navigate(ActivityMaps.this, parent_view, place, AnalyticsConstants.SELECT_MAP_PLACE);
             }
@@ -178,15 +178,15 @@ public class ActivityMaps extends AppCompatActivity implements OnMapReadyCallbac
 
         @Override
         protected void onBeforeClusterItemRendered(Place item, MarkerOptions markerOptions) {
-            if (cat_id == -1) { // all place
+            if (catId == -1) { // all place
                 icon.setImageResource(R.drawable.round_shape);
             } else {
-                icon.setImageResource(cur_category.getIcon());
+                icon.setImageResource(currentCategory.getIcon());
             }
-            marker_bg.setColorFilter(getResources().getColor(R.color.colorPrimary));
+            imageView.setColorFilter(getResources().getColor(R.color.colorPrimary));
             markerOptions.title(item.getName());
-            markerOptions.icon(BitmapDescriptorFactory.fromBitmap(UITools.Companion.createBitmapFromView(ActivityMaps.this, marker_view)));
-            if (ext_place != null && ext_place.getPlace_id() == item.getPlace_id()) {
+            markerOptions.icon(BitmapDescriptorFactory.fromBitmap(UITools.Companion.createBitmapFromView(ActivityMaps.this, markerView)));
+            if (extPlace != null && extPlace.getPlace_id() == item.getPlace_id()) {
                 markerOptions.visible(false);
             }
         }
@@ -218,66 +218,66 @@ public class ActivityMaps extends AppCompatActivity implements OnMapReadyCallbac
                 category_text = item.getTitle().toString();
                 switch (item.getItemId()) {
                     case R.id.nav_all:
-                        cat_id = -1;
+                        catId = -1;
                         break;
                     case R.id.nav_featured:
-                        cat_id = cat[0];
+                        catId = cat[0];
                         break;
                     case R.id.nav_shopping:
-                        cat_id = cat[1];
+                        catId = cat[1];
                         break;
                     case R.id.nav_pharmacy:
-                        cat_id = cat[2];
+                        catId = cat[2];
                         break;
                     case R.id.nav_gym:
-                        cat_id = cat[3];
+                        catId = cat[3];
                         break;
                     case R.id.nav_food:
-                        cat_id = cat[4];
+                        catId = cat[4];
                         break;
                     case R.id.nav_bar:
-                        cat_id = cat[5];
+                        catId = cat[5];
                         break;
                     case R.id.nav_fast_food:
-                        cat_id = cat[6];
+                        catId = cat[6];
                         break;
                     case R.id.nav_delivery:
-                        cat_id = cat[7];
+                        catId = cat[7];
                         break;
                     case R.id.nav_ice_cream_store:
-                        cat_id = cat[8];
+                        catId = cat[8];
                         break;
                     case R.id.nav_hotels:
-                        cat_id = cat[9];
+                        catId = cat[9];
                         break;
                     case R.id.nav_temporary_rent:
-                        cat_id = cat[10];
+                        catId = cat[10];
                         break;
                     case R.id.nav_tour:
-                        cat_id = cat[11];
+                        catId = cat[11];
                         break;
                     case R.id.nav_money:
-                        cat_id = cat[12];
+                        catId = cat[12];
                         break;
                     case R.id.nav_bill_payments:
-                        cat_id = cat[13];
+                        catId = cat[13];
                         break;
                     case R.id.nav_apartment_rental:
-                        cat_id = cat[14];
+                        catId = cat[14];
                         break;
                     case R.id.nav_taxi:
-                        cat_id = cat[15];
+                        catId = cat[15];
                         break;
                     case R.id.nav_gas_station:
-                        cat_id = cat[16];
+                        catId = cat[16];
                         break;
                     case R.id.nav_transport:
-                        cat_id = cat[17];
+                        catId = cat[17];
                         break;
                 }
 
                 // get category object when menu click
-                cur_category = db.getCategory(cat_id);
+                currentCategory = db.getCategory(catId);
 
                 if (isSinglePlace) {
                     isSinglePlace = false;
@@ -285,7 +285,7 @@ public class ActivityMaps extends AppCompatActivity implements OnMapReadyCallbac
                     mMap.setOnCameraChangeListener(mClusterManager);
                 }
 
-                List<Place> places = db.getAllPlaceByCategory(cat_id);
+                List<Place> places = db.getAllPlaceByCategory(catId);
                 loadClusterManager(places);
                 if (places.size() == 0) {
                     Snackbar.make(parent_view, getString(R.string.no_item_at) + " " + item.getTitle().toString(), Snackbar.LENGTH_LONG).show();

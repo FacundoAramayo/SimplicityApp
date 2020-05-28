@@ -20,7 +20,6 @@ public class AdapterImageList extends RecyclerView.Adapter<AdapterImageList.View
     private List<Images> items = new ArrayList<>();
     private OnItemClickListener onItemClickListener;
 
-    private int lastPosition = -1;
     private Context ctx;
 
     public class ViewHolder extends RecyclerView.ViewHolder {

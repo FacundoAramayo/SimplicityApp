@@ -37,15 +37,15 @@ import retrofit2.Response
 
 class CategoryFragment : Fragment() {
 
-    private var count_total: Int = 0
-    private var category_id: Int = 0
+    private var countTotal: Int = 0
+    private var categoryId: Int = 0
 
-    private var root_view: View? = null
+    private var rootView: View? = null
     private var recyclerView: RecyclerView? = null
-    private var lyt_progress: View? = null
-    private var lyt_not_found: View? = null
-    private var text_progress: TextView? = null
-    private var snackbar_retry: Snackbar? = null
+    private var lytProgress: View? = null
+    private var lytNotFound: View? = null
+    private var textProgress: TextView? = null
+    private var snackbarRetry: Snackbar? = null
 
     private var db: DatabaseHandler? = null
     private var sharedPref: SharedPref? = null
@@ -56,25 +56,25 @@ class CategoryFragment : Fragment() {
     private var onProcess = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        root_view = inflater.inflate(R.layout.fragment_category, null)
+        rootView = inflater.inflate(R.layout.fragment_category, null)
         db = DatabaseHandler(context)
         sharedPref =
             SharedPref(context)
-        category_id = arguments!!.getInt(TAG_CATEGORY)
+        categoryId = arguments!!.getInt(TAG_CATEGORY)
 
         initUI()
 
-        return root_view
+        return rootView
     }
 
     private fun initUI() {
         // activate fragment menu
         setHasOptionsMenu(true)
 
-        recyclerView = root_view?.findViewById<View>(R.id.recycler) as RecyclerView
-        lyt_progress = root_view?.findViewById(R.id.lyt_progress)
-        lyt_not_found = root_view?.findViewById(R.id.lyt_not_found)
-        text_progress = root_view?.findViewById<View>(R.id.text_progress) as TextView
+        recyclerView = rootView?.findViewById<View>(R.id.recycler) as RecyclerView
+        lytProgress = rootView?.findViewById(R.id.lyt_progress)
+        lytNotFound = rootView?.findViewById(R.id.lyt_not_found)
+        textProgress = rootView?.findViewById<View>(R.id.text_progress) as TextView
 
         recyclerView?.layoutManager = StaggeredGridLayoutManager(UITools.getGridSpanCount(activity!!), StaggeredGridLayoutManager.VERTICAL)
         recyclerView?.addItemDecoration(
@@ -91,22 +91,11 @@ class CategoryFragment : Fragment() {
 
         // on item list clicked
         adapter?.setOnItemClickListener { v, obj -> ActivityPlaceDetail.navigate((activity as? AppCompatActivity), v.findViewById(R.id.lyt_content), obj, AnalyticsConstants.SELECT_CATEGORY_PLACE) }
-
-        recyclerView?.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(v: RecyclerView, state: Int) {
-                super.onScrollStateChanged(v, state)
-                if (state == RecyclerView.SCROLL_STATE_DRAGGING || state == RecyclerView.SCROLL_STATE_SETTLING) {
-                    ActivityMain.animateFab(true)
-                } else {
-                    ActivityMain.animateFab(false)
-                }
-            }
-        })
         startLoadMoreAdapter()
     }
 
     override fun onDestroyView() {
-        if (snackbar_retry != null) snackbar_retry?.dismiss()
+        if (snackbarRetry != null) snackbarRetry?.dismiss()
         if (callback != null && callback!!.isExecuted) {
             callback?.cancel()
         }
@@ -137,8 +126,8 @@ class CategoryFragment : Fragment() {
             ThisApplication.instance?.location = null
             sharedPref?.lastPlacePage = 1
             sharedPref?.isRefreshPlaces = true
-            text_progress?.text = ""
-            if (snackbar_retry != null) snackbar_retry?.dismiss()
+            textProgress?.text = ""
+            if (snackbarRetry != null) snackbarRetry?.dismiss()
             actionRefresh(sharedPref!!.lastPlacePage)
         }
         return super.onOptionsItemSelected(item)
@@ -146,10 +135,10 @@ class CategoryFragment : Fragment() {
 
     private fun startLoadMoreAdapter() {
         adapter?.resetListData()
-        val items = db?.getPlacesByPage(category_id, Constant.LIMIT_LOADMORE, 0)
+        val items = db?.getPlacesByPage(categoryId, Constant.LIMIT_LOADMORE, 0)
         adapter?.insertData(items, false)
         showNoItemView()
-        val item_count = db!!.getPlacesSize(category_id)
+        val item_count = db!!.getPlacesSize(categoryId)
         // detect when scroll reach bottom
         adapter?.setOnLoadMoreListener { current_page ->
             if (item_count > adapter!!.itemCount && current_page != 0) {
@@ -164,7 +153,7 @@ class CategoryFragment : Fragment() {
     private fun displayDataByPage(next_page: Int) {
         adapter?.setLoading()
         Handler().postDelayed({
-            val items = db?.getPlacesByPage(category_id, Constant.LIMIT_LOADMORE, next_page * Constant.LIMIT_LOADMORE)
+            val items = db?.getPlacesByPage(categoryId, Constant.LIMIT_LOADMORE, next_page * Constant.LIMIT_LOADMORE)
             adapter?.insertData(items, false)
             showNoItemView()
         }, 500)
@@ -177,7 +166,7 @@ class CategoryFragment : Fragment() {
             if (!onProcess) {
                 onRefresh(page_no)
             } else {
-                Snackbar.make(root_view!!, R.string.task_running, Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(rootView!!, R.string.task_running, Snackbar.LENGTH_SHORT).show()
             }
         } else {
             onFailureRetry(page_no, getString(R.string.no_internet))
@@ -193,13 +182,13 @@ class CategoryFragment : Fragment() {
             override fun onResponse(call: Call<CallbackListPlace>, response: Response<CallbackListPlace>) {
                 val resp = response.body()
                 if (resp != null) {
-                    count_total = resp.count_total
+                    countTotal = resp.count_total
                     if (page_no == 1) db!!.refreshTablePlace()
                     db!!.insertListPlace(resp.places)  // save result into database
                     sharedPref!!.lastPlacePage = page_no + 1
                     delayNextRequest(page_no)
-                    val str_progress = String.format(getString(R.string.load_of), page_no * Constant.LIMIT_PLACE_REQUEST, count_total)
-                    text_progress!!.text = str_progress
+                    val str_progress = String.format(getString(R.string.load_of), page_no * Constant.LIMIT_PLACE_REQUEST, countTotal)
+                    textProgress!!.text = str_progress
                 } else {
                     onFailureRetry(page_no, getString(R.string.refresh_failed))
                 }
@@ -221,20 +210,20 @@ class CategoryFragment : Fragment() {
 
     private fun showProgress(show: Boolean) {
         if (show) {
-            lyt_progress!!.visibility = View.VISIBLE
+            lytProgress!!.visibility = View.VISIBLE
             recyclerView!!.visibility = View.GONE
-            lyt_not_found!!.visibility = View.GONE
+            lytNotFound!!.visibility = View.GONE
         } else {
-            lyt_progress!!.visibility = View.GONE
+            lytProgress!!.visibility = View.GONE
             recyclerView!!.visibility = View.VISIBLE
         }
     }
 
     private fun showNoItemView() {
         if (adapter!!.itemCount == 0) {
-            lyt_not_found!!.visibility = View.VISIBLE
+            lytNotFound!!.visibility = View.VISIBLE
         } else {
-            lyt_not_found!!.visibility = View.GONE
+            lytNotFound!!.visibility = View.GONE
         }
     }
 
@@ -243,23 +232,23 @@ class CategoryFragment : Fragment() {
         showProgress(onProcess)
         showNoItemView()
         startLoadMoreAdapter()
-        snackbar_retry = Snackbar.make(root_view!!, msg, Snackbar.LENGTH_INDEFINITE)
-        snackbar_retry!!.setAction(R.string.RETRY) { actionRefresh(page_no) }
-        snackbar_retry!!.show()
+        snackbarRetry = Snackbar.make(rootView!!, msg, Snackbar.LENGTH_INDEFINITE)
+        snackbarRetry!!.setAction(R.string.RETRY) { actionRefresh(page_no) }
+        snackbarRetry!!.show()
     }
 
     private fun delayNextRequest(page_no: Int) {
-        if (count_total == 0) {
+        if (countTotal == 0) {
             onFailureRetry(page_no, getString(R.string.refresh_failed))
             return
         }
-        if (page_no * Constant.LIMIT_PLACE_REQUEST > count_total) { // when all data loaded
+        if (page_no * Constant.LIMIT_PLACE_REQUEST > countTotal) { // when all data loaded
             onProcess = false
             showProgress(onProcess)
             startLoadMoreAdapter()
             sharedPref!!.isRefreshPlaces = false
-            text_progress!!.text = ""
-            Snackbar.make(root_view!!, R.string.load_success, Snackbar.LENGTH_LONG).show()
+            textProgress!!.text = ""
+            Snackbar.make(rootView!!, R.string.load_success, Snackbar.LENGTH_LONG).show()
             return
         }
         Handler().postDelayed({ onRefresh(page_no + 1) }, 500)

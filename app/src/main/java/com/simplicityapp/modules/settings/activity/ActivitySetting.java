@@ -49,14 +49,14 @@ public class ActivitySetting extends PreferenceActivity {
     private AppCompatDelegate mDelegate;
     private ActionBar actionBar;
 
-    private View parent_view;
+    private View parentView;
     private SharedPref sharedPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.setting_notification);
-        parent_view = (View) findViewById(android.R.id.content);
+        parentView = (View) findViewById(android.R.id.content);
 
         sharedPref = new SharedPref(getApplicationContext());
 
@@ -94,7 +94,7 @@ public class ActivitySetting extends PreferenceActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         UITools.Companion.clearImageCacheOnBackground(ActivitySetting.this);
-                        Snackbar.make(parent_view, getString(R.string.message_after_clear_image_cache), Snackbar.LENGTH_SHORT).show();
+                        Snackbar.make(parentView, getString(R.string.message_after_clear_image_cache), Snackbar.LENGTH_SHORT).show();
                     }
                 });
                 builder.setNegativeButton(R.string.CANCEL, null);

@@ -39,13 +39,13 @@ import com.simplicityapp.modules.places.model.Place;
 import com.simplicityapp.R;
 import java.util.Map;
 
+import static com.simplicityapp.base.config.AppConfig.VIBRATION_TIME;
 import static com.simplicityapp.base.config.Constant.LOG_TAG;
 
 public class FcmMessagingService extends FirebaseMessagingService {
 
-    private static int VIBRATION_TIME = 500; // in millisecond
     private SharedPref sharedPref;
-    private int retry_count = 0;
+    private int retryCount = 0;
 
     @Override
     public void onNewToken(String s) {
@@ -172,8 +172,8 @@ public class FcmMessagingService extends FirebaseMessagingService {
             @Override
             public void onFailed(String string) {
                 Log.e(LOG_TAG, "FcmMessagingService, on Failed");
-                if (retry_count <= Constant.LOAD_IMAGE_NOTIF_RETRY) {
-                    retry_count++;
+                if (retryCount <= Constant.LOAD_IMAGE_NOTIF_RETRY) {
+                    retryCount++;
                     loadRetryImageFromUrl(ctx, fcmNotification, callback);
                 } else {
                     callback.onFailed("");

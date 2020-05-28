@@ -22,7 +22,7 @@ public class AdapterContentInfo extends RecyclerView.Adapter<RecyclerView.ViewHo
     private final int VIEW_ITEM = 1;
     private final int VIEW_PROG = 0;
 
-    private List<ContentInfo> items = new ArrayList<>();
+    private List<ContentInfo> items;
 
     private boolean loading;
     private OnLoadMoreListener onLoadMoreListener;

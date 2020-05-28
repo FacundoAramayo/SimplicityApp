@@ -45,18 +45,18 @@ import java.util.*
 
 class FragmentHome : Fragment() {
 
-    private var count_total: Int = 0
-    private var category_id: Int = 0
+    private var countTotal: Int = 0
+    private var categoryId: Int = 0
 
-    private var root_view: View? = null
+    private var rootView: View? = null
     private var mainScrollView: ScrollView? = null
     private var recyclerFeatured: RecyclerView? = null
     private var recyclerNews: RecyclerView? = null
-    private var tv_featured_title: TextView? = null
-    private var tv_news_title: TextView? = null
-    private var snackbar_retry: Snackbar? = null
-    private var button_share_app: Button? = null
-    private var button_home_subscription: Button? = null
+    private var tvFeaturedTitle: TextView? = null
+    private var tvNewsTitle: TextView? = null
+    private var snackbarRetry: Snackbar? = null
+    private var buttonShareApp: Button? = null
+    private var buttonHomeSubscription: Button? = null
     private var btnQuickAccessGastronomy: LinearLayout? = null
     private var btnQuickAccessTaxi: LinearLayout? = null
     private var btnQuickAccessJobs: LinearLayout? = null
@@ -65,66 +65,58 @@ class FragmentHome : Fragment() {
     private var btnQuickAccessFavorites: LinearLayout? = null
     private var btnQuickAccessMap: LinearLayout? = null
     private var btnQuickAccessEmergency: LinearLayout? = null
-
     private var db: DatabaseHandler? = null
     private var sharedPref: SharedPref? = null
     private var adapterFeatured: AdapterPlaceGrid? = null
     private var adapterNews: AdapterNewsList? = null
-
     private var shimmerContainer: ShimmerFrameLayout? = null
-
     private var callbackPlaces: Call<CallbackListPlace>? = null
     private var callbackNews: Call<CallbackListContentInfo>? = null
-
     private var backToHome = false
-
     private var featuredOnProcess = false
     private var newsOnProcess = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        root_view = inflater.inflate(R.layout.fragment_home, null)
+        rootView = inflater.inflate(R.layout.fragment_home, null)
         db = DatabaseHandler(context)
-        sharedPref =
-            SharedPref(context)
-        category_id = 0
-
+        sharedPref = SharedPref(context)
+        categoryId = 0
         initUI()
-
-        return root_view
+        return rootView
     }
 
     private fun initUI() {
         setHasOptionsMenu(true)
 
-        mainScrollView = root_view?.findViewById(R.id.main_scroll_view)
-        recyclerFeatured = root_view?.findViewById<View>(R.id.recyclerFeatured) as RecyclerView
-        recyclerNews = root_view?.findViewById<View>(R.id.recyclerNews) as RecyclerView
-        tv_featured_title = root_view?.findViewById(R.id.tv_featured_title)
-        tv_news_title = root_view?.findViewById(R.id.tv_news_title)
-        button_share_app = root_view?.findViewById(R.id.button_home_share_app)
-        button_home_subscription = root_view?.findViewById(R.id.button_home_subscription)
-        btnQuickAccessGastronomy = root_view?.findViewById(R.id.lyt_quick_access_gastronomy)
-        btnQuickAccessTaxi = root_view?.findViewById(R.id.lyt_quick_access_taxi)
-        btnQuickAccessJobs = root_view?.findViewById(R.id.lyt_quick_access_jobs)
-        btnQuickAccessPharmacy = root_view?.findViewById(R.id.lyt_quick_access_pharmacy)
-        btnQuickAccessSearch = root_view?.findViewById(R.id.lyt_quick_access_search)
-        btnQuickAccessFavorites = root_view?.findViewById(R.id.lyt_quick_access_fav)
-        btnQuickAccessMap = root_view?.findViewById(R.id.lyt_quick_access_map)
-        btnQuickAccessEmergency = root_view?.findViewById(R.id.lyt_quick_access_emergency)
+        mainScrollView = rootView?.findViewById(R.id.main_scroll_view)
+        recyclerFeatured = rootView?.findViewById<View>(R.id.recyclerFeatured) as RecyclerView
+        recyclerNews = rootView?.findViewById<View>(R.id.recyclerNews) as RecyclerView
+        tvFeaturedTitle = rootView?.findViewById(R.id.tv_featured_title)
+        tvNewsTitle = rootView?.findViewById(R.id.tv_news_title)
+        buttonShareApp = rootView?.findViewById(R.id.button_home_share_app)
+        buttonHomeSubscription = rootView?.findViewById(R.id.button_home_subscription)
+        btnQuickAccessGastronomy = rootView?.findViewById(R.id.lyt_quick_access_gastronomy)
+        btnQuickAccessTaxi = rootView?.findViewById(R.id.lyt_quick_access_taxi)
+        btnQuickAccessJobs = rootView?.findViewById(R.id.lyt_quick_access_jobs)
+        btnQuickAccessPharmacy = rootView?.findViewById(R.id.lyt_quick_access_pharmacy)
+        btnQuickAccessSearch = rootView?.findViewById(R.id.lyt_quick_access_search)
+        btnQuickAccessFavorites = rootView?.findViewById(R.id.lyt_quick_access_fav)
+        btnQuickAccessMap = rootView?.findViewById(R.id.lyt_quick_access_map)
+        btnQuickAccessEmergency = rootView?.findViewById(R.id.lyt_quick_access_emergency)
 
-        shimmerContainer = root_view?.findViewById(R.id.shimmer_view_container)
+        shimmerContainer = rootView?.findViewById(R.id.shimmer_view_container)
         shimmerContainer?.visibility = View.VISIBLE
         mainScrollView?.visibility = View.GONE
 
         initRecyclerFeatured()
         initRecyclerNews()
 
-        button_share_app?.setOnClickListener {
+        buttonShareApp?.setOnClickListener {
             AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_HOME_ACTION, AnalyticsConstants.SHARE_APP, true)
             activity?.let { it1 -> ActionTools.methodShare(it1) }
         }
 
-        button_home_subscription?.setOnClickListener {
+        buttonHomeSubscription?.setOnClickListener {
             AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_HOME_ACTION, AnalyticsConstants.OPEN_REGISTER_FORM, true)
             activity?.let { it1 -> ActionTools.directUrl(it1, Constant.LINK_TO_SUBSCRIPTION_FORM) }
         }
@@ -174,7 +166,7 @@ class FragmentHome : Fragment() {
     }
 
     override fun onDestroyView() {
-        if (snackbar_retry != null) snackbar_retry?.dismiss()
+        if (snackbarRetry != null) snackbarRetry?.dismiss()
         if (callbackPlaces != null && callbackPlaces!!.isExecuted) {
             callbackPlaces?.cancel()
         }
@@ -185,7 +177,7 @@ class FragmentHome : Fragment() {
     }
 
     override fun onStop() {
-        if (snackbar_retry != null) snackbar_retry?.dismiss()
+        if (snackbarRetry != null) snackbarRetry?.dismiss()
         if (callbackPlaces != null && callbackPlaces!!.isExecuted) {
             callbackPlaces?.cancel()
         }
@@ -268,7 +260,7 @@ class FragmentHome : Fragment() {
         ThisApplication.instance?.location = null
         sharedPref?.lastPlacePage = 1
         sharedPref?.isRefreshPlaces = true
-        if (snackbar_retry != null) snackbar_retry?.dismiss()
+        if (snackbarRetry != null) snackbarRetry?.dismiss()
         actionRefreshFeatured(sharedPref!!.lastPlacePage)
     }
 
@@ -295,9 +287,9 @@ class FragmentHome : Fragment() {
 
     private fun startLoadMoreFeaturedAdapter() {
         adapterFeatured?.resetListData()
-        val items = db?.getPlacesByPage(category_id, Constant.LIMIT_LOADMORE, 0)
+        val items = db?.getPlacesByPage(categoryId, Constant.LIMIT_LOADMORE, 0)
         adapterFeatured?.insertData(items, true)
-        val item_count = db!!.getPlacesSize(category_id)
+        val item_count = db!!.getPlacesSize(categoryId)
         // detect when scroll reach bottom
         adapterFeatured?.setOnLoadMoreListener { current_page ->
             if (item_count > adapterFeatured!!.itemCount && current_page != 0) {
@@ -311,7 +303,7 @@ class FragmentHome : Fragment() {
     private fun displayDataByPageFeatured(next_page: Int) {
         adapterFeatured?.setLoading()
         Handler().postDelayed({
-            val items = db?.getPlacesByPage(category_id, Constant.LIMIT_LOADMORE, next_page * Constant.LIMIT_LOADMORE)
+            val items = db?.getPlacesByPage(categoryId, Constant.LIMIT_LOADMORE, next_page * Constant.LIMIT_LOADMORE)
             adapterFeatured?.insertData(items, false)
         }, 500)
     }
@@ -323,7 +315,7 @@ class FragmentHome : Fragment() {
             if (!featuredOnProcess) {
                 onRefreshFeatured(page_no)
             } else {
-                Snackbar.make(root_view!!, R.string.task_running, Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(rootView!!, R.string.task_running, Snackbar.LENGTH_SHORT).show()
             }
         } else {
             onFailureRetryFeatured(page_no, getString(R.string.no_internet))
@@ -339,7 +331,7 @@ class FragmentHome : Fragment() {
             override fun onResponse(call: Call<CallbackListPlace>, response: Response<CallbackListPlace>) {
                 val resp = response.body()
                 if (resp != null) {
-                    count_total = resp.count_total
+                    countTotal = resp.count_total
                     if (page_no == 1) db!!.refreshTablePlace()
                     db!!.insertListPlace(resp.places)  // save result into database
                     sharedPref!!.lastPlacePage = page_no + 1
@@ -367,22 +359,22 @@ class FragmentHome : Fragment() {
         featuredOnProcess = false
         isLoadComplete(true)
         startLoadMoreFeaturedAdapter()
-        snackbar_retry = Snackbar.make(root_view!!, msg, Snackbar.LENGTH_INDEFINITE)
-        snackbar_retry!!.setAction(R.string.RETRY) { actionRefreshFeatured(page_no) }
-        snackbar_retry!!.show()
+        snackbarRetry = Snackbar.make(rootView!!, msg, Snackbar.LENGTH_INDEFINITE)
+        snackbarRetry!!.setAction(R.string.RETRY) { actionRefreshFeatured(page_no) }
+        snackbarRetry!!.show()
     }
 
     private fun delayNextRequestFeatured(page_no: Int) {
-        if (count_total == 0) {
+        if (countTotal == 0) {
             onFailureRetryFeatured(page_no, getString(R.string.refresh_failed))
             return
         }
-        if (page_no * Constant.LIMIT_PLACE_REQUEST > count_total) { // when all data loaded
+        if (page_no * Constant.LIMIT_PLACE_REQUEST > countTotal) { // when all data loaded
             featuredOnProcess = false
             isLoadComplete(true)
             startLoadMoreFeaturedAdapter()
             sharedPref!!.isRefreshPlaces = false
-            root_view?.let { Snackbar.make(it, R.string.load_success, Snackbar.LENGTH_LONG).show() }
+            rootView?.let { Snackbar.make(it, R.string.load_success, Snackbar.LENGTH_LONG).show() }
             return
         }
         Handler().postDelayed({ onRefreshFeatured(page_no + 1) }, 500)
@@ -510,15 +502,13 @@ class FragmentHome : Fragment() {
 
     private fun showNews(show: Boolean) {
         if (show) {
-            tv_news_title?.visibility = View.VISIBLE
+            tvNewsTitle?.visibility = View.VISIBLE
             recyclerNews?.visibility = View.VISIBLE
         } else {
-            tv_news_title?.visibility = View.GONE
+            tvNewsTitle?.visibility = View.GONE
             recyclerNews?.visibility = View.GONE
         }
     }
-
-
 
     companion object {
         var TAG_CATEGORY = "key.TAG_CATEGORY"

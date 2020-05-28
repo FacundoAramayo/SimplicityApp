@@ -113,7 +113,7 @@ public class AdapterPlaceGrid extends RecyclerView.Adapter<RecyclerView.ViewHold
                 vItem.lyt_distance.setVisibility(View.GONE);
             } else {
                 vItem.lyt_distance.setVisibility(View.VISIBLE);
-                vItem.distance.setText(Tools.Companion.getFormatedDistance(p.getDistance()));
+                vItem.distance.setText(Tools.Companion.getFormattedDistance(p.getDistance()));
             }
 
             // Here you apply the animation when the view is bound

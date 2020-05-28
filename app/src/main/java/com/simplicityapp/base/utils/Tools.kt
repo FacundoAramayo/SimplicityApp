@@ -44,7 +44,7 @@ class Tools {
             return conn.isConnectingToInternet
         }
 
-        fun getDeviceName(): String {
+        private fun getDeviceName(): String {
             val manufacturer = Build.MANUFACTURER
             val model = Build.MODEL
             return if (model.startsWith(manufacturer)) {
@@ -54,7 +54,7 @@ class Tools {
             }
         }
 
-        fun getAndroidVersion(): String {
+        private fun getAndroidVersion(): String {
             return Build.VERSION.RELEASE + ""
         }
 
@@ -109,12 +109,12 @@ class Tools {
             googleMap.uiSettings.isMapToolbarEnabled = false
 
             val inflater = act.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-            val marker_view = inflater.inflate(R.layout.maps_marker, null)
-            (marker_view.findViewById(R.id.marker_bg) as ImageView).setColorFilter(act.resources.getColor(R.color.colorMarker))
+            val markerView = inflater.inflate(R.layout.maps_marker, null)
+            (markerView.findViewById(R.id.marker_bg) as ImageView).setColorFilter(act.resources.getColor(R.color.colorMarker))
 
             val cameraPosition = CameraPosition.Builder().target(place.position).zoom(12f).build()
             val markerOptions = MarkerOptions().position(place.position)
-            markerOptions.icon(BitmapDescriptorFactory.fromBitmap(UITools.createBitmapFromView(act, marker_view)))
+            markerOptions.icon(BitmapDescriptorFactory.fromBitmap(UITools.createBitmapFromView(act, markerView)))
             googleMap.addMarker(markerOptions)
             googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
             return googleMap
@@ -189,8 +189,8 @@ class Tools {
             return items
         }
 
-        fun getDistanceList(places: List<Place>, curLoc: LatLng): List<Place> {
-            if (places.size > 0) {
+        private fun getDistanceList(places: List<Place>, curLoc: LatLng): List<Place> {
+            if (places.isNotEmpty()) {
                 for (p in places) {
                     p.distance = calculateDistance(curLoc, p.position)
                 }
@@ -198,9 +198,9 @@ class Tools {
             return places
         }
 
-        fun getSortedDistanceList(places: List<Place>, curLoc: LatLng): List<Place> {
+        private fun getSortedDistanceList(places: List<Place>, curLoc: LatLng): List<Place> {
             val result = ArrayList<Place>()
-            if (places.size > 0) {
+            if (places.isNotEmpty()) {
                 for (i in places.indices) {
                     val p = places[i]
                     p.distance = calculateDistance(curLoc, p.position)
@@ -213,7 +213,7 @@ class Tools {
             return result
         }
 
-        fun getCurrentLocation(ctx: Context): LatLng? {
+        private fun getCurrentLocation(ctx: Context): LatLng? {
             if (PermissionUtil.isLocationGranted(ctx)) {
                 val manager = ctx.getSystemService(Context.LOCATION_SERVICE) as LocationManager
                 if (manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
@@ -264,7 +264,7 @@ class Tools {
             return locationListener
         }
 
-        fun getFormatedDistance(distance: Float): String {
+        fun getFormattedDistance(distance: Float): String {
             val df = DecimalFormat()
             df.maximumFractionDigits = 1
             return df.format(distance.toDouble()) + " " + AppConfig.DISTANCE_METRIC_STR

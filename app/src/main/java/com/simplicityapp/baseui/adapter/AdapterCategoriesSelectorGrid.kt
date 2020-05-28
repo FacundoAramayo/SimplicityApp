@@ -13,9 +13,7 @@ import com.simplicityapp.R
 class AdapterCategoriesSelectorGrid(
     private val categories: List<Category>,
     private val listener: (Category) -> Unit
-)
-    : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
         Log.d("LOG-", "onCreateViewHolder")

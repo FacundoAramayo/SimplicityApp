@@ -6,27 +6,25 @@ import android.net.NetworkInfo;
 
 public class ConnectionDetector {
  
-    private Context _context;
+    private Context context;
  
     public ConnectionDetector(Context context){
-        this._context = context;
+        this.context = context;
     }
  
     /**
      * Checking for all possible internet providers
      * **/
     public boolean isConnectingToInternet(){
-        ConnectivityManager connectivity = (ConnectivityManager) _context.getSystemService(Context.CONNECTIVITY_SERVICE);
-          if (connectivity != null)
-          {
+        ConnectivityManager connectivity = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+          if (connectivity != null) {
               NetworkInfo[] info = connectivity.getAllNetworkInfo();
-              if (info != null)
-                  for (int i = 0; i < info.length; i++)
-                      if (info[i].getState() == NetworkInfo.State.CONNECTED)
-                      {
+              if (info != null) {
+                  for (NetworkInfo networkInfo : info)
+                      if (networkInfo.getState() == NetworkInfo.State.CONNECTED) {
                           return true;
                       }
- 
+              }
           }
           return false;
     }

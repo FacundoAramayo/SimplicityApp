@@ -29,8 +29,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private SQLiteDatabase db;
     private Context context;
 
-    private int cat_id[]; // category id
-    private String cat_name[]; // category name
+    private int categoriesId[]; // category id
+    private String categoriesName[]; // category name
     private TypedArray cat_icon; // category name
 
     public DatabaseHandler(Context context) {
@@ -39,12 +39,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         this.db = getWritableDatabase();
 
         // get data from res/values/category.xml
-        cat_id = context.getResources().getIntArray(R.array.id_category);
-        cat_name = context.getResources().getStringArray(R.array.category_name);
+        categoriesId = context.getResources().getIntArray(R.array.id_category);
+        categoriesName = context.getResources().getStringArray(R.array.category_name);
         cat_icon = context.getResources().obtainTypedArray(R.array.category_icon);
 
         // if length not equal refresh table category
-        if(getCategorySize() != cat_id.length) {
+        if(getCategorySize() != categoriesId.length) {
             defineCategory(this.db);  // define table category
         }
 
@@ -106,10 +106,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private void defineCategory(SQLiteDatabase db) {
         db.execSQL("DELETE FROM " + DatabaseConstants.TABLE_CATEGORY); // refresh table content
         db.execSQL("VACUUM");
-        for (int i = 0; i < cat_id.length; i++) {
+        for (int i = 0; i < categoriesId.length; i++) {
             ContentValues values = new ContentValues();
-            values.put(DatabaseConstants.KEY_CAT_ID, cat_id[i]);
-            values.put(DatabaseConstants.KEY_CAT_NAME, cat_name[i]);
+            values.put(DatabaseConstants.KEY_CAT_ID, categoriesId[i]);
+            values.put(DatabaseConstants.KEY_CAT_NAME, categoriesName[i]);
             values.put(DatabaseConstants.KEY_CAT_ICON, cat_icon.getResourceId(i, 0));
             db.insert(DatabaseConstants.TABLE_CATEGORY, null, values); // Inserting Row
         }
