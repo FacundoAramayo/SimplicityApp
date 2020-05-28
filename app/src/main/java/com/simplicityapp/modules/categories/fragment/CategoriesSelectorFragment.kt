@@ -14,6 +14,9 @@ import com.simplicityapp.baseui.adapter.AdapterCategoriesSelectorGrid
 import com.simplicityapp.modules.categories.activity.CategoriesSelectorActivity
 import com.simplicityapp.modules.categories.viewmodel.CategoriesSelectorViewModel
 import com.simplicityapp.R
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class CategoriesSelectorFragment : Fragment(R.layout.categories_selector_fragment) {
 
@@ -27,8 +30,7 @@ class CategoriesSelectorFragment : Fragment(R.layout.categories_selector_fragmen
         savedInstanceState: Bundle?
     ): View? {
         binding = CategoriesSelectorFragmentBinding.inflate(inflater, container, false)
-        val view = binding.root
-        return view
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -36,13 +38,22 @@ class CategoriesSelectorFragment : Fragment(R.layout.categories_selector_fragmen
         viewModel = ViewModelProvider(this).get(CategoriesSelectorViewModel::class.java)
         // TODO: Use the ViewModel
 
-
+        initUI()
         initRecycler()
     }
 
     companion object {
         fun newInstance() =
             CategoriesSelectorFragment()
+    }
+
+    private fun initUI() {
+        binding.categoriesBanner.setOnClickListener {
+            CategoriesSelectorActivity.CategoriesSelectorInstance.
+                openCategory(resources.getString(R.string.title_nav_delivery),
+                    resources.getIntArray(R.array.id_category)[7]
+            )
+        }
     }
 
     private fun initRecycler() {
@@ -56,15 +67,14 @@ class CategoriesSelectorFragment : Fragment(R.layout.categories_selector_fragmen
                 )
             )
 
-            val items = viewModel.getCategories()
-            val adapter =
-                AdapterCategoriesSelectorGrid(
-                    items
-                ) { item ->
-                    CategoriesSelectorActivity.CategoriesSelectorInstance.openCategory(item.categoryId)
-                }
-            this.adapter = adapter
-            adapter.notifyDataSetChanged()
+            GlobalScope.launch(Dispatchers.Main) {
+                val items = viewModel.getCategoriesAsync().body()?.categories
+                val adapter = AdapterCategoriesSelectorGrid(items ?: listOf()) { item ->
+                        CategoriesSelectorActivity.CategoriesSelectorInstance.openCategory(item.title, item.categoryId)
+                    }
+                binding.categoriesRecycler.adapter = adapter
+                adapter.notifyDataSetChanged()
+            }
 
         }
 

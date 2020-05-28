@@ -28,6 +28,7 @@
     <string name="title_nav_profile">Profile</string>
 
     <string name="title_nav_featured">Featured</string>
+    <string name="title_nav_commercial_guide">Commercial guide</string>
     <string name="title_nav_shop">Shopping</string>
     <string name="title_nav_pharmacy">Pharmacy</string>
     <string name="title_nav_gym">Gym Center</string>
@@ -296,5 +297,8 @@
 
     <string name="help_us_grow">Help us grow!</string>
     <string name="have_you_a_commerce">Have you a commerce?</string>
+
+    <!--Categories selector-->
+    <string name="categories_selector_title">Categories</string>
 
 </resources>

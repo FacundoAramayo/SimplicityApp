@@ -184,7 +184,6 @@ class ActivityLogin : AppCompatActivity(), BaseActivity, View.OnClickListener {
             findViewById<View>(R.id.sign_in_button).visibility = View.GONE
             val i = Intent(this@ActivityLogin, ActivityMain::class.java)
             i.putExtra(Constant.IS_FIRST_OPEN, true)
-            Log.d("LOG-", " is first open : $i")
             startActivity(i)
             finish()
         }

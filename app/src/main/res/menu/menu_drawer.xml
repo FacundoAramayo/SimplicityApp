@@ -9,28 +9,37 @@
                 android:id="@+id/nav_home"
                 android:icon="@drawable/ic_nav_home"
                 android:title="@string/title_home" />
-
             <item
-                android:id="@+id/nav_all"
-                android:icon="@drawable/ic_nav_all"
-                android:title="@string/title_nav_all" />
-
+                android:id="@+id/nav_featured"
+                android:icon="@drawable/ic_nav_featured"
+                android:title="@string/title_nav_featured" />
             <item
-                android:id="@+id/nav_map"
-                android:icon="@drawable/ic_nav_map"
-                android:title="@string/title_nav_map" />
-
+                android:id="@+id/nav_commercial_guide"
+                android:icon="@drawable/ic_store"
+                android:title="@string/title_nav_commercial_guide" />
             <item
-                android:id="@+id/nav_search"
-                android:icon="@drawable/ic_search"
-                android:title="@string/title_nav_search" />
-
+                android:id="@+id/nav_jobs"
+                android:icon="@drawable/ic_nav_jobs"
+                android:title="@string/title_nav_jobs" />
             <item
                 android:id="@+id/nav_favorites"
                 android:icon="@drawable/ic_nav_fav"
                 android:title="@string/title_nav_fav"
                 android:fontFamily="@font/raleway"
                 app:actionLayout="@layout/menu_counter" />
+<!--            <item-->
+<!--                android:id="@+id/nav_all"-->
+<!--                android:icon="@drawable/ic_nav_all"-->
+<!--                android:title="@string/title_nav_all" />-->
+
+            <item
+                android:id="@+id/nav_search"
+                android:icon="@drawable/ic_search"
+                android:title="@string/title_nav_search" />
+            <item
+                android:id="@+id/nav_map"
+                android:icon="@drawable/ic_nav_map"
+                android:title="@string/title_nav_map" />
 
             <item
                 android:id="@+id/nav_news"
@@ -42,106 +51,7 @@
                 android:icon="@drawable/ic_profile"
                 android:title="@string/title_activity_profile" />
         </group>
-        <item
-            android:id="@+id/nav_featured"
-            android:icon="@drawable/ic_nav_featured"
-            android:title="@string/title_nav_featured" />
-<!--        <item-->
-<!--            android:id="@+id/nav_shopping"-->
-<!--            android:icon="@drawable/ic_nav_shopping"-->
-<!--            android:title="@string/title_nav_shop" />-->
-        <item
-            android:id="@+id/nav_delivery"
-            android:icon="@drawable/ic_nav_delivery"
-            android:title="@string/title_nav_delivery" />
-        <item
-            android:id="@+id/nav_fast_food"
-            android:icon="@drawable/ic_nav_fast_food"
-            android:title="@string/title_nav_fast_food" />
-        <item
-            android:id="@+id/nav_food"
-            android:icon="@drawable/ic_nav_restaurant"
-            android:title="@string/title_nav_food" />
-        <item
-            android:id="@+id/nav_bar"
-            android:icon="@drawable/ic_nav_bar"
-            android:title="@string/title_nav_bar" />
-        <item
-            android:id="@+id/nav_ice_cream_store"
-            android:icon="@drawable/ic_store"
-            android:title="@string/title_nav_icecream_store" />
-        <item
-            android:id="@+id/nav_gym"
-            android:icon="@drawable/ic_nav_gym"
-            android:title="@string/title_nav_gym" />
-        <item
-            android:id="@+id/nav_clothing_stores"
-            android:icon="@drawable/ic_nav_clothing_store"
-            android:title="@string/title_nav_clothing_stores" />
-        <item
-            android:id="@+id/nav_big_stores"
-            android:icon="@drawable/ic_nav_big_stores"
-            android:title="@string/title_nav_big_stores" />
-        <item
-            android:id="@+id/nav_industrial_stores"
-            android:icon="@drawable/ic_nav_industrial_stores"
-            android:title="@string/title_nav_industrial_stores" />
-        <item
-            android:id="@+id/nav_bill_payments"
-            android:icon="@drawable/ic_nav_bill_payments"
-            android:title="@string/title_nav_bill_payments" />
-        <item
-            android:id="@+id/nav_money"
-            android:icon="@drawable/ic_nav_money"
-            android:title="@string/title_nav_money" />
-        <item
-            android:id="@+id/nav_art_and_design"
-            android:icon="@drawable/ic_art_and_design"
-            android:title="@string/title_nav_art" />
-        <item
-            android:id="@+id/nav_jobs"
-            android:icon="@drawable/ic_nav_jobs"
-            android:title="@string/title_nav_jobs" />
-        <item
-            android:id="@+id/nav_tour"
-            android:icon="@drawable/ic_nav_tour"
-            android:title="@string/title_nav_tour" />
-        <item
-            android:id="@+id/nav_hotels"
-            android:icon="@drawable/ic_nav_hotels"
-            android:title="@string/title_nav_hotels" />
-        <item
-            android:id="@+id/nav_apartment_rental"
-            android:icon="@drawable/ic_nav_apartment_rental"
-            android:title="@string/title_nav_apartment_rental" />
-        <item
-            android:id="@+id/nav_temporary_rent"
-            android:icon="@drawable/ic_nav_temporary_rent"
-            android:title="@string/title_nav_temporary_rent" />
-        <item
-            android:id="@+id/nav_taxi"
-            android:icon="@drawable/ic_nav_taxi"
-            android:title="@string/title_nav_taxi" />
-        <item
-            android:id="@+id/nav_gas_station"
-            android:icon="@drawable/ic_nav_gas_station"
-            android:title="@string/title_nav_gas_station" />
-        <item
-            android:id="@+id/nav_transport"
-            android:icon="@drawable/ic_nav_transport"
-            android:title="@string/title_nav_transport" />
-        <item
-            android:id="@+id/nav_transport_tickets"
-            android:icon="@drawable/ic_nav_transport_ticket"
-            android:title="@string/title_nav_transport_tickets" />
-        <item
-            android:id="@+id/nav_pharmacy"
-            android:icon="@drawable/ic_nav_pharmacy"
-            android:title="@string/title_nav_pharmacy" />
-        <item
-            android:id="@+id/nav_emergency"
-            android:icon="@drawable/ic_nav_emergency"
-            android:title="@string/title_nav_emergency" />
+
     </group>
 
 

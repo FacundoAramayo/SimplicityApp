@@ -16,13 +16,11 @@ class AdapterCategoriesSelectorGrid(
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
-        Log.d("LOG-", "onCreateViewHolder")
         val inflater = LayoutInflater.from(parent.context).inflate(R.layout.item_category, parent, false)
         return CategoryViewHolder(inflater)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        Log.d("LOG-", "onBindViewHolder")
         val category: Category = categories[position]
         val categoryViewHolder = holder as CategoryViewHolder
         holder.bindView(category)
@@ -40,14 +38,12 @@ class CategoryViewHolder(itemView: View) :
     private var background: ImageView? = null
 
     init {
-        Log.d("LOG-", "init")
         layoutParent = itemView.findViewById(R.id.lyt_parent)
         background = itemView.findViewById(R.id.image)
     }
 
     fun bindView(category: Category) {
         background?.let {
-            Log.d("LOG-", "load image")
             UITools.displayImage(itemView.context, it, category.backgroundResource) }
     }
 }

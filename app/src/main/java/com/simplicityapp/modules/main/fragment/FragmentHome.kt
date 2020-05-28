@@ -144,7 +144,8 @@ class FragmentHome : Fragment() {
 
         btnQuickAccessSearch?.setOnClickListener {
             AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_HOME_QUICK_ACCESS, AnalyticsConstants.QUICK_ACCESS_SEARCH)
-            ActivityMain.ActivityMainInstance.searchIntent()
+            //TODO revert this
+            ActivityMain.ActivityMainInstance.categorySelectorIntent()
         }
 
         btnQuickAccessFavorites?.setOnClickListener {

@@ -21,6 +21,7 @@
     <string name="title_nav_profile">Perfil</string>
 
     <string name="title_nav_featured">Destacados</string>
+    <string name="title_nav_commercial_guide">Guía comercial</string>
     <string name="title_nav_shop">Comercios</string>
     <string name="title_nav_pharmacy">Farmacias</string>
     <string name="title_nav_gym">Gimnasios</string>
@@ -247,5 +248,6 @@
 
     <string name="help_us_grow">¡Comparte la app!</string>
     <string name="have_you_a_commerce">Registra tu comercio</string>
+    <string name="categories_selector_title">Categorías</string>
 
 </resources>
