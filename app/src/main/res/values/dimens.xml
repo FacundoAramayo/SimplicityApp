@@ -53,7 +53,7 @@
     <dimen name="text_title_width">310dp</dimen>
 
     <!--for categories selector-->
-    <dimen name="categories_banner_height">100dp</dimen>
+    <dimen name="categories_banner_height">80dp</dimen>
 
     <!--for detail activity-->
     <dimen name="image_toolbar_height">270dp</dimen>

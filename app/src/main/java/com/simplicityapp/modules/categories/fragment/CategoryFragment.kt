@@ -12,8 +12,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.simplicityapp.base.rest.RestAdapter
 import com.simplicityapp.base.connection.callbacks.CallbackListPlace
@@ -25,10 +26,7 @@ import com.simplicityapp.base.config.ThisApplication
 import com.simplicityapp.base.utils.Tools
 import com.simplicityapp.base.config.analytics.AnalyticsConstants
 import com.simplicityapp.base.config.Constant.LOG_TAG
-import com.simplicityapp.baseui.adapter.AdapterPlaceGrid
-import com.simplicityapp.baseui.utils.UITools
-import com.simplicityapp.baseui.decorator.SpacingItemDecoration
-import com.simplicityapp.modules.main.activity.ActivityMain
+import com.simplicityapp.baseui.adapter.AdapterPlaceList
 import com.simplicityapp.modules.places.activity.ActivityPlaceDetail
 import com.simplicityapp.R
 import java.util.ArrayList
@@ -49,7 +47,7 @@ class CategoryFragment : Fragment() {
 
     private var db: DatabaseHandler? = null
     private var sharedPref: SharedPref? = null
-    private var adapter: AdapterPlaceGrid? = null
+    private var adapter: AdapterPlaceList? = null
 
     private var callback: Call<CallbackListPlace>? = null
 
@@ -76,17 +74,11 @@ class CategoryFragment : Fragment() {
         lytNotFound = rootView?.findViewById(R.id.lyt_not_found)
         textProgress = rootView?.findViewById<View>(R.id.text_progress) as TextView
 
-        recyclerView?.layoutManager = StaggeredGridLayoutManager(UITools.getGridSpanCount(activity!!), StaggeredGridLayoutManager.VERTICAL)
-        recyclerView?.addItemDecoration(
-            SpacingItemDecoration(
-                UITools.getGridSpanCount(activity!!),
-                UITools.dpToPx(4),
-                true
-            )
-        )
+        recyclerView?.layoutManager = LinearLayoutManager(context)
+        recyclerView?.addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
 
         //set data and list adapter
-        adapter = AdapterPlaceGrid(activity, recyclerView, ArrayList(), StaggeredGridLayoutManager.VERTICAL, 0)
+        adapter = AdapterPlaceList(activity, recyclerView, ArrayList())
         recyclerView?.adapter = adapter
 
         // on item list clicked

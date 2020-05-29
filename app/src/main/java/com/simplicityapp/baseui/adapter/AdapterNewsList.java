@@ -21,13 +21,12 @@ public class AdapterNewsList extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     private final int VIEW_ITEM = 1;
     private final int VIEW_PROG = 0;
-
-    private List<ContentInfo> items;
-
     private boolean loading;
-    private OnLoadMoreListener onLoadMoreListener;
 
     private Context ctx;
+    private List<ContentInfo> items;
+
+    private OnLoadMoreListener onLoadMoreListener;
     private OnItemClickListener mOnItemClickListener;
 
     public interface OnItemClickListener {
@@ -75,7 +74,7 @@ public class AdapterNewsList extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         RecyclerView.ViewHolder vh;
         if (viewType == VIEW_ITEM) {
-            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_news_horizontal_item, parent, false);
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_news_horizontal, parent, false);
             vh = new OriginalViewHolder(v);
         } else {
             View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_loading, parent, false);

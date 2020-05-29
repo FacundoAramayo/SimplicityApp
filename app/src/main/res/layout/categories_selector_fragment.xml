@@ -22,16 +22,18 @@
                 android:layout_height="@dimen/categories_banner_height"
                 android:orientation="horizontal"
                 android:background="@drawable/categories_featured_banner_background"
-                android:layout_marginStart="@dimen/spacing_normal"
-                android:layout_marginEnd="@dimen/spacing_normal"
+                android:layout_marginStart="@dimen/action_bar_margin"
+                android:layout_marginEnd="@dimen/action_bar_margin"
                 android:layout_marginTop="@dimen/spacing_normal"
                 android:layout_marginBottom="@dimen/spacing_normal"
                 android:gravity="center_vertical"
                 android:elevation="@dimen/elevation_card">
 
                 <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
+                    android:layout_width="@dimen/categories_banner_height"
+                    android:layout_height="@dimen/categories_banner_height"
+                    android:paddingTop="@dimen/spacing_normal"
+                    android:paddingBottom="@dimen/spacing_normal"
                     android:layout_marginStart="@dimen/spacing_large"
                     android:layout_marginEnd="@dimen/spacing_large"
                     android:src="@drawable/scooter"
