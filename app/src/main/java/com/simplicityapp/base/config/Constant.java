@@ -36,6 +36,12 @@ public class Constant {
     //WEB VIEW CONFIGS
     public static final String WEB_VIEW_HTML_CONFIG = "<style>img{max-width:100%;height:auto;} iframe{width:100%;}</style> ";
 
+    //GUIDE TYPES
+    public static final String GUIDE_TYPE = "GUIDE_TYPE";
+
+    public static final String COMMERCIAL_GUIDE = "COMMERCIAL_GUIDE";
+    public static final String JOBS_GUIDE = "JOBS_GUIDE";
+
     /**
      * ------------------- DON'T EDIT THIS ---------------------------------------------------------
      */

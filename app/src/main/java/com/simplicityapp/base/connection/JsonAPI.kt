@@ -40,6 +40,22 @@ interface JsonAPI {
         @Body deviceInfo: DeviceInfo?
     ): Call<CallbackDevice>?
 
+    /*
+    @Headers(CACHE, AGENT)
+    @GET("app/services/getRegions")
+    fun getRegions(
+    ): RegionsResponse
+    */
+
+    /*
+    @Headers(CACHE, AGENT)
+    @GET("app/services/getRegion")
+    fun getRegion(
+        @Query("reg_id") reg_id: Int,
+    ): RegionResponse
+    */
+
+
 
 
 

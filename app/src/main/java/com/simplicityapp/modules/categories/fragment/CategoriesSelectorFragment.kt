@@ -3,6 +3,7 @@ package com.simplicityapp.modules.categories.fragment
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -14,6 +15,8 @@ import com.simplicityapp.baseui.adapter.AdapterCategoriesSelectorGrid
 import com.simplicityapp.modules.categories.activity.CategoriesSelectorActivity
 import com.simplicityapp.modules.categories.viewmodel.CategoriesSelectorViewModel
 import com.simplicityapp.R
+import com.simplicityapp.base.config.Constant
+import com.simplicityapp.base.config.Constant.COMMERCIAL_GUIDE
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -24,12 +27,15 @@ class CategoriesSelectorFragment : Fragment(R.layout.categories_selector_fragmen
 
     private lateinit var binding: CategoriesSelectorFragmentBinding
 
+    private var type: String? = null
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = CategoriesSelectorFragmentBinding.inflate(inflater, container, false)
+        type = activity?.intent?.getStringExtra(Constant.GUIDE_TYPE)
         return binding.root
     }
 
@@ -48,11 +54,17 @@ class CategoriesSelectorFragment : Fragment(R.layout.categories_selector_fragmen
     }
 
     private fun initUI() {
-        binding.categoriesBanner.setOnClickListener {
-            CategoriesSelectorActivity.CategoriesSelectorInstance.
-                openCategory(resources.getString(R.string.title_nav_delivery),
+        binding.categoriesBanner.apply {
+            if (type != COMMERCIAL_GUIDE) {
+                visibility = GONE
+                return
+            }
+            setOnClickListener {
+                CategoriesSelectorActivity.CategoriesSelectorInstance.openCategory(
+                    resources.getString(R.string.title_nav_delivery),
                     resources.getIntArray(R.array.id_category)[7]
-            )
+                )
+            }
         }
     }
 
@@ -67,14 +79,17 @@ class CategoriesSelectorFragment : Fragment(R.layout.categories_selector_fragmen
                 )
             )
 
-            GlobalScope.launch(Dispatchers.Main) {
-                val items = viewModel.getCategoriesAsync().body()?.categories
-                val adapter = AdapterCategoriesSelectorGrid(items ?: listOf()) { item ->
+            type?.let {
+                GlobalScope.launch(Dispatchers.Main) {
+                    val items = viewModel.getCategoriesAsync(it).body()?.categories
+                    val adapter = AdapterCategoriesSelectorGrid(items ?: listOf()) { item ->
                         CategoriesSelectorActivity.CategoriesSelectorInstance.openCategory(item.title, item.categoryId)
                     }
-                binding.categoriesRecycler.adapter = adapter
-                adapter.notifyDataSetChanged()
+                    binding.categoriesRecycler.adapter = adapter
+                    adapter.notifyDataSetChanged()
+                }
             }
+
 
         }
 

@@ -139,15 +139,15 @@ class ActivityMain : AppCompatActivity() {
         onItemSelected(R.id.nav_favorites, getString(R.string.title_nav_fav), false)
     }
 
-    fun categorySelectorIntent() {
+    fun categorySelectorIntent(guideType: String) {
         val intent = Intent(this, CategoriesSelectorActivity::class.java)
+        intent.putExtra(GUIDE_TYPE, guideType)
         startActivity(intent)
     }
 
     private fun getMenuItemId(categoryId: Int): Int? {
         return when (categoryId) {
             0 -> R.id.nav_featured
-            23 -> R.id.nav_jobs
             else -> null
         }
     }
@@ -256,10 +256,11 @@ class ActivityMain : AppCompatActivity() {
             }
             R.id.nav_commercial_guide -> {
                 home = false
-                categorySelectorIntent()
+                categorySelectorIntent(COMMERCIAL_GUIDE)
             }
-            R.id.nav_jobs -> {
-                openFragmentCategory(title, 23)
+            R.id.nav_jobs_guide -> {
+                home = false
+                categorySelectorIntent(JOBS_GUIDE)
                 AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_CATEGORY, AnalyticsConstants.CATEGORY_JOBS)
             }
 

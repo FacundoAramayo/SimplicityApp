@@ -7,6 +7,6 @@ class CategoriesRepository {
 
     private var jsonApi : CategoriesAPI = RetrofitService.createService(CategoriesAPI::class.java)
 
-    suspend fun getCategories() = jsonApi.getCategories()
+    suspend fun getCategories(type: String) = jsonApi.getCategories(type.toLowerCase())
 
 }

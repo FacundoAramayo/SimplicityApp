@@ -16,8 +16,8 @@ class CategoriesSelectorViewModel : ViewModel() {
         return categoriesFactory.getCategoriesList()
     }
 
-    suspend fun getCategoriesAsync(): Response<CategoriesResponse> {
-        return repository.getCategories()
+    suspend fun getCategoriesAsync(type: String): Response<CategoriesResponse> {
+        return repository.getCategories(type)
     }
 
     fun onCategoryClicked() {

@@ -26,6 +26,7 @@ import com.simplicityapp.base.connection.callbacks.CallbackListPlace
 import com.simplicityapp.base.config.AppConfig
 import com.simplicityapp.base.config.AppConfig.LIMIT_PLACES_TO_UPDATE
 import com.simplicityapp.base.config.Constant
+import com.simplicityapp.base.config.Constant.JOBS_GUIDE
 import com.simplicityapp.base.config.Constant.LOG_TAG
 import com.simplicityapp.base.persistence.preferences.SharedPref
 import com.simplicityapp.base.config.ThisApplication
@@ -134,7 +135,7 @@ class FragmentHome : Fragment() {
 
         btnQuickAccessJobs?.setOnClickListener {
             AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_HOME_QUICK_ACCESS, AnalyticsConstants.QUICK_ACCESS_JOBS)
-            ActivityMain.ActivityMainInstance.onItemSelected(R.id.nav_jobs, resources.getString(R.string.title_nav_jobs), false, true)
+            ActivityMain.ActivityMainInstance.categorySelectorIntent(JOBS_GUIDE)
         }
 
         btnQuickAccessPharmacy?.setOnClickListener {
@@ -144,8 +145,7 @@ class FragmentHome : Fragment() {
 
         btnQuickAccessSearch?.setOnClickListener {
             AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_HOME_QUICK_ACCESS, AnalyticsConstants.QUICK_ACCESS_SEARCH)
-            //TODO revert this
-            ActivityMain.ActivityMainInstance.categorySelectorIntent()
+            ActivityMain.ActivityMainInstance.searchIntent()
         }
 
         btnQuickAccessFavorites?.setOnClickListener {

@@ -18,7 +18,7 @@
                 android:icon="@drawable/ic_store"
                 android:title="@string/title_nav_commercial_guide" />
             <item
-                android:id="@+id/nav_jobs"
+                android:id="@+id/nav_jobs_guide"
                 android:icon="@drawable/ic_nav_jobs"
                 android:title="@string/title_nav_jobs" />
             <item
