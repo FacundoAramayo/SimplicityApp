@@ -28,12 +28,12 @@ import com.simplicityapp.base.config.Constant.*
 import com.simplicityapp.base.utils.ActionTools
 import com.simplicityapp.modules.categories.fragment.CategoryFragment
 import com.simplicityapp.modules.main.fragment.FragmentHome
-import com.simplicityapp.modules.maps.activity.ActivityMaps
 import com.simplicityapp.modules.notifications.activity.ActivityNotifications
 import com.simplicityapp.modules.settings.activity.ActivitySetting
 import com.simplicityapp.modules.categories.activity.CategoriesSelectorActivity
 import com.simplicityapp.modules.places.activity.ActivitySearch
 import com.simplicityapp.R
+import com.simplicityapp.modules.maps.activity.ActivityMapsV2
 
 class ActivityMain : AppCompatActivity() {
 
@@ -149,7 +149,7 @@ class ActivityMain : AppCompatActivity() {
     }
 
     fun mapIntent() {
-        val intent = Intent(this, ActivityMaps::class.java)
+        val intent = Intent(this, ActivityMapsV2::class.java)
         startActivity(intent)
     }
 
@@ -227,7 +227,7 @@ class ActivityMain : AppCompatActivity() {
                 }
             }
             R.id.nav_map -> {
-                val i = Intent(applicationContext, ActivityMaps::class.java)
+                val i = Intent(applicationContext, ActivityMapsV2::class.java)
                 home = false
                 AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_ACTION, AnalyticsConstants.MAP)
                 startActivity(i)

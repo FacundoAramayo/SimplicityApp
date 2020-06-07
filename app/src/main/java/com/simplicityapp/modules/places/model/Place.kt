@@ -29,4 +29,14 @@ class Place (
         override fun getPosition(): LatLng {
             return LatLng(lat, lng)
         }
+
+    fun hasPosition(): Boolean {
+        if (this.lat == 0.toDouble()) {
+            return false
+        }
+        if (this.lng == 0.toDouble()) {
+            return false
+        }
+        return true
+    }
 }

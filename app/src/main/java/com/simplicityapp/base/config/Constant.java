@@ -8,9 +8,6 @@ public class Constant {
      * -------------------- EDIT THIS  -------------------------------------------------------------
      */
 
-    /*Tartagal*/
-    public static final double city_lat = -22.5167622;
-    public static final double city_lng = -63.8056084;
     public static final float city_zoom = 13;
 
     /*
