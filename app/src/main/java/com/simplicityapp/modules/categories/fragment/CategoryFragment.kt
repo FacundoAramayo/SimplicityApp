@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.simplicityapp.base.rest.RestAdapter
-import com.simplicityapp.base.connection.callbacks.CallbackListPlace
+import com.simplicityapp.base.connection.callbacks.ListPlaceResponse
 import com.simplicityapp.base.config.AppConfig
 import com.simplicityapp.base.config.Constant
 import com.simplicityapp.base.persistence.db.DatabaseHandler
@@ -45,19 +45,18 @@ class CategoryFragment : Fragment() {
     private var textProgress: TextView? = null
     private var snackbarRetry: Snackbar? = null
 
-    private var db: DatabaseHandler? = null
-    private var sharedPref: SharedPref? = null
+    private lateinit var db: DatabaseHandler
+    private lateinit var sharedPref: SharedPref
     private var adapter: AdapterPlaceList? = null
 
-    private var callback: Call<CallbackListPlace>? = null
+    private var response: Call<ListPlaceResponse>? = null
 
     private var onProcess = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         rootView = inflater.inflate(R.layout.fragment_category, null)
         db = DatabaseHandler(context)
-        sharedPref =
-            SharedPref(context)
+        sharedPref = SharedPref(context)
         categoryId = arguments!!.getInt(TAG_CATEGORY)
 
         initUI()
@@ -88,8 +87,8 @@ class CategoryFragment : Fragment() {
 
     override fun onDestroyView() {
         if (snackbarRetry != null) snackbarRetry?.dismiss()
-        if (callback != null && callback!!.isExecuted) {
-            callback?.cancel()
+        if (response != null && response!!.isExecuted) {
+            response?.cancel()
         }
         super.onDestroyView()
     }
@@ -101,8 +100,8 @@ class CategoryFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        if (sharedPref!!.isRefreshPlaces || db?.placesSize == 0) {
-            actionRefresh(sharedPref!!.lastPlacePage)
+        if (sharedPref.isRefreshPlaces || db.placesSize == 0) {
+            actionRefresh(sharedPref.lastPlacePage)
         } else {
             startLoadMoreAdapter()
         }
@@ -116,21 +115,21 @@ class CategoryFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.action_refresh) {
             ThisApplication.instance?.location = null
-            sharedPref?.lastPlacePage = 1
-            sharedPref?.isRefreshPlaces = true
+            sharedPref.lastPlacePage = 1
+            sharedPref.isRefreshPlaces = true
             textProgress?.text = ""
             if (snackbarRetry != null) snackbarRetry?.dismiss()
-            actionRefresh(sharedPref!!.lastPlacePage)
+            actionRefresh(sharedPref.lastPlacePage)
         }
         return super.onOptionsItemSelected(item)
     }
 
     private fun startLoadMoreAdapter() {
         adapter?.resetListData()
-        val items = db?.getPlacesByPage(categoryId, Constant.LIMIT_LOADMORE, 0)
+        val items = db.getPlacesByPage(categoryId, Constant.LIMIT_LOADMORE, 0)
         adapter?.insertData(items, false)
         showNoItemView()
-        val item_count = db!!.getPlacesSize(categoryId)
+        val item_count = db.getPlacesSize(categoryId)
         // detect when scroll reach bottom
         adapter?.setOnLoadMoreListener { current_page ->
             if (item_count > adapter!!.itemCount && current_page != 0) {
@@ -145,7 +144,7 @@ class CategoryFragment : Fragment() {
     private fun displayDataByPage(next_page: Int) {
         adapter?.setLoading()
         Handler().postDelayed({
-            val items = db?.getPlacesByPage(categoryId, Constant.LIMIT_LOADMORE, next_page * Constant.LIMIT_LOADMORE)
+            val items = db.getPlacesByPage(categoryId, Constant.LIMIT_LOADMORE, next_page * Constant.LIMIT_LOADMORE)
             adapter?.insertData(items, false)
             showNoItemView()
         }, 500)
@@ -169,15 +168,15 @@ class CategoryFragment : Fragment() {
         onProcess = true
         showProgress(onProcess)
         val isDraft = if (AppConfig.LAZY_LOAD) 1 else 0
-        callback = RestAdapter.createAPI().getPlacesByPage(page_no, Constant.LIMIT_PLACE_REQUEST, isDraft)
-        callback!!.enqueue(object : retrofit2.Callback<CallbackListPlace> {
-            override fun onResponse(call: Call<CallbackListPlace>, response: Response<CallbackListPlace>) {
+        response = RestAdapter.createAPI().getPlacesByPage(page_no, Constant.LIMIT_PLACE_REQUEST, isDraft, sharedPref.regionId)
+        response!!.enqueue(object : retrofit2.Callback<ListPlaceResponse> {
+            override fun onResponse(call: Call<ListPlaceResponse>, response: Response<ListPlaceResponse>) {
                 val resp = response.body()
                 if (resp != null) {
                     countTotal = resp.count_total
-                    if (page_no == 1) db!!.refreshTablePlace()
-                    db!!.insertListPlace(resp.places)  // save result into database
-                    sharedPref!!.lastPlacePage = page_no + 1
+                    if (page_no == 1) db.refreshTablePlace()
+                    db.insertListPlace(resp.places, sharedPref.regionId)  // save result into database
+                    sharedPref.lastPlacePage = page_no + 1
                     delayNextRequest(page_no)
                     val str_progress = String.format(getString(R.string.load_of), page_no * Constant.LIMIT_PLACE_REQUEST, countTotal)
                     textProgress!!.text = str_progress
@@ -186,7 +185,7 @@ class CategoryFragment : Fragment() {
                 }
             }
 
-            override fun onFailure(call: Call<CallbackListPlace>?, t: Throwable) {
+            override fun onFailure(call: Call<ListPlaceResponse>?, t: Throwable) {
                 if (call != null && !call.isCanceled) {
                     Log.e(LOG_TAG, "FragmentCategory, onFailure: " + t.message)
                     val conn = Tools.checkConnection(context!!)
@@ -238,7 +237,7 @@ class CategoryFragment : Fragment() {
             onProcess = false
             showProgress(onProcess)
             startLoadMoreAdapter()
-            sharedPref!!.isRefreshPlaces = false
+            sharedPref.isRefreshPlaces = false
             textProgress!!.text = ""
             Snackbar.make(rootView!!, R.string.load_success, Snackbar.LENGTH_LONG).show()
             return

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.simplicityapp.modules.main.activity.RegionSelectorActivity">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/margin_top"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_begin="@dimen/popup_margin_top" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/margin_bottom"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_end="@dimen/popup_margin_bottom" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/margin_start"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_begin="@dimen/popup_margin_start" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/margin_end"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_end="@dimen/popup_margin_end" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="@dimen/spacing_empty"
+        android:layout_height="@dimen/spacing_empty"
+        android:background="@drawable/container_rounded_bordered"
+        app:layout_constraintStart_toStartOf="@id/margin_start"
+        app:layout_constraintEnd_toEndOf="@id/margin_end"
+        app:layout_constraintTop_toTopOf="@id/margin_top"
+        app:layout_constraintBottom_toBottomOf="@id/margin_bottom"
+        android:elevation="@dimen/elevation_card">
+
+        <TextView
+            android:id="@+id/textView_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:layout_marginTop="@dimen/spacing_normal"
+            android:layout_marginStart="@dimen/spacing_normal"
+            android:layout_marginEnd="@dimen/spacing_normal"
+            android:fontFamily="@font/raleway_semibold"
+            android:text="@string/region_selector_title"
+            android:textColor="@color/colorPrimary"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Selecciona tu ubicación"/>
+
+        <TextView
+            android:id="@+id/textView_subtitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+            android:layout_marginTop="@dimen/spacing_normal"
+            android:layout_marginStart="@dimen/spacing_normal"
+            android:layout_marginEnd="@dimen/spacing_normal"
+            android:fontFamily="@font/raleway"
+            android:text="@string/region_selector_subtitle"
+            app:layout_constraintTop_toBottomOf="@id/textView_title"
+            tools:text="Selecciona en el listado la ciudad o región en la que te encuentras"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView_region"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/spacing_empty"
+            app:layout_constraintTop_toBottomOf="@id/textView_subtitle"
+            app:layout_constraintBottom_toTopOf="@id/lyt_buttons"
+            android:layout_marginTop="@dimen/spacing_normal"
+            android:layout_marginStart="@dimen/spacing_normal"
+            android:layout_marginEnd="@dimen/spacing_normal"
+            />
+
+        <LinearLayout
+            android:id="@+id/lyt_buttons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="2"
+            android:orientation="horizontal"
+            android:layout_margin="@dimen/spacing_normal"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <Button
+                android:id="@+id/button_region_selector_cancel"
+                android:layout_width="@dimen/spacing_empty"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:text="@string/CANCEL" />
+
+            <Button
+                android:id="@+id/button_region_selector_ok"
+                android:layout_width="@dimen/spacing_empty"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:text="@string/OK" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

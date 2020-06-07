@@ -17,8 +17,9 @@ interface JsonAPI {
     fun getPlacesByPage(
         @Query("page") page: Int,
         @Query("count") count: Int,
-        @Query("draft") draft: Int
-    ): Call<CallbackListPlace>?
+        @Query("draft") draft: Int,
+        @Query("reg_id") regId: Int
+    ): Call<ListPlaceResponse>?
 
     @Headers(CACHE, AGENT)
     @GET("app/services/getPlaceDetails")
@@ -39,25 +40,6 @@ interface JsonAPI {
     fun registerDevice(
         @Body deviceInfo: DeviceInfo?
     ): Call<CallbackDevice>?
-
-    /*
-    @Headers(CACHE, AGENT)
-    @GET("app/services/getRegions")
-    fun getRegions(
-    ): RegionsResponse
-    */
-
-    /*
-    @Headers(CACHE, AGENT)
-    @GET("app/services/getRegion")
-    fun getRegion(
-        @Query("reg_id") reg_id: Int,
-    ): RegionResponse
-    */
-
-
-
-
 
     companion object {
         const val CACHE = "Cache-Control: max-age=0"

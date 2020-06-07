@@ -2,13 +2,13 @@
 <resources>
 
 <!--    <color name="colorPrimary">#1D88BA</color>-->
-    <color name="colorPrimaryGradient">#008BCE</color>
+    <color name="colorPrimaryGradient">#16C8E1</color>
     <color name="colorPrimary">#0D5389</color>
     <color name="colorPrimaryDark">#171C30</color>
 
 <!--    <color name="colorAccent">#EA68AF</color>-->
     <color name="colorAccent">#c2185b</color>
-    <color name="colorAccentGradient">#FF0198</color>
+    <color name="colorAccentGradient">#F504FD</color>
 
     <color name="colorSeparatorLight">#789CAF</color>
     <color name="colorSeparator">#AFB8C4</color>

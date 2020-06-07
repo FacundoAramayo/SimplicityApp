@@ -15,6 +15,7 @@ import com.simplicityapp.base.utils.ActionTools
 import com.simplicityapp.BuildConfig
 import com.simplicityapp.modules.main.activity.ActivityMain
 import com.simplicityapp.R
+import com.simplicityapp.modules.main.activity.RegionSelectorActivity
 
 class ActivitySplash : AppCompatActivity() {
 
@@ -28,8 +29,7 @@ class ActivitySplash : AppCompatActivity() {
         setContentView(R.layout.activity_splash)
         instance = this
 
-        sharedPref =
-            SharedPref(this)
+        sharedPref = SharedPref(this)
 
         chooseNextActivity()
         startUI()
@@ -76,7 +76,11 @@ class ActivitySplash : AppCompatActivity() {
     }
 
     private fun startActivityUpgradeDelay() {
-        val i = Intent(this@ActivitySplash, ActivityMain::class.java)
+        val i = if (sharedPref?.regionId == -1) {
+            Intent(this@ActivitySplash, ActivityMain::class.java)
+        } else {
+            Intent(this@ActivitySplash, RegionSelectorActivity::class.java)
+        }
         animationDrawable?.stop()
         ActionTools.startActivityWithDelay(ActivitySplashInstance,this@ActivitySplash, i)
         AnalyticsConstants.logAnalyticsEvent(APP_OPEN, AnalyticsConstants.UPGRADE_RUN)

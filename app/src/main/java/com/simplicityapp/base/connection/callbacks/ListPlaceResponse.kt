@@ -5,7 +5,7 @@ import java.util.ArrayList
 
 import com.simplicityapp.modules.places.model.Place
 
-class CallbackListPlace : Serializable {
+class ListPlaceResponse : Serializable {
 
     var status = ""
     var count = -1

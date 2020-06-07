@@ -22,6 +22,11 @@ public class SharedPref {
     private static final String SERVER_FLAG_KEY = BuildConfig.APPLICATION_ID + ".data.SERVER_FLAG_KEY";
     private static final String THEME_COLOR_KEY = BuildConfig.APPLICATION_ID + ".data.THEME_COLOR_KEY";
     private static final String LAST_PLACE_PAGE = "LAST_PLACE_PAGE_KEY";
+    private static final String REGION_ID_KEY = "REGION_ID_KEY";
+    private static final String REGION_TITLE_KEY = "REGION_TITLE_KEY";
+    private static final String REGION_LAT_KEY = "REGION_LAT_KEY";
+    private static final String REGION_LON_KEY = "REGION_LON_KEY";
+    private static final String REGION_RADIUS_KEY = "REGION_RADIUS_KEY";
 
     // need refresh
     private static final String REFRESH_PLACES = BuildConfig.APPLICATION_ID + ".data.REFRESH_PLACES";
@@ -137,6 +142,38 @@ public class SharedPref {
 
     public void setOpenAppCounter(int val) {
         sharedPreferences.edit().putInt("OPEN_COUNTER_KEY", val).apply();
+    }
+
+    public int getRegionId() {
+        return sharedPreferences.getInt(REGION_ID_KEY, -1);
+    }
+
+    public void setRegionId(int regionId) {
+        sharedPreferences.edit().putInt(REGION_ID_KEY, regionId).apply();
+    }
+
+    public String getRegionTitle() {
+        return sharedPreferences.getString(REGION_TITLE_KEY, "");
+    }
+
+    public void setRegionTitle(String regionTitle) {
+        sharedPreferences.edit().putString(REGION_TITLE_KEY, regionTitle).apply();
+    }
+
+    public float getRegionLat() {
+        return sharedPreferences.getFloat(REGION_LAT_KEY, 0);
+    }
+
+    public void setRegionLat(float regionLat) {
+        sharedPreferences.edit().putFloat(REGION_LAT_KEY, regionLat).apply();
+    }
+
+    public float getRegionLon() {
+        return sharedPreferences.getFloat(REGION_LON_KEY, 0);
+    }
+
+    public void setRegionLon(float regionLon) {
+        sharedPreferences.edit().putFloat(REGION_LON_KEY, regionLon).apply();
     }
 
 }

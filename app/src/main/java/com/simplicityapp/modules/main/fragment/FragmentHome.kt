@@ -22,7 +22,7 @@ import com.simplicityapp.baseui.adapter.AdapterPlaceGrid
 import com.simplicityapp.base.config.analytics.AnalyticsConstants
 import com.simplicityapp.base.rest.RestAdapter
 import com.simplicityapp.base.connection.callbacks.CallbackListContentInfo
-import com.simplicityapp.base.connection.callbacks.CallbackListPlace
+import com.simplicityapp.base.connection.callbacks.ListPlaceResponse
 import com.simplicityapp.base.config.AppConfig
 import com.simplicityapp.base.config.AppConfig.LIMIT_PLACES_TO_UPDATE
 import com.simplicityapp.base.config.Constant
@@ -66,12 +66,12 @@ class FragmentHome : Fragment() {
     private var btnQuickAccessFavorites: LinearLayout? = null
     private var btnQuickAccessMap: LinearLayout? = null
     private var btnQuickAccessEmergency: LinearLayout? = null
-    private var db: DatabaseHandler? = null
-    private var sharedPref: SharedPref? = null
+    private lateinit var db: DatabaseHandler
+    private lateinit var sharedPref: SharedPref
     private var adapterFeatured: AdapterPlaceGrid? = null
     private var adapterNews: AdapterNewsList? = null
     private var shimmerContainer: ShimmerFrameLayout? = null
-    private var callbackPlaces: Call<CallbackListPlace>? = null
+    private var placesResponse: Call<ListPlaceResponse>? = null
     private var callbackNews: Call<CallbackListContentInfo>? = null
     private var backToHome = false
     private var featuredOnProcess = false
@@ -168,8 +168,8 @@ class FragmentHome : Fragment() {
 
     override fun onDestroyView() {
         if (snackbarRetry != null) snackbarRetry?.dismiss()
-        if (callbackPlaces != null && callbackPlaces!!.isExecuted) {
-            callbackPlaces?.cancel()
+        if (placesResponse != null && placesResponse!!.isExecuted) {
+            placesResponse?.cancel()
         }
         if (callbackNews != null && callbackNews!!.isExecuted) {
             callbackNews?.cancel()
@@ -179,8 +179,8 @@ class FragmentHome : Fragment() {
 
     override fun onStop() {
         if (snackbarRetry != null) snackbarRetry?.dismiss()
-        if (callbackPlaces != null && callbackPlaces!!.isExecuted) {
-            callbackPlaces?.cancel()
+        if (placesResponse != null && placesResponse!!.isExecuted) {
+            placesResponse?.cancel()
         }
         if (callbackNews != null && callbackNews!!.isExecuted) {
             callbackNews?.cancel()
@@ -198,7 +198,7 @@ class FragmentHome : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        if (sharedPref!!.isRefreshPlaces || db?.placesSize!! < LIMIT_PLACES_TO_UPDATE) {
+        if (sharedPref.isRefreshPlaces || db.placesSize < LIMIT_PLACES_TO_UPDATE) {
             refreshContent()
             refreshNews()
         } else {
@@ -241,28 +241,12 @@ class FragmentHome : Fragment() {
         return Resources.getSystem().getDisplayMetrics().widthPixels
     }
 
-    private fun showProgress(show: Boolean) {
-        if (show) {
-            shimmerContainer?.startShimmer()
-            recyclerFeatured!!.visibility = View.GONE
-            recyclerNews?.visibility = View.GONE
-        } else {
-            if (shimmerContainer?.isShimmerStarted == true) {
-                shimmerContainer?.stopShimmer()
-            }
-            shimmerContainer?.visibility = View.GONE
-            mainScrollView?.visibility = View.VISIBLE
-            recyclerFeatured!!.visibility = View.VISIBLE
-            recyclerNews?.visibility = View.VISIBLE
-        }
-    }
-
     private fun refreshContent() {
         ThisApplication.instance?.location = null
-        sharedPref?.lastPlacePage = 1
-        sharedPref?.isRefreshPlaces = true
+        sharedPref.lastPlacePage = 1
+        sharedPref.isRefreshPlaces = true
         if (snackbarRetry != null) snackbarRetry?.dismiss()
-        actionRefreshFeatured(sharedPref!!.lastPlacePage)
+        actionRefreshFeatured(sharedPref.lastPlacePage)
     }
 
     //FEATURED LIST METHODS
@@ -288,9 +272,9 @@ class FragmentHome : Fragment() {
 
     private fun startLoadMoreFeaturedAdapter() {
         adapterFeatured?.resetListData()
-        val items = db?.getPlacesByPage(categoryId, Constant.LIMIT_LOADMORE, 0)
+        val items = db.getPlacesByPage(categoryId, Constant.LIMIT_LOADMORE, 0)
         adapterFeatured?.insertData(items, true)
-        val item_count = db!!.getPlacesSize(categoryId)
+        val item_count = db.getPlacesSize(categoryId)
         // detect when scroll reach bottom
         adapterFeatured?.setOnLoadMoreListener { current_page ->
             if (item_count > adapterFeatured!!.itemCount && current_page != 0) {
@@ -327,24 +311,24 @@ class FragmentHome : Fragment() {
         featuredOnProcess = true
         isLoadComplete(false)
         val isDraft = if (AppConfig.LAZY_LOAD) 1 else 0
-        callbackPlaces = RestAdapter.createAPI().getPlacesByPage(page_no, Constant.LIMIT_PLACE_REQUEST, isDraft)
-        callbackPlaces!!.enqueue(object : retrofit2.Callback<CallbackListPlace> {
-            override fun onResponse(call: Call<CallbackListPlace>, response: Response<CallbackListPlace>) {
+        placesResponse = RestAdapter.createAPI().getPlacesByPage(page_no, Constant.LIMIT_PLACE_REQUEST, isDraft, sharedPref.regionId)
+        placesResponse!!.enqueue(object : retrofit2.Callback<ListPlaceResponse> {
+            override fun onResponse(call: Call<ListPlaceResponse>, response: Response<ListPlaceResponse>) {
                 val resp = response.body()
                 if (resp != null) {
                     countTotal = resp.count_total
-                    if (page_no == 1) db!!.refreshTablePlace()
-                    db!!.insertListPlace(resp.places)  // save result into database
-                    sharedPref!!.lastPlacePage = page_no + 1
+                    if (page_no == 1) db.refreshTablePlace()
+                    Log.d("LOG-", "insert with region id: ${sharedPref.regionId}")
+                    db.insertListPlace(resp.places, sharedPref.regionId)  // save result into database
+                    sharedPref.lastPlacePage = page_no + 1
                     delayNextRequestFeatured(page_no)
                 } else {
                     onFailureRetryFeatured(page_no, getString(R.string.refresh_failed))
                 }
             }
 
-            override fun onFailure(call: Call<CallbackListPlace>?, t: Throwable) {
+            override fun onFailure(call: Call<ListPlaceResponse>?, t: Throwable) {
                 if (call != null && !call.isCanceled) {
-                    Log.e(LOG_TAG, "FragmentHome - onFailire ${t.message}")
                     val conn = Tools.checkConnection(context!!)
                     if (conn) {
                         onFailureRetryFeatured(page_no, getString(R.string.refresh_failed))
@@ -374,7 +358,7 @@ class FragmentHome : Fragment() {
             featuredOnProcess = false
             isLoadComplete(true)
             startLoadMoreFeaturedAdapter()
-            sharedPref!!.isRefreshPlaces = false
+            sharedPref.isRefreshPlaces = false
             rootView?.let { Snackbar.make(it, R.string.load_success, Snackbar.LENGTH_LONG).show() }
             return
         }
@@ -448,10 +432,10 @@ class FragmentHome : Fragment() {
                     if (resp != null && resp.status == "success") {
                         if (page_no == 1) {
                             adapterNews?.resetListData()
-                            db!!.refreshTableContentInfo()
+                            db.refreshTableContentInfo()
                         }
                         post_total = resp.count_total
-                        db!!.insertListContentInfo(resp.news_infos)
+                        db.insertListContentInfo(resp.news_infos)
                         displayApiResult(resp.news_infos)
                     } else {
                         onFailRequestNews(page_no)
@@ -469,9 +453,9 @@ class FragmentHome : Fragment() {
             if (page_no == 1) adapterNews?.resetListData()
             val limit = Constant.LIMIT_NEWS_REQUEST
             val offset = page_no * limit - limit
-            post_total = db!!.contentInfoSize
+            post_total = db.contentInfoSize
             val items =
-                db!!.getContentInfoByPage(limit, offset)
+                db.getContentInfoByPage(limit, offset)
             displayApiResult(items)
         }
     }

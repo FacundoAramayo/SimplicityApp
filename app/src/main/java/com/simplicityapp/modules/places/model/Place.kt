@@ -19,7 +19,8 @@ class Place (
         var last_update: Long = 0,
         var distance: Float = -1f,
         var categories: List<Category> = ArrayList(),
-        var images: List<Images> = ArrayList()
+        var images: List<Images> = ArrayList(),
+        var reg_id: Int = -1
     ): Serializable, ClusterItem {
 
         val isDraft: Boolean

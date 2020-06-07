@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.simplicityapp.base.config.Constant.LOG_TAG;
+import static com.simplicityapp.base.persistence.db.DatabaseConstants.*;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
 
@@ -34,7 +35,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private TypedArray cat_icon; // category name
 
     public DatabaseHandler(Context context) {
-        super(context, DatabaseConstants.DATABASE_NAME, null, DatabaseConstants.DATABASE_VERSION);
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.context = context;
         this.db = getWritableDatabase();
 
@@ -62,77 +63,80 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     private void createTablePlace(SQLiteDatabase db) {
-        String CREATE_TABLE = "CREATE TABLE " + DatabaseConstants.TABLE_PLACE + " ("
-                + DatabaseConstants.KEY_PLACE_ID + " INTEGER PRIMARY KEY, "
-                + DatabaseConstants.KEY_NAME + " TEXT, "
-                + DatabaseConstants.KEY_IMAGE + " TEXT, "
-                + DatabaseConstants.KEY_ADDRESS + " TEXT, "
-                + DatabaseConstants.KEY_PHONE + " TEXT, "
-                + DatabaseConstants.KEY_WEBSITE + " TEXT, "
-                + DatabaseConstants.KEY_DESCRIPTION + " TEXT, "
-                + DatabaseConstants.KEY_LNG + " REAL, "
-                + DatabaseConstants.KEY_LAT + " REAL, "
-                + DatabaseConstants.KEY_DISTANCE + " REAL, "
-                + DatabaseConstants.KEY_LAST_UPDATE + " NUMERIC "
+        String CREATE_TABLE = "CREATE TABLE " + TABLE_PLACE + " ("
+                + KEY_PLACE_ID + " INTEGER PRIMARY KEY, "
+                + KEY_NAME + " TEXT, "
+                + KEY_IMAGE + " TEXT, "
+                + KEY_ADDRESS + " TEXT, "
+                + KEY_PHONE + " TEXT, "
+                + KEY_WEBSITE + " TEXT, "
+                + KEY_DESCRIPTION + " TEXT, "
+                + KEY_LNG + " REAL, "
+                + KEY_LAT + " REAL, "
+                + KEY_DISTANCE + " REAL, "
+                + KEY_LAST_UPDATE + " NUMERIC, "
+                + KEY_REGION_ID +" INTEGER "
                 + ")";
         db.execSQL(CREATE_TABLE);
     }
 
     private void createTableImages(SQLiteDatabase db) {
-        String CREATE_TABLE = "CREATE TABLE " + DatabaseConstants.TABLE_IMAGES + " ("
-                + DatabaseConstants.KEY_IMG_PLACE_ID + " INTEGER, "
-                + DatabaseConstants.KEY_IMG_NAME + " TEXT, "
-                + " FOREIGN KEY(" + DatabaseConstants.KEY_IMG_PLACE_ID + ") REFERENCES " + DatabaseConstants.TABLE_PLACE + "(" + DatabaseConstants.KEY_PLACE_ID + ")"
+        String CREATE_TABLE = "CREATE TABLE " + TABLE_IMAGES + " ("
+                + KEY_IMG_PLACE_ID + " INTEGER, "
+                + KEY_IMG_NAME + " TEXT, "
+                + " FOREIGN KEY(" + KEY_IMG_PLACE_ID + ") REFERENCES " + TABLE_PLACE + "(" + KEY_PLACE_ID + ")"
                 + " )";
         db.execSQL(CREATE_TABLE);
     }
 
     private void createTableCategory(SQLiteDatabase db) {
-        String CREATE_TABLE = "CREATE TABLE " + DatabaseConstants.TABLE_CATEGORY + "("
-                + DatabaseConstants.KEY_CAT_ID + " INTEGER PRIMARY KEY, "
-                + DatabaseConstants.KEY_CAT_NAME + " TEXT, "
-                + DatabaseConstants.KEY_CAT_ICON + " INTEGER"
+        String CREATE_TABLE = "CREATE TABLE " + TABLE_CATEGORY + "("
+                + KEY_CAT_ID + " INTEGER PRIMARY KEY, "
+                + KEY_CAT_NAME + " TEXT, "
+                + KEY_CAT_ICON + " INTEGER"
                 + ")";
         db.execSQL(CREATE_TABLE);
     }
 
     private void createTableFavorites(SQLiteDatabase db) {
-        String CREATE_TABLE = "CREATE TABLE " + DatabaseConstants.TABLE_FAVORITES + "("
-                + DatabaseConstants.KEY_PLACE_ID + " INTEGER PRIMARY KEY "
+        String CREATE_TABLE = "CREATE TABLE " + TABLE_FAVORITES + "("
+                + KEY_PLACE_ID + " INTEGER PRIMARY KEY "
                 + ")";
         db.execSQL(CREATE_TABLE);
     }
 
     private void defineCategory(SQLiteDatabase db) {
-        db.execSQL("DELETE FROM " + DatabaseConstants.TABLE_CATEGORY); // refresh table content
+        // refresh table content
+        db.execSQL("DELETE FROM " + TABLE_CATEGORY);
         db.execSQL("VACUUM");
         for (int i = 0; i < categoriesId.length; i++) {
             ContentValues values = new ContentValues();
-            values.put(DatabaseConstants.KEY_CAT_ID, categoriesId[i]);
-            values.put(DatabaseConstants.KEY_CAT_NAME, categoriesName[i]);
-            values.put(DatabaseConstants.KEY_CAT_ICON, cat_icon.getResourceId(i, 0));
-            db.insert(DatabaseConstants.TABLE_CATEGORY, null, values); // Inserting Row
+            values.put(KEY_CAT_ID, categoriesId[i]);
+            values.put(KEY_CAT_NAME, categoriesName[i]);
+            values.put(KEY_CAT_ICON, cat_icon.getResourceId(i, 0));
+            // Inserting Row
+            db.insert(TABLE_CATEGORY, null, values);
         }
     }
 
     // Table Relational place_category
     private void createTableRelational(SQLiteDatabase db) {
-        String CREATE_TABLE = "CREATE TABLE " + DatabaseConstants.TABLE_PLACE_CATEGORY + "("
-                + DatabaseConstants.KEY_RELATION_PLACE_ID + " INTEGER, "      // id from table place
-                + DatabaseConstants.KEY_RELATION_CAT_ID + " INTEGER "        // id from table category
+        String CREATE_TABLE = "CREATE TABLE " + TABLE_PLACE_CATEGORY + "("
+                + KEY_RELATION_PLACE_ID + " INTEGER, "      // id from table place
+                + KEY_RELATION_CAT_ID + " INTEGER "        // id from table category
                 + ")";
         db.execSQL(CREATE_TABLE);
     }
 
 
     private void createTableContentInfo(SQLiteDatabase db) {
-        String CREATE_TABLE = "CREATE TABLE " + DatabaseConstants.TABLE_NEWS_INFO+ " ("
-                + DatabaseConstants.KEY_NEWS_ID+ " INTEGER PRIMARY KEY, "
-                + DatabaseConstants.KEY_NEWS_TITLE+ " TEXT, "
-                + DatabaseConstants.KEY_NEWS_BRIEF_CONTENT+ " TEXT, "
-                + DatabaseConstants.KEY_NEWS_FULL_CONTENT+ " TEXT, "
-                + DatabaseConstants.KEY_NEWS_IMAGE+ " TEXT, "
-                + DatabaseConstants.KEY_NEWS_LAST_UPDATE+ " NUMERIC "
+        String CREATE_TABLE = "CREATE TABLE " + TABLE_NEWS_INFO+ " ("
+                + KEY_NEWS_ID+ " INTEGER PRIMARY KEY, "
+                + KEY_NEWS_TITLE+ " TEXT, "
+                + KEY_NEWS_BRIEF_CONTENT+ " TEXT, "
+                + KEY_NEWS_FULL_CONTENT+ " TEXT, "
+                + KEY_NEWS_IMAGE+ " TEXT, "
+                + KEY_NEWS_LAST_UPDATE+ " NUMERIC "
                 + ")";
         db.execSQL(CREATE_TABLE);
     }
@@ -140,75 +144,78 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     // Upgrading database
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        Log.d(LOG_TAG, "DB, onUpgrade "+oldVersion+" to "+newVersion);
-        if(oldVersion < newVersion) {
+        Log.d(LOG_TAG, "DB, onUpgrade " + oldVersion + " to " + newVersion);
+        if (oldVersion < newVersion) {
             // Drop older table if existed
             truncateDB(db);
         }
     }
 
-    public void truncateDB(SQLiteDatabase db) {
-        db.execSQL("DROP TABLE IF EXISTS " + DatabaseConstants.TABLE_PLACE);
-        db.execSQL("DROP TABLE IF EXISTS " + DatabaseConstants.TABLE_IMAGES);
-        db.execSQL("DROP TABLE IF EXISTS " + DatabaseConstants.TABLE_CATEGORY);
-        db.execSQL("DROP TABLE IF EXISTS " + DatabaseConstants.TABLE_PLACE_CATEGORY);
-        db.execSQL("DROP TABLE IF EXISTS " + DatabaseConstants.TABLE_FAVORITES);
-        db.execSQL("DROP TABLE IF EXISTS " + DatabaseConstants.TABLE_NEWS_INFO);
-
+    private void truncateDB(SQLiteDatabase db) {
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_PLACE);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_IMAGES);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_CATEGORY);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_PLACE_CATEGORY);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_FAVORITES);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NEWS_INFO);
         // Create tables again
         onCreate(db);
     }
 
     // refresh table place and place_category
     public void refreshTablePlace(){
-        db.execSQL("DELETE FROM " + DatabaseConstants.TABLE_PLACE_CATEGORY);
+        db.execSQL("DELETE FROM " + TABLE_PLACE_CATEGORY);
         db.execSQL("VACUUM");
-        db.execSQL("DELETE FROM " + DatabaseConstants.TABLE_IMAGES);
+        db.execSQL("DELETE FROM " + TABLE_IMAGES);
         db.execSQL("VACUUM");
-        db.execSQL("DELETE FROM " + DatabaseConstants.TABLE_PLACE);
+        db.execSQL("DELETE FROM " + TABLE_PLACE);
         db.execSQL("VACUUM");
     }
 
     // refresh table place and place_category
     public void refreshTableContentInfo(){
-        db.execSQL("DELETE FROM " + DatabaseConstants.TABLE_NEWS_INFO);
+        db.execSQL("DELETE FROM " + TABLE_NEWS_INFO);
         db.execSQL("VACUUM");
     }
-
 
     /**
      * All CRUD(Create, Read, Update, Delete) Operations
      */
 
     // Insert List place
-    public void insertListPlace(List<Place> modelList) {
+    public void insertListPlace(List<Place> modelList, int regionId) {
         modelList = Tools.Companion.itemsWithDistance(context, modelList);
+        if (regionId == -1) return;
         for (Place p : modelList) {
+            p.setReg_id(regionId);
+            //TODO: Here filter locally region_id (We filter in request from service)
+            //if (p.getReg_id() == regionId) {
             ContentValues values = getPlaceValue(p);
-            // Inserting or Update Row
-            db.insertWithOnConflict(DatabaseConstants.TABLE_PLACE, null, values, SQLiteDatabase.CONFLICT_REPLACE);
+            // Inserting or update row
+            db.insertWithOnConflict(TABLE_PLACE, null, values, SQLiteDatabase.CONFLICT_REPLACE);
             // Insert relational place with category
             insertListPlaceCategory(p.getPlace_id(), p.getCategories());
             // Insert Images places
             insertListImages(p.getImages());
+            //}
         }
     }
 
-    // Insert List place
+    // Insert List Content Info
     public void insertListContentInfo(List<ContentInfo> modelList) {
         for (ContentInfo n : modelList) {
             ContentValues values = getContentInfoValue(n);
-            // Inserting or Update Row
-            db.insertWithOnConflict(DatabaseConstants.TABLE_NEWS_INFO, null, values, SQLiteDatabase.CONFLICT_REPLACE);
+            // Inserting or update row
+            db.insertWithOnConflict(TABLE_NEWS_INFO, null, values, SQLiteDatabase.CONFLICT_REPLACE);
         }
     }
 
     // Update one place
     public Place updatePlace(Place place) {
-        List<Place> objcs = new ArrayList<>();
-        objcs.add(place);
-        insertListPlace(objcs);
-        if(isPlaceExist(place.getPlace_id())){
+        List<Place> places = new ArrayList<>();
+        places.add(place);
+        insertListPlace(places, place.getReg_id());
+        if (isPlaceExist(place.getPlace_id())){
             return getPlace(place.getPlace_id());
         }
         return null;
@@ -216,28 +223,29 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     private ContentValues getPlaceValue(Place model){
         ContentValues values = new ContentValues();
-        values.put(DatabaseConstants.KEY_PLACE_ID, model.getPlace_id());
-        values.put(DatabaseConstants.KEY_NAME, model.getName());
-        values.put(DatabaseConstants.KEY_IMAGE, model.getImage());
-        values.put(DatabaseConstants.KEY_ADDRESS, model.getAddress());
-        values.put(DatabaseConstants.KEY_PHONE, model.getPhone());
-        values.put(DatabaseConstants.KEY_WEBSITE, model.getWebsite());
-        values.put(DatabaseConstants.KEY_DESCRIPTION, model.getDescription());
-        values.put(DatabaseConstants.KEY_LNG, model.getLng());
-        values.put(DatabaseConstants.KEY_LAT, model.getLat());
-        values.put(DatabaseConstants.KEY_DISTANCE, model.getDistance());
-        values.put(DatabaseConstants.KEY_LAST_UPDATE, model.getLast_update());
+        values.put(KEY_PLACE_ID, model.getPlace_id());
+        values.put(KEY_NAME, model.getName());
+        values.put(KEY_IMAGE, model.getImage());
+        values.put(KEY_ADDRESS, model.getAddress());
+        values.put(KEY_PHONE, model.getPhone());
+        values.put(KEY_WEBSITE, model.getWebsite());
+        values.put(KEY_DESCRIPTION, model.getDescription());
+        values.put(KEY_LNG, model.getLng());
+        values.put(KEY_LAT, model.getLat());
+        values.put(KEY_DISTANCE, model.getDistance());
+        values.put(KEY_LAST_UPDATE, model.getLast_update());
+        values.put(KEY_REGION_ID, model.getReg_id());
         return values;
     }
 
     private ContentValues getContentInfoValue(ContentInfo model){
         ContentValues values = new ContentValues();
-        values.put(DatabaseConstants.KEY_NEWS_ID, model.getId());
-        values.put(DatabaseConstants.KEY_NEWS_TITLE, model.getTitle());
-        values.put(DatabaseConstants.KEY_NEWS_BRIEF_CONTENT, model.getBrief_content());
-        values.put(DatabaseConstants.KEY_NEWS_FULL_CONTENT, model.getFull_content());
-        values.put(DatabaseConstants.KEY_NEWS_IMAGE, model.getImage());
-        values.put(DatabaseConstants.KEY_LAST_UPDATE, model.getLast_update());
+        values.put(KEY_NEWS_ID, model.getId());
+        values.put(KEY_NEWS_TITLE, model.getTitle());
+        values.put(KEY_NEWS_BRIEF_CONTENT, model.getBrief_content());
+        values.put(KEY_NEWS_FULL_CONTENT, model.getFull_content());
+        values.put(KEY_NEWS_IMAGE, model.getImage());
+        values.put(KEY_LAST_UPDATE, model.getLast_update());
         return values;
     }
 
@@ -246,10 +254,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         List<Place> locList = new ArrayList<>();
         Cursor cur;
         if (keyword.equals("")) {
-            cur = db.rawQuery("SELECT p.* FROM "+ DatabaseConstants.TABLE_PLACE+" p ORDER BY " + DatabaseConstants.KEY_LAST_UPDATE + " DESC", null);
+            cur = db.rawQuery("SELECT p.* FROM "+ TABLE_PLACE+" p ORDER BY " + KEY_LAST_UPDATE + " DESC", null);
         } else {
             keyword = keyword.toLowerCase();
-            cur = db.rawQuery("SELECT * FROM " + DatabaseConstants.TABLE_PLACE + " WHERE LOWER(" + DatabaseConstants.KEY_NAME + ") LIKE ? OR LOWER("+ DatabaseConstants.KEY_ADDRESS + ") LIKE ? OR LOWER("+ DatabaseConstants.KEY_DESCRIPTION + ") LIKE ? ",
+            cur = db.rawQuery("SELECT * FROM " + TABLE_PLACE + " WHERE LOWER(" + KEY_NAME + ") LIKE ? OR LOWER("+ KEY_ADDRESS + ") LIKE ? OR LOWER("+ KEY_DESCRIPTION + ") LIKE ? ",
                     new String[]{"%" + keyword + "%", "%" + keyword + "%", "%" + keyword + "%"});
         }
         locList = getListPlaceByCursor(cur);
@@ -263,15 +271,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public List<Place> getPlacesByPage(int c_id, int limit, int offset) {
         List<Place> locList = new ArrayList<>();
         StringBuilder sb = new StringBuilder();
-        sb.append(" SELECT DISTINCT p.* FROM "+ DatabaseConstants.TABLE_PLACE+" p ");
+        sb.append(" SELECT DISTINCT p.* FROM "+ TABLE_PLACE+" p ");
         if(c_id == -2) {
-            sb.append(", "+ DatabaseConstants.TABLE_FAVORITES+" f ");
-            sb.append(" WHERE p." + DatabaseConstants.KEY_PLACE_ID+ " = f." + DatabaseConstants.KEY_PLACE_ID+" ");
+            sb.append(", "+ TABLE_FAVORITES+" f ");
+            sb.append(" WHERE p." + KEY_PLACE_ID + " = f." + KEY_PLACE_ID+" ");
         } else if(c_id != -1){
-            sb.append(", "+ DatabaseConstants.TABLE_PLACE_CATEGORY+" pc ");
-            sb.append(" WHERE pc." + DatabaseConstants.KEY_RELATION_PLACE_ID+ " = p." + DatabaseConstants.KEY_PLACE_ID+ " AND pc." + DatabaseConstants.KEY_RELATION_CAT_ID+ "=" +c_id+ " ");
+            sb.append(", "+ TABLE_PLACE_CATEGORY+" pc ");
+            sb.append(" WHERE pc." + KEY_RELATION_PLACE_ID+ " = p." + KEY_PLACE_ID + " AND pc." + KEY_RELATION_CAT_ID+ "=" +c_id+ " ");
         }
-        sb.append(" ORDER BY p."+ DatabaseConstants.KEY_DISTANCE+" ASC, p."+ DatabaseConstants.KEY_LAST_UPDATE+" DESC ");
+        sb.append(" ORDER BY p."+ KEY_DISTANCE+" ASC, p."+ KEY_LAST_UPDATE+" DESC ");
         sb.append(" LIMIT "+limit+" OFFSET "+ offset+" ");
         Cursor cursor = db.rawQuery(sb.toString(), null);
         if (cursor.moveToFirst()) {
@@ -283,15 +291,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public List<Place> getAllPlaceByCategory(int c_id) {
         List<Place> locList = new ArrayList<>();
         StringBuilder sb = new StringBuilder();
-        sb.append(" SELECT DISTINCT p.* FROM "+ DatabaseConstants.TABLE_PLACE+" p ");
+        sb.append(" SELECT DISTINCT p.* FROM "+ TABLE_PLACE +" p ");
         if(c_id == -2) {
-            sb.append(", "+ DatabaseConstants.TABLE_FAVORITES+" f ");
-            sb.append(" WHERE p." + DatabaseConstants.KEY_PLACE_ID+ " = f." + DatabaseConstants.KEY_PLACE_ID+" ");
+            sb.append(", " + TABLE_FAVORITES +" f ");
+            sb.append(" WHERE p." + KEY_PLACE_ID + " = f." + KEY_PLACE_ID +" ");
         } else if(c_id != -1){
-            sb.append(", "+ DatabaseConstants.TABLE_PLACE_CATEGORY+" pc ");
-            sb.append(" WHERE pc." + DatabaseConstants.KEY_RELATION_PLACE_ID+ " = p." + DatabaseConstants.KEY_PLACE_ID+ " AND pc." + DatabaseConstants.KEY_RELATION_CAT_ID+ "=" +c_id+ " ");
+            sb.append(", "+ TABLE_PLACE_CATEGORY +" pc ");
+            sb.append(" WHERE pc." + KEY_RELATION_PLACE_ID + " = p." + KEY_PLACE_ID + " AND pc." + KEY_RELATION_CAT_ID + "=" + c_id + " ");
         }
-        sb.append(" ORDER BY p."+ DatabaseConstants.KEY_LAST_UPDATE+" DESC ");
+        sb.append(" ORDER BY p." + KEY_LAST_UPDATE + " DESC ");
         Cursor cursor = db.rawQuery(sb.toString(), null);
         if (cursor.moveToFirst()) {
             locList = getListPlaceByCursor(cursor);
@@ -301,7 +309,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     public Place getPlace(int place_id) {
         Place p = new Place();
-        String query = "SELECT * FROM " + DatabaseConstants.TABLE_PLACE + " p WHERE p." + DatabaseConstants.KEY_PLACE_ID + " = ?";
+        String query = "SELECT * FROM " + TABLE_PLACE + " p WHERE p." + KEY_PLACE_ID + " = ?";
         Cursor cursor = db.rawQuery(query, new String[]{place_id+""});
         p.setPlace_id(place_id);
         if (cursor.moveToFirst()) {
@@ -336,36 +344,37 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     private Place getPlaceByCursor(Cursor cur){
-        Place p       = new Place();
-        p.setPlace_id(cur.getInt(cur.getColumnIndex(DatabaseConstants.KEY_PLACE_ID)));
-        p.setName(cur.getString(cur.getColumnIndex(DatabaseConstants.KEY_NAME)));
-        p.setImage(cur.getString(cur.getColumnIndex(DatabaseConstants.KEY_IMAGE)));
-        p.setAddress(cur.getString(cur.getColumnIndex(DatabaseConstants.KEY_ADDRESS)));
-        p.setPhone(cur.getString(cur.getColumnIndex(DatabaseConstants.KEY_PHONE)));
-        p.setWebsite(cur.getString(cur.getColumnIndex(DatabaseConstants.KEY_WEBSITE)));
-        p.setDescription(cur.getString(cur.getColumnIndex(DatabaseConstants.KEY_DESCRIPTION)));
-        p.setLng(cur.getDouble(cur.getColumnIndex(DatabaseConstants.KEY_LNG)));
-        p.setLat(cur.getDouble(cur.getColumnIndex(DatabaseConstants.KEY_LAT)));
-        p.setDistance(cur.getFloat(cur.getColumnIndex(DatabaseConstants.KEY_DISTANCE)));
-        p.setLast_update(cur.getLong(cur.getColumnIndex(DatabaseConstants.KEY_LAST_UPDATE)));
+        Place p = new Place();
+        p.setPlace_id(cur.getInt(cur.getColumnIndex(KEY_PLACE_ID)));
+        p.setName(cur.getString(cur.getColumnIndex(KEY_NAME)));
+        p.setImage(cur.getString(cur.getColumnIndex(KEY_IMAGE)));
+        p.setAddress(cur.getString(cur.getColumnIndex(KEY_ADDRESS)));
+        p.setPhone(cur.getString(cur.getColumnIndex(KEY_PHONE)));
+        p.setWebsite(cur.getString(cur.getColumnIndex(KEY_WEBSITE)));
+        p.setDescription(cur.getString(cur.getColumnIndex(KEY_DESCRIPTION)));
+        p.setLng(cur.getDouble(cur.getColumnIndex(KEY_LNG)));
+        p.setLat(cur.getDouble(cur.getColumnIndex(KEY_LAT)));
+        p.setDistance(cur.getFloat(cur.getColumnIndex(KEY_DISTANCE)));
+        p.setLast_update(cur.getLong(cur.getColumnIndex(KEY_LAST_UPDATE)));
+        p.setReg_id(cur.getInt(cur.getColumnIndex(KEY_REGION_ID)));
         return p;
     }
 
     private ContentInfo getContentInfoByCursor(Cursor cur){
-        ContentInfo n      = new ContentInfo();
-        n.setId(cur.getInt(cur.getColumnIndex(DatabaseConstants.KEY_NEWS_ID)));
-        n.setTitle(cur.getString(cur.getColumnIndex(DatabaseConstants.KEY_NEWS_TITLE)));
-        n.setBrief_content(cur.getString(cur.getColumnIndex(DatabaseConstants.KEY_NEWS_BRIEF_CONTENT)));
-        n.setFull_content(cur.getString(cur.getColumnIndex(DatabaseConstants.KEY_NEWS_FULL_CONTENT)));
-        n.setImage(cur.getString(cur.getColumnIndex(DatabaseConstants.KEY_NEWS_IMAGE)));
-        n.setLast_update(cur.getLong(cur.getColumnIndex(DatabaseConstants.KEY_NEWS_LAST_UPDATE)));
+        ContentInfo n = new ContentInfo();
+        n.setId(cur.getInt(cur.getColumnIndex(KEY_NEWS_ID)));
+        n.setTitle(cur.getString(cur.getColumnIndex(KEY_NEWS_TITLE)));
+        n.setBrief_content(cur.getString(cur.getColumnIndex(KEY_NEWS_BRIEF_CONTENT)));
+        n.setFull_content(cur.getString(cur.getColumnIndex(KEY_NEWS_FULL_CONTENT)));
+        n.setImage(cur.getString(cur.getColumnIndex(KEY_NEWS_IMAGE)));
+        n.setLast_update(cur.getLong(cur.getColumnIndex(KEY_NEWS_LAST_UPDATE)));
         return n;
     }
 
     // Get LIst Images By Place Id
     public List<Images> getListImageByPlaceId(int place_id) {
         List<Images> imageList = new ArrayList<>();
-        String selectQuery = "SELECT * FROM " + DatabaseConstants.TABLE_IMAGES + " WHERE " + DatabaseConstants.KEY_IMG_PLACE_ID + " = ?";
+        String selectQuery = "SELECT * FROM " + TABLE_IMAGES + " WHERE " + KEY_IMG_PLACE_ID + " = ?";
         Cursor cursor = db.rawQuery(selectQuery, new String[]{place_id + ""});
         if (cursor.moveToFirst()) {
             do {
@@ -381,7 +390,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public Category getCategory(int c_id){
         Category category = new Category();
         try {
-            Cursor cur = db.rawQuery("SELECT * FROM " + DatabaseConstants.TABLE_CATEGORY + " WHERE " + DatabaseConstants.KEY_CAT_ID + " = ?", new String[]{c_id + ""});
+            Cursor cur = db.rawQuery("SELECT * FROM " + TABLE_CATEGORY + " WHERE " + KEY_CAT_ID + " = ?", new String[]{c_id + ""});
             cur.moveToFirst();
             category.setCat_id(cur.getInt(0));
             category.setName(cur.getString(1));
@@ -402,8 +411,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         Log.d(LOG_TAG, "DB, Limit : " + limit + " Offset : " + offset);
         List<ContentInfo> list = new ArrayList<>();
         StringBuilder sb = new StringBuilder();
-        sb.append(" SELECT DISTINCT n.* FROM "+ DatabaseConstants.TABLE_NEWS_INFO+" n ");
-        sb.append(" ORDER BY n."+ DatabaseConstants.KEY_NEWS_ID+" DESC ");
+        sb.append(" SELECT DISTINCT n.* FROM "+ TABLE_NEWS_INFO+" n ");
+        sb.append(" ORDER BY n."+ KEY_NEWS_ID+" DESC ");
         sb.append(" LIMIT "+limit+" OFFSET "+ offset+" ");
         Cursor cursor = db.rawQuery(sb.toString(), null);
         if (cursor.moveToFirst()) {
@@ -416,10 +425,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void insertListImages(List<Images> images) {
         for (int i = 0; i < images.size(); i++) {
             ContentValues values = new ContentValues();
-            values.put(DatabaseConstants.KEY_IMG_PLACE_ID, images.get(i).getPlace_id());
-            values.put(DatabaseConstants.KEY_IMG_NAME, images.get(i).getName());
+            values.put(KEY_IMG_PLACE_ID, images.get(i).getPlace_id());
+            values.put(KEY_IMG_NAME, images.get(i).getName());
             // Inserting or Update Row
-            db.insertWithOnConflict(DatabaseConstants.TABLE_IMAGES, null, values, SQLiteDatabase.CONFLICT_REPLACE);
+            db.insertWithOnConflict(TABLE_IMAGES, null, values, SQLiteDatabase.CONFLICT_REPLACE);
         }
     }
 
@@ -427,75 +436,76 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void insertListPlaceCategory(int place_id, List<Category> categories) {
         for (Category c : categories) {
             ContentValues values = new ContentValues();
-            values.put(DatabaseConstants.KEY_RELATION_PLACE_ID, place_id);
-            values.put(DatabaseConstants.KEY_RELATION_CAT_ID, c.getCat_id());
+            values.put(KEY_RELATION_PLACE_ID, place_id);
+            values.put(KEY_RELATION_CAT_ID, c.getCat_id());
             // Inserting or Update Row
-            db.insertWithOnConflict(DatabaseConstants.TABLE_PLACE_CATEGORY, null, values, SQLiteDatabase.CONFLICT_REPLACE);
+            db.insertWithOnConflict(TABLE_PLACE_CATEGORY, null, values, SQLiteDatabase.CONFLICT_REPLACE);
         }
     }
 
     // Adding new Connector
     public void addFavorites(int id) {
         ContentValues values = new ContentValues();
-        values.put(DatabaseConstants.KEY_PLACE_ID, id);
+        values.put(KEY_PLACE_ID, id);
         // Inserting Row
-        db.insert(DatabaseConstants.TABLE_FAVORITES, null, values);
+        db.insert(TABLE_FAVORITES, null, values);
     }
 
     // all Favorites
-    public List<Place> getAllFavorites() {
+    public List<Place> getAllFavorites(int reg_id) {
+        StringBuilder sb = new StringBuilder();
         List<Place> locList = new ArrayList<>();
-        Cursor cursor = db.rawQuery("SELECT p.* FROM " + DatabaseConstants.TABLE_PLACE + " p, " + DatabaseConstants.TABLE_FAVORITES + " f" +" WHERE p." + DatabaseConstants.KEY_PLACE_ID + " = f." + DatabaseConstants.KEY_PLACE_ID, null);
+        sb.append("SELECT p.* FROM " + TABLE_PLACE + " p, " + TABLE_FAVORITES + " f" +" WHERE p." + KEY_PLACE_ID + " = f." + KEY_PLACE_ID + " AND p." + KEY_REGION_ID + " = " + reg_id +" ");
+        Cursor cursor = db.rawQuery(sb.toString(), null);
         locList = getListPlaceByCursor(cursor);
         return locList;
     }
 
+
+    // all Favorites
+    public int getFavoritesCount(int reg_id) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("SELECT p.* FROM " + TABLE_PLACE + " p, " + TABLE_FAVORITES + " f" +" WHERE p." + KEY_PLACE_ID + " = f." + KEY_PLACE_ID + " AND p." + KEY_REGION_ID + " = " + reg_id +" ");
+        Cursor cursor = db.rawQuery(sb.toString(), null);
+        return cursor.getCount();
+    }
+
     public void deleteFavorites(int id) {
         if (isFavoritesExist(id)) {
-            db.delete(DatabaseConstants.TABLE_FAVORITES, DatabaseConstants.KEY_PLACE_ID + " = ?", new String[]{id+""});
+            db.delete(TABLE_FAVORITES, KEY_PLACE_ID + " = ?", new String[]{id+""});
         }
     }
 
     public boolean isFavoritesExist(int id) {
-        Cursor cursor = db.rawQuery("SELECT * FROM " + DatabaseConstants.TABLE_FAVORITES + " WHERE " + DatabaseConstants.KEY_PLACE_ID + " = ?", new String[]{id+""});
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_FAVORITES + " WHERE " + KEY_PLACE_ID + " = ?", new String[]{id+""});
         int count = cursor.getCount();
-        if (count > 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return count > 0;
     }
 
     private boolean isPlaceExist(int id) {
-        Cursor cursor = db.rawQuery("SELECT * FROM " + DatabaseConstants.TABLE_PLACE + " WHERE " + DatabaseConstants.KEY_PLACE_ID + " = ?", new String[]{id + ""});
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_PLACE + " WHERE " + KEY_PLACE_ID + " = ?", new String[]{id + ""});
         int count = cursor.getCount();
         cursor.close();
-        if (count > 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return count > 0;
     }
 
     public int getPlacesSize() {
-        int count = (int)DatabaseUtils.queryNumEntries(db, DatabaseConstants.TABLE_PLACE);
-        return count;
+        return (int)DatabaseUtils.queryNumEntries(db, TABLE_PLACE);
     }
 
     public int getContentInfoSize() {
-        int count = (int)DatabaseUtils.queryNumEntries(db, DatabaseConstants.TABLE_NEWS_INFO);
-        return count;
+        return (int)DatabaseUtils.queryNumEntries(db, TABLE_NEWS_INFO);
     }
 
     public int getPlacesSize(int c_id) {
         StringBuilder sb = new StringBuilder();
-        sb.append("SELECT COUNT(DISTINCT p."+ DatabaseConstants.KEY_PLACE_ID+") FROM "+ DatabaseConstants.TABLE_PLACE+" p ");
+        sb.append("SELECT COUNT(DISTINCT p."+ KEY_PLACE_ID +") FROM "+ TABLE_PLACE+" p ");
         if(c_id == -2) {
-            sb.append(", "+ DatabaseConstants.TABLE_FAVORITES+" f ");
-            sb.append(" WHERE p." + DatabaseConstants.KEY_PLACE_ID+ " = f." + DatabaseConstants.KEY_PLACE_ID+" ");
+            sb.append(", "+ TABLE_FAVORITES+" f ");
+            sb.append(" WHERE p." + KEY_PLACE_ID + " = f." + KEY_PLACE_ID+" ");
         } else if(c_id != -1){
-            sb.append(", "+ DatabaseConstants.TABLE_PLACE_CATEGORY+" pc ");
-            sb.append(" WHERE pc." + DatabaseConstants.KEY_RELATION_PLACE_ID+ " = p." + DatabaseConstants.KEY_PLACE_ID+ " AND pc." + DatabaseConstants.KEY_RELATION_CAT_ID+ "=" +c_id+ " ");
+            sb.append(", "+ TABLE_PLACE_CATEGORY+" pc ");
+            sb.append(" WHERE pc." + KEY_RELATION_PLACE_ID+ " = p." + KEY_PLACE_ID + " AND pc." + KEY_RELATION_CAT_ID+ "=" +c_id+ " ");
         }
         Cursor cursor = db.rawQuery(sb.toString(), null);
         cursor.moveToFirst();
@@ -505,23 +515,19 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     public int getCategorySize() {
-        int count = (int)DatabaseUtils.queryNumEntries(db, DatabaseConstants.TABLE_CATEGORY);
-        return count;
+        return (int)DatabaseUtils.queryNumEntries(db, TABLE_CATEGORY);
     }
 
     public int getFavoritesSize() {
-        int count = (int)DatabaseUtils.queryNumEntries(db, DatabaseConstants.TABLE_FAVORITES);
-        return count;
+        return (int) DatabaseUtils.queryNumEntries(db, TABLE_FAVORITES);
     }
 
     public int getImagesSize() {
-        int count = (int)DatabaseUtils.queryNumEntries(db, DatabaseConstants.TABLE_IMAGES);
-        return count;
+        return (int)DatabaseUtils.queryNumEntries(db, TABLE_IMAGES);
     }
 
     public int getPlaceCategorySize() {
-        int count = (int)DatabaseUtils.queryNumEntries(db, DatabaseConstants.TABLE_PLACE_CATEGORY);
-        return count;
+        return (int)DatabaseUtils.queryNumEntries(db, TABLE_PLACE_CATEGORY);
     }
 
     // to export database file
@@ -530,8 +536,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         try {
             File sd = Environment.getExternalStorageDirectory();
             if (sd.canWrite()) {
-                String currentDBPath = "/data/data/" + context.getPackageName() + "/databases/"+ DatabaseConstants.DATABASE_NAME;
-                String backupDBPath = "backup_"+ DatabaseConstants.DATABASE_NAME+".db";
+                String currentDBPath = "/data/data/" + context.getPackageName() + "/databases/"+ DATABASE_NAME;
+                String backupDBPath = "backup_"+ DATABASE_NAME+".db";
                 File currentDB = new File(currentDBPath);
                 File backupDB = new File(sd, backupDBPath);
 

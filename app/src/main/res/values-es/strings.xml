@@ -250,4 +250,13 @@
     <string name="have_you_a_commerce">Registra tu comercio</string>
     <string name="categories_selector_title">Categorías</string>
 
+    <!--Region selector-->
+    <string name="region_selector_cancel_warning">Tienes que seleccionar una región de la lista</string>
+    <string name="region_selector_ok_warning">Primero tiene que seleccionar una región</string>
+
+
+    <!--Categories selector-->
+    <string name="region_selector_title">Selecciona tu ubicación</string>
+    <string name="region_selector_subtitle">Selecciona en el listado la ciudad o región en la que te encuentras</string>
+
 </resources>

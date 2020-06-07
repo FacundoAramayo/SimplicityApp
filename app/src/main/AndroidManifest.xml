@@ -24,6 +24,9 @@
         android:supportsRtl="true"
         android:theme="@style/BaseTheme"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".modules.main.activity.RegionSelectorActivity"
+            android:theme="@style/AppTheme.GradientBackground"/>
         <activity android:name=".modules.categories.activity.CategoriesSelectorActivity" />
         <activity
             android:name=".modules.start.activity.ActivityWelcome"
@@ -46,7 +49,7 @@
             android:label="@string/app_name"
             android:theme="@style/BaseTheme" />
         <activity
-            android:name=".modules.places.activity.ActivityMaps"
+            android:name=".modules.maps.activity.ActivityMaps"
             android:label="@string/activity_title_maps"
             android:theme="@style/BaseTheme" />
         <activity android:name=".modules.places.activity.ActivityPlaceDetail" />

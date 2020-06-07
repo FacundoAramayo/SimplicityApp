@@ -26,6 +26,12 @@
 
     <style name="AppThemeSetting.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="AppTheme.GradientBackground" parent="Start.BaseTheme">
+        <item name="android:windowBackground">@drawable/gradient_box_1</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
     <style name="Checkbox" parent="@style/Widget.AppCompat.CompoundButton.CheckBox">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -61,7 +67,6 @@
         <item name="android:background">@drawable/container_rounded_bordered</item>
         <item name="android:elevation">@dimen/elevation_action_bar</item>
     </style>
-
 
     <style name="AppTheme.Toolbar" parent="ThemeOverlay.AppCompat.Light">
         <item name="android:textColor">@color/colorPrimary</item>
@@ -144,7 +149,6 @@
         <item name="android:layout_marginBottom">@dimen/spacing_medium</item>
         <item name="android:layout_marginLeft">@dimen/spacing_medium</item>
         <item name="android:layout_marginRight">@dimen/spacing_medium</item>
-
     </style>
 
     <style name="menu_labels_style">

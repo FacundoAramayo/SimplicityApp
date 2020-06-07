@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.IdRes
@@ -27,7 +28,7 @@ import com.simplicityapp.base.config.Constant.*
 import com.simplicityapp.base.utils.ActionTools
 import com.simplicityapp.modules.categories.fragment.CategoryFragment
 import com.simplicityapp.modules.main.fragment.FragmentHome
-import com.simplicityapp.modules.places.activity.ActivityMaps
+import com.simplicityapp.modules.maps.activity.ActivityMaps
 import com.simplicityapp.modules.notifications.activity.ActivityNotifications
 import com.simplicityapp.modules.settings.activity.ActivitySetting
 import com.simplicityapp.modules.categories.activity.CategoriesSelectorActivity
@@ -43,12 +44,15 @@ class ActivityMain : AppCompatActivity() {
     private var exitTime: Long = 0
     private var cat: IntArray? = null
     private var navigationView: NavigationView? = null
-    private var db: DatabaseHandler? = null
-    private var sharedPref: SharedPref? = null
+    private lateinit var db: DatabaseHandler
+    private lateinit var sharedPref: SharedPref
     private var fragment: Fragment? = null
     private var drawerLayout: DrawerLayout? = null
+    private var cityName: TextView? = null
     var actionBar: ActionBar? = null
     var toolbar: Toolbar? = null
+
+    private var regionId: Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,8 +66,7 @@ class ActivityMain : AppCompatActivity() {
         }
 
         db = DatabaseHandler(this)
-        sharedPref =
-            SharedPref(this)
+        sharedPref = SharedPref(this)
 
         configOpenApp()
         initUI()
@@ -76,6 +79,14 @@ class ActivityMain : AppCompatActivity() {
         val prefs = getSharedPreferences(Constant.PREFS_NAME, Context.MODE_PRIVATE)
         val currentVersionCode = BuildConfig.VERSION_CODE
         prefs.edit().putInt(Constant.PREF_VERSION_CODE_KEY, currentVersionCode).apply()
+    }
+
+    private fun checkRegion() {
+        regionId = sharedPref.regionId
+        if (regionId == -1) {
+            val intent = Intent(this, RegionSelectorActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun initUI() {
@@ -98,7 +109,7 @@ class ActivityMain : AppCompatActivity() {
         val toggle = object : ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
 
             override fun onDrawerOpened(drawerView: View) {
-                updateFavoritesCounter(navigationView!!, R.id.nav_favorites, db!!.favoritesSize)
+                updateFavoritesCounter(navigationView!!, R.id.nav_favorites, db.getFavoritesCount(sharedPref.regionId))
                 super.onDrawerOpened(drawerView)
             }
         }
@@ -106,6 +117,13 @@ class ActivityMain : AppCompatActivity() {
         toggle.syncState()
 
         navigationView = findViewById(R.id.nav_view)
+        val navHeader = navigationView?.getHeaderView(0)
+        cityName = navHeader?.findViewById(R.id.textView_city_name)
+        val changeRegion = navHeader?.findViewById<ImageView>(R.id.imageView_change_region)
+        changeRegion?.setOnClickListener {
+            changeRegion()
+        }
+
         navigationView?.setNavigationItemSelectedListener { item -> onItemSelected(item.itemId, item.title.toString()) }
 
         /*CONFIG UI WITH AppConfig*/
@@ -208,14 +226,6 @@ class ActivityMain : AppCompatActivity() {
                     AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_ACTION, AnalyticsConstants.HOME)
                 }
             }
-//            R.id.nav_all -> {
-//                fragment =
-//                    CategoryFragment()
-//                home = false
-//                bundle.putInt(CategoryFragment.TAG_CATEGORY, -1)
-//                actionBar?.title = title
-//                AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_ACTION, AnalyticsConstants.ALL_PLACES)
-//            }
             R.id.nav_map -> {
                 val i = Intent(applicationContext, ActivityMaps::class.java)
                 home = false
@@ -229,8 +239,7 @@ class ActivityMain : AppCompatActivity() {
                 startActivity(i)
             }
             R.id.nav_favorites -> {
-                fragment =
-                    CategoryFragment()
+                fragment = CategoryFragment()
                 home = false
                 bundle.putInt(CategoryFragment.TAG_CATEGORY, -2)
                 actionBar?.title = title
@@ -243,12 +252,6 @@ class ActivityMain : AppCompatActivity() {
                 home = false
                 AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_ACTION, AnalyticsConstants.NOTIFICATIONS)
                 startActivity(i)
-            }
-            R.id.nav_profile -> {
-//                val j = Intent(this, ActivityProfile::class.java)
-//                home = false
-//                AnalyticsConstants.logEvent(AnalyticsConstants.SELECT_MENU_ITEM, AnalyticsConstants.ACTION_PROFILE)
-//                startActivity(j)
             }
             R.id.nav_featured -> {
                 openFragmentCategory(title, 0)
@@ -321,7 +324,9 @@ class ActivityMain : AppCompatActivity() {
     }
 
     override fun onResume() {
-        updateFavoritesCounter(navigationView!!, R.id.nav_favorites, db!!.favoritesSize)
+        checkRegion()
+        updateRegionTitle()
+        updateFavoritesCounter(navigationView!!, R.id.nav_favorites, db.getFavoritesCount(sharedPref.regionId))
         super.onResume()
     }
 
@@ -338,6 +343,16 @@ class ActivityMain : AppCompatActivity() {
     private fun updateFavoritesCounter(nav: NavigationView, @IdRes itemId: Int, count: Int) {
         val view = nav.menu.findItem(itemId).actionView.findViewById<View>(R.id.counter) as TextView
         view.text = count.toString()
+    }
+
+    private fun changeRegion() {
+        val intent = Intent(this, RegionSelectorActivity::class.java)
+        intent.putExtra(IS_FROM_HOME, true)
+        startActivity(intent)
+    }
+
+    private fun updateRegionTitle() {
+        cityName?.text = sharedPref.regionTitle
     }
 
     companion object {

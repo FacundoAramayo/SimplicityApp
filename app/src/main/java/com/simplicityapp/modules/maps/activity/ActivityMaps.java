@@ -1,4 +1,4 @@
-package com.simplicityapp.modules.places.activity;
+package com.simplicityapp.modules.maps.activity;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -33,6 +33,7 @@ import com.simplicityapp.base.persistence.db.DatabaseHandler;
 import com.simplicityapp.base.utils.Tools;
 import com.simplicityapp.base.utils.PermissionUtil;
 import com.simplicityapp.baseui.utils.UITools;
+import com.simplicityapp.modules.places.activity.ActivityPlaceDetail;
 import com.simplicityapp.modules.places.model.Category;
 import com.simplicityapp.modules.places.model.Place;
 import com.simplicityapp.R;

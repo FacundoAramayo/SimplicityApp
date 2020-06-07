@@ -10,10 +10,10 @@ data class Region (
     val name: String,
 
     @SerializedName("lat")
-    val latitude: Long,
+    val latitude: Float,
 
     @SerializedName("lon")
-    val longitude: Long,
+    val longitude: Float,
 
     @SerializedName("radius")
     val radius: Int

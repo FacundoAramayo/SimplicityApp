@@ -298,7 +298,14 @@
     <string name="help_us_grow">Help us grow!</string>
     <string name="have_you_a_commerce">Have you a commerce?</string>
 
+    <!--Region selector-->
+    <string name="region_selector_cancel_warning">You must select a region available</string>
+    <string name="region_selector_ok_warning">First, you must select a region</string>
+
+
     <!--Categories selector-->
     <string name="categories_selector_title">Categories</string>
+    <string name="region_selector_title">Set your location</string>
+    <string name="region_selector_subtitle">Choose your city or region</string>
 
 </resources>

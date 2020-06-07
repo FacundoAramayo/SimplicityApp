@@ -66,4 +66,6 @@ public class Constant {
     //Bundle keys
     public static String IS_FIRST_OPEN = "IS_FIRST_OPEN";
 
+    public static String IS_FROM_HOME = "IS_FROM_HOME";
+
 }
