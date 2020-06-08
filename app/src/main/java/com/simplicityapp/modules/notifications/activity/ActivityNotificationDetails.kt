@@ -24,10 +24,10 @@ import com.simplicityapp.base.utils.Tools
 import com.simplicityapp.baseui.utils.UITools
 import com.simplicityapp.base.config.Constant
 import com.simplicityapp.modules.main.activity.ActivityMain
-import com.simplicityapp.modules.notifications.model.ContentInfo
 import com.simplicityapp.modules.places.activity.ActivityFullScreenImage
 import com.simplicityapp.modules.start.activity.ActivitySplash
 import com.simplicityapp.R
+import com.simplicityapp.modules.notifications.model.News
 import java.util.ArrayList
 
 class ActivityNotificationDetails : AppCompatActivity() {
@@ -35,7 +35,7 @@ class ActivityNotificationDetails : AppCompatActivity() {
     private var fromNotif: Boolean? = null
 
     // extra obj
-    private var contentInfo: ContentInfo? = null
+    private var news: News? = null
 
     private var toolbar: Toolbar? = null
     private var actionBar: ActionBar? = null
@@ -47,7 +47,7 @@ class ActivityNotificationDetails : AppCompatActivity() {
         overridePendingTransition(R.anim.enter_slide_in, R.anim.enter_slide_out)
         setContentView(R.layout.activity_notifications_details)
 
-        contentInfo = intent.getSerializableExtra(EXTRA_OBJECT) as ContentInfo
+        news = intent.getSerializableExtra(EXTRA_OBJECT) as News
         fromNotif = intent.getBooleanExtra(EXTRA_FROM_NOTIF, false)
 
         initComponent()
@@ -55,7 +55,7 @@ class ActivityNotificationDetails : AppCompatActivity() {
         displayData()
 
         // analytics tracking
-        AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.VIEW_NOTIFICATION, contentInfo?.title.orEmpty())
+        AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.VIEW_NOTIFICATION, news?.title.orEmpty())
     }
 
     private fun initComponent() {
@@ -68,14 +68,14 @@ class ActivityNotificationDetails : AppCompatActivity() {
         actionBar = supportActionBar
         actionBar!!.setDisplayHomeAsUpEnabled(true)
         actionBar!!.setHomeButtonEnabled(true)
-        actionBar!!.title = Html.fromHtml(contentInfo!!.title)
+        actionBar!!.title = Html.fromHtml(news!!.title)
     }
 
     private fun displayData() {
 
         webView = findViewById<View>(R.id.content) as WebView
         var html_data = "<style>img{max-width:100%;height:auto;} iframe{width:100%;}</style> "
-        html_data += contentInfo!!.full_content
+        html_data += news!!.full_content
         webView!!.settings.javaScriptEnabled = true
         webView!!.settings
         webView!!.settings.builtInZoomControls = true
@@ -87,19 +87,19 @@ class ActivityNotificationDetails : AppCompatActivity() {
         webView!!.setOnTouchListener { v, event -> event.action == MotionEvent.ACTION_MOVE }
 
         (findViewById<View>(R.id.date) as TextView).text =
-            Tools.getFormattedDate(contentInfo!!.last_update)
+            Tools.getFormattedDate(news!!.last_update)
         UITools.displayImage(
             this,
             findViewById<View>(R.id.image) as ImageView,
-            Constant.getURLimgNews(contentInfo!!.image)
+            Constant.getURLimgNews(news!!.image)
         )
 
         (findViewById<View>(R.id.lyt_image) as MaterialRippleLayout).setOnClickListener {
             AnalyticsConstants.logAnalyticsEvent(
-                AnalyticsConstants.SELECT_NOTIFICATION_OPEN_PHOTO, contentInfo?.image
+                AnalyticsConstants.SELECT_NOTIFICATION_OPEN_PHOTO, news?.image
             )
             val images_list = ArrayList<String>()
-            images_list.add(Constant.getURLimgNews(contentInfo!!.image))
+            images_list.add(Constant.getURLimgNews(news!!.image))
             val i = Intent(this@ActivityNotificationDetails, ActivityFullScreenImage::class.java)
             i.putStringArrayListExtra(ActivityFullScreenImage.EXTRA_IMGS, images_list)
             startActivity(i)
@@ -129,13 +129,13 @@ class ActivityNotificationDetails : AppCompatActivity() {
             return true
         } else if (id == R.id.action_share) {
             AnalyticsConstants.logAnalyticsEvent(
-                AnalyticsConstants.SELECT_NOTIFICATION_ITEM_SHARE, contentInfo?.title
+                AnalyticsConstants.SELECT_NOTIFICATION_ITEM_SHARE, news?.title
             )
             AnalyticsConstants.logAnalyticsShare(
                 AnalyticsConstants.CONTENT_NOTIFICATION,
-                contentInfo?.title.orEmpty()
+                news?.title.orEmpty()
             )
-            ActionTools.methodShareNews(this, contentInfo!!)
+            ActionTools.methodShareNews(this, news!!)
         }
         return super.onOptionsItemSelected(item)
     }
@@ -167,7 +167,7 @@ class ActivityNotificationDetails : AppCompatActivity() {
         private val SCREEN_NAME = "NOTIFICATIONS_DETAILS"
 
         // activity transition
-        fun navigate(activity: Activity, obj: ContentInfo, from_notif: Boolean?, analyticsEvent: String) {
+        fun navigate(activity: Activity, obj: News, from_notif: Boolean?, analyticsEvent: String) {
             AnalyticsConstants.logAnalyticsEvent(analyticsEvent, obj.title
             )
             val i =
@@ -179,10 +179,10 @@ class ActivityNotificationDetails : AppCompatActivity() {
             activity.startActivity(i)
         }
 
-        fun navigateBase(context: Context, obj: ContentInfo, from_notif: Boolean?): Intent {
+        fun navigateBase(context: Context, obj: News, fromNotif: Boolean?): Intent {
             val i = Intent(context, ActivityNotificationDetails::class.java)
             i.putExtra(EXTRA_OBJECT, obj)
-            i.putExtra(EXTRA_FROM_NOTIF, from_notif)
+            i.putExtra(EXTRA_FROM_NOTIF, fromNotif)
             return i
         }
     }

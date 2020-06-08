@@ -9,9 +9,9 @@ interface JsonAPI {
 
     //TODO: Todas las peticiones deben ir a su respectivo módulo, en services, y ser suspend fun con corutinas
 
-
     /* Place API transaction ------------------------------- */
 
+    //Pendiente de quitar (ya está la implementación de courutina en FragmentHome)
     @Headers(CACHE, AGENT)
     @GET("app/services/listPlaces")
     fun getPlacesByPage(
@@ -21,19 +21,12 @@ interface JsonAPI {
         @Query("reg_id") regId: Int
     ): Call<ListPlaceResponse>?
 
+    //Pendiente de quitar (ya está la implementación de courutina en FragmentHome)
     @Headers(CACHE, AGENT)
     @GET("app/services/getPlaceDetails")
     fun getPlaceDetails(
         @Query("place_id") place_id: Int
     ): Call<CallbackPlaceDetails>?
-
-    /* News Info API transaction ------------------------------- */
-    @Headers(CACHE, AGENT)
-    @GET("app/services/listNewsInfo")
-    fun getContentInfoByPage(
-        @Query("page") page: Int,
-        @Query("count") count: Int
-    ): Call<CallbackListContentInfo>?
 
     @Headers(CACHE, AGENT)
     @POST("app/services/insertGcm")

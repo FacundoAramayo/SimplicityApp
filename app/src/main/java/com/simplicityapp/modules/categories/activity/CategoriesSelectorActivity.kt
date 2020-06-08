@@ -42,11 +42,6 @@ class CategoriesSelectorActivity : AppCompatActivity(), BaseActivity {
         binding.toolbar.toolbar.title = categoryName
     }
 
-
-    override fun onResume() {
-        super.onResume()
-    }
-
     override fun onBackPressed() {
         if (fragment is CategoryFragment) {
             fragment = CategoriesSelectorFragment.newInstance()

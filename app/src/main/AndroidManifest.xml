@@ -54,7 +54,7 @@
             android:theme="@style/BaseTheme" />
         <activity android:name=".modules.places.activity.ActivityPlaceDetail" />
         <activity android:name=".modules.places.activity.ActivitySearch" />
-        <activity android:name=".modules.notifications.activity.ActivityNotifications" />
+        <activity android:name=".modules.notifications.activity.ActivityNotificationsV2" />
         <activity android:name=".modules.notifications.activity.ActivityNotificationDetails" />
         <activity
             android:name=".modules.settings.activity.ActivitySetting"

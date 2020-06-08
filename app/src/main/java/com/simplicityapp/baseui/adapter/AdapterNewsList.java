@@ -12,8 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.simplicityapp.base.config.Constant;
 import com.simplicityapp.baseui.utils.UITools;
-import com.simplicityapp.modules.notifications.model.ContentInfo;
 import com.simplicityapp.R;
+import com.simplicityapp.modules.notifications.model.News;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,13 +25,13 @@ public class AdapterNewsList extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private boolean loading;
 
     private Context ctx;
-    private List<ContentInfo> items;
+    private List<News> items;
 
     private OnLoadMoreListener onLoadMoreListener;
     private OnItemClickListener mOnItemClickListener;
 
     public interface OnItemClickListener {
-        void onItemClick(View view, ContentInfo obj, int position);
+        void onItemClick(View view, News obj, int position);
     }
 
     public void setOnItemClickListener(final OnItemClickListener mItemClickListener) {
@@ -38,7 +39,7 @@ public class AdapterNewsList extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public AdapterNewsList(Context context, RecyclerView view, List<ContentInfo> items) {
+    public AdapterNewsList(Context context, RecyclerView view, List<News> items) {
         this.items = items;
         ctx = context;
         lastItemViewDetector(view);
@@ -87,7 +88,7 @@ public class AdapterNewsList extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         if (holder instanceof OriginalViewHolder) {
-            final ContentInfo o = items.get(position);
+            final News o = items.get(position);
             OriginalViewHolder vItem = (OriginalViewHolder) holder;
             vItem.title.setText(o.getTitle());
             vItem.brief_content.setText(o.getBrief_content());
@@ -116,7 +117,7 @@ public class AdapterNewsList extends RecyclerView.Adapter<RecyclerView.ViewHolde
         return this.items.get(position) != null ? VIEW_ITEM : VIEW_PROG;
     }
 
-    public void insertData(List<ContentInfo> items) {
+    public void insertData(List<News> items) {
         setLoaded();
         int positionStart = getItemCount();
         int itemCount = items.size();

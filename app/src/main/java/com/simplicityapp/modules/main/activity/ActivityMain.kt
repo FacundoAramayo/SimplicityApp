@@ -28,12 +28,12 @@ import com.simplicityapp.base.config.Constant.*
 import com.simplicityapp.base.utils.ActionTools
 import com.simplicityapp.modules.categories.fragment.CategoryFragment
 import com.simplicityapp.modules.main.fragment.FragmentHome
-import com.simplicityapp.modules.notifications.activity.ActivityNotifications
 import com.simplicityapp.modules.settings.activity.ActivitySetting
 import com.simplicityapp.modules.categories.activity.CategoriesSelectorActivity
 import com.simplicityapp.modules.places.activity.ActivitySearch
 import com.simplicityapp.R
 import com.simplicityapp.modules.maps.activity.ActivityMapsV2
+import com.simplicityapp.modules.notifications.activity.ActivityNotificationsV2
 
 class ActivityMain : AppCompatActivity() {
 
@@ -248,7 +248,7 @@ class ActivityMain : AppCompatActivity() {
                 }
             }
             R.id.nav_news -> {
-                val i = Intent(this, ActivityNotifications::class.java)
+                val i = Intent(this, ActivityNotificationsV2::class.java)
                 home = false
                 AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_ACTION, AnalyticsConstants.NOTIFICATIONS)
                 startActivity(i)

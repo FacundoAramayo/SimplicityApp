@@ -39,6 +39,11 @@ public class Constant {
     public static final String COMMERCIAL_GUIDE = "COMMERCIAL_GUIDE";
     public static final String JOBS_GUIDE = "JOBS_GUIDE";
 
+
+    //RESPONSE
+    public static final String SUCCESS_RESPONSE = "success";
+
+
     /**
      * ------------------- DON'T EDIT THIS ---------------------------------------------------------
      */

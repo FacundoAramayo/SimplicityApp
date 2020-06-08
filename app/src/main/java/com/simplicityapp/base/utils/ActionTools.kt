@@ -11,9 +11,9 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat.startActivity
 import com.simplicityapp.base.config.Constant.LOG_TAG
-import com.simplicityapp.modules.notifications.model.ContentInfo
 import com.simplicityapp.modules.places.model.Place
 import com.simplicityapp.R
+import com.simplicityapp.modules.notifications.model.News
 import java.util.*
 
 class ActionTools {
@@ -101,7 +101,7 @@ class ActionTools {
             act.startActivity(Intent.createChooser(sharingIntent, act.getString(R.string.shareUsing)))
         }
 
-        fun methodShareNews(act: Activity, n: ContentInfo) {
+        fun methodShareNews(act: Activity, n: News) {
 
             // string to share
             val shareApp = act.getString(R.string.findInApp) + ": "

@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Environment;
 import android.util.Log;
 import com.simplicityapp.base.utils.Tools;
-import com.simplicityapp.modules.notifications.model.ContentInfo;
+import com.simplicityapp.modules.notifications.model.News;
 import com.simplicityapp.modules.places.model.Category;
 import com.simplicityapp.modules.places.model.Images;
 import com.simplicityapp.modules.places.model.Place;
@@ -188,8 +188,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         if (regionId == -1) return;
         for (Place p : modelList) {
             p.setReg_id(regionId);
-            //TODO: Here filter locally region_id (We filter in request from service)
-            //if (p.getReg_id() == regionId) {
             ContentValues values = getPlaceValue(p);
             // Inserting or update row
             db.insertWithOnConflict(TABLE_PLACE, null, values, SQLiteDatabase.CONFLICT_REPLACE);
@@ -197,13 +195,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             insertListPlaceCategory(p.getPlace_id(), p.getCategories());
             // Insert Images places
             insertListImages(p.getImages());
-            //}
         }
     }
 
     // Insert List Content Info
-    public void insertListContentInfo(List<ContentInfo> modelList) {
-        for (ContentInfo n : modelList) {
+    public void insertListContentInfo(List<News> modelList) {
+        for (News n : modelList) {
             ContentValues values = getContentInfoValue(n);
             // Inserting or update row
             db.insertWithOnConflict(TABLE_NEWS_INFO, null, values, SQLiteDatabase.CONFLICT_REPLACE);
@@ -238,7 +235,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return values;
     }
 
-    private ContentValues getContentInfoValue(ContentInfo model){
+    private ContentValues getContentInfoValue(News model){
         ContentValues values = new ContentValues();
         values.put(KEY_NEWS_ID, model.getId());
         values.put(KEY_NEWS_TITLE, model.getTitle());
@@ -331,8 +328,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return locList;
     }
 
-    private List<ContentInfo> getListContentInfoByCursor(Cursor cur) {
-        List<ContentInfo> list = new ArrayList<>();
+    private List<News> getListContentInfoByCursor(Cursor cur) {
+        List<News> list = new ArrayList<>();
         // looping through all rows and adding to list
         if (cur.moveToFirst()) {
             do {
@@ -360,14 +357,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return p;
     }
 
-    private ContentInfo getContentInfoByCursor(Cursor cur){
-        ContentInfo n = new ContentInfo();
-        n.setId(cur.getInt(cur.getColumnIndex(KEY_NEWS_ID)));
-        n.setTitle(cur.getString(cur.getColumnIndex(KEY_NEWS_TITLE)));
-        n.setBrief_content(cur.getString(cur.getColumnIndex(KEY_NEWS_BRIEF_CONTENT)));
-        n.setFull_content(cur.getString(cur.getColumnIndex(KEY_NEWS_FULL_CONTENT)));
-        n.setImage(cur.getString(cur.getColumnIndex(KEY_NEWS_IMAGE)));
-        n.setLast_update(cur.getLong(cur.getColumnIndex(KEY_NEWS_LAST_UPDATE)));
+    private News getContentInfoByCursor(Cursor cur){
+        News n = new News(
+                cur.getInt(cur.getColumnIndex(KEY_NEWS_ID)),
+                cur.getString(cur.getColumnIndex(KEY_NEWS_TITLE)),
+                cur.getString(cur.getColumnIndex(KEY_NEWS_BRIEF_CONTENT)),
+                cur.getString(cur.getColumnIndex(KEY_NEWS_FULL_CONTENT)),
+                cur.getString(cur.getColumnIndex(KEY_NEWS_IMAGE)),
+                cur.getLong(cur.getColumnIndex(KEY_NEWS_LAST_UPDATE))
+        );
         return n;
     }
 
@@ -405,11 +403,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 
     // get list News Info
-    public List<ContentInfo> getContentInfoByPage(int limit, int offset) {
+    public List<News> getContentInfoByPage(int limit, int offset) {
 
         Log.d(LOG_TAG,"DB, Size : " + getContentInfoSize());
         Log.d(LOG_TAG, "DB, Limit : " + limit + " Offset : " + offset);
-        List<ContentInfo> list = new ArrayList<>();
+        List<News> list = new ArrayList<>();
         StringBuilder sb = new StringBuilder();
         sb.append(" SELECT DISTINCT n.* FROM "+ TABLE_NEWS_INFO+" n ");
         sb.append(" ORDER BY n."+ KEY_NEWS_ID+" DESC ");

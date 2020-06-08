@@ -9,5 +9,5 @@ data class FcmNotification(
         var content: String? = null,
         var type: String? = null,
         var place: Place? = null,
-        var news: ContentInfo? = null
+        var news: News? = null
     ) : Serializable

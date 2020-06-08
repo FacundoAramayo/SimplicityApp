@@ -32,8 +32,8 @@ import com.simplicityapp.base.utils.PermissionUtil;
 import com.simplicityapp.baseui.utils.UITools;
 import com.simplicityapp.modules.main.activity.ActivityMain;
 import com.simplicityapp.modules.notifications.activity.ActivityNotificationDetails;
-import com.simplicityapp.modules.notifications.model.ContentInfo;
 import com.simplicityapp.modules.notifications.model.FcmNotification;
+import com.simplicityapp.modules.notifications.model.News;
 import com.simplicityapp.modules.places.activity.ActivityPlaceDetail;
 import com.simplicityapp.modules.places.model.Place;
 import com.simplicityapp.R;
@@ -78,7 +78,7 @@ public class FcmMessagingService extends FirebaseMessagingService {
 
                 // load data news_info if exist
                 String news_str = data.get("news");
-                fcmNotif.setNews(news_str != null ? new Gson().fromJson(news_str, ContentInfo.class) : null);
+                fcmNotif.setNews(news_str != null ? new Gson().fromJson(news_str, News.class) : null);
 
             } else if (remoteMessage.getNotification() != null) {
                 RemoteMessage.Notification rn = remoteMessage.getNotification();
