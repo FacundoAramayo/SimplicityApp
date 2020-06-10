@@ -23,9 +23,6 @@ class Place (
         var reg_id: Int = -1
     ): Serializable, ClusterItem {
 
-        val isDraft: Boolean
-            get() = address == null && phone == null && website == null && description == null
-
         override fun getPosition(): LatLng {
             return LatLng(lat, lng)
         }

@@ -298,11 +298,9 @@ class ActivityPlaceDetail : AppCompatActivity() {
             backAction()
             return true
         } else if (id == R.id.action_share) {
-            if (place?.isDraft == false) {
-                logAnalyticsEvent(AnalyticsConstants.SELECT_PLACE_SHARE, place?.name, false)
-                logAnalyticsShare(CONTENT_PLACE, place?.name.orEmpty())
-                ActionTools.methodShare(this@ActivityPlaceDetail, place!!)
-            }
+            logAnalyticsEvent(AnalyticsConstants.SELECT_PLACE_SHARE, place?.name, false)
+            logAnalyticsShare(CONTENT_PLACE, place?.name.orEmpty())
+            ActionTools.methodShare(this@ActivityPlaceDetail, place!!)
         }
         return super.onOptionsItemSelected(item)
     }
@@ -333,15 +331,18 @@ class ActivityPlaceDetail : AppCompatActivity() {
     // places detail load with lazy scheme
     private fun loadPlaceData() {
         place = db.getPlace(place!!.place_id)
-        if (place!!.isDraft) {
+        displayData(place!!)
+        /*if (place!!.isDraft) {
             if (Tools.checkConnection(this)) {
                 requestDetailsPlace(place!!.place_id)
             } else {
                 onFailureRetry(getString(R.string.no_internet))
             }
         } else {
-            displayData(place!!)
+
         }
+        This code allow lazy load
+         */
     }
 
     private fun requestDetailsPlace(place_id: Int) {
