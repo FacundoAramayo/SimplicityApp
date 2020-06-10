@@ -52,23 +52,31 @@ class ActionTools {
             builder.show()
         }
 
-        fun dialNumber(ctx: Context, phone: String) {
+        fun dialNumber(ctx: Context, phone: String, fallback: String) {
             try {
                 val i = Intent(Intent.ACTION_DIAL)
                 i.data = Uri.parse("tel:$phone")
+                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 ctx.startActivity(i)
             } catch (e: Exception) {
-                Toast.makeText(ctx, "Cannot dial number", Toast.LENGTH_SHORT).show()
+                e.printStackTrace()
+                Toast.makeText(ctx, fallback, Toast.LENGTH_SHORT).show()
             }
         }
 
-        fun directUrl(ctx: Context, website: String) {
-            var url = website
-            if (!url.startsWith("https://") && !url.startsWith("http://")) {
-                url = "http://$url"
+        fun directUrl(ctx: Context, website: String, fallback: String) {
+            try {
+                var url = website
+                if (!url.startsWith("https://") && !url.startsWith("http://")) {
+                    url = "http://$url"
+                }
+                val i = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                ctx.startActivity(i)
+            } catch (e: java.lang.Exception) {
+                e.printStackTrace()
+                Toast.makeText(ctx, fallback, Toast.LENGTH_SHORT).show()
             }
-            val i = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-            ctx.startActivity(i)
         }
 
         fun methodShare(act: Activity) {

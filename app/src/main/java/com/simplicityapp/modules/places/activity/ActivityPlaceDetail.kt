@@ -11,6 +11,7 @@ import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.View
 import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.WindowManager
 import android.webkit.WebChromeClient
 import androidx.appcompat.app.AppCompatActivity
@@ -47,6 +48,7 @@ import com.simplicityapp.modules.main.activity.ActivityMain
 import com.simplicityapp.modules.places.model.Images
 import com.simplicityapp.modules.places.model.Place
 import com.simplicityapp.R
+import com.simplicityapp.base.config.Constant.WEB_VIEW_MIME_TYPE
 import java.lang.Exception
 import retrofit2.Call
 import retrofit2.Response
@@ -54,8 +56,8 @@ import retrofit2.Response
 class ActivityPlaceDetail : AppCompatActivity() {
 
     private var place: Place? = null
-    private var parentView: View? = null
-    private var db: DatabaseHandler? = null
+    private lateinit var parentView: View
+    private lateinit var db: DatabaseHandler
     private var onProcess = false
     private var isFromNotif = false
     private var callback: Call<CallbackPlaceDetails>? = null
@@ -66,10 +68,11 @@ class ActivityPlaceDetail : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityPlaceDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        parentView = findViewById(android.R.id.content)
-        setOnClickListeners(applicationContext)
-
         db = DatabaseHandler(this)
+
+        parentView = findViewById(android.R.id.content)
+
+
         ViewCompat.setTransitionName(binding.placeAppBarLayout,
             EXTRA_OBJ
         )
@@ -86,43 +89,36 @@ class ActivityPlaceDetail : AppCompatActivity() {
         val distance = place.distance
 
         binding.details.apply {
-            if (place.phone.isNullOrEmpty()) {
-                placeLytPhone?.visibility = GONE
-            }
-            if (place.website.isNullOrEmpty()) {
-                placeLytWebsite?.visibility = GONE
-            }
-            placeAddress?.text = place.address
-            placePhone?.text = if (place.phone == "-" || place.phone!!.trim { it <= ' ' } == "") getString(R.string.no_phone_number) else place.phone
-            placeWebsite?.text = if (place.website == "-" || place.website!!.trim { it <= ' ' } == "") getString(R.string.no_website) else place.website
+            if (place.phone.isNullOrEmpty()) { placeLytPhone.visibility = GONE }
+            if (place.website.isNullOrEmpty()) { placeLytWebsite.visibility = GONE }
+            if (place.address.isNullOrEmpty()) { placeLytAddress.visibility = GONE }
+            if (place.hasLatLngPosition().not()) { placeHowToGet.visibility = GONE }
+            if (place.description.isNullOrEmpty()) { placeCardViewDescription.visibility = GONE }
 
-            try {
-                if (place.description?.replace("&nbsp;", "").isNullOrBlank() or
-                    (place.description?.length!! < 20)) {
-                    placeCardViewDescription?.visibility = GONE
-                }
-            } catch (e: Exception) { e.printStackTrace() }
+            if (place.hasLatLngPosition() and !place.address.isNullOrEmpty()) {
+                placeLytDistance.visibility = VISIBLE
+                placeDistance.text = Tools.getFormattedDistance(distance)
+            }
 
-            val htmlData = WEB_VIEW_HTML_CONFIG + place.description
-            placeDescriptionWebView?.settings?.builtInZoomControls = true
-            placeDescriptionWebView?.setBackgroundColor(Color.TRANSPARENT)
-            placeDescriptionWebView?.webChromeClient = WebChromeClient()
-            placeDescriptionWebView?.loadData(htmlData, "text/html; charset=UTF-8", null)
-            placeDescriptionWebView?.settings?.javaScriptEnabled = true
+            placeAddress.text = place.address
+            placePhone.text = place.phone
+            placeWebsite.text = place.website
+
+            val htmlData = "$WEB_VIEW_HTML_CONFIG ${place.description}"
+            placeDescriptionWebView.settings?.builtInZoomControls = true
+            placeDescriptionWebView.setBackgroundColor(Color.TRANSPARENT)
+            placeDescriptionWebView.webChromeClient = WebChromeClient()
+            placeDescriptionWebView.loadData(htmlData, WEB_VIEW_MIME_TYPE, null)
+            placeDescriptionWebView.settings.javaScriptEnabled = true
             // disable scroll on touch
-            placeDescriptionWebView?.setOnTouchListener { v, event -> event.action == MotionEvent.ACTION_MOVE }
+            placeDescriptionWebView.setOnTouchListener { v, event -> event.action == MotionEvent.ACTION_MOVE }
 
-            if (distance == -1f) {
-                placeLytDistance?.visibility = View.GONE
-            } else {
-                placeLytDistance?.visibility = View.VISIBLE
-                placeDistance?.text = Tools.getFormattedDistance(distance)
-            }
 
-            setImageGallery(db!!.getListImageByPlaceId(place.place_id))
+
+            setImageGallery(db.getListImageByPlaceId(place.place_id))
             try {
                 if ((place.images.size > 1).not()) {
-                    placeCardViewPhotos?.visibility = GONE
+                    placeCardViewPhotos.visibility = GONE
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -132,6 +128,7 @@ class ActivityPlaceDetail : AppCompatActivity() {
 
     override fun onResume() {
         loadPlaceData()
+        setOnClickListeners(applicationContext)
         setToolbarColor()
         binding.details.placeDescriptionWebView?.onResume()
         super.onResume()
@@ -139,46 +136,45 @@ class ActivityPlaceDetail : AppCompatActivity() {
 
     private fun setOnClickListeners(context: Context) {
         binding.details.apply {
-            placeAddress?.setOnClickListener {
-                if (!place!!.isDraft) {
+            placeAddress.setOnClickListener {
+                if (place!!.hasLatLngPosition()) {
                     logAnalyticsEvent(SELECT_PLACE_ADDRESS, place?.name.orEmpty(), false)
-                    val uri =
-                        Uri.parse("http://maps.google.com/maps?q=loc: ${place!!.lat},${place!!.lng}")
+                    val uri = Uri.parse("http://maps.google.com/maps?q=loc: ${place!!.lat},${place!!.lng}")
                     val intent = Intent(Intent.ACTION_VIEW, uri)
                     startActivity(intent)
                 }
             }
-            placeHowToGet?.setOnClickListener {
+            placeHowToGet.setOnClickListener {
                 logAnalyticsEvent(SELECT_PLACE_OPEN_NAVIGATION, place?.name.orEmpty(), false)
                 val navigation = Intent(Intent.ACTION_VIEW, Uri.parse("http://maps.google.com/maps?daddr=${place!!.lat},${place!!.lng}"))
                 startActivity(navigation)
             }
-            placeLytPhone?.setOnClickListener {
-                if (!place!!.isDraft && place!!.phone != "-" && place!!.phone!!.trim { it <= ' ' } != "") {
+            placeLytPhone.setOnClickListener {
+                if (!place!!.phone.isNullOrEmpty()) {
                     logAnalyticsEvent(SELECT_PLACE_PHONE, place?.name.orEmpty(), false)
-                    ActionTools.dialNumber(context, place!!.phone!!)
+                    ActionTools.dialNumber(context, place!!.phone!!, resources.getString(R.string.fail_dial_number))
                 } else {
-                    Snackbar.make(parentView!!, R.string.fail_dial_number, Snackbar.LENGTH_SHORT).show()
+                    Snackbar.make(parentView, R.string.fail_dial_number, Snackbar.LENGTH_SHORT).show()
                 }
             }
-            placeLytWebsite?.setOnClickListener {
-                if (!place!!.isDraft && place!!.website != "-" && place!!.website!!.trim { it <= ' ' } != "") {
+            placeLytWebsite.setOnClickListener {
+                if (!place!!.website.isNullOrEmpty()) {
                     logAnalyticsEvent(SELECT_PLACE_WEB_SITE, place?.name.orEmpty(), false)
-                    ActionTools.directUrl(context, place!!.website!!)
+                    ActionTools.directUrl(context, place!!.website!!, resources.getString(R.string.fail_open_website))
                 } else {
-                    Snackbar.make(parentView!!, R.string.fail_open_website, Snackbar.LENGTH_SHORT).show()
+                    Snackbar.make(parentView, R.string.fail_open_website, Snackbar.LENGTH_SHORT).show()
                 }
             }
         }
         binding.placeFab.setOnClickListener {
-            if (db!!.isFavoritesExist(place!!.place_id)) {
-                db!!.deleteFavorites(place!!.place_id)
-                Snackbar.make(parentView!!, place!!.name + " " + getString(R.string.remove_favorite), Snackbar.LENGTH_SHORT).show()
+            if (db.isFavoritesExist(place!!.place_id)) {
+                db.deleteFavorites(place!!.place_id)
+                Snackbar.make(parentView, place!!.name + " " + getString(R.string.remove_favorite), Snackbar.LENGTH_SHORT).show()
                 logAnalyticsEvent(SELECT_PLACE_FAVORITES_REMOVE, place?.name.orEmpty(), true)
                 fabToggle(false)
             } else {
-                db!!.addFavorites(place!!.place_id)
-                Snackbar.make(parentView!!, place!!.name + " " + getString(R.string.add_favorite), Snackbar.LENGTH_SHORT).show()
+                db.addFavorites(place!!.place_id)
+                Snackbar.make(parentView, place!!.name + " " + getString(R.string.add_favorite), Snackbar.LENGTH_SHORT).show()
                 logAnalyticsEvent(SELECT_PLACE_FAVORITES_ADD, place?.name.orEmpty(), true)
                 fabToggle(true)
             }
@@ -195,8 +191,8 @@ class ActivityPlaceDetail : AppCompatActivity() {
         }
 
         val adapter = AdapterImageList(this, newImages)
-        binding.details.placeGalleryRecycler?.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        binding.details.placeGalleryRecycler?.adapter = adapter
+        binding.details.placeGalleryRecycler.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        binding.details.placeGalleryRecycler.adapter = adapter
 
         adapter.setOnItemClickListener { view, viewModel, pos ->
             logAnalyticsEvent(AnalyticsConstants.SELECT_PLACE_PHOTO, place?.name, false)
@@ -217,7 +213,7 @@ class ActivityPlaceDetail : AppCompatActivity() {
     }
 
     private fun configFab() {
-        if (db!!.isFavoritesExist(place!!.place_id)) {
+        if (db.isFavoritesExist(place!!.place_id)) {
             binding.placeFab.setImageResource(R.drawable.ic_nav_favorites)
         } else {
             binding.placeFab.setImageResource(R.drawable.ic_nav_favorites_outline)
@@ -322,7 +318,7 @@ class ActivityPlaceDetail : AppCompatActivity() {
 
     override fun onPause() {
         super.onPause()
-        binding.details.placeDescriptionWebView?.onPause()
+        binding.details.placeDescriptionWebView.onPause()
     }
 
     private fun backAction() {
@@ -336,7 +332,7 @@ class ActivityPlaceDetail : AppCompatActivity() {
 
     // places detail load with lazy scheme
     private fun loadPlaceData() {
-        place = db!!.getPlace(place!!.place_id)
+        place = db.getPlace(place!!.place_id)
         if (place!!.isDraft) {
             if (Tools.checkConnection(this)) {
                 requestDetailsPlace(place!!.place_id)
@@ -350,7 +346,7 @@ class ActivityPlaceDetail : AppCompatActivity() {
 
     private fun requestDetailsPlace(place_id: Int) {
         if (onProcess) {
-            Snackbar.make(parentView!!, R.string.task_running, Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(parentView, R.string.task_running, Snackbar.LENGTH_SHORT).show()
             return
         }
         onProcess = true
@@ -360,7 +356,7 @@ class ActivityPlaceDetail : AppCompatActivity() {
             override fun onResponse(call: Call<CallbackPlaceDetails>, response: Response<CallbackPlaceDetails>) {
                 val resp = response.body()
                 if (resp != null) {
-                    place = db!!.updatePlace(resp.place)
+                    place = db.updatePlace(resp.place)
                     displayDataWithDelay(place)
                 } else {
                     onFailureRetry(getString(R.string.failed_load_details))
@@ -392,9 +388,9 @@ class ActivityPlaceDetail : AppCompatActivity() {
     private fun onFailureRetry(msg: String) {
         showProgressbar(false)
         onProcess = false
-        snackbar = Snackbar.make(parentView!!, msg, Snackbar.LENGTH_INDEFINITE)
-        snackbar!!.setAction(R.string.RETRY) { loadPlaceData() }
-        snackbar!!.show()
+        snackbar = Snackbar.make(parentView, msg, Snackbar.LENGTH_INDEFINITE)
+        snackbar?.setAction(R.string.RETRY) { loadPlaceData() }
+        snackbar?.show()
         retryDisplaySnackbar()
     }
 
@@ -409,8 +405,8 @@ class ActivityPlaceDetail : AppCompatActivity() {
     }
 
     companion object {
-        private val EXTRA_OBJ = "key.EXTRA_OBJ"
-        private val EXTRA_NOTIF_FLAG = "key.EXTRA_NOTIF_FLAG"
+        private const val EXTRA_OBJ = "key.EXTRA_OBJ"
+        private const val EXTRA_NOTIF_FLAG = "key.EXTRA_NOTIF_FLAG"
 
         // give preparation animation activity transition
         fun navigate(activity: AppCompatActivity?, sharedView: View, p: Place, analyticsEvent: String) {

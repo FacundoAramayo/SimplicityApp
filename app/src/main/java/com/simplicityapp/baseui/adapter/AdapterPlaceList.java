@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -22,6 +23,7 @@ import com.simplicityapp.modules.places.model.Place;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class AdapterPlaceList extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -52,6 +54,7 @@ public class AdapterPlaceList extends RecyclerView.Adapter<RecyclerView.ViewHold
         public TextView title;
         public ImageView image;
         public TextView distance;
+        public LinearLayout lyt_distance;
         public TextView content;
         public MaterialRippleLayout lyt_parent;
 
@@ -60,6 +63,7 @@ public class AdapterPlaceList extends RecyclerView.Adapter<RecyclerView.ViewHold
             title = (TextView) v.findViewById(R.id.title);
             image = (ImageView) v.findViewById(R.id.image);
             distance = (TextView) v.findViewById(R.id.distance);
+            lyt_distance = (LinearLayout) v.findViewById(R.id.lyt_distance);
             content = v.findViewById(R.id.content);
             lyt_parent = (MaterialRippleLayout) v.findViewById(R.id.lyt_parent);
         }
@@ -102,10 +106,8 @@ public class AdapterPlaceList extends RecyclerView.Adapter<RecyclerView.ViewHold
             vItem.title.setText(p.getName());
             UITools.Companion.displayImageThumb(ctx, vItem.image, Constant.getURLimgPlace(p.getImage()), 0.5f);
 
-            if (p.getDistance() == -1) {
-                vItem.distance.setVisibility(View.GONE);
-            } else {
-                vItem.distance.setVisibility(View.VISIBLE);
+            if (p.hasLatLngPosition() && (!Objects.equals(p.getAddress(), ""))) {
+                vItem.lyt_distance.setVisibility(View.VISIBLE);
                 vItem.distance.setText(Tools.Companion.getFormattedDistance(p.getDistance()));
             }
 

@@ -270,11 +270,11 @@ class ActivityMain : AppCompatActivity() {
             //COMMERCE ITEMS
             R.id.nav_subscription -> {
                 AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_ACTION, AnalyticsConstants.OPEN_REGISTER_FORM, true)
-                ActionTools.directUrl(this, LINK_TO_SUBSCRIPTION_FORM)
+                ActionTools.directUrl(this, LINK_TO_SUBSCRIPTION_FORM, resources.getString(R.string.fail_open_website))
             }
             R.id.nav_suggestions -> {
                 AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_ACTION, AnalyticsConstants.OPEN_SUGGESTION_FORM, true)
-                ActionTools.directUrl(this, LINK_TO_SUGGESTIONS_FORM)
+                ActionTools.directUrl(this, LINK_TO_SUGGESTIONS_FORM, resources.getString(R.string.fail_open_website))
             }
             R.id.nav_get_in_touch -> {
                 AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_ACTION, AnalyticsConstants.OPEN_GET_IN_TOUCH, true)

@@ -244,7 +244,7 @@ class ActivityMapsV2 : AppCompatActivity(), OnMapReadyCallback {
     private fun cleanPlaces(places: List<Place>): List<Place> {
         val listPlace: MutableList<Place> = mutableListOf()
         places.forEach {
-            if (it.hasPosition()) {
+            if (it.hasLatLngPosition()) {
                 listPlace.add(it)
             }
         }

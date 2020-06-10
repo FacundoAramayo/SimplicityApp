@@ -82,17 +82,36 @@
                         android:textColor="@color/grey_hard"
                         tools:text="short content... lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet" />
 
-                    <TextView
-                        android:id="@+id/distance"
-                        android:layout_width="match_parent"
+                    <LinearLayout
+                        android:id="@+id/lyt_distance"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textAlignment="viewEnd"
-                        android:fontFamily="@font/raleway_semibold"
-                        android:maxLines="1"
-                        android:singleLine="true"
-                        android:text="10 Km"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-                        android:textColor="@color/colorLink" />
+                        android:layout_marginTop="@dimen/spacing_xsmall"
+                        android:gravity="center_vertical"
+                        android:layout_gravity="end"
+                        android:orientation="horizontal"
+                        android:visibility="invisible"
+                        tools:visibility="visible">
+
+                        <ImageView
+                            android:layout_width="@dimen/spacing_middle"
+                            android:layout_height="@dimen/spacing_middle"
+                            android:src="@drawable/ic_info_distance"
+                            android:tint="@color/colorLink" />
+
+                        <TextView
+                            android:id="@+id/distance"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/spacing_small"
+                            android:fontFamily="@font/raleway_semibold"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:text="10 Km"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                            android:textColor="@color/colorLink" />
+
+                    </LinearLayout>
 
 
                 </LinearLayout>

@@ -30,7 +30,7 @@ class Place (
             return LatLng(lat, lng)
         }
 
-    fun hasPosition(): Boolean {
+    fun hasLatLngPosition(): Boolean {
         if (this.lat == 0.toDouble()) {
             return false
         }

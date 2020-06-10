@@ -20,6 +20,7 @@ import com.simplicityapp.modules.places.model.Place;
 import com.simplicityapp.R;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class AdapterPlaceGrid extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -109,9 +110,7 @@ public class AdapterPlaceGrid extends RecyclerView.Adapter<RecyclerView.ViewHold
             vItem.title.setText(p.getName());
             UITools.Companion.displayImageThumb(ctx, vItem.image, Constant.getURLimgPlace(p.getImage()), 0.5f);
 
-            if (p.getDistance() == -1) {
-                vItem.lyt_distance.setVisibility(View.GONE);
-            } else {
+            if (p.hasLatLngPosition() && (!Objects.equals(p.getAddress(), ""))) {
                 vItem.lyt_distance.setVisibility(View.VISIBLE);
                 vItem.distance.setText(Tools.Companion.getFormattedDistance(p.getDistance()));
             }

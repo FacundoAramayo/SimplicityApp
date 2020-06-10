@@ -32,6 +32,7 @@ public class Constant {
 
     //WEB VIEW CONFIGS
     public static final String WEB_VIEW_HTML_CONFIG = "<style>img{max-width:100%;height:auto;} iframe{width:100%;}</style> ";
+    public static final String WEB_VIEW_MIME_TYPE = "text/html; charset=UTF-8";
 
     //GUIDE TYPES
     public static final String GUIDE_TYPE = "GUIDE_TYPE";

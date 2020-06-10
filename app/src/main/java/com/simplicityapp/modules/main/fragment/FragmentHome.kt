@@ -80,7 +80,7 @@ class FragmentHome : Fragment() {
             }
             buttonHomeSubscription.setOnClickListener {
                 AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_HOME_ACTION, AnalyticsConstants.OPEN_REGISTER_FORM, true)
-                activity?.let { it1 -> ActionTools.directUrl(it1, Constant.LINK_TO_SUBSCRIPTION_FORM) }
+                activity?.let { it1 -> ActionTools.directUrl(it1, Constant.LINK_TO_SUBSCRIPTION_FORM, resources.getString(R.string.fail_open_website)) }
             }
             lytQuickAccessGastronomy.setOnClickListener {
                 backToHome = true
