@@ -94,6 +94,11 @@ class ActivityPlaceDetail : AppCompatActivity() {
         val distance = place.distance
 
         binding.details.apply {
+            if (place.categoriesList.isNullOrEmpty().not()) {
+                textViewPlaceCategories?.visibility = VISIBLE
+                textViewPlaceCategories?.text = place.categoriesList.orEmpty()
+            }
+
             if (place.hasLatLngPosition() and !place.address.isNullOrEmpty()) {
                 placeLytDistance.visibility = VISIBLE
                 placeDistance.text = Tools.getFormattedDistance(distance)

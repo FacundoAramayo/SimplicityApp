@@ -7,6 +7,24 @@
     android:background="@color/grey_soft"
     android:orientation="vertical">
 
+    <TextView
+        android:id="@+id/textView_place_categories"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_large"
+        android:layout_marginEnd="40pt"
+        android:layout_marginTop="@dimen/spacing_large"
+        android:layout_marginBottom="@dimen/spacing_medium"
+        android:paddingStart="@dimen/spacing_medium"
+        android:paddingEnd="@dimen/spacing_medium"
+        android:fontFamily="@font/raleway_semibold"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="@color/material_grey_800"
+        android:textStyle="italic"
+        android:visibility="gone"
+        tools:visibility="visible"
+        tools:text="Panadería, Carnicería, Salón velatorio"/>
+
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

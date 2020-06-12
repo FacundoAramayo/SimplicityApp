@@ -2,6 +2,7 @@ package com.simplicityapp.modules.places.model
 
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.clustering.ClusterItem
+import com.simplicityapp.base.utils.tryOrDefault
 
 import java.io.Serializable
 import java.util.ArrayList
@@ -27,6 +28,8 @@ class Place (
         var reg_id: Int = -1
     ): Serializable, ClusterItem {
 
+    var categoriesList: String? = null
+
         override fun getPosition(): LatLng {
             return LatLng(lat, lng)
         }
@@ -39,5 +42,14 @@ class Place (
             return false
         }
         return true
+    }
+
+    fun getCategoriesAsString(): String? {
+        var categoriesString = ""
+        categories.forEach {
+            categoriesString += "${it.name}, "
+        }
+
+        return tryOrDefault({categoriesString.substring(0, categoriesString.length -2 )}, null)
     }
 }

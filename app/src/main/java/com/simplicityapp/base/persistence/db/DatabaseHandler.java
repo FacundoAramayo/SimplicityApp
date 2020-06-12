@@ -79,7 +79,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + KEY_WHATSAPP +" TEXT, "
                 + KEY_INSTAGRAM +" TEXT, "
                 + KEY_FACEBOOK +" TEXT, "
-                + KEY_SHORT_DESCRIPTION +" TEXT "
+                + KEY_SHORT_DESCRIPTION +" TEXT, "
+                + KEY_CATEGORIES_LIST +" TEXT "
                 + ")";
         db.execSQL(CREATE_TABLE);
     }
@@ -196,6 +197,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             // Inserting or update row
             db.insertWithOnConflict(TABLE_PLACE, null, values, SQLiteDatabase.CONFLICT_REPLACE);
             // Insert relational place with category
+            Log.d("LOG-", "insertPlaceCategory, cat: " + p.getCategoriesAsString());
             insertListPlaceCategory(p.getPlace_id(), p.getCategories());
             // Insert Images places
             insertListImages(p.getImages());
@@ -240,6 +242,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_INSTAGRAM, model.getInstagram());
         values.put(KEY_FACEBOOK, model.getFacebook());
         values.put(KEY_SHORT_DESCRIPTION, model.getShort_description());
+        values.put(KEY_CATEGORIES_LIST, model.getCategoriesAsString());
         return values;
     }
 
@@ -366,6 +369,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         p.setInstagram(cur.getString(cur.getColumnIndex(KEY_INSTAGRAM)));
         p.setFacebook(cur.getString(cur.getColumnIndex(KEY_FACEBOOK)));
         p.setShort_description(cur.getString(cur.getColumnIndex(KEY_SHORT_DESCRIPTION)));
+        p.setCategoriesList(cur.getString(cur.getColumnIndex(KEY_CATEGORIES_LIST)));
         return p;
     }
 
