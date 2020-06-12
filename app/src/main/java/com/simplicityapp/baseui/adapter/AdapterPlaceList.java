@@ -111,7 +111,7 @@ public class AdapterPlaceList extends RecyclerView.Adapter<RecyclerView.ViewHold
                 vItem.distance.setText(Tools.Companion.getFormattedDistance(p.getDistance()));
             }
 
-            vItem.content.setText(p.getDescription());
+            vItem.content.setText(p.getShort_description());
 
             // Here you apply the animation when the view is bound
             setAnimation(vItem.lyt_parent, position);

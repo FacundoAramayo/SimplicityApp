@@ -78,7 +78,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + KEY_REGION_ID +" INTEGER, "
                 + KEY_WHATSAPP +" TEXT, "
                 + KEY_INSTAGRAM +" TEXT, "
-                + KEY_FACEBOOK +" TEXT "
+                + KEY_FACEBOOK +" TEXT, "
+                + KEY_SHORT_DESCRIPTION +" TEXT "
                 + ")";
         db.execSQL(CREATE_TABLE);
     }
@@ -238,6 +239,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_WHATSAPP, model.getWhatsapp());
         values.put(KEY_INSTAGRAM, model.getInstagram());
         values.put(KEY_FACEBOOK, model.getFacebook());
+        values.put(KEY_SHORT_DESCRIPTION, model.getShort_description());
         return values;
     }
 
@@ -363,6 +365,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         p.setWhatsapp(cur.getString(cur.getColumnIndex(KEY_WHATSAPP)));
         p.setInstagram(cur.getString(cur.getColumnIndex(KEY_INSTAGRAM)));
         p.setFacebook(cur.getString(cur.getColumnIndex(KEY_FACEBOOK)));
+        p.setShort_description(cur.getString(cur.getColumnIndex(KEY_SHORT_DESCRIPTION)));
         return p;
     }
 
