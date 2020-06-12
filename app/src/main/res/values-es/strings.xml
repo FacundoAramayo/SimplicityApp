@@ -6,7 +6,7 @@
     <string name="about_text">Simplicity App
         \nTodos los derechos reservados © 2019–2020</string>
     <string name="welcome_to_app_message">Bienvenidos a Simplicity App</string>
-
+    <string name="message_from_app">Enviado desde *Simplcity App*: </string>
 
 
     <!--=== Nav Drawer Menu Items ============================================================== -->
@@ -81,6 +81,7 @@
     <string name="no_phone_number">No tiene telefono</string>
     <string name="no_website">No tiene sitio web</string>
     <string name="fail_dial_number">No se puede marcar el número de teléfono</string>
+    <string name="fail_open_whatsapp">No se pudo enviar WhatsApp</string>
     <string name="fail_open_website">No se puede abrir el sitio web</string>
     <string name="unable_create_map">¡Lo siento! No se puede crear mapas</string>
     <string name="failed_load_details">Falló la carga de detalles del lugar</string>

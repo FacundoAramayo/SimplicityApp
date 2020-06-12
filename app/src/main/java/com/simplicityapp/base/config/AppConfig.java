@@ -49,6 +49,10 @@ public class AppConfig {
     // vibrate duration in millisecond in FCM notification
     public static int VIBRATION_TIME = 500;
 
+    //WhatsApp API string
+    public static String WHATSAPP_API_STRING = "https://api.whatsapp.com/send?phone=";
+    public static String WHATSAPP_TEXT_STRING = "&text=";
+
 
     /**************************CONSTANTS****************************/
 

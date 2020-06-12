@@ -10,6 +10,7 @@
     <string name="about_text">Simplicity App
         \nAll rights reserved © 2019–2020</string>
     <string name="welcome_to_app_message">Welcome to Simplicity App</string>
+    <string name="message_from_app">Message sent from *Simplicity App*: </string>
 
     <!--=== GOOGLE API KEY STRING ============================================================== -->
     <!-- API KEY FOR MAP -->
@@ -87,6 +88,7 @@
     <string name="no_phone_number">do not have a phone</string>
     <string name="no_website">do not have a website</string>
     <string name="fail_dial_number">Cannot dial phone number</string>
+    <string name="fail_open_whatsapp">Cannot open WhatsApp</string>
     <string name="fail_open_website">Cannot open website</string>
     <string name="unable_create_map">Sorry! unable to create maps</string>
     <string name="failed_load_details">Failed load place details</string>

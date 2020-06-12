@@ -48,7 +48,12 @@ import com.simplicityapp.modules.main.activity.ActivityMain
 import com.simplicityapp.modules.places.model.Images
 import com.simplicityapp.modules.places.model.Place
 import com.simplicityapp.R
+import com.simplicityapp.base.config.AppConfig.WHATSAPP_API_STRING
+import com.simplicityapp.base.config.AppConfig.WHATSAPP_TEXT_STRING
 import com.simplicityapp.base.config.Constant.WEB_VIEW_MIME_TYPE
+import com.simplicityapp.base.config.analytics.AnalyticsConstants.Companion.SELECT_PLACE_FACEBOOK
+import com.simplicityapp.base.config.analytics.AnalyticsConstants.Companion.SELECT_PLACE_INSTAGRAM
+import com.simplicityapp.base.config.analytics.AnalyticsConstants.Companion.SELECT_PLACE_WHATSAPP
 import java.lang.Exception
 import retrofit2.Call
 import retrofit2.Response
@@ -89,19 +94,26 @@ class ActivityPlaceDetail : AppCompatActivity() {
         val distance = place.distance
 
         binding.details.apply {
-            if (place.phone.isNullOrEmpty()) { placeLytPhone.visibility = GONE }
-            if (place.website.isNullOrEmpty()) { placeLytWebsite.visibility = GONE }
-            if (place.address.isNullOrEmpty()) { placeLytAddress.visibility = GONE }
-            if (place.hasLatLngPosition().not()) { placeHowToGet.visibility = GONE }
-            if (place.description.isNullOrEmpty()) { placeCardViewDescription.visibility = GONE }
-
             if (place.hasLatLngPosition() and !place.address.isNullOrEmpty()) {
                 placeLytDistance.visibility = VISIBLE
                 placeDistance.text = Tools.getFormattedDistance(distance)
             }
+            if (place.address.isNullOrEmpty()) { placeLytAddress.visibility = GONE }
+            if (place.hasLatLngPosition().not()) { placeHowToGet.visibility = GONE }
+            if (place.phone.isNullOrEmpty()) { placeLytPhone.visibility = GONE }
+
+            if (place.whatsapp.isNullOrEmpty()) { placeLytWhatsapp?.visibility = GONE }
+            if (place.instagram.isNullOrEmpty()) { placeLytInstagram?.visibility = GONE }
+            if (place.facebook.isNullOrEmpty()) { placeLytFacebook?.visibility = GONE }
+            if (place.website.isNullOrEmpty()) { placeLytWebsite.visibility = GONE }
+
+            if (place.description.isNullOrEmpty()) { placeCardViewDescription.visibility = GONE }
 
             placeAddress.text = place.address
             placePhone.text = place.phone
+            placeWhatsapp?.text = place.whatsapp
+            placeInstagram?.text = place.instagram
+            placeFacebook?.text = place.facebook
             placeWebsite.text = place.website
 
             val htmlData = "$WEB_VIEW_HTML_CONFIG ${place.description}"
@@ -157,10 +169,35 @@ class ActivityPlaceDetail : AppCompatActivity() {
                     Snackbar.make(parentView, R.string.fail_dial_number, Snackbar.LENGTH_SHORT).show()
                 }
             }
+            placeLytWhatsapp?.setOnClickListener {
+                if (!place?.website.isNullOrEmpty()) {
+                    val messageFromApp = resources.getString(R.string.message_from_app)
+                    logAnalyticsEvent(SELECT_PLACE_WHATSAPP, place?.name.orEmpty(), false)
+                    ActionTools.directUrl(context, "$WHATSAPP_API_STRING${place?.whatsapp.orEmpty()}$WHATSAPP_TEXT_STRING$messageFromApp", resources.getString(R.string.fail_open_whatsapp))
+                } else {
+                    Snackbar.make(parentView, R.string.fail_open_whatsapp, Snackbar.LENGTH_SHORT).show()
+                }
+            }
+            placeLytInstagram?.setOnClickListener {
+                if (!place?.instagram.isNullOrEmpty()) {
+                    logAnalyticsEvent(SELECT_PLACE_INSTAGRAM, place?.name.orEmpty(), false)
+                    ActionTools.directUrl(context, place?.instagram.orEmpty(), resources.getString(R.string.fail_open_website))
+                } else {
+                    Snackbar.make(parentView, R.string.fail_open_website, Snackbar.LENGTH_SHORT).show()
+                }
+            }
+            placeLytFacebook?.setOnClickListener {
+                if (!place?.website.isNullOrEmpty()) {
+                    logAnalyticsEvent(SELECT_PLACE_FACEBOOK, place?.name.orEmpty(), false)
+                    ActionTools.directUrl(context, place?.facebook.orEmpty(), resources.getString(R.string.fail_open_website))
+                } else {
+                    Snackbar.make(parentView, R.string.fail_open_website, Snackbar.LENGTH_SHORT).show()
+                }
+            }
             placeLytWebsite.setOnClickListener {
-                if (!place!!.website.isNullOrEmpty()) {
+                if (!place?.website.isNullOrEmpty()) {
                     logAnalyticsEvent(SELECT_PLACE_WEB_SITE, place?.name.orEmpty(), false)
-                    ActionTools.directUrl(context, place!!.website!!, resources.getString(R.string.fail_open_website))
+                    ActionTools.directUrl(context, place?.website.orEmpty(), resources.getString(R.string.fail_open_website))
                 } else {
                     Snackbar.make(parentView, R.string.fail_open_website, Snackbar.LENGTH_SHORT).show()
                 }
