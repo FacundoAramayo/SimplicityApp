@@ -38,13 +38,15 @@ class CategoriesSelectorActivity : AppCompatActivity(), BaseActivity {
         fragment = CategoryFragment()
         bundle.putInt(CategoryFragment.TAG_CATEGORY, categoryId)
         fragment.arguments = bundle
-        fragmentManager?.beginTransaction()?.replace(R.id.container, fragment)?.commitNow()
+        fragmentManager?.beginTransaction()?.replace(R.id.container, fragment)?.commit()
         binding.toolbar.toolbar.title = categoryName
     }
 
     override fun onBackPressed() {
         if (fragment is CategoryFragment) {
+            bundle.putInt(CategoryFragment.TAG_CATEGORY, 0)
             fragment = CategoriesSelectorFragment.newInstance()
+            fragment.arguments = bundle
             fragmentManager?.beginTransaction()?.replace(R.id.container, fragment)
                 ?.commitNow()
             binding.toolbar.toolbar.title = resources.getString(R.string.categories_selector_title)

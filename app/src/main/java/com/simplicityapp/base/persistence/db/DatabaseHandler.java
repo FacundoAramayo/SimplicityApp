@@ -198,7 +198,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             // Inserting or update row
             db.insertWithOnConflict(TABLE_PLACE, null, values, SQLiteDatabase.CONFLICT_REPLACE);
             // Insert relational place with category
-            Log.d("LOG-", "insertPlaceCategory, cat: " + p.getCategoriesAsString());
             insertListPlaceCategory(p.getPlace_id(), p.getCategories());
             // Insert Images places
             insertListImages(p.getImages());

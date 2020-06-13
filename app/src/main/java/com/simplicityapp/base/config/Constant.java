@@ -48,6 +48,12 @@ public class Constant {
     public static final String SUCCESS_RESPONSE = "success";
 
 
+    /**QUICK ACCESS CATEGORIES ID*/
+    public static final int GASTRONOMY_ID = 1000;
+    public static final int TAXI_ID = 4001;
+    public static final int PHARMACY_OPENED_ID = 3002;
+
+
     /**
      * ------------------- DON'T EDIT THIS ---------------------------------------------------------
      */

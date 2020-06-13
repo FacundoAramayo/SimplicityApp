@@ -157,9 +157,10 @@ class ActivityMain : AppCompatActivity() {
         onItemSelected(R.id.nav_favorites, getString(R.string.title_nav_fav), false)
     }
 
-    fun categorySelectorIntent(guideType: String) {
+    fun categorySelectorIntent(guideType: String? = null, categoryId: Int = 0) {
         val intent = Intent(this, CategoriesSelectorActivity::class.java)
         intent.putExtra(GUIDE_TYPE, guideType)
+        intent.putExtra(CategoryFragment.TAG_CATEGORY, categoryId.toString())
         startActivity(intent)
     }
 

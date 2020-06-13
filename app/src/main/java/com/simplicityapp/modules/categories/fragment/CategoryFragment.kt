@@ -57,7 +57,8 @@ class CategoryFragment : Fragment() {
         rootView = inflater.inflate(R.layout.fragment_category, null)
         db = DatabaseHandler(context)
         sharedPref = SharedPref(context)
-        categoryId = arguments!!.getInt(TAG_CATEGORY)
+        categoryId = arguments?.getInt(TAG_CATEGORY) ?: 0
+
 
         initUI()
 

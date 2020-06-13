@@ -2,7 +2,6 @@ package com.simplicityapp.modules.main.fragment
 
 import android.content.res.Resources
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.View
@@ -21,6 +20,7 @@ import com.simplicityapp.base.config.analytics.AnalyticsConstants
 import com.simplicityapp.base.config.AppConfig
 import com.simplicityapp.base.config.AppConfig.LIMIT_PLACES_TO_UPDATE
 import com.simplicityapp.base.config.Constant
+import com.simplicityapp.base.config.Constant.COMMERCIAL_GUIDE
 import com.simplicityapp.base.config.Constant.JOBS_GUIDE
 import com.simplicityapp.base.config.Constant.SUCCESS_RESPONSE
 import com.simplicityapp.base.persistence.preferences.SharedPref
@@ -85,11 +85,11 @@ class FragmentHome : Fragment() {
             lytQuickAccessGastronomy.setOnClickListener {
                 backToHome = true
                 AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_HOME_QUICK_ACCESS, AnalyticsConstants.QUICK_ACCESS_DELIVERY)
-                ActivityMain.ActivityMainInstance.onItemSelected(R.id.nav_delivery, resources.getString(R.string.title_nav_delivery), false, true)
+                ActivityMain.ActivityMainInstance.categorySelectorIntent(COMMERCIAL_GUIDE, Constant.GASTRONOMY_ID)
             }
             lytQuickAccessTaxi.setOnClickListener {
                 AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_HOME_QUICK_ACCESS, AnalyticsConstants.QUICK_ACCESS_TAXI)
-                ActivityMain.ActivityMainInstance.onItemSelected(R.id.nav_taxi, resources.getString(R.string.title_nav_taxi), false, true)
+                ActivityMain.ActivityMainInstance.categorySelectorIntent(COMMERCIAL_GUIDE, Constant.TAXI_ID)
             }
             lytQuickAccessJobs.setOnClickListener {
                 AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_HOME_QUICK_ACCESS, AnalyticsConstants.QUICK_ACCESS_JOBS)
@@ -97,7 +97,7 @@ class FragmentHome : Fragment() {
             }
             lytQuickAccessPharmacy.setOnClickListener {
                 AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_HOME_QUICK_ACCESS, AnalyticsConstants.QUICK_ACCESS_PHARMACY)
-                ActivityMain.ActivityMainInstance.onItemSelected(R.id.nav_pharmacy, resources.getString(R.string.title_nav_pharmacy), false, true)
+                ActivityMain.ActivityMainInstance.categorySelectorIntent(COMMERCIAL_GUIDE, Constant.PHARMACY_OPENED_ID)
             }
             lytQuickAccessSearch.setOnClickListener {
                 AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_HOME_QUICK_ACCESS, AnalyticsConstants.QUICK_ACCESS_SEARCH)
@@ -275,7 +275,6 @@ class FragmentHome : Fragment() {
         places.forEach { place ->
             place.categories.forEach {
                 if (it.cat_id == 0) {
-                    Log.d("LOG-", "place: ${place.name}, categories: ${place.categories}")
                     featured.add(place)
                 }
             }

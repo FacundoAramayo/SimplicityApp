@@ -1,5 +1,6 @@
 package com.simplicityapp.modules.categories.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +18,7 @@ import com.simplicityapp.modules.categories.viewmodel.CategoriesSelectorViewMode
 import com.simplicityapp.R
 import com.simplicityapp.base.config.Constant
 import com.simplicityapp.base.config.Constant.COMMERCIAL_GUIDE
+import com.simplicityapp.base.utils.tryOrDefault
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -29,6 +31,8 @@ class CategoriesSelectorFragment : Fragment(R.layout.categories_selector_fragmen
 
     private var type: String? = null
 
+    private var categoryId: Int? = 0
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -36,6 +40,11 @@ class CategoriesSelectorFragment : Fragment(R.layout.categories_selector_fragmen
     ): View? {
         binding = CategoriesSelectorFragmentBinding.inflate(inflater, container, false)
         type = activity?.intent?.getStringExtra(Constant.GUIDE_TYPE)
+        categoryId = tryOrDefault({activity?.intent?.getStringExtra(CategoryFragment.TAG_CATEGORY)!!.toInt()}, 0)
+        //This allow return to guide type on back pressed
+        activity?.intent = Intent()
+        activity?.intent?.putExtra(Constant.GUIDE_TYPE, type)
+        //
         return binding.root
     }
 
@@ -46,6 +55,9 @@ class CategoriesSelectorFragment : Fragment(R.layout.categories_selector_fragmen
 
         initUI()
         initRecycler()
+        categoryId?.let {
+            if (it != 0) openQuickAccess(it)
+        }
     }
 
     companion object {
@@ -93,6 +105,10 @@ class CategoriesSelectorFragment : Fragment(R.layout.categories_selector_fragmen
 
         }
 
+    }
+
+    private fun openQuickAccess(categoryId: Int) {
+        CategoriesSelectorActivity.CategoriesSelectorInstance.openCategory("", categoryId)
     }
 
 }
