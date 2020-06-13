@@ -106,7 +106,7 @@ public class AdapterPlaceList extends RecyclerView.Adapter<RecyclerView.ViewHold
             vItem.title.setText(p.getName());
             UITools.Companion.displayImageThumb(ctx, vItem.image, Constant.getURLimgPlace(p.getImage()), 0.5f);
 
-            if (p.hasLatLngPosition() && (!Objects.equals(p.getAddress(), ""))) {
+            if (p.hasLatLngPosition() && (!Objects.equals(p.getAddress(), "")) && (p.getDistance() != -1)) {
                 vItem.lyt_distance.setVisibility(View.VISIBLE);
                 vItem.distance.setText(Tools.Companion.getFormattedDistance(p.getDistance()));
             }
