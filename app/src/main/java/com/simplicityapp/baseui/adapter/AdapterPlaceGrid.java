@@ -108,7 +108,14 @@ public class AdapterPlaceGrid extends RecyclerView.Adapter<RecyclerView.ViewHold
             ViewHolder vItem = (ViewHolder) holder;
             final Place p = items.get(position);
             vItem.title.setText(p.getName());
-            UITools.Companion.displayImageThumb(ctx, vItem.image, Constant.getURLimgPlace(p.getImage()), 0.5f);
+
+            String imagePath;
+            if (p.getOffer_image() != null) {
+                imagePath = p.getOffer_image();
+            } else {
+                imagePath = p.getImage();
+            }
+            UITools.Companion.displayImageThumb(ctx, vItem.image, Constant.getURLimgPlace(imagePath), 0.5f);
 
             if (p.hasLatLngPosition() && (!Objects.equals(p.getAddress(), ""))) {
                 vItem.lyt_distance.setVisibility(View.VISIBLE);

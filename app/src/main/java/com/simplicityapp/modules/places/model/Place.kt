@@ -25,7 +25,8 @@ class Place (
         var distance: Float = -1f,
         var categories: List<Category> = ArrayList(),
         var images: List<Images> = ArrayList(),
-        var reg_id: Int = -1
+        var reg_id: Int = -1,
+        var offer_image: String? = null
     ): Serializable, ClusterItem {
 
     var categoriesList: String? = null

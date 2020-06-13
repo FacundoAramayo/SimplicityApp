@@ -3,7 +3,7 @@ package com.simplicityapp.base.persistence.db
 object DatabaseConstants {
 
     // Database Version
-    const val DATABASE_VERSION = 5
+    const val DATABASE_VERSION = 6
 
     // Database Name
     const val DATABASE_NAME = "simplicity_app"
@@ -38,6 +38,7 @@ object DatabaseConstants {
     const val KEY_FACEBOOK = "facebook"
     const val KEY_SHORT_DESCRIPTION = "short_description"
     const val KEY_CATEGORIES_LIST = "categories_list"
+    const val KEY_OFFER_IMAGE = "offer_image"
 
     // Table Columns names TABLE_IMAGES
     const val KEY_IMG_PLACE_ID = "place_id"

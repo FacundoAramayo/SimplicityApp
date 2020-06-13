@@ -80,7 +80,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + KEY_INSTAGRAM +" TEXT, "
                 + KEY_FACEBOOK +" TEXT, "
                 + KEY_SHORT_DESCRIPTION +" TEXT, "
-                + KEY_CATEGORIES_LIST +" TEXT "
+                + KEY_CATEGORIES_LIST +" TEXT, "
+                + KEY_OFFER_IMAGE + " TEXT "
                 + ")";
         db.execSQL(CREATE_TABLE);
     }
@@ -243,6 +244,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_FACEBOOK, model.getFacebook());
         values.put(KEY_SHORT_DESCRIPTION, model.getShort_description());
         values.put(KEY_CATEGORIES_LIST, model.getCategoriesAsString());
+        values.put(KEY_OFFER_IMAGE, model.getOffer_image());
         return values;
     }
 
@@ -370,6 +372,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         p.setFacebook(cur.getString(cur.getColumnIndex(KEY_FACEBOOK)));
         p.setShort_description(cur.getString(cur.getColumnIndex(KEY_SHORT_DESCRIPTION)));
         p.setCategoriesList(cur.getString(cur.getColumnIndex(KEY_CATEGORIES_LIST)));
+        p.setOffer_image(cur.getString(cur.getColumnIndex(KEY_OFFER_IMAGE)));
         return p;
     }
 
