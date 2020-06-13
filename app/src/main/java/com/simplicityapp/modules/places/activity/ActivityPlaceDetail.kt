@@ -40,6 +40,8 @@ import com.simplicityapp.base.config.analytics.AnalyticsConstants.Companion.VIEW
 import com.simplicityapp.base.config.analytics.AnalyticsConstants.Companion.logAnalyticsEvent
 import com.simplicityapp.base.config.analytics.AnalyticsConstants.Companion.logAnalyticsShare
 import com.simplicityapp.base.config.Constant.WEB_VIEW_HTML_CONFIG
+import com.simplicityapp.base.config.Constant.WEB_VIEW_MIME_TYPE
+import com.simplicityapp.base.config.Constant.FONT_FAMILY_RALEWAY
 import com.simplicityapp.base.utils.ActionTools
 import com.simplicityapp.base.utils.Tools
 import com.simplicityapp.baseui.utils.UITools
@@ -50,7 +52,6 @@ import com.simplicityapp.modules.places.model.Place
 import com.simplicityapp.R
 import com.simplicityapp.base.config.AppConfig.WHATSAPP_API_STRING
 import com.simplicityapp.base.config.AppConfig.WHATSAPP_TEXT_STRING
-import com.simplicityapp.base.config.Constant.WEB_VIEW_MIME_TYPE
 import com.simplicityapp.base.config.analytics.AnalyticsConstants.Companion.SELECT_PLACE_FACEBOOK
 import com.simplicityapp.base.config.analytics.AnalyticsConstants.Companion.SELECT_PLACE_INSTAGRAM
 import com.simplicityapp.base.config.analytics.AnalyticsConstants.Companion.SELECT_PLACE_WHATSAPP
@@ -121,7 +122,7 @@ class ActivityPlaceDetail : AppCompatActivity() {
             placeFacebook?.text = place.facebook
             placeWebsite.text = place.website
 
-            val htmlData = "$WEB_VIEW_HTML_CONFIG ${place.description}"
+            val htmlData = "$WEB_VIEW_HTML_CONFIG $FONT_FAMILY_RALEWAY ${place.description}"
             placeDescriptionWebView.settings?.builtInZoomControls = true
             placeDescriptionWebView.setBackgroundColor(Color.TRANSPARENT)
             placeDescriptionWebView.webChromeClient = WebChromeClient()
