@@ -30,8 +30,8 @@
         android:elevation="@dimen/elevation_container"
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        >
+        android:layout_marginRight="10dp">
+
         <fragment
             android:id="@+id/map"
             android:name="com.google.android.gms.maps.SupportMapFragment"
@@ -39,9 +39,6 @@
             android:layout_height="match_parent"
             android:layout_margin="4dp"/>
     </RelativeLayout>
-
-
-
 
 </RelativeLayout>
 

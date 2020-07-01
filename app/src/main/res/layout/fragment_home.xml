@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/bg_app">
 
         <ScrollView
@@ -31,9 +32,7 @@
                     android:text="@string/title_nav_featured"
                     android:layout_marginLeft="@dimen/spacing_normal"
                     android:layout_marginRight="@dimen/spacing_normal"
-                    android:layout_marginTop="@dimen/spacing_normal"
-                    />
-
+                    android:layout_marginTop="@dimen/spacing_normal" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerFeatured"
@@ -56,8 +55,7 @@
                     android:text="@string/title_nav_news"
                     android:layout_marginLeft="@dimen/spacing_normal"
                     android:layout_marginRight="@dimen/spacing_normal"
-                    android:layout_marginTop="@dimen/spacing_normal"
-                    />
+                    android:layout_marginTop="@dimen/spacing_normal" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerNews"
@@ -72,7 +70,6 @@
                     android:layout_marginRight="@dimen/spacing_normal"
                     android:padding="@dimen/spacing_normal"
                     app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -133,7 +130,6 @@
                                 android:textAlignment="center"/>
 
                         </LinearLayout>
-
 
                     </LinearLayout>
 
@@ -213,7 +209,6 @@
 
                         </LinearLayout>
 
-
                     </LinearLayout>
 
                     <LinearLayout
@@ -252,11 +247,9 @@
 
                         </LinearLayout>
 
-
                     </LinearLayout>
 
                 </LinearLayout>
-
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -301,7 +294,6 @@
 
                         </LinearLayout>
 
-
                     </LinearLayout>
 
                     <LinearLayout
@@ -339,7 +331,6 @@
                                 android:textAlignment="center"/>
 
                         </LinearLayout>
-
 
                     </LinearLayout>
 
@@ -379,7 +370,6 @@
 
                         </LinearLayout>
 
-
                     </LinearLayout>
 
                     <LinearLayout
@@ -417,7 +407,6 @@
                                 android:textAlignment="center"/>
 
                         </LinearLayout>
-
 
                     </LinearLayout>
 
@@ -481,8 +470,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:visibility="gone"
-        tools:visibility="gone"
-        >
+        tools:visibility="gone">
+
         <ImageView
             android:layout_width="@dimen/splash_icon_size"
             android:layout_height="@dimen/splash_icon_size"
@@ -491,6 +480,5 @@
             android:src="@drawable/simplicity_logo_transparent" />
 
     </com.facebook.shimmer.ShimmerFrameLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
