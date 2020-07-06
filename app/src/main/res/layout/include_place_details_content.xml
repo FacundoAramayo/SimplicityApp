@@ -319,7 +319,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/place_gallery_recycler"
                 android:layout_width="match_parent"
-                android:layout_height="97dp"
+                android:layout_height="wrap_content"
                 android:paddingBottom="@dimen/spacing_large"
                 android:paddingLeft="@dimen/spacing_large"
                 android:paddingRight="@dimen/spacing_large" />
