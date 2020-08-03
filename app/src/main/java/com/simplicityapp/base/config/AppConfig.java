@@ -4,14 +4,6 @@ import com.simplicityapp.BuildConfig;
 
 public class AppConfig {
 
-    // flag for display ads
-    public static final boolean ADS_MAIN_INTERSTITIAL = false;
-    public static final boolean ADS_PLACE_DETAILS_BANNER = false;
-    public static final boolean ADS_NEWS_DETAILS_BANNER = false;
-
-    // if you not use ads you can set this to false
-    public static final boolean ENABLE_GDPR = true;
-
     // if we want use profile and register
     public static final boolean ENABLE_USER_PROFILE = false;
 
@@ -29,7 +21,6 @@ public class AppConfig {
 
     // clear image cache when receive push notifications
     public static final boolean REFRESH_IMG_NOTIF = true;
-
 
     // when user enable gps, places will sort by distance
     public static final boolean SORT_BY_DISTANCE = true;

@@ -58,8 +58,6 @@ object DatabaseConstants {
     const val KEY_NEWS_LAST_UPDATE = "last_update"
 
     // Table Relational Columns names TABLE_PLACE_CATEGORY
-    const val KEY_RELATION_PLACE_ID =
-        KEY_PLACE_ID
-    const val KEY_RELATION_CAT_ID =
-        KEY_CAT_ID
+    const val KEY_RELATION_PLACE_ID = KEY_PLACE_ID
+    const val KEY_RELATION_CAT_ID = KEY_CAT_ID
 }

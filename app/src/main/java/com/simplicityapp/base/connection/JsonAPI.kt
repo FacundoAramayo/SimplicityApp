@@ -11,7 +11,7 @@ interface JsonAPI {
 
     /* Place API transaction ------------------------------- */
 
-    //Pendiente de quitar (ya está la implementación de courutina en FragmentHome)
+    //Pendiente de quitar (ya está la implementación de corutina en FragmentHome)
     @Headers(CACHE, AGENT)
     @GET("app/services/listPlaces")
     fun getPlacesByPage(
@@ -21,7 +21,7 @@ interface JsonAPI {
         @Query("reg_id") regId: Int
     ): Call<ListPlaceResponse>?
 
-    //Pendiente de quitar (ya está la implementación de courutina en FragmentHome)
+    //Pendiente de quitar (ya está la implementación de corutina en FragmentHome)
     @Headers(CACHE, AGENT)
     @GET("app/services/getPlaceDetails")
     fun getPlaceDetails(
