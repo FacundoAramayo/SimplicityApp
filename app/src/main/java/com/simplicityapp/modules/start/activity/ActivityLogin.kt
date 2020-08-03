@@ -6,8 +6,6 @@ import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.CheckBox
-import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.PermissionChecker.PERMISSION_GRANTED
@@ -15,7 +13,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.SignInButton
 import com.google.android.gms.common.api.ApiException
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
@@ -31,6 +28,7 @@ import com.simplicityapp.base.utils.Tools
 import com.simplicityapp.BuildConfig
 import com.simplicityapp.modules.main.activity.ActivityMain
 import com.simplicityapp.R
+import com.simplicityapp.databinding.ActivityLoginBinding
 
 
 /**
@@ -38,21 +36,18 @@ import com.simplicityapp.R
  */
 class ActivityLogin : AppCompatActivity(), BaseActivity, View.OnClickListener {
 
-    private var mAuth: FirebaseAuth? = null
-
+    private lateinit var binding: ActivityLoginBinding
+    private lateinit var mAuth: FirebaseAuth
     private var mGoogleSignInClient: GoogleSignInClient? = null
-    private var checkBox: CheckBox? = null
     private var sharedPref: SharedPref? = null
-    private var signInButton: SignInButton? = null
     private var gso: GoogleSignInOptions? = null
-    private var mainLayout: LinearLayout? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        sharedPref =
-            SharedPref(this)
+        sharedPref = SharedPref(this)
 
         initUI()
         initListeners()
@@ -63,22 +58,19 @@ class ActivityLogin : AppCompatActivity(), BaseActivity, View.OnClickListener {
     }
 
     override fun initUI() {
-        signInButton = findViewById(R.id.sign_in_button)
-        signInButton?.isEnabled = false
-        checkBox = findViewById(R.id.checkBox)
-        mainLayout = findViewById(R.id.main_layout)
+        binding.signInButton?.isEnabled = false
         startBackgroundAnimation()
     }
 
     private fun startBackgroundAnimation() {
-        val animationDrawable: AnimationDrawable = mainLayout?.background as AnimationDrawable
+        val animationDrawable: AnimationDrawable = binding.mainLayout.background as AnimationDrawable
         animationDrawable.setExitFadeDuration(3500)
         animationDrawable.start()
     }
 
     override fun initListeners() {
-        signInButton?.setOnClickListener(this)
-        checkBox?.setOnClickListener { checkBoxListener() }
+        binding.signInButton.setOnClickListener(this)
+        binding.checkBox.setOnClickListener { checkBoxListener() }
     }
 
     override fun getArguments() {
@@ -87,7 +79,7 @@ class ActivityLogin : AppCompatActivity(), BaseActivity, View.OnClickListener {
 
     public override fun onStart() {
         super.onStart()
-        val currentUser = mAuth!!.currentUser
+        val currentUser = mAuth.currentUser
         updateUI(currentUser)
     }
 
@@ -103,7 +95,6 @@ class ActivityLogin : AppCompatActivity(), BaseActivity, View.OnClickListener {
                 Log.w(LOG_TAG, "Google sign in failed", e)
                 updateUI(null)
             }
-
         }
     }
 
@@ -118,12 +109,12 @@ class ActivityLogin : AppCompatActivity(), BaseActivity, View.OnClickListener {
     private fun firebaseAuthWithGoogle(acct: GoogleSignInAccount) {
         Log.d(LOG_TAG, "firebaseAuthWithGoogle:" + acct.id!!)
         val credential = GoogleAuthProvider.getCredential(acct.idToken, null)
-        mAuth!!.signInWithCredential(credential)
+        mAuth.signInWithCredential(credential)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(LOG_TAG, "signInWithCredential: success")
-                    val user = mAuth?.currentUser
+                    val user = mAuth.currentUser
                     updateUI(user)
                 } else {
                     // If sign in fails, display a message to the user.
@@ -144,18 +135,18 @@ class ActivityLogin : AppCompatActivity(), BaseActivity, View.OnClickListener {
     }
 
     private fun checkBoxListener() {
-        if (checkBox?.isChecked!!) {
+        if (binding.checkBox.isChecked) {
             AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.TERMS_AND_CONDITIONS_PREVIOUS)
             if (Tools.needRequestPermission()) {
                 val permission = PermissionUtil.getDeniedPermission(this@ActivityLogin)
                 if (permission.isNotEmpty()) {
                     requestPermissions(permission, 200)
                 } else {
-                    signInButton?.isEnabled = true
+                    binding.signInButton.isEnabled = true
                 }
             }
         } else {
-            signInButton?.isEnabled = false
+            binding.signInButton.isEnabled = false
         }
     }
 
@@ -165,14 +156,14 @@ class ActivityLogin : AppCompatActivity(), BaseActivity, View.OnClickListener {
     }
 
     private fun signOut() {
-        mAuth?.signOut()
+        mAuth.signOut()
 
         mGoogleSignInClient?.signOut()?.addOnCompleteListener(this
         ) { updateUI(null) }
     }
 
     private fun revokeAccess() {
-        mAuth?.signOut()
+        mAuth.signOut()
 
         mGoogleSignInClient?.revokeAccess()?.addOnCompleteListener(this
         ) { updateUI(null) }
@@ -192,7 +183,7 @@ class ActivityLogin : AppCompatActivity(), BaseActivity, View.OnClickListener {
     override fun onClick(v: View) {
         val i = v.id
         if (i == R.id.sign_in_button) {
-            if (checkBox!!.isChecked) {
+            if (binding.checkBox.isChecked) {
                 signIn()
             }
         }
@@ -207,12 +198,12 @@ class ActivityLogin : AppCompatActivity(), BaseActivity, View.OnClickListener {
 
         }
         if (!checkingPermissions()) {
-            checkBox?.isChecked = false
+            binding.checkBox.isChecked = false
         } else {
             AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.TERMS_AND_CONDITIONS_SUCCESS)
             Log.d(LOG_TAG, "Permissions OK")
-            checkBox?.isChecked = true
-            signInButton!!.isEnabled = true
+            binding.checkBox.isChecked = true
+            binding.signInButton.isEnabled = true
         }
     }
 
