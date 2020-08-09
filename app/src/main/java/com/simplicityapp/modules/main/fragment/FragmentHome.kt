@@ -121,9 +121,9 @@ class FragmentHome : Fragment() {
     }
 
     override fun onResume() {
+        super.onResume()
         adapterFeatured?.notifyDataSetChanged()
         adapterNews?.notifyDataSetChanged()
-        super.onResume()
     }
 
     override fun onStart() {

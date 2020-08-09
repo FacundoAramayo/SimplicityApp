@@ -63,6 +63,7 @@ class ActivityMapsV2 : AppCompatActivity(), OnMapReadyCallback {
         super.onCreate(savedInstanceState)
         binding = ActivityMapsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         parent_view = findViewById<View>(android.R.id.content)
         overridePendingTransition(R.anim.enter_slide_in, R.anim.enter_slide_out)
         sharedPref = SharedPref(this)

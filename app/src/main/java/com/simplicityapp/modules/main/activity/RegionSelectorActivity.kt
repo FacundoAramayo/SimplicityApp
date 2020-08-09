@@ -21,9 +21,9 @@ class RegionSelectorActivity : AppCompatActivity() {
 
     private lateinit var viewModel: RegionSelectorViewModel
     private lateinit var binding: ActivityRegionSelectorBinding
+    private lateinit var sharedPref: SharedPref
 
     private var adapter: RegionAdapter? = null
-    private lateinit var sharedPref: SharedPref
     private var fromHome = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -71,7 +71,6 @@ class RegionSelectorActivity : AppCompatActivity() {
                 }
             } ?: showAlert()
         }
-
     }
 
     private fun showAlert() {
@@ -82,9 +81,7 @@ class RegionSelectorActivity : AppCompatActivity() {
         }
     }
 
-
     companion object {
-
         private lateinit var instance: RegionSelectorActivity
 
         val RegionSelectorActivityInstance: RegionSelectorActivity

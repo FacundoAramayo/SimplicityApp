@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.IdRes
@@ -32,32 +31,31 @@ import com.simplicityapp.modules.settings.activity.ActivitySetting
 import com.simplicityapp.modules.categories.activity.CategoriesSelectorActivity
 import com.simplicityapp.modules.places.activity.ActivitySearch
 import com.simplicityapp.R
+import com.simplicityapp.databinding.ActivityMainPlacesBinding
 import com.simplicityapp.modules.maps.activity.ActivityMapsV2
 import com.simplicityapp.modules.notifications.activity.ActivityNotificationsV2
 
 class ActivityMain : AppCompatActivity() {
 
+    private lateinit var db: DatabaseHandler
+    private lateinit var sharedPref: SharedPref
+    private lateinit var binding: ActivityMainPlacesBinding
     private val bundle = Bundle()
     private var home = false
     private var backToHome = false
     private var firstRun: Boolean = false
     private var exitTime: Long = 0
     private var cat: IntArray? = null
-    private var navigationView: NavigationView? = null
-    private lateinit var db: DatabaseHandler
-    private lateinit var sharedPref: SharedPref
     private var fragment: Fragment? = null
-    private var drawerLayout: DrawerLayout? = null
-    private var cityName: TextView? = null
-    var actionBar: ActionBar? = null
-    var toolbar: Toolbar? = null
-
+    private var toolbar: Toolbar? = null
+    private var actionBar: ActionBar? = null
     private var regionId: Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         overridePendingTransition(R.anim.enter_slide_in, R.anim.enter_slide_out)
-        setContentView(R.layout.activity_main_places)
+        ActivityMainPlacesBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         instance = this
 
         if (intent?.extras?.get(IS_FIRST_OPEN) == true) {
@@ -83,7 +81,7 @@ class ActivityMain : AppCompatActivity() {
 
     private fun checkRegion() {
         regionId = sharedPref.regionId
-        if (regionId == -1) {
+        if (regionId == NO_REGION_SELECTED) {
             val intent = Intent(this, RegionSelectorActivity::class.java)
             startActivity(intent)
         }
@@ -91,13 +89,13 @@ class ActivityMain : AppCompatActivity() {
 
     private fun initUI() {
         cat = resources.getIntArray(R.array.id_category)
-        toolbar = findViewById(R.id.toolbar)
         initToolbar()
         initDrawerMenu()
         onItemSelected(R.id.nav_home, getString(R.string.title_home), false)
     }
 
     private fun initToolbar() {
+        toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         actionBar = supportActionBar
         actionBar?.setDisplayHomeAsUpEnabled(true)
@@ -105,40 +103,31 @@ class ActivityMain : AppCompatActivity() {
     }
 
     private fun initDrawerMenu() {
-        drawerLayout = findViewById(R.id.drawer_layout)
-        val toggle = object : ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
-
+        val toggle = object : ActionBarDrawerToggle(this, binding.drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
             override fun onDrawerOpened(drawerView: View) {
-                updateFavoritesCounter(navigationView!!, R.id.nav_favorites, db.getFavoritesCount(sharedPref.regionId))
+                updateFavoritesCounter(binding.navView, R.id.nav_favorites, db.getFavoritesCount(sharedPref.regionId))
                 super.onDrawerOpened(drawerView)
             }
         }
-        drawerLayout?.setDrawerListener(toggle)
+        binding.drawerLayout.setDrawerListener(toggle)
         toggle.syncState()
 
-        navigationView = findViewById(R.id.nav_view)
-        val navHeader = navigationView?.getHeaderView(0)
-        cityName = navHeader?.findViewById(R.id.textView_city_name)
-        val changeRegion = navHeader?.findViewById<ImageView>(R.id.imageView_change_region)
-        changeRegion?.setOnClickListener {
-            changeRegion()
-        }
-
-        navigationView?.setNavigationItemSelectedListener { item -> onItemSelected(item.itemId, item.title.toString()) }
+        binding.navView.setNavigationItemSelectedListener { item -> onItemSelected(item.itemId, item.title.toString()) }
 
         /*CONFIG UI WITH AppConfig*/
-        if (!AppConfig.ENABLE_CONTENT_INFO) navigationView?.menu?.removeItem(R.id.nav_news)
-        if (!AppConfig.ENABLE_USER_PROFILE) navigationView?.menu?.removeItem(R.id.nav_profile)
-        if (!AppConfig.ENABLE_EMPTY_CATEGORIES and firstRun.not()) { removeEmptyCategories() }
-
+        binding.navView.run {
+            if (!AppConfig.ENABLE_CONTENT_INFO) menu.removeItem(R.id.nav_news)
+            if (!AppConfig.ENABLE_USER_PROFILE) menu.removeItem(R.id.nav_profile)
+            if (!AppConfig.ENABLE_EMPTY_CATEGORIES and !firstRun) { removeEmptyCategories() }
+        }
     }
 
     private fun removeEmptyCategories() {
         cat?.forEach {
-            val placesByCategory = db?.getAllPlaceByCategory(it)?.size
+            val placesByCategory = db.getAllPlaceByCategory(it)?.size
             if (placesByCategory == 0) {
                 val categoryId = getMenuItemId(it)
-                categoryId?.let { navigationView?.menu?.removeItem(categoryId) }
+                categoryId?.let { binding.navView.menu.removeItem(categoryId) }
             }
         }
     }
@@ -176,9 +165,8 @@ class ActivityMain : AppCompatActivity() {
             onItemSelected(R.id.nav_home, resources.getString(R.string.title_home), false)
             return
         }
-
-        if (drawerLayout?.isDrawerOpen(GravityCompat.START) == false) {
-            drawerLayout?.openDrawer(GravityCompat.START)
+        if (!binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            binding.drawerLayout.openDrawer(GravityCompat.START)
         } else {
             exitApp()
         }
@@ -205,7 +193,6 @@ class ActivityMain : AppCompatActivity() {
                 ActionTools.aboutAction(this@ActivityMain)
             }
         }
-
         return super.onOptionsItemSelected(item)
     }
 
@@ -325,15 +312,15 @@ class ActivityMain : AppCompatActivity() {
     }
 
     override fun onResume() {
+        super.onResume()
         checkRegion()
         updateRegionTitle()
-        updateFavoritesCounter(navigationView!!, R.id.nav_favorites, db.getFavoritesCount(sharedPref.regionId))
-        super.onResume()
+        updateFavoritesCounter(binding.navView, R.id.nav_favorites, db.getFavoritesCount(sharedPref.regionId))
     }
 
     public override fun onStart() {
-        active = true
         super.onStart()
+        active = true
     }
 
     override fun onDestroy() {
@@ -346,21 +333,21 @@ class ActivityMain : AppCompatActivity() {
         view.text = count.toString()
     }
 
+    private fun updateRegionTitle() {
+        val navHeader = binding.navView.getHeaderView(0)
+        val cityName = navHeader?.findViewById<TextView>(R.id.textView_city_name)
+        cityName?.text = sharedPref.regionTitle
+        cityName?.setOnClickListener { changeRegion() }
+    }
+
     private fun changeRegion() {
         val intent = Intent(this, RegionSelectorActivity::class.java)
         intent.putExtra(IS_FROM_HOME, true)
         startActivity(intent)
     }
 
-    private fun updateRegionTitle() {
-        cityName?.text = sharedPref.regionTitle
-    }
-
     companion object {
         var active = false
-
-        const val BACK_TO_HOME = "BACK_TO_HOME"
-
         private lateinit var instance: ActivityMain
 
         val ActivityMainInstance: ActivityMain
@@ -369,7 +356,6 @@ class ActivityMain : AppCompatActivity() {
                     instance =
                         ActivityMain()
                 }
-
                 return instance
             }
     }

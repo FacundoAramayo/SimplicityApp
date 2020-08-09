@@ -10,6 +10,8 @@ public class Constant {
 
     public static final float city_zoom = 13;
 
+    public static final int NO_REGION_SELECTED = -1;
+
     /*
     TAGS
      */
