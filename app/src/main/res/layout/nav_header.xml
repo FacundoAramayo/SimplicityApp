@@ -30,7 +30,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="70dp"
                     android:textAlignment="center"
-                    app:srcCompat="@drawable/simplicity_logo_transparent" />
+                    app:srcCompat="@drawable/logo_splash_screen" />
 
             </LinearLayout>
 

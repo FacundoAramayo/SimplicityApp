@@ -92,7 +92,7 @@
                         android:layout_marginEnd="@dimen/spacing_medium"
                         android:layout_marginBottom="@dimen/spacing_standard"
                         style="@style/Widget.AppCompat.Button.Borderless.Colored"
-                        android:text="Ver más"/>
+                        android:text="@string/see_more"/>
 
                 </LinearLayout>
 
@@ -501,7 +501,7 @@
             android:layout_height="@dimen/splash_icon_size"
             android:layout_gravity="center"
             android:tint="@color/colorPrimary"
-            android:src="@drawable/simplicity_logo_transparent" />
+            android:src="@drawable/logo_splash_screen" />
 
     </com.facebook.shimmer.ShimmerFrameLayout>
 

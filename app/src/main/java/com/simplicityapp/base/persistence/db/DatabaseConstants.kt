@@ -49,7 +49,6 @@ object DatabaseConstants {
     // Table Columns names TABLE_CATEGORY
     const val KEY_CAT_ID = "cat_id"
     const val KEY_CAT_NAME = "name"
-    const val KEY_CAT_ICON = "icon"
 
     // Table Columns names TABLE_NEWS_INFO
     const val KEY_NEWS_ID = "id"

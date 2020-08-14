@@ -69,7 +69,7 @@
                             style="@style/textStyleSemibold"
                             android:maxLines="1"
                             android:singleLine="true"
-                            android:text="Sample Title"
+                            tools:text="Sample Title"
                             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                             android:textColor="@color/grey_dark" />
 
@@ -97,7 +97,7 @@
                                 style="@style/textStyleSemibold"
                                 android:maxLines="1"
                                 android:singleLine="true"
-                                android:text="10 Km"
+                                tools:text="10 Km"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                                 android:textColor="@color/colorLink" />
 

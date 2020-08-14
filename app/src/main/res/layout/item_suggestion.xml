@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/lyt_parent"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?attr/selectableItemBackground"
     android:clickable="true"
+    android:focusable="true"
     android:paddingLeft="@dimen/spacing_medium"
     android:paddingRight="@dimen/spacing_medium"
     android:gravity="center_vertical"
@@ -25,7 +26,7 @@
         style="@style/textStyleRegular"
         android:maxLines="1"
         android:singleLine="true"
-        android:text="Text Suggestion"
+        tools:text="Text Suggestion"
         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
         android:textColor="@color/grey_hard" />
 

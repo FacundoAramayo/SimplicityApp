@@ -15,7 +15,8 @@
         style="@style/textStyleRegular"
         android:gravity="center_vertical"
         android:minHeight="?attr/actionBarSize"
-        android:paddingLeft="@dimen/spacing_large"
+        android:paddingStart="@dimen/spacing_large"
+        android:paddingEnd="@dimen/spacing_large"
         android:text="@string/title_dialog_theme"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
         android:textStyle="bold" />

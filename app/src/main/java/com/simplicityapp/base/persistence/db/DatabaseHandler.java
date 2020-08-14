@@ -32,7 +32,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     private int categoriesId[]; // category id
     private String categoriesName[]; // category name
-    private TypedArray cat_icon; // category name
 
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -42,7 +41,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         // get data from res/values/category.xml
         categoriesId = context.getResources().getIntArray(R.array.id_category);
         categoriesName = context.getResources().getStringArray(R.array.category_name);
-        cat_icon = context.getResources().obtainTypedArray(R.array.category_icon);
 
         // if length not equal refresh table category
         if(getCategorySize() != categoriesId.length) {
@@ -98,8 +96,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private void createTableCategory(SQLiteDatabase db) {
         String CREATE_TABLE = "CREATE TABLE " + TABLE_CATEGORY + "("
                 + KEY_CAT_ID + " INTEGER PRIMARY KEY, "
-                + KEY_CAT_NAME + " TEXT, "
-                + KEY_CAT_ICON + " INTEGER"
+                + KEY_CAT_NAME + " TEXT"
                 + ")";
         db.execSQL(CREATE_TABLE);
     }
@@ -119,7 +116,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             ContentValues values = new ContentValues();
             values.put(KEY_CAT_ID, categoriesId[i]);
             values.put(KEY_CAT_NAME, categoriesName[i]);
-            values.put(KEY_CAT_ICON, cat_icon.getResourceId(i, 0));
             // Inserting Row
             db.insert(TABLE_CATEGORY, null, values);
         }

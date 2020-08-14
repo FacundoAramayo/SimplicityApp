@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:background="@color/colorPrimary">
+    android:layout_height="match_parent">
 
     <ImageView
         android:id="@+id/img_welcome"
@@ -27,7 +26,7 @@
         android:gravity="center_horizontal"
         android:text="@string/welcome_title_2"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:textColor="@android:color/white"
+        android:textColor="@color/welcomeButtonTextColor"
         tools:layout_editor_absoluteX="166dp"
         tools:layout_editor_absoluteY="270dp" />
 
@@ -43,6 +42,6 @@
         android:text="@string/welcome_description_2"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="15sp"
-        android:textColor="@android:color/white" />
+        android:textColor="@color/welcomeButtonTextColor" />
 
 </RelativeLayout>

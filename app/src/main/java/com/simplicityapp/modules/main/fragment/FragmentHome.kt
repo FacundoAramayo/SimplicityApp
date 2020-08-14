@@ -117,7 +117,7 @@ class FragmentHome : Fragment() {
             }
             lytQuickAccessEmergency.setOnClickListener {
                 AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_HOME_QUICK_ACCESS, AnalyticsConstants.QUICK_ACCESS_EMERGENCY)
-                ActivityMain.ActivityMainInstance.onItemSelected(R.id.nav_emergency, resources.getString(R.string.title_nav_emergency), false, true)
+                //TODO ActivityMain.ActivityMainInstance.onItemSelected(R.id.nav_emergency, resources.getString(R.string.title_nav_emergency), false, true)
             }
         }
         initRecyclerFeatured()

@@ -24,6 +24,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/lyt_content"
                 android:clickable="true"
+                android:focusable="true"
                 android:minHeight="60dp"
                 android:orientation="horizontal">
 
@@ -66,7 +67,7 @@
                         android:layout_height="wrap_content"
                         style="@style/textStyleSemibold"
                         android:maxLines="1"
-                        android:text="Sample Title"
+                        tools:text="Sample Title"
                         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                         android:textColor="@color/grey_dark" />
 
@@ -108,7 +109,7 @@
                             style="@style/textStyleSemibold"
                             android:maxLines="1"
                             android:singleLine="true"
-                            android:text="10 Km"
+                            tools:text="10 Km"
                             android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                             android:textColor="@color/colorLink" />
 

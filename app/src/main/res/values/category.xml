@@ -59,35 +59,4 @@
         <item>Emergency</item>
     </string-array>
 
-    <integer-array name="category_icon">
-        <item>@drawable/ic_nav_featured</item>
-        <item>@drawable/ic_nav_shopping</item>
-        <item>@drawable/ic_nav_pharmacy</item>
-        <item>@drawable/ic_nav_gym</item>
-        <item>@drawable/ic_nav_restaurant</item>
-        <item>@drawable/ic_nav_bar</item>
-        <item>@drawable/ic_nav_fast_food</item>
-        <item>@drawable/ic_nav_delivery</item>
-        <item>@drawable/ic_store</item>
-        <item>@drawable/ic_nav_hotels</item>
-        <item>@drawable/ic_nav_temporary_rent</item>
-        <item>@drawable/ic_nav_tour</item>
-        <item>@drawable/ic_nav_money</item>
-        <item>@drawable/ic_nav_bill_payments</item>
-
-        <item>@drawable/ic_nav_apartment_rental</item>
-        <item>@drawable/ic_nav_taxi</item>
-        <item>@drawable/ic_nav_gas_station</item>
-        <item>@drawable/ic_nav_transport</item>
-        <item>@drawable/ic_nav_transport_ticket</item>
-        <item>@drawable/ic_nav_clothing_store</item>
-        <item>@android:drawable/ic_dialog_alert</item>
-        <item>@android:drawable/ic_dialog_alert</item>
-        <item>@android:drawable/ic_dialog_alert</item>
-        <item>@android:drawable/ic_dialog_alert</item>
-        <item>@android:drawable/ic_dialog_alert</item>
-
-    </integer-array>
-
-
 </resources>

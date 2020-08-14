@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/main_layout"
-    android:background="@drawable/gradient_box_list">
+    android:background="@drawable/background_splash">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,7 +17,7 @@
         <ImageView
             android:layout_width="@dimen/splash_icon_size"
             android:layout_height="@dimen/splash_icon_size"
-            android:src="@drawable/simplicity_logo_transparent" />
+            android:src="@drawable/logo_splash_screen" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -25,7 +25,7 @@
             style="@style/textStyleRegular"
             android:text="@string/splash_welcome_text"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            android:textColor="@android:color/white" />
+            android:textColor="@color/welcomeTextColor" />
     </LinearLayout>
 
 </RelativeLayout>
