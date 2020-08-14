@@ -46,9 +46,6 @@ class AnalyticsConstants {
         const val SELECT_TOOLBAR_ACTION = "SELECT_TOOLBAR_ACTION"
 
         //HOME PARAMS
-        const val FAB_MAP = "FAB_MAP"
-        const val FAB_SEARCH = "FAB_SEARCH"
-        const val FAB_FAVORITES = "FAB_FAVORITES"
         const val SHARE_APP = "SHARE_APP"
         const val REFRESH = "REFRESH"
 
@@ -70,7 +67,6 @@ class AnalyticsConstants {
 
         //MENU PARAMS
         const val HOME = "HOME"
-        const val ALL_PLACES = "ALL_PLACES"
         const val MAP = "MAP"
         const val SEARCH = "SEARCH"
         const val FAVORITES = "FAVORITES"
@@ -81,30 +77,8 @@ class AnalyticsConstants {
 
         //CATEGORY PARAMS
         const val CATEGORY_FEATURED = "CATEGORY_FEATURED"
-        const val CATEGORY_STORE = "CATEGORY_STORE"
-        const val CATEGORY_DELIVERY = "CATEGORY_DELIVERY"
-        const val CATEGORY_FAST_FOOD = "CATEGORY_FAST_FOOD"
-        const val CATEGORY_RESTAURANTS = "CATEGORY_RESTAURANTS"
-        const val CATEGORY_BAR = "CATEGORY_BAR"
-        const val CATEGORY_ICE_CREAM = "CATEGORY_ICE_CREAM"
-        const val CATEGORY_GYM_CENTER = "CATEGORY_GYM_CENTER"
-        const val CATEGORY_CLOTHING_STORES = "CATEGORY_CLOTHING_STORES"
-        const val CATEGORY_BIG_STORES = "CATEGORY_BIG_STORES"
-        const val CATEGORY_INDUSTRIAL_STORES = "CATEGORY_INDUSTRIAL_STORES"
-        const val CATEGORY_BILL_PAYMENTS = "CATEGORY_BILL_PAYMENTS"
-        const val CATEGORY_ART = "CATEGORY_ART"
+
         const val CATEGORY_JOBS = "CATEGORY_JOBS"
-        const val CATEGORY_MONEY = "CATEGORY_MONEY"
-        const val CATEGORY_TOURIST_DESTINATION = "CATEGORY_TOURIST_DESTINATION"
-        const val CATEGORY_HOTEL = "CATEGORY_HOTEL"
-        const val CATEGORY_APARTMENT_RENTAL = "CATEGORY_APARTMENT_RENTAL"
-        const val CATEGORY_TEMPORARY_RENT = "CATEGORY_TEMPORARY_RENT"
-        const val CATEGORY_TAXI = "CATEGORY_TAXI"
-        const val CATEGORY_GAS_STATION = "CATEGORY_GAS_STATION"
-        const val CATEGORY_TRANSPORT = "CATEGORY_TRANSPORT"
-        const val CATEGORY_TRANSPORT_TICKETS = "CATEGORY_TRANSPORT_TICKETS"
-        const val CATEGORY_PHARMACY = "CATEGORY_PHARMACY"
-        const val CATEGORY_EMERGENCIES = "CATEGORY_EMERGENCIES"
 
         //PLACE EVENTS
         const val VIEW_PLACE = "VIEW_PLACE"
@@ -116,8 +90,6 @@ class AnalyticsConstants {
         const val SELECT_PLACE_FACEBOOK = "SELECT_PLACE_FACEBOOK"
         const val SELECT_PLACE_WEB_SITE = "SELECT_PLACE_WEB_SITE"
         const val SELECT_PLACE_PHOTO = "SELECT_PLACE_PHOTO"
-        const val SELECT_PLACE_DESCRIPTION_CONTENT = "SELECT_PLACE_DESCRIPTION_CONTENT"
-        const val SELECT_PLACE_OPEN_MAP = "SELECT_PLACE_OPEN_MAP"
         const val SELECT_PLACE_OPEN_NAVIGATION = "SELECT_PLACE_OPEN_NAVIGATION"
         const val SELECT_PLACE_SHARE = "SELECT_PLACE_SHARE"
         const val SELECT_PLACE_FAVORITES_ADD = "SELECT_PLACE_FAVORITES_ADD"
@@ -135,7 +107,6 @@ class AnalyticsConstants {
         const val REFRESH_LIST = "REFRESH_LIST"
 
         //MAP
-        const val SELECT_MAP_CATEGORY = "SELECT_MAP_CATEGORY"
         const val SELECT_MAP_PLACE = "SELECT_MAP_PLACE"
 
         //SEARCH

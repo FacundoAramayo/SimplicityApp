@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.simplicityapp.R
+import com.simplicityapp.base.BaseActivity
 import com.simplicityapp.base.config.Constant
 import com.simplicityapp.base.config.analytics.AnalyticsConstants
 import com.simplicityapp.base.config.analytics.AnalyticsConstants.Companion.logAnalyticsEvent
@@ -24,6 +25,7 @@ import com.simplicityapp.base.utils.Tools.Companion.checkConnection
 import com.simplicityapp.baseui.adapter.AdapterNews
 import com.simplicityapp.baseui.decorator.SpacingItemDecoration
 import com.simplicityapp.baseui.utils.UITools.Companion.dpToPx
+import com.simplicityapp.databinding.ActivityNotificationsBinding
 import com.simplicityapp.modules.notifications.activity.ActivityNotificationDetails.Companion.navigate
 import com.simplicityapp.modules.notifications.model.News
 import com.simplicityapp.modules.notifications.repository.NewsRepository
@@ -33,14 +35,14 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.util.*
 
-class ActivityNotificationsV2 : AppCompatActivity() {
+class ActivityNotificationsV2 : BaseActivity() {
+    
+    private lateinit var binding: ActivityNotificationsBinding
     private var actionBar: ActionBar? = null
     private var parentView: View? = null
     private var recyclerView: RecyclerView? = null
     private var mAdapter: AdapterNews? = null
     private var lytProgress: View? = null
-    private lateinit var db: DatabaseHandler
-    private lateinit var sharedPref: SharedPref
     private var newsPostTotal = 0
     private var failed_page = 0
     private var snackbarRetry: Snackbar? = null
@@ -52,31 +54,33 @@ class ActivityNotificationsV2 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         overridePendingTransition(R.anim.enter_slide_in, R.anim.enter_slide_out)
-        setContentView(R.layout.activity_notifications)
+        binding = ActivityNotificationsBinding.inflate(layoutInflater)
+        initActivity(binding)
         parentView = findViewById(android.R.id.content)
-        db = DatabaseHandler(this)
-        sharedPref = SharedPref(this)
+        initComponent()
+    }
+
+    override fun initUI() {
         initToolbar()
-        iniComponent()
+        lytProgress = findViewById(R.id.lyt_progress)
+        recyclerView = findViewById<View>(R.id.recyclerView) as RecyclerView
+        recyclerView?.layoutManager = LinearLayoutManager(this)
+        recyclerView?.addItemDecoration(SpacingItemDecoration(1, dpToPx(4), true))
+        mAdapter = AdapterNews(this, recyclerView, ArrayList())
+        recyclerView?.adapter = mAdapter
     }
 
     private fun initToolbar() {
         val toolbar = findViewById<View>(R.id.toolbar) as Toolbar
         setSupportActionBar(toolbar)
         actionBar = supportActionBar
-        actionBar!!.setDisplayHomeAsUpEnabled(true)
-        actionBar!!.setHomeButtonEnabled(true)
-        actionBar!!.setTitle(R.string.title_nav_news)
+        actionBar?.setDisplayHomeAsUpEnabled(true)
+        actionBar?.setHomeButtonEnabled(true)
+        actionBar?.setTitle(R.string.title_nav_news)
     }
 
-    private fun iniComponent() {
-        lytProgress = findViewById(R.id.lyt_progress)
-        recyclerView = findViewById<View>(R.id.recyclerView) as RecyclerView
-        recyclerView!!.layoutManager = LinearLayoutManager(this)
-        recyclerView!!.addItemDecoration(SpacingItemDecoration(1, dpToPx(4), true))
-        mAdapter = AdapterNews(this, recyclerView, ArrayList())
-        recyclerView!!.adapter = mAdapter
-        mAdapter!!.setOnItemClickListener { v, obj, position ->
+    private fun initComponent() {
+        mAdapter?.setOnItemClickListener { v, obj, position ->
             navigate(
                 this@ActivityNotificationsV2,
                 obj,
@@ -85,7 +89,7 @@ class ActivityNotificationsV2 : AppCompatActivity() {
             )
         }
         // detect when scroll reach bottom
-        mAdapter!!.setOnLoadMoreListener { current_page ->
+        mAdapter?.setOnLoadMoreListener { current_page ->
             if (newsPostTotal > mAdapter!!.itemCount && current_page != 0) {
                 val next_page = current_page + 1
                 requestAction(next_page)
@@ -94,17 +98,19 @@ class ActivityNotificationsV2 : AppCompatActivity() {
             }
         }
         // if already have data news at db, use mode OFFLINE
-        if (db.contentInfoSize > 0) {
-            MODE = "OFFLINE"
+        db?.contentInfoSize?.let {
+            if (it > 0) MODE = "OFFLINE"
         }
         requestAction(1)
     }
 
-    private fun displayNewsResult(items: List<News>) {
-        mAdapter!!.insertData(items)
-        showProgress(false)
-        if (items.isEmpty()) {
-            showNoItemView(true)
+    private fun displayNewsResult(items: List<News>?) {
+        items?.let {
+            mAdapter?.insertData(it)
+            showProgress(false)
+            if (it.isEmpty()) {
+                showNoItemView(true)
+            }
         }
     }
 
@@ -116,10 +122,10 @@ class ActivityNotificationsV2 : AppCompatActivity() {
                     if (it.status == Constant.SUCCESS_RESPONSE) {
                         if (page_no == 1) {
                             mAdapter?.resetListData()
-                            db.refreshTableContentInfo()
+                            db?.refreshTableContentInfo()
                         }
                         newsPostTotal = it.countTotal
-                        db.insertListContentInfo(it.newsList)
+                        db?.insertListContentInfo(it.newsList)
                         displayNewsResult(it.newsList)
                     } else {
                         onFailRequest(page_no)
@@ -130,8 +136,8 @@ class ActivityNotificationsV2 : AppCompatActivity() {
             if (page_no == 1) mAdapter!!.resetListData()
             val limit = Constant.LIMIT_NEWS_REQUEST
             val offset = page_no * limit - limit
-            newsPostTotal = db.contentInfoSize
-            val items = db.getContentInfoByPage(limit, offset)
+            newsPostTotal = db?.contentInfoSize ?: 0
+            val items = db?.getContentInfoByPage(limit, offset)
             displayNewsResult(items)
         }
     }
@@ -153,7 +159,7 @@ class ActivityNotificationsV2 : AppCompatActivity() {
         if (page_no == 1) {
             showProgress(true)
         } else {
-            mAdapter!!.setLoading()
+            mAdapter?.setLoading()
         }
         Handler().postDelayed(
             { requestListContentInfo(page_no) },
@@ -175,14 +181,16 @@ class ActivityNotificationsV2 : AppCompatActivity() {
 
     private fun showFailedView(show: Boolean, message: String) {
         if (snackbarRetry == null) {
-            snackbarRetry = Snackbar.make(parentView!!, "", Snackbar.LENGTH_INDEFINITE)
+            parentView?.let {
+                snackbarRetry = Snackbar.make(it, "", Snackbar.LENGTH_INDEFINITE)
+            }
         }
-        snackbarRetry!!.setText(message)
-        snackbarRetry!!.setAction(R.string.RETRY) { requestAction(failed_page) }
+        snackbarRetry?.setText(message)
+        snackbarRetry?.setAction(R.string.RETRY) { requestAction(failed_page) }
         if (show) {
-            snackbarRetry!!.show()
+            snackbarRetry?.show()
         } else {
-            snackbarRetry!!.dismiss()
+            snackbarRetry?.dismiss()
         }
     }
 

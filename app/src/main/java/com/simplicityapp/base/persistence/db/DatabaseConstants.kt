@@ -1,12 +1,14 @@
 package com.simplicityapp.base.persistence.db
 
+import com.simplicityapp.base.config.AppConfig
+
 object DatabaseConstants {
 
     // Database Version
-    const val DATABASE_VERSION = 6
+    const val DATABASE_VERSION = AppConfig.DATABASE_VERSION
 
     // Database Name
-    const val DATABASE_NAME = "simplicity_app"
+    const val DATABASE_NAME = AppConfig.DATABASE_NAME
 
     // Main Table Name
     const val TABLE_PLACE = "place"

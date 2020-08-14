@@ -34,7 +34,7 @@
     <dimen name="icon_top_margin">24dp</dimen>
     <dimen name="icon_bottom_margin">24dp</dimen>
 
-    <dimen name="news_list_height">200dp</dimen>
+    <dimen name="news_list_height">160dp</dimen>
 
     <dimen name="text_size_medium">12sp</dimen>
     <dimen name="text_size_small">10sp</dimen>

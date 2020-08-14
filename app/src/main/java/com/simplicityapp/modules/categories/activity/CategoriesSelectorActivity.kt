@@ -1,6 +1,5 @@
 package com.simplicityapp.modules.categories.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
@@ -9,60 +8,27 @@ import com.simplicityapp.modules.categories.fragment.CategoriesSelectorFragment
 import com.simplicityapp.modules.categories.fragment.CategoryFragment
 import com.simplicityapp.R
 import com.simplicityapp.base.BaseActivity
+import com.simplicityapp.base.config.Constant.TAG_CATEGORY
 import com.simplicityapp.databinding.CategoriesSelectorActivityBinding
 
-class CategoriesSelectorActivity : AppCompatActivity(), BaseActivity {
-
-    var fragmentManager: FragmentManager? = null
-    private val bundle = Bundle()
-    var fragment = Fragment()
+class CategoriesSelectorActivity : BaseActivity()  {
 
     private lateinit var binding: CategoriesSelectorActivityBinding
+    private val bundle = Bundle()
+    var fragmentManager: FragmentManager? = null
+    var fragment = Fragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = CategoriesSelectorActivityBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        initActivity(binding)
         if (savedInstanceState == null) {
             fragmentManager = supportFragmentManager
             fragment = CategoriesSelectorFragment.newInstance()
             fragmentManager?.beginTransaction()?.replace(R.id.container, fragment)
                 ?.commitNow()
-
         }
         instance = this
-        initUI()
-    }
-
-    fun openCategory(categoryName: String, categoryId: Int) {
-        fragment = CategoryFragment()
-        bundle.putInt(CategoryFragment.TAG_CATEGORY, categoryId)
-        fragment.arguments = bundle
-        fragmentManager?.beginTransaction()?.replace(R.id.container, fragment)?.commit()
-        binding.toolbar.toolbar.title = categoryName
-    }
-
-    override fun onBackPressed() {
-        if (fragment is CategoryFragment) {
-            bundle.putInt(CategoryFragment.TAG_CATEGORY, 0)
-            fragment = CategoriesSelectorFragment.newInstance()
-            fragment.arguments = bundle
-            fragmentManager?.beginTransaction()?.replace(R.id.container, fragment)
-                ?.commitNow()
-            binding.toolbar.toolbar.title = resources.getString(R.string.categories_selector_title)
-        } else {
-            super.onBackPressed()
-        }
-    }
-
-    companion object {
-        var TAG_CATEGORY = "key.TAG_CATEGORY"
-        private lateinit var instance: CategoriesSelectorActivity
-
-        val CategoriesSelectorInstance: CategoriesSelectorActivity
-            get() {
-                return instance
-            }
     }
 
     override fun initUI() {
@@ -75,12 +41,25 @@ class CategoriesSelectorActivity : AppCompatActivity(), BaseActivity {
 
     }
 
-    override fun initListeners() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    fun openCategory(categoryName: String, categoryId: Int) {
+        fragment = CategoryFragment()
+        bundle.putInt(TAG_CATEGORY, categoryId)
+        fragment.arguments = bundle
+        fragmentManager?.beginTransaction()?.replace(R.id.container, fragment)?.commit()
+        binding.toolbar.toolbar.title = categoryName
     }
 
-    override fun getArguments() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun onBackPressed() {
+        if (fragment is CategoryFragment) {
+            bundle.putInt(TAG_CATEGORY, 0)
+            fragment = CategoriesSelectorFragment.newInstance()
+            fragment.arguments = bundle
+            fragmentManager?.beginTransaction()?.replace(R.id.container, fragment)
+                ?.commitNow()
+            binding.toolbar.toolbar.title = resources.getString(R.string.categories_selector_title)
+        } else {
+            super.onBackPressed()
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -89,5 +68,14 @@ class CategoriesSelectorActivity : AppCompatActivity(), BaseActivity {
             onBackPressed()
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    companion object {
+        private lateinit var instance: CategoriesSelectorActivity
+
+        val CategoriesSelectorInstance: CategoriesSelectorActivity
+            get() {
+                return instance
+            }
     }
 }

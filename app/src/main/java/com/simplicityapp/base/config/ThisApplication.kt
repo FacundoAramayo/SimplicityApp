@@ -3,28 +3,15 @@ package com.simplicityapp.base.config
 import android.app.Application
 import android.location.Location
 import android.os.Bundle
-import android.text.TextUtils
-import android.util.Log
 import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.tasks.OnFailureListener
 import com.google.firebase.FirebaseApp
 import com.google.firebase.analytics.FirebaseAnalytics
-import com.google.firebase.iid.FirebaseInstanceId
 import com.simplicityapp.base.config.analytics.AnalyticsConstants.Companion.SHARE
 import com.simplicityapp.base.config.analytics.AnalyticsConstants.Companion.SIGN_UP
-import com.simplicityapp.base.config.Constant.LOG_TAG
-import com.simplicityapp.base.connection.callbacks.CallbackDevice
 import com.simplicityapp.base.persistence.preferences.SharedPref
-import com.simplicityapp.base.rest.RestAdapter
-import com.simplicityapp.base.utils.Tools
-import retrofit2.Call
-import retrofit2.Response
-
-private const val FCM_MAX_COUNT = 10
 
 class ThisApplication : Application() {
 
-    private var callback: Call<CallbackDevice>? = null
     private var firebaseAnalytics: FirebaseAnalytics? = null
     /**
      * ---------------------------------------- End of analytics ---------------------------------
@@ -32,71 +19,16 @@ class ThisApplication : Application() {
 
     var location: Location? = null
     private var sharedPref: SharedPref? = null
-    private var fcmCount = 0
+    var firebaseApp: FirebaseApp? = null
 
     override fun onCreate() {
         super.onCreate()
         instance = this
-        sharedPref =
-            SharedPref(this)
-
-        // initialize firebase
-        val firebaseApp = FirebaseApp.initializeApp(this)
-
-        // obtain regId & registering device to server
-        obtainFirebaseToken(firebaseApp)
+        sharedPref = SharedPref(this)
 
         // activate analytics tracker
         getFirebaseAnalytics()
     }
-
-
-    private fun obtainFirebaseToken(firebaseApp: FirebaseApp?) {
-        if (!Tools.checkConnection(this)) return
-        fcmCount++
-
-        val resultTask = FirebaseInstanceId.getInstance().instanceId
-        resultTask.addOnSuccessListener { instanceIdResult ->
-            val regId = instanceIdResult.token
-            if (!TextUtils.isEmpty(regId)) sendRegistrationToServer(regId)
-        }
-
-        resultTask.addOnFailureListener(OnFailureListener { e ->
-            Log.e(LOG_TAG, "Constant.LOG_TAG, Failed obtain fcmID : " + e.message)
-            if (fcmCount > FCM_MAX_COUNT) return@OnFailureListener
-            obtainFirebaseToken(firebaseApp)
-        })
-    }
-
-    /**
-     * --------------------------------------------------------------------------------------------
-     * For Firebase Cloud Messaging
-     */
-    private fun sendRegistrationToServer(token: String) {
-        if (Tools.checkConnection(this) && !TextUtils.isEmpty(token) && sharedPref!!.isOpenAppCounterReach) {
-            val api = RestAdapter.createAPI()
-            val deviceInfo = Tools.getDeviceInfo(this)
-            deviceInfo.regid = token
-
-            callback = api.registerDevice(deviceInfo)
-            callback!!.enqueue(object : retrofit2.Callback<CallbackDevice> {
-                override fun onResponse(
-                    call: Call<CallbackDevice>,
-                    response: Response<CallbackDevice>
-                ) {
-                    val resp = response.body()
-                    if (resp != null) {
-                        if (resp.status == "success") {
-                            sharedPref!!.setOpenAppCounter(0)
-                        }
-                    }
-                }
-
-                override fun onFailure(call: Call<CallbackDevice>, t: Throwable) {}
-            })
-        }
-    }
-
 
     /*
      * --------------------------------------------------------------------------------------------

@@ -44,6 +44,12 @@ import static com.simplicityapp.base.config.Constant.LOG_TAG;
 
 public class FcmMessagingService extends FirebaseMessagingService {
 
+    private static final String FCM_TITLE_KEY = "title";
+    private static final String FCM_CONTENT_KEY = "content";
+    private static final String FCM_TYPE_KEY = "type";
+    private static final String FCM_PLACE_KEY = "place";
+    private static final String FCM_NEWS_KEY = "news";
+
     private SharedPref sharedPref;
     private int retryCount = 0;
 
@@ -68,16 +74,16 @@ public class FcmMessagingService extends FirebaseMessagingService {
             final FcmNotification fcmNotif = new FcmNotification();
             if (remoteMessage.getData().size() > 0) {
                 Map<String, String> data = remoteMessage.getData();
-                fcmNotif.setTitle(data.get("title"));
-                fcmNotif.setContent(data.get("content"));
-                fcmNotif.setType(data.get("type"));
+                fcmNotif.setTitle(data.get(FCM_TITLE_KEY));
+                fcmNotif.setContent(data.get(FCM_CONTENT_KEY));
+                fcmNotif.setType(data.get(FCM_TYPE_KEY));
 
                 // load data place if exist
-                String place_str = data.get("place");
+                String place_str = data.get(FCM_PLACE_KEY);
                 fcmNotif.setPlace(place_str != null ? new Gson().fromJson(place_str, Place.class) : null);
 
                 // load data news_info if exist
-                String news_str = data.get("news");
+                String news_str = data.get(FCM_NEWS_KEY);
                 fcmNotif.setNews(news_str != null ? new Gson().fromJson(news_str, News.class) : null);
 
             } else if (remoteMessage.getNotification() != null) {

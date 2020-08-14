@@ -1,15 +1,14 @@
 package com.simplicityapp.modules.main.activity
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.simplicityapp.R
+import com.simplicityapp.base.BaseActivity
 import com.simplicityapp.base.config.Constant.IS_FROM_HOME
-import com.simplicityapp.base.persistence.preferences.SharedPref
 import com.simplicityapp.baseui.adapter.RegionAdapter
 import com.simplicityapp.databinding.ActivityRegionSelectorBinding
 import com.simplicityapp.modules.main.viewmodel.RegionSelectorViewModel
@@ -17,11 +16,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class RegionSelectorActivity : AppCompatActivity() {
+class RegionSelectorActivity : BaseActivity() {
 
     private lateinit var viewModel: RegionSelectorViewModel
     private lateinit var binding: ActivityRegionSelectorBinding
-    private lateinit var sharedPref: SharedPref
 
     private var adapter: RegionAdapter? = null
     private var fromHome = false
@@ -29,23 +27,22 @@ class RegionSelectorActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegionSelectorBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        initActivity(binding)
         viewModel = ViewModelProvider(this).get(RegionSelectorViewModel::class.java)
-        sharedPref = SharedPref(this)
-
-        fromHome = intent.getBooleanExtra(IS_FROM_HOME, false)
-
-        initUI()
     }
 
-    private fun initUI() {
+    override fun getArguments() {
+        fromHome = intent.getBooleanExtra(IS_FROM_HOME, false)
+    }
+
+    override fun initUI() {
         binding.recyclerViewRegion.apply {
             layoutManager = LinearLayoutManager(context)
             addItemDecoration(DividerItemDecoration(context, LinearLayoutManager.VERTICAL))
         }
         GlobalScope.launch(Dispatchers.Main) {
             val items = viewModel.getRegionsAsync().body()
-            adapter = RegionAdapter(applicationContext, items)
+            adapter = RegionAdapter(this@RegionSelectorActivity, items)
             binding.recyclerViewRegion.adapter = adapter
             adapter?.notifyDataSetChanged()
         }

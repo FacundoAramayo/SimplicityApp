@@ -16,8 +16,6 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
-import com.simplicityapp.base.rest.RestAdapter
-import com.simplicityapp.base.connection.callbacks.ListPlaceResponse
 import com.simplicityapp.base.config.AppConfig
 import com.simplicityapp.base.config.Constant
 import com.simplicityapp.base.persistence.db.DatabaseHandler
@@ -29,9 +27,14 @@ import com.simplicityapp.base.config.Constant.LOG_TAG
 import com.simplicityapp.baseui.adapter.AdapterPlaceList
 import com.simplicityapp.modules.places.activity.ActivityPlaceDetail
 import com.simplicityapp.R
+import com.simplicityapp.base.config.Constant.TAG_CATEGORY
+import com.simplicityapp.modules.places.model.PlacesResponse
+import com.simplicityapp.modules.places.repository.PlacesRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.util.ArrayList
-import retrofit2.Call
-import retrofit2.Response
+import java.lang.Exception
 
 class CategoryFragment : Fragment() {
 
@@ -49,17 +52,16 @@ class CategoryFragment : Fragment() {
     private lateinit var sharedPref: SharedPref
     private var adapter: AdapterPlaceList? = null
 
-    private var response: Call<ListPlaceResponse>? = null
-
     private var onProcess = false
+
+    private val placesRepository: PlacesRepository = PlacesRepository()
+    private var placesResponse: PlacesResponse? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         rootView = inflater.inflate(R.layout.fragment_category, null)
         db = DatabaseHandler(context)
         sharedPref = SharedPref(context)
         categoryId = arguments?.getInt(TAG_CATEGORY) ?: 0
-
-
         initUI()
 
         return rootView
@@ -88,9 +90,6 @@ class CategoryFragment : Fragment() {
 
     override fun onDestroyView() {
         if (snackbarRetry != null) snackbarRetry?.dismiss()
-        if (response != null && response!!.isExecuted) {
-            response?.cancel()
-        }
         super.onDestroyView()
     }
 
@@ -169,35 +168,50 @@ class CategoryFragment : Fragment() {
         onProcess = true
         showProgress(onProcess)
         val isDraft = if (AppConfig.LAZY_LOAD) 1 else 0
-        response = RestAdapter.createAPI().getPlacesByPage(page_no, Constant.LIMIT_PLACE_REQUEST, isDraft, sharedPref.regionId)
-        response!!.enqueue(object : retrofit2.Callback<ListPlaceResponse> {
-            override fun onResponse(call: Call<ListPlaceResponse>, response: Response<ListPlaceResponse>) {
-                val resp = response.body()
-                if (resp != null) {
-                    countTotal = resp.count_total
-                    if (page_no == 1) db.refreshTablePlace()
-                    db.insertListPlace(resp.places, sharedPref.regionId)  // save result into database
-                    sharedPref.lastPlacePage = page_no + 1
-                    delayNextRequest(page_no)
-                    val str_progress = String.format(getString(R.string.load_of), page_no * Constant.LIMIT_PLACE_REQUEST, countTotal)
-                    textProgress!!.text = str_progress
-                } else {
-                    onFailureRetry(page_no, getString(R.string.refresh_failed))
-                }
-            }
+        GlobalScope.launch(Dispatchers.Main) {
+            requestContent(page_no, isDraft)
+        }
+    }
 
-            override fun onFailure(call: Call<ListPlaceResponse>?, t: Throwable) {
-                if (call != null && !call.isCanceled) {
-                    Log.e(LOG_TAG, "FragmentCategory, onFailure: " + t.message)
-                    val conn = Tools.checkConnection(context!!)
-                    if (conn) {
-                        onFailureRetry(page_no, getString(R.string.refresh_failed))
-                    } else {
-                        onFailureRetry(page_no, getString(R.string.no_internet))
+    private suspend fun requestContent(pageNo: Int, isDraft: Int) {
+        try {
+            placesResponse = placesRepository.getPlacesByPage(
+                pageNo,
+                Constant.LIMIT_PLACE_REQUEST,
+                isDraft,
+                sharedPref.regionId)?.body()
+            placesResponse?.let {
+                when (it.status) {
+                    Constant.SUCCESS_RESPONSE -> {
+                        countTotal = it.count_total
+                        if (pageNo == 1) {
+                            adapter?.resetListData()
+                            db.refreshTablePlace()
+                        }
+                        db.insertListPlace(it.places, sharedPref.regionId)
+                        sharedPref.lastPlacePage = pageNo + 1
+                        delayNextRequest(pageNo)
+                        val str_progress = String.format(getString(R.string.load_of), pageNo * Constant.LIMIT_PLACE_REQUEST, countTotal)
+                        textProgress!!.text = str_progress
+                    }
+                    else -> {
+                        onFailureRetry(pageNo, getString(R.string.refresh_failed))
                     }
                 }
-            }
-        })
+            } ?: onFailureRetry(pageNo, getString(R.string.refresh_failed))
+        } catch (e: Exception) {
+            onFailure(pageNo, e)
+        }
+    }
+
+    private fun onFailure(pageNo: Int, t: Throwable) {
+        Log.e(LOG_TAG, "FragmentCategory, onFailure: " + t.message)
+        val conn = Tools.checkConnection(context!!)
+        if (conn) {
+            onFailureRetry(pageNo, getString(R.string.refresh_failed))
+        } else {
+            onFailureRetry(pageNo, getString(R.string.no_internet))
+        }
     }
 
     private fun showProgress(show: Boolean) {
@@ -244,9 +258,5 @@ class CategoryFragment : Fragment() {
             return
         }
         Handler().postDelayed({ onRefresh(page_no + 1) }, 500)
-    }
-
-    companion object {
-        var TAG_CATEGORY = "key.TAG_CATEGORY"
     }
 }

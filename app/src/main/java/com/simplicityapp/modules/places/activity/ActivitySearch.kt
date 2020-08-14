@@ -9,16 +9,11 @@ import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
-import android.widget.ImageButton
-import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.simplicityapp.base.persistence.db.DatabaseHandler
 import com.simplicityapp.base.utils.Tools
@@ -29,32 +24,24 @@ import com.simplicityapp.baseui.adapter.AdapterSuggestionSearch
 import com.simplicityapp.baseui.utils.UITools
 import com.simplicityapp.baseui.decorator.SpacingItemDecoration
 import com.simplicityapp.R
+import com.simplicityapp.databinding.ActivitySearchBinding
 import java.util.ArrayList
 
-class ActivitySearch : AppCompatActivity(), BaseActivity {
+class ActivitySearch : BaseActivity() {
 
+    private lateinit var binding: ActivitySearchBinding
     private var toolbar: Toolbar? = null
     private var actionBar: ActionBar? = null
-    private var etSearch: EditText? = null
-    private var btClear: ImageButton? = null
     private var parentView: View? = null
-
-    private var recyclerView: RecyclerView? = null
     private var mAdapter: AdapterPlaceGrid? = null
-
-    private var recyclerSuggestion: RecyclerView? = null
     private var mAdapterSuggestion: AdapterSuggestionSearch? = null
-    private var lytSuggestion: LinearLayout? = null
-    private var lytNoItem: View? = null
-
-    private var db: DatabaseHandler? = null
 
     private var textWatcher: TextWatcher = object : TextWatcher {
         override fun onTextChanged(c: CharSequence, i: Int, i1: Int, i2: Int) {
             if (c.toString().trim { it <= ' ' }.isEmpty()) {
-                btClear?.visibility = View.GONE
+                binding.btnClear.visibility = View.GONE
             } else {
-                btClear?.visibility = View.VISIBLE
+                binding.btnClear.visibility = View.VISIBLE
             }
         }
 
@@ -65,55 +52,56 @@ class ActivitySearch : AppCompatActivity(), BaseActivity {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_search)
+        binding = ActivitySearchBinding.inflate(layoutInflater)
+        initActivity(binding)
         parentView = findViewById(android.R.id.content)
-        db = DatabaseHandler(this)
-        initUI()
-        initComponents()
-        initListeners()
-        setupToolbar()
     }
 
     override fun initUI() {
-        lytSuggestion = findViewById<View>(R.id.lyt_suggestion) as LinearLayout
-        etSearch = findViewById<View>(R.id.et_search) as EditText
-        etSearch?.addTextChangedListener(textWatcher)
-
-        btClear = findViewById<View>(R.id.bt_clear) as ImageButton
-        btClear?.visibility = View.GONE
-        recyclerView = findViewById<View>(R.id.recyclerView) as RecyclerView
-        recyclerSuggestion = findViewById<View>(R.id.recyclerSuggestion) as RecyclerView
-
-        recyclerView?.layoutManager = StaggeredGridLayoutManager(UITools.getGridSpanCount(this), StaggeredGridLayoutManager.VERTICAL)
-        recyclerView?.addItemDecoration(
-            SpacingItemDecoration(
-                UITools.getGridSpanCount(this),
-                UITools.dpToPx(4),
-                true
+        binding.run {
+            editTextSearch.addTextChangedListener(textWatcher)
+            btnClear.visibility = View.GONE
+            recyclerView.layoutManager = StaggeredGridLayoutManager(UITools.getGridSpanCount(this@ActivitySearch), StaggeredGridLayoutManager.VERTICAL)
+            recyclerView.addItemDecoration(
+                SpacingItemDecoration(
+                    UITools.getGridSpanCount(this@ActivitySearch),
+                    UITools.dpToPx(4),
+                    true
+                )
             )
-        )
+            recyclerSuggestion.layoutManager = LinearLayoutManager(this@ActivitySearch)
+            recyclerSuggestion.setHasFixedSize(true)
 
-        recyclerSuggestion?.layoutManager = LinearLayoutManager(this)
-        recyclerSuggestion?.setHasFixedSize(true)
+            //set data and list adapter
+            mAdapter = AdapterPlaceGrid(this@ActivitySearch, recyclerView, ArrayList(), StaggeredGridLayoutManager.VERTICAL, 0)
+            recyclerView.adapter = mAdapter
+            mAdapter?.setOnItemClickListener { v, obj -> ActivityPlaceDetail.navigate(this@ActivitySearch, v.findViewById(R.id.lyt_content), obj, AnalyticsConstants.SELECT_SEARCHED_PLACE) }
 
-        lytNoItem = findViewById<View>(R.id.lyt_no_item)
+            //set data and list adapter suggestion
+            mAdapterSuggestion = AdapterSuggestionSearch(this@ActivitySearch)
+            recyclerSuggestion.adapter = mAdapterSuggestion
+            showSuggestionSearch()
+
+            showNotFoundView()
+        }
+        setupToolbar()
     }
 
     override fun initListeners() {
         mAdapterSuggestion?.setOnItemClickListener { view, viewModel, pos ->
-            etSearch?.setText(viewModel)
-            lytSuggestion?.visibility = View.GONE
+            binding.editTextSearch.setText(viewModel)
+            binding.lytSuggestion.visibility = View.GONE
             hideKeyboard()
             searchAction()
         }
 
-        btClear?.setOnClickListener {
-            etSearch?.setText("")
+        binding.btnClear.setOnClickListener {
+            binding.editTextSearch.setText("")
             mAdapter?.resetListData()
             showNotFoundView()
         }
 
-        etSearch?.setOnEditorActionListener(TextView.OnEditorActionListener { v, actionId, event ->
+        binding.editTextSearch.setOnEditorActionListener(TextView.OnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 hideKeyboard()
                 searchAction()
@@ -122,34 +110,16 @@ class ActivitySearch : AppCompatActivity(), BaseActivity {
             false
         })
 
-        etSearch?.setOnTouchListener { view, motionEvent ->
+        binding.editTextSearch.setOnTouchListener { view, motionEvent ->
             showSuggestionSearch()
             window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE)
             false
         }
     }
 
-    override fun getArguments() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    private fun initComponents() {
-        //set data and list adapter
-        mAdapter = AdapterPlaceGrid(this, recyclerView, ArrayList(), StaggeredGridLayoutManager.VERTICAL, 0)
-        recyclerView?.adapter = mAdapter
-        mAdapter?.setOnItemClickListener { v, obj -> ActivityPlaceDetail.navigate(this@ActivitySearch, v.findViewById(R.id.lyt_content), obj, AnalyticsConstants.SELECT_SEARCHED_PLACE) }
-
-        //set data and list adapter suggestion
-        mAdapterSuggestion = AdapterSuggestionSearch(this)
-        recyclerSuggestion!!.adapter = mAdapterSuggestion
-        showSuggestionSearch()
-
-        showNotFoundView()
-    }
-
     private fun showSuggestionSearch() {
         mAdapterSuggestion?.refreshItems()
-        lytSuggestion?.visibility = View.VISIBLE
+        binding.lytSuggestion.visibility = View.VISIBLE
     }
 
     override fun onResume() {
@@ -181,12 +151,12 @@ class ActivitySearch : AppCompatActivity(), BaseActivity {
     }
 
     private fun searchAction() {
-        lytSuggestion?.visibility = View.GONE
+        binding.lytSuggestion.visibility = View.GONE
         showNotFoundView()
-        val query = etSearch!!.text.toString().trim { it <= ' ' }
+        val query = binding.editTextSearch.text.toString().trim { it <= ' ' }
         AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SEARCH_PLACE, query, false)
         if (query != "") {
-            mAdapterSuggestion!!.addSearchHistory(query)
+            mAdapterSuggestion?.addSearchHistory(query)
             mAdapter?.resetListData()
             mAdapter?.insertData(Tools.filterItemsWithDistance(this, db!!.searchAllPlace(query)), false)
             showNotFoundView()
@@ -197,11 +167,11 @@ class ActivitySearch : AppCompatActivity(), BaseActivity {
 
     private fun showNotFoundView() {
         if (mAdapter?.itemCount == 0) {
-            recyclerView?.visibility = View.GONE
-            lytNoItem?.visibility = View.VISIBLE
+            binding.recyclerView.visibility = View.GONE
+            binding.lytNoItem.root.visibility = View.VISIBLE
         } else {
-            recyclerView?.visibility = View.VISIBLE
-            lytNoItem?.visibility = View.GONE
+            binding.recyclerView.visibility = View.VISIBLE
+            binding.lytNoItem.root.visibility = View.GONE
         }
     }
 }

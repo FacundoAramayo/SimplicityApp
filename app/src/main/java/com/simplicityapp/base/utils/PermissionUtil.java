@@ -26,10 +26,8 @@ public abstract class PermissionUtil {
                 permissions.add(permission);
             }
         }
-
         return permissions.toArray(new String[permissions.size()]);
     }
-
 
     private static boolean isGranted(Context ctx, String permission) {
         if (!Tools.Companion.needRequestPermission()) return true;

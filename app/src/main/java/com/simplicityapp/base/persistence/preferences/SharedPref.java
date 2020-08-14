@@ -45,7 +45,7 @@ public class SharedPref {
         return sharedPreferences.getString(FCM_PREF_KEY, null);
     }
 
-    public boolean isFcmRegIdEmpty() {
+    private boolean isFcmRegIdEmpty() {
         return TextUtils.isEmpty(getFcmRegId());
     }
 
@@ -53,7 +53,7 @@ public class SharedPref {
         sharedPreferences.edit().putBoolean(SERVER_FLAG_KEY, registered).apply();
     }
 
-    public boolean isRegisteredOnServer() {
+    private boolean isRegisteredOnServer() {
         return sharedPreferences.getBoolean(SERVER_FLAG_KEY, false);
     }
 
@@ -97,7 +97,7 @@ public class SharedPref {
         sharedPreferences.edit().putString(THEME_COLOR_KEY, color).apply();
     }
 
-    public String getThemeColor() {
+    private String getThemeColor() {
         return sharedPreferences.getString(THEME_COLOR_KEY, "");
     }
 

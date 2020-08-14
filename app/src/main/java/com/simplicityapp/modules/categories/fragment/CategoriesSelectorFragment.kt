@@ -18,6 +18,7 @@ import com.simplicityapp.modules.categories.viewmodel.CategoriesSelectorViewMode
 import com.simplicityapp.R
 import com.simplicityapp.base.config.Constant
 import com.simplicityapp.base.config.Constant.COMMERCIAL_GUIDE
+import com.simplicityapp.base.config.Constant.TAG_CATEGORY
 import com.simplicityapp.base.utils.tryOrDefault
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -40,7 +41,7 @@ class CategoriesSelectorFragment : Fragment(R.layout.categories_selector_fragmen
     ): View? {
         binding = CategoriesSelectorFragmentBinding.inflate(inflater, container, false)
         type = activity?.intent?.getStringExtra(Constant.GUIDE_TYPE)
-        categoryId = tryOrDefault({activity?.intent?.getStringExtra(CategoryFragment.TAG_CATEGORY)!!.toInt()}, 0)
+        categoryId = tryOrDefault({activity?.intent?.getStringExtra(TAG_CATEGORY)!!.toInt()}, 0)
         //This allow return to guide type on back pressed
         activity?.intent = Intent()
         activity?.intent?.putExtra(Constant.GUIDE_TYPE, type)
@@ -101,8 +102,6 @@ class CategoriesSelectorFragment : Fragment(R.layout.categories_selector_fragmen
                     adapter.notifyDataSetChanged()
                 }
             }
-
-
         }
 
     }

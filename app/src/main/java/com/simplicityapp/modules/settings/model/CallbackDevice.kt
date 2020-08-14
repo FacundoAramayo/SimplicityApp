@@ -1,4 +1,4 @@
-package com.simplicityapp.base.connection.callbacks
+package com.simplicityapp.modules.settings.model
 
 import java.io.Serializable
 

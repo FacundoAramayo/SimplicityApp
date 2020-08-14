@@ -59,15 +59,8 @@ class Tools {
         }
 
         fun getDeviceInfo(context: Context): DeviceInfo {
-            var phoneID = Build.SERIAL
-            try {
-                phoneID = Settings.Secure.getString(context.contentResolver, Settings.Secure.ANDROID_ID)
-            } catch (e: Exception) {
-            }
-
             val deviceInfo = DeviceInfo()
             deviceInfo.device = getDeviceName()
-            deviceInfo.email = phoneID
             deviceInfo.version = getAndroidVersion()
             deviceInfo.regid = SharedPref(
                 context

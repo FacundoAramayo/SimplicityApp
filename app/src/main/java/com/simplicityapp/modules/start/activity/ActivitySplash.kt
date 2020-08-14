@@ -8,7 +8,6 @@ import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
 import com.simplicityapp.base.config.analytics.AnalyticsConstants
 import com.simplicityapp.base.config.analytics.AnalyticsConstants.Companion.APP_OPEN
-import com.simplicityapp.base.config.AppConfig
 import com.simplicityapp.base.config.Constant
 import com.simplicityapp.base.persistence.preferences.SharedPref
 import com.simplicityapp.base.utils.ActionTools
@@ -42,9 +41,9 @@ class ActivitySplash : AppCompatActivity() {
 
     private fun chooseNextActivity() {
         when (checkFirstRun()) {
-            AppConfig.FIRST_RUN -> startActivityWelcomeDelay()
-            AppConfig.NORMAL_RUN -> startActivityMainDelay()
-            AppConfig.UPGRADE_RUN -> startActivityUpgradeDelay()
+            Constant.FIRST_RUN -> startActivityWelcomeDelay()
+            Constant.NORMAL_RUN -> startActivityMainDelay()
+            Constant.UPGRADE_RUN -> startActivityUpgradeDelay()
         }
     }
 
@@ -53,9 +52,9 @@ class ActivitySplash : AppCompatActivity() {
         val savedVersionCode = prefs.getInt(Constant.PREF_VERSION_CODE_KEY, Constant.DOESNT_EXIST_CODE)
 
         return when {
-            BuildConfig.VERSION_CODE == savedVersionCode -> AppConfig.NORMAL_RUN
-            savedVersionCode == Constant.DOESNT_EXIST_CODE -> AppConfig.FIRST_RUN
-            BuildConfig.VERSION_CODE > savedVersionCode -> AppConfig.UPGRADE_RUN
+            BuildConfig.VERSION_CODE == savedVersionCode -> Constant.NORMAL_RUN
+            savedVersionCode == Constant.DOESNT_EXIST_CODE -> Constant.FIRST_RUN
+            BuildConfig.VERSION_CODE > savedVersionCode -> Constant.UPGRADE_RUN
             else -> 400
         }
 

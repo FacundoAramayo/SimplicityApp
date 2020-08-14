@@ -19,6 +19,7 @@ import com.simplicityapp.baseui.adapter.AdapterPlaceGrid
 import com.simplicityapp.base.config.analytics.AnalyticsConstants
 import com.simplicityapp.base.config.AppConfig
 import com.simplicityapp.base.config.AppConfig.LIMIT_PLACES_TO_UPDATE
+import com.simplicityapp.base.config.AppConfig.LINK_TO_SUBSCRIPTION_FORM
 import com.simplicityapp.base.config.Constant
 import com.simplicityapp.base.config.Constant.COMMERCIAL_GUIDE
 import com.simplicityapp.base.config.Constant.JOBS_GUIDE
@@ -74,13 +75,16 @@ class FragmentHome : Fragment() {
         binding.apply {
             shimmerViewContainer.visibility = View.VISIBLE
             mainScrollView.visibility = View.GONE
+            btnNews.setOnClickListener {
+                ActivityMain.ActivityMainInstance.openNews()
+            }
             buttonHomeShareApp.setOnClickListener {
                 AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_HOME_ACTION, AnalyticsConstants.SHARE_APP, true)
                 activity?.let { it1 -> ActionTools.methodShare(it1) }
             }
             buttonHomeSubscription.setOnClickListener {
                 AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_HOME_ACTION, AnalyticsConstants.OPEN_REGISTER_FORM, true)
-                activity?.let { it1 -> ActionTools.directUrl(it1, Constant.LINK_TO_SUBSCRIPTION_FORM, resources.getString(R.string.fail_open_website)) }
+                activity?.let { it1 -> ActionTools.directUrl(it1, LINK_TO_SUBSCRIPTION_FORM, resources.getString(R.string.fail_open_website)) }
             }
             lytQuickAccessGastronomy.setOnClickListener {
                 backToHome = true
@@ -359,10 +363,10 @@ class FragmentHome : Fragment() {
     private fun showNews(show: Boolean) {
         if (show) {
             binding.tvNewsTitle.visibility = View.VISIBLE
-            binding.recyclerNews.visibility = View.VISIBLE
+            binding.lytNews.visibility = View.VISIBLE
         } else {
             binding.tvNewsTitle.visibility = View.GONE
-            binding.recyclerNews.visibility = View.GONE
+            binding.lytNews.visibility = View.GONE
         }
     }
 

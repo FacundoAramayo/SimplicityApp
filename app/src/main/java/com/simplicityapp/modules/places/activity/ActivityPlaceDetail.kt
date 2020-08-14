@@ -23,10 +23,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.snackbar.Snackbar
 import com.simplicityapp.baseui.adapter.AdapterImageList
-import com.simplicityapp.base.rest.RestAdapter
-import com.simplicityapp.base.connection.callbacks.CallbackPlaceDetails
 import com.simplicityapp.base.config.Constant
-import com.simplicityapp.base.persistence.db.DatabaseHandler
 import com.simplicityapp.base.persistence.preferences.SharedPref
 import com.simplicityapp.base.config.analytics.AnalyticsConstants
 import com.simplicityapp.base.config.analytics.AnalyticsConstants.Companion.CONTENT_PLACE
@@ -39,9 +36,6 @@ import com.simplicityapp.base.config.analytics.AnalyticsConstants.Companion.SELE
 import com.simplicityapp.base.config.analytics.AnalyticsConstants.Companion.VIEW_PLACE
 import com.simplicityapp.base.config.analytics.AnalyticsConstants.Companion.logAnalyticsEvent
 import com.simplicityapp.base.config.analytics.AnalyticsConstants.Companion.logAnalyticsShare
-import com.simplicityapp.base.config.Constant.WEB_VIEW_HTML_CONFIG
-import com.simplicityapp.base.config.Constant.WEB_VIEW_MIME_TYPE
-import com.simplicityapp.base.config.Constant.FONT_FAMILY_RALEWAY
 import com.simplicityapp.base.utils.ActionTools
 import com.simplicityapp.base.utils.Tools
 import com.simplicityapp.baseui.utils.UITools
@@ -50,49 +44,43 @@ import com.simplicityapp.modules.main.activity.ActivityMain
 import com.simplicityapp.modules.places.model.Images
 import com.simplicityapp.modules.places.model.Place
 import com.simplicityapp.R
-import com.simplicityapp.base.config.AppConfig.WHATSAPP_API_STRING
-import com.simplicityapp.base.config.AppConfig.WHATSAPP_TEXT_STRING
+import com.simplicityapp.base.BaseActivity
+import com.simplicityapp.base.config.AppConfig.*
+import com.simplicityapp.base.config.Constant.*
 import com.simplicityapp.base.config.analytics.AnalyticsConstants.Companion.SELECT_PLACE_FACEBOOK
 import com.simplicityapp.base.config.analytics.AnalyticsConstants.Companion.SELECT_PLACE_INSTAGRAM
 import com.simplicityapp.base.config.analytics.AnalyticsConstants.Companion.SELECT_PLACE_WHATSAPP
 import java.lang.Exception
-import retrofit2.Call
-import retrofit2.Response
 
-class ActivityPlaceDetail : AppCompatActivity() {
+class ActivityPlaceDetail : BaseActivity() {
 
     private var place: Place? = null
     private lateinit var parentView: View
-    private lateinit var db: DatabaseHandler
-    private var onProcess = false
     private var isFromNotif = false
-    private var callback: Call<CallbackPlaceDetails>? = null
-    private var snackbar: Snackbar? = null
     private lateinit var binding: ActivityPlaceDetailsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPlaceDetailsBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        db = DatabaseHandler(this)
-
+        initActivity(binding)
         parentView = findViewById(android.R.id.content)
-
-
         ViewCompat.setTransitionName(binding.placeAppBarLayout,
-            EXTRA_OBJ
+            EXTRA_OBJECT
         )
-
-        place = intent.getSerializableExtra(EXTRA_OBJ) as Place
-        isFromNotif = intent.getBooleanExtra(EXTRA_NOTIF_FLAG, false)
-        configFab()
-        setupToolbar(place!!.name)
-
         logAnalyticsEvent(VIEW_PLACE, place?.name.orEmpty())
     }
 
+    override fun getArguments() {
+        place = intent.getSerializableExtra(EXTRA_OBJECT) as Place
+        isFromNotif = intent.getBooleanExtra(EXTRA_NOTIF_FLAG, false)
+    }
+
+    override fun initUI() {
+        configFab()
+        setupToolbar(place!!.name)
+    }
+
     private fun displayData(place: Place) {
-        val distance = place.distance
 
         binding.details.apply {
             if (place.categoriesList.isNullOrEmpty().not()) {
@@ -100,7 +88,11 @@ class ActivityPlaceDetail : AppCompatActivity() {
                 textViewPlaceCategories?.text = place.categoriesList.orEmpty()
             }
 
-            if (place.hasLatLngPosition() and !place.address.isNullOrEmpty()) {
+            if (place.hasLatLngPosition()
+                and !place.address.isNullOrEmpty()
+                and (place.distance != -1f)
+            ) {
+                val distance = place.distance
                 placeLytDistance.visibility = VISIBLE
                 placeDistance.text = Tools.getFormattedDistance(distance)
             }
@@ -122,18 +114,20 @@ class ActivityPlaceDetail : AppCompatActivity() {
             placeFacebook?.text = place.facebook
             placeWebsite.text = place.website
 
-            val htmlData = "$WEB_VIEW_HTML_CONFIG $FONT_FAMILY_RALEWAY ${place.description}"
-            placeDescriptionWebView.settings?.builtInZoomControls = true
-            placeDescriptionWebView.setBackgroundColor(Color.TRANSPARENT)
-            placeDescriptionWebView.webChromeClient = WebChromeClient()
-            placeDescriptionWebView.loadData(htmlData, WEB_VIEW_MIME_TYPE, null)
-            placeDescriptionWebView.settings.javaScriptEnabled = true
-            // disable scroll on touch
-            placeDescriptionWebView.setOnTouchListener { v, event -> event.action == MotionEvent.ACTION_MOVE }
+            val htmlData = "$WEB_VIEW_HTML_CONFIG $FONT_FAMILY ${place.description}"
+            placeDescriptionWebView.run {
+                settings?.builtInZoomControls = true
+                setBackgroundColor(Color.TRANSPARENT)
+                webChromeClient = WebChromeClient()
+                loadData(htmlData, WEB_VIEW_MIME_TYPE, null)
+                settings.javaScriptEnabled = true
+                // disable scroll on touch
+                setOnTouchListener { v, event -> event.action == MotionEvent.ACTION_MOVE }
+            }
 
-
-
-            setImageGallery(db.getListImageByPlaceId(place.place_id))
+            db?.getListImageByPlaceId(place.place_id)?.let {
+                setImageGallery(it)
+            }
             try {
                 if ((place.images.size > 1).not()) {
                     placeCardViewPhotos.visibility = GONE
@@ -177,9 +171,10 @@ class ActivityPlaceDetail : AppCompatActivity() {
             }
             placeLytWhatsapp?.setOnClickListener {
                 if (!place?.website.isNullOrEmpty()) {
+                    val whatsApp = place?.whatsapp.orEmpty().replace("+", "")
                     val messageFromApp = resources.getString(R.string.message_from_app)
                     logAnalyticsEvent(SELECT_PLACE_WHATSAPP, place?.name.orEmpty(), false)
-                    ActionTools.directUrl(context, "$WHATSAPP_API_STRING${place?.whatsapp.orEmpty()}$WHATSAPP_TEXT_STRING$messageFromApp", resources.getString(R.string.fail_open_whatsapp))
+                    ActionTools.directUrl(context, "$WHATSAPP_API_STRING$whatsApp$WHATSAPP_TEXT_STRING$messageFromApp", resources.getString(R.string.fail_open_whatsapp))
                 } else {
                     Snackbar.make(parentView, R.string.fail_open_whatsapp, Snackbar.LENGTH_SHORT).show()
                 }
@@ -210,13 +205,13 @@ class ActivityPlaceDetail : AppCompatActivity() {
             }
         }
         binding.placeFab.setOnClickListener {
-            if (db.isFavoritesExist(place!!.place_id)) {
-                db.deleteFavorites(place!!.place_id)
+            if (db?.isFavoritesExist(place!!.place_id) == true) {
+                db?.deleteFavorites(place!!.place_id)
                 Snackbar.make(parentView, place!!.name + " " + getString(R.string.remove_favorite), Snackbar.LENGTH_SHORT).show()
                 logAnalyticsEvent(SELECT_PLACE_FAVORITES_REMOVE, place?.name.orEmpty(), true)
                 fabToggle(false)
             } else {
-                db.addFavorites(place!!.place_id)
+                db?.addFavorites(place!!.place_id)
                 Snackbar.make(parentView, place!!.name + " " + getString(R.string.add_favorite), Snackbar.LENGTH_SHORT).show()
                 logAnalyticsEvent(SELECT_PLACE_FAVORITES_ADD, place?.name.orEmpty(), true)
                 fabToggle(true)
@@ -230,7 +225,7 @@ class ActivityPlaceDetail : AppCompatActivity() {
         newImages.add(Images(place!!.place_id, place!!.image))
         newImages.addAll(images)
         for (img in newImages) {
-            newImagesStr.add(Constant.getURLimgPlace(img.name))
+            newImagesStr.add(getURLimgPlace(img.name))
         }
 
         val adapter = AdapterImageList(this, newImages)
@@ -240,8 +235,8 @@ class ActivityPlaceDetail : AppCompatActivity() {
         adapter.setOnItemClickListener { view, viewModel, pos ->
             logAnalyticsEvent(AnalyticsConstants.SELECT_PLACE_PHOTO, place?.name, false)
             val i = Intent(this@ActivityPlaceDetail, ActivityFullScreenImage::class.java)
-            i.putExtra(ActivityFullScreenImage.EXTRA_POS, pos)
-            i.putStringArrayListExtra(ActivityFullScreenImage.EXTRA_IMGS, newImagesStr)
+            i.putExtra(EXTRA_POS, pos)
+            i.putStringArrayListExtra(EXTRA_IMGS, newImagesStr)
             startActivity(i)
         }
         place?.images = newImages
@@ -256,7 +251,7 @@ class ActivityPlaceDetail : AppCompatActivity() {
     }
 
     private fun configFab() {
-        if (db.isFavoritesExist(place!!.place_id)) {
+        if (db?.isFavoritesExist(place!!.place_id) == true) {
             binding.placeFab.setImageResource(R.drawable.ic_nav_favorites)
         } else {
             binding.placeFab.setImageResource(R.drawable.ic_nav_favorites_outline)
@@ -268,7 +263,6 @@ class ActivityPlaceDetail : AppCompatActivity() {
         val actionBar = supportActionBar
         actionBar?.setDisplayHomeAsUpEnabled(true)
         actionBar?.title = resources.getString(R.string.empty_string)
-
         binding.placeToolbarTitle.text = name
         binding.placeImage.apply {
             UITools.displayImage(context, this, Constant.getURLimgPlace(place!!.image))
@@ -282,7 +276,6 @@ class ActivityPlaceDetail : AppCompatActivity() {
                 bitmap.let {
                     val builder = Palette.Builder(bitmap)
                     val palette = builder.generate()
-
                     palette.vibrantSwatch?.let {
                         setToolbarColor(
                             this,
@@ -294,7 +287,6 @@ class ActivityPlaceDetail : AppCompatActivity() {
                         )
                         return@apply
                     }
-
                     palette.darkVibrantSwatch?.let {
                         setToolbarColor(
                             this,
@@ -306,7 +298,6 @@ class ActivityPlaceDetail : AppCompatActivity() {
                         )
                         return@apply
                     }
-
                     palette.lightVibrantSwatch?.let {
                         setToolbarColor(
                             this,
@@ -317,7 +308,6 @@ class ActivityPlaceDetail : AppCompatActivity() {
                             palette.getLightVibrantColor(resources.getColor(R.color.colorPrimaryDark))
                         )
                     }
-
                 }
             }
         }, 800)
@@ -348,11 +338,6 @@ class ActivityPlaceDetail : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    override fun onDestroy() {
-        if (callback != null && callback!!.isExecuted) callback!!.cancel()
-        super.onDestroy()
-    }
-
     override fun onBackPressed() {
         backAction()
     }
@@ -373,93 +358,20 @@ class ActivityPlaceDetail : AppCompatActivity() {
 
     // places detail load with lazy scheme
     private fun loadPlaceData() {
-        place = db.getPlace(place!!.place_id)
+        place = db?.getPlace(place!!.place_id)
         displayData(place!!)
-        /*if (place!!.isDraft) {
-            if (Tools.checkConnection(this)) {
-                requestDetailsPlace(place!!.place_id)
-            } else {
-                onFailureRetry(getString(R.string.no_internet))
-            }
-        } else {
-
-        }
-        This code allow lazy load
-         */
-    }
-
-    private fun requestDetailsPlace(place_id: Int) {
-        if (onProcess) {
-            Snackbar.make(parentView, R.string.task_running, Snackbar.LENGTH_SHORT).show()
-            return
-        }
-        onProcess = true
-        showProgressbar(true)
-        callback = RestAdapter.createAPI().getPlaceDetails(place_id)
-        callback!!.enqueue(object : retrofit2.Callback<CallbackPlaceDetails> {
-            override fun onResponse(call: Call<CallbackPlaceDetails>, response: Response<CallbackPlaceDetails>) {
-                val resp = response.body()
-                if (resp != null) {
-                    place = db.updatePlace(resp.place)
-                    displayDataWithDelay(place)
-                } else {
-                    onFailureRetry(getString(R.string.failed_load_details))
-                }
-
-            }
-
-            override fun onFailure(call: Call<CallbackPlaceDetails>?, t: Throwable) {
-                if (call != null && !call.isCanceled) {
-                    val conn = Tools.checkConnection(this@ActivityPlaceDetail)
-                    if (conn) {
-                        onFailureRetry(getString(R.string.failed_load_details))
-                    } else {
-                        onFailureRetry(getString(R.string.no_internet))
-                    }
-                }
-            }
-        })
-    }
-
-    private fun displayDataWithDelay(resp: Place?) {
-        Handler().postDelayed({
-            showProgressbar(false)
-            onProcess = false
-            displayData(resp!!)
-        }, 800)
-    }
-
-    private fun onFailureRetry(msg: String) {
-        showProgressbar(false)
-        onProcess = false
-        snackbar = Snackbar.make(parentView, msg, Snackbar.LENGTH_INDEFINITE)
-        snackbar?.setAction(R.string.RETRY) { loadPlaceData() }
-        snackbar?.show()
-        retryDisplaySnackbar()
-    }
-
-    private fun retryDisplaySnackbar() {
-        if (snackbar != null && !snackbar!!.isShown) {
-            Handler().postDelayed({ retryDisplaySnackbar() }, 1000)
-        }
-    }
-
-    private fun showProgressbar(show: Boolean) {
-        binding.placeLytProgress.root.visibility = if (show) View.VISIBLE else View.GONE
     }
 
     companion object {
-        private const val EXTRA_OBJ = "key.EXTRA_OBJ"
-        private const val EXTRA_NOTIF_FLAG = "key.EXTRA_NOTIF_FLAG"
 
         // give preparation animation activity transition
         fun navigate(activity: AppCompatActivity?, sharedView: View, p: Place, analyticsEvent: String) {
             logAnalyticsEvent(analyticsEvent, p.name, false)
             val intent = Intent(activity, ActivityPlaceDetail::class.java)
-            intent.putExtra(EXTRA_OBJ, p)
+            intent.putExtra(EXTRA_OBJECT, p)
             activity?.let {
                 val options = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, sharedView,
-                    EXTRA_OBJ
+                    EXTRA_OBJECT
                 )
                 ActivityCompat.startActivity(activity, intent, options.toBundle())
             }
@@ -467,7 +379,7 @@ class ActivityPlaceDetail : AppCompatActivity() {
 
         fun navigateBase(context: Context, obj: Place, from_notif: Boolean?): Intent {
             val i = Intent(context, ActivityPlaceDetail::class.java)
-            i.putExtra(EXTRA_OBJ, obj)
+            i.putExtra(EXTRA_OBJECT, obj)
             i.putExtra(EXTRA_NOTIF_FLAG, from_notif)
             return i
         }

@@ -1,7 +1,7 @@
 package com.simplicityapp.modules.main.services
 
-import com.simplicityapp.base.connection.JsonAPI.Companion.AGENT
-import com.simplicityapp.base.connection.JsonAPI.Companion.CACHE
+import com.simplicityapp.modules.settings.services.DeviceAPI.Companion.AGENT
+import com.simplicityapp.modules.settings.services.DeviceAPI.Companion.CACHE
 import com.simplicityapp.modules.main.model.Region
 import retrofit2.Response
 import retrofit2.http.GET

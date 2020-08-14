@@ -21,7 +21,9 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.google.maps.android.clustering.ClusterManager
 import com.google.maps.android.clustering.view.DefaultClusterRenderer
 import com.simplicityapp.R
-import com.simplicityapp.base.config.Constant
+import com.simplicityapp.base.BaseActivity
+import com.simplicityapp.base.config.AppConfig.CITY_ZOOM
+import com.simplicityapp.base.config.Constant.EXTRA_OBJECT
 import com.simplicityapp.base.config.analytics.AnalyticsConstants
 import com.simplicityapp.base.persistence.db.DatabaseHandler
 import com.simplicityapp.base.persistence.preferences.SharedPref
@@ -35,20 +37,18 @@ import com.simplicityapp.modules.places.model.Category
 import com.simplicityapp.modules.places.model.Place
 import java.util.*
 
-class ActivityMapsV2 : AppCompatActivity(), OnMapReadyCallback {
+class ActivityMapsV2 : BaseActivity(), OnMapReadyCallback {
     private var mMap: GoogleMap? = null
     private var toolbar: Toolbar? = null
     private var actionBar: ActionBar? = null
-    private lateinit var db: DatabaseHandler
-    private lateinit var sharedPref: SharedPref
     private var mClusterManager: ClusterManager<Place?>? = null
     private var placeMarkerRenderer: PlaceMarkerRenderer? = null
 
-    private var parent_view: View? = null
+    private var parentView: View? = null
     // for single place
     private var extPlace: Place? = null
     private var isSinglePlace = false
-    var hashMapPlaces = HashMap<String, Place>()
+    private var hashMapPlaces = HashMap<String, Place>()
     // id category
     private var catId = -1
     private var currentCategory: Category? = null
@@ -62,16 +62,17 @@ class ActivityMapsV2 : AppCompatActivity(), OnMapReadyCallback {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMapsBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        parent_view = findViewById<View>(android.R.id.content)
+        initActivity(binding)
+        parentView = findViewById(android.R.id.content)
         overridePendingTransition(R.anim.enter_slide_in, R.anim.enter_slide_out)
-        sharedPref = SharedPref(this)
-        db = DatabaseHandler(this)
+    }
 
-        (intent.getSerializableExtra(EXTRA_OBJ) as? Place)?.let { extPlace = it }
+    override fun getArguments() {
+        (intent.getSerializableExtra(EXTRA_OBJECT) as? Place)?.let { extPlace = it }
         isSinglePlace = extPlace != null
+    }
 
+    override fun initUI() {
         val inflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
         markerView = inflater.inflate(R.layout.maps_marker, null)
@@ -105,7 +106,7 @@ class ActivityMapsV2 : AppCompatActivity(), OnMapReadyCallback {
                 LatLng(
                     sharedPref.regionLat.toDouble(),
                     sharedPref.regionLon.toDouble()
-                ), Constant.city_zoom
+                ), CITY_ZOOM
             )
             mClusterManager = ClusterManager(this, mMap)
             placeMarkerRenderer =
@@ -115,8 +116,10 @@ class ActivityMapsV2 : AppCompatActivity(), OnMapReadyCallback {
                     mClusterManager
                 )
             mClusterManager!!.setRenderer(placeMarkerRenderer)
-            mMap!!.setOnCameraChangeListener(mClusterManager)
-            loadClusterManager(db.allPlace)
+            mMap?.setOnCameraChangeListener(mClusterManager)
+            db?.allPlace?.let {
+                loadClusterManager(it)
+            }
         }
         location?.let { mMap?.animateCamera(it) }
 
@@ -128,7 +131,7 @@ class ActivityMapsV2 : AppCompatActivity(), OnMapReadyCallback {
             }
             navigate(
                 this@ActivityMapsV2,
-                parent_view!!,
+                parentView!!,
                 place!!,
                 AnalyticsConstants.SELECT_MAP_PLACE
             )
@@ -250,9 +253,5 @@ class ActivityMapsV2 : AppCompatActivity(), OnMapReadyCallback {
             }
         }
         return listPlace.toList()
-    }
-
-    companion object {
-        const val EXTRA_OBJ = "key.EXTRA_OBJ"
     }
 }

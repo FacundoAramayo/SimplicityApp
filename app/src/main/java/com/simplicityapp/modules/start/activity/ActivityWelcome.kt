@@ -18,23 +18,19 @@ import com.simplicityapp.base.config.analytics.AnalyticsConstants
 import com.simplicityapp.base.config.analytics.AnalyticsConstants.Companion.TUTORIAL_BEGIN
 import com.simplicityapp.base.config.analytics.AnalyticsConstants.Companion.TUTORIAL_COMPLETE
 import com.simplicityapp.R
+import com.simplicityapp.base.config.Constant.ARG_SECTION_NUMBER
 import com.simplicityapp.databinding.ActivityWelcomeBinding
 
-class ActivityWelcome : AppCompatActivity(),
-    BaseActivity {
+class ActivityWelcome : BaseActivity() {
 
     private lateinit var binding: ActivityWelcomeBinding
-
     private var mSectionsPagerAdapter: SectionsPagerAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityWelcomeBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
+        initActivity(binding)
         AnalyticsConstants.logAnalyticsEvent(TUTORIAL_BEGIN)
-        initUI()
-        initListeners()
     }
 
     override fun initUI() {
@@ -72,10 +68,6 @@ class ActivityWelcome : AppCompatActivity(),
         val animationDrawable: AnimationDrawable = mainLayout?.background as AnimationDrawable
         animationDrawable.setExitFadeDuration(3500)
         animationDrawable.start()
-    }
-
-    override fun getArguments() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     private inner class PageListener : ViewPager.SimpleOnPageChangeListener() {
@@ -125,7 +117,6 @@ class ActivityWelcome : AppCompatActivity(),
         }
 
         companion object {
-            const val ARG_SECTION_NUMBER = "section_number"
 
             fun newInstance(sectionNumber: Int): PlaceholderFragment {
                 val fragment = PlaceholderFragment()

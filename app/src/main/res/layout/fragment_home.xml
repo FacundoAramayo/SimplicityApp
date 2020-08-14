@@ -57,19 +57,45 @@
                     android:layout_marginRight="@dimen/spacing_normal"
                     android:layout_marginTop="@dimen/spacing_normal" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerNews"
+                <LinearLayout
+                    android:id="@+id/lyt_news"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/news_list_height"
+                    android:layout_height="wrap_content"
                     android:background="@drawable/container_rounded_bordered"
                     android:elevation="@dimen/elevation_container"
-                    android:scrollbars="vertical"
-                    android:scrollingCache="true"
                     android:layout_marginTop="@dimen/spacing_middle"
-                    android:layout_marginLeft="@dimen/spacing_normal"
-                    android:layout_marginRight="@dimen/spacing_normal"
-                    android:padding="@dimen/spacing_normal"
-                    app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+                    android:layout_marginStart="@dimen/spacing_normal"
+                    android:layout_marginEnd="@dimen/spacing_normal"
+                    android:visibility="gone"
+                    tools:visibility="visible"
+                    android:orientation="vertical">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerNews"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/news_list_height"
+                        android:scrollbars="vertical"
+                        android:scrollingCache="true"
+                        android:layout_marginTop="@dimen/spacing_middle"
+                        android:layout_marginStart="@dimen/spacing_normal"
+                        android:layout_marginEnd="@dimen/spacing_normal"
+                        android:padding="@dimen/spacing_normal"
+                        tools:listitem="@layout/item_news_horizontal"
+                        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+                    <Button
+                        android:id="@+id/btn_news"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_medium"
+                        android:layout_marginStart="@dimen/spacing_normal"
+                        android:layout_marginEnd="@dimen/spacing_normal"
+                        android:layout_marginBottom="@dimen/spacing_middle"
+                        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                        android:text="Ver más"/>
+
+                </LinearLayout>
+
 
                 <TextView
                     android:layout_width="wrap_content"

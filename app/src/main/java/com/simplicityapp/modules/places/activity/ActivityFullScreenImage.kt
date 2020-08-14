@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import com.simplicityapp.baseui.adapter.AdapterFullScreenImage
 import com.simplicityapp.R
+import com.simplicityapp.base.config.Constant.EXTRA_IMGS
+import com.simplicityapp.base.config.Constant.EXTRA_POS
 import java.util.ArrayList
 
 class ActivityFullScreenImage : AppCompatActivity() {
@@ -49,18 +51,7 @@ class ActivityFullScreenImage : AppCompatActivity() {
             }
         })
 
-
         (findViewById<View>(R.id.btnClose) as ImageButton).setOnClickListener { finish() }
-    }
-
-    override fun onResume() {
-        super.onResume()
-    }
-
-    companion object {
-
-        val EXTRA_POS = "key.EXTRA_POS"
-        val EXTRA_IMGS = "key.EXTRA_IMGS"
     }
 
 }

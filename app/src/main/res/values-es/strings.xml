@@ -6,7 +6,7 @@
     <string name="about_text">Simplicity App
         \nTodos los derechos reservados © 2019–2020</string>
     <string name="welcome_to_app_message">Bienvenidos a Simplicity App</string>
-    <string name="message_from_app">Enviado desde *Simplcity App*: </string>
+    <string name="message_from_app">Enviado desde *Simplicity App*: \n</string>
 
 
     <!--=== Nav Drawer Menu Items ============================================================== -->
@@ -202,7 +202,7 @@
     <string name="no_item">Aún no hay nada por aquí…</string>
 
     <!--Basic action Text-->
-    <string name="OK">OK</string>
+    <string name="OK">ACEPTAR</string>
     <string name="YES">SI</string>
     <string name="NO">NO</string>
     <string name="SETTING">CONFIGURACIÓN</string>

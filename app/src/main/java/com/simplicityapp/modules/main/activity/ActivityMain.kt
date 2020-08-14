@@ -6,12 +6,12 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.IdRes
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -20,8 +20,6 @@ import com.google.android.material.navigation.NavigationView
 import com.simplicityapp.BuildConfig
 import com.simplicityapp.base.config.Constant
 import com.simplicityapp.base.config.AppConfig
-import com.simplicityapp.base.persistence.db.DatabaseHandler
-import com.simplicityapp.base.persistence.preferences.SharedPref
 import com.simplicityapp.base.config.analytics.AnalyticsConstants
 import com.simplicityapp.base.config.Constant.*
 import com.simplicityapp.base.utils.ActionTools
@@ -31,21 +29,21 @@ import com.simplicityapp.modules.settings.activity.ActivitySetting
 import com.simplicityapp.modules.categories.activity.CategoriesSelectorActivity
 import com.simplicityapp.modules.places.activity.ActivitySearch
 import com.simplicityapp.R
+import com.simplicityapp.base.BaseActivity
+import com.simplicityapp.base.config.AppConfig.*
 import com.simplicityapp.databinding.ActivityMainPlacesBinding
 import com.simplicityapp.modules.maps.activity.ActivityMapsV2
 import com.simplicityapp.modules.notifications.activity.ActivityNotificationsV2
 
-class ActivityMain : AppCompatActivity() {
+class ActivityMain : BaseActivity() {
 
-    private lateinit var db: DatabaseHandler
-    private lateinit var sharedPref: SharedPref
     private lateinit var binding: ActivityMainPlacesBinding
     private val bundle = Bundle()
     private var home = false
     private var backToHome = false
     private var firstRun: Boolean = false
     private var exitTime: Long = 0
-    private var cat: IntArray? = null
+    private var categories: IntArray? = null
     private var fragment: Fragment? = null
     private var toolbar: Toolbar? = null
     private var actionBar: ActionBar? = null
@@ -54,20 +52,10 @@ class ActivityMain : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         overridePendingTransition(R.anim.enter_slide_in, R.anim.enter_slide_out)
-        ActivityMainPlacesBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        binding = ActivityMainPlacesBinding.inflate(layoutInflater)
+        initActivity(binding)
         instance = this
-
-        if (intent?.extras?.get(IS_FIRST_OPEN) == true) {
-            firstRun = true
-            AnalyticsConstants.logAnalyticsSignUp()
-        }
-
-        db = DatabaseHandler(this)
-        sharedPref = SharedPref(this)
-
         configOpenApp()
-        initUI()
     }
 
     /**
@@ -87,8 +75,15 @@ class ActivityMain : AppCompatActivity() {
         }
     }
 
-    private fun initUI() {
-        cat = resources.getIntArray(R.array.id_category)
+    override fun getArguments() {
+        if (intent?.extras?.get(IS_FIRST_OPEN) == true) {
+            firstRun = true
+            AnalyticsConstants.logAnalyticsSignUp()
+        }
+    }
+
+    override fun initUI() {
+        categories = resources.getIntArray(R.array.id_category)
         initToolbar()
         initDrawerMenu()
         onItemSelected(R.id.nav_home, getString(R.string.title_home), false)
@@ -105,7 +100,9 @@ class ActivityMain : AppCompatActivity() {
     private fun initDrawerMenu() {
         val toggle = object : ActionBarDrawerToggle(this, binding.drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
             override fun onDrawerOpened(drawerView: View) {
-                updateFavoritesCounter(binding.navView, R.id.nav_favorites, db.getFavoritesCount(sharedPref.regionId))
+                db?.getFavoritesCount(sharedPref.regionId)?.let {
+                    updateFavoritesCounter(binding.navView, R.id.nav_favorites, it)
+                }
                 super.onDrawerOpened(drawerView)
             }
         }
@@ -123,8 +120,8 @@ class ActivityMain : AppCompatActivity() {
     }
 
     private fun removeEmptyCategories() {
-        cat?.forEach {
-            val placesByCategory = db.getAllPlaceByCategory(it)?.size
+        categories?.forEach {
+            val placesByCategory = db?.getAllPlaceByCategory(it)?.size
             if (placesByCategory == 0) {
                 val categoryId = getMenuItemId(it)
                 categoryId?.let { binding.navView.menu.removeItem(categoryId) }
@@ -149,7 +146,7 @@ class ActivityMain : AppCompatActivity() {
     fun categorySelectorIntent(guideType: String? = null, categoryId: Int = 0) {
         val intent = Intent(this, CategoriesSelectorActivity::class.java)
         intent.putExtra(GUIDE_TYPE, guideType)
-        intent.putExtra(CategoryFragment.TAG_CATEGORY, categoryId.toString())
+        intent.putExtra(TAG_CATEGORY, categoryId.toString())
         startActivity(intent)
     }
 
@@ -199,7 +196,7 @@ class ActivityMain : AppCompatActivity() {
     private fun openFragmentCategory(title: String, categoryId: Int) {
         fragment = CategoryFragment()
         home = false
-        bundle.putInt(CategoryFragment.TAG_CATEGORY, cat!![categoryId])
+        bundle.putInt(TAG_CATEGORY, categories!![categoryId])
         actionBar?.title = title
     }
 
@@ -229,7 +226,7 @@ class ActivityMain : AppCompatActivity() {
             R.id.nav_favorites -> {
                 fragment = CategoryFragment()
                 home = false
-                bundle.putInt(CategoryFragment.TAG_CATEGORY, -2)
+                bundle.putInt(TAG_CATEGORY, -2)
                 actionBar?.title = title
                 if (logAnalytics) {
                     AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_ACTION, AnalyticsConstants.FAVORITES)
@@ -266,7 +263,7 @@ class ActivityMain : AppCompatActivity() {
             }
             R.id.nav_get_in_touch -> {
                 AnalyticsConstants.logAnalyticsEvent(AnalyticsConstants.SELECT_MENU_ACTION, AnalyticsConstants.OPEN_GET_IN_TOUCH, true)
-                ActionTools.sendEmail(CONTACT_EMAIL, SUBJECT_EMAIL, "\n\n--\nMensaje enviado desde Simplicity App.", this)
+                ActionTools.sendEmail(CONTACT_EMAIL, SUBJECT_EMAIL, FOOTER_MESSAGE, this)
             }
 
             //SETTINGS
@@ -301,6 +298,10 @@ class ActivityMain : AppCompatActivity() {
         return true
     }
 
+    fun openNews() {
+        onItemSelected(R.id.nav_news, getString(R.string.title_nav_news))
+    }
+
 
     private fun exitApp() {
         if (System.currentTimeMillis() - exitTime > 2000) {
@@ -315,7 +316,9 @@ class ActivityMain : AppCompatActivity() {
         super.onResume()
         checkRegion()
         updateRegionTitle()
-        updateFavoritesCounter(binding.navView, R.id.nav_favorites, db.getFavoritesCount(sharedPref.regionId))
+        db?.getFavoritesCount(sharedPref.regionId)?.let {
+            updateFavoritesCounter(binding.navView, R.id.nav_favorites, it)
+        }
     }
 
     public override fun onStart() {
@@ -336,8 +339,9 @@ class ActivityMain : AppCompatActivity() {
     private fun updateRegionTitle() {
         val navHeader = binding.navView.getHeaderView(0)
         val cityName = navHeader?.findViewById<TextView>(R.id.textView_city_name)
+        val cityBox = navHeader?.findViewById<LinearLayout>(R.id.lyt_cityBox)
         cityName?.text = sharedPref.regionTitle
-        cityName?.setOnClickListener { changeRegion() }
+        cityBox?.setOnClickListener { changeRegion() }
     }
 
     private fun changeRegion() {

@@ -4,9 +4,9 @@ import android.Manifest
 import android.content.Intent
 import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.PermissionChecker.PERMISSION_GRANTED
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -14,51 +14,55 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.tasks.OnFailureListener
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
-import com.simplicityapp.base.persistence.preferences.SharedPref
-import com.simplicityapp.base.utils.PermissionUtil
-import com.simplicityapp.base.config.analytics.AnalyticsConstants
+import com.google.firebase.iid.FirebaseInstanceId
+import com.simplicityapp.BuildConfig
+import com.simplicityapp.R
+import com.simplicityapp.base.BaseActivity
 import com.simplicityapp.base.config.Constant
 import com.simplicityapp.base.config.Constant.LOG_TAG
-import com.simplicityapp.base.BaseActivity
+import com.simplicityapp.base.config.ThisApplication
+import com.simplicityapp.base.config.analytics.AnalyticsConstants
+import com.simplicityapp.base.rest.RetrofitService
+import com.simplicityapp.base.utils.PermissionUtil
 import com.simplicityapp.base.utils.Tools
-import com.simplicityapp.BuildConfig
-import com.simplicityapp.modules.main.activity.ActivityMain
-import com.simplicityapp.R
 import com.simplicityapp.databinding.ActivityLoginBinding
+import com.simplicityapp.modules.main.activity.ActivityMain
+import com.simplicityapp.modules.settings.model.CallbackDevice
+import com.simplicityapp.modules.settings.services.DeviceAPI
+import retrofit2.Call
+import retrofit2.Response
 
+private const val FCM_MAX_COUNT = 10
 
 /**
  * A login screen that offers login via Google Sign-In after accept Terms & Conditions.
  */
-class ActivityLogin : AppCompatActivity(), BaseActivity, View.OnClickListener {
+class ActivityLogin : BaseActivity(), View.OnClickListener {
 
     private lateinit var binding: ActivityLoginBinding
     private lateinit var mAuth: FirebaseAuth
     private var mGoogleSignInClient: GoogleSignInClient? = null
-    private var sharedPref: SharedPref? = null
     private var gso: GoogleSignInOptions? = null
+    private var callback: Call<CallbackDevice>? = null
+    private var fcmCount = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        sharedPref = SharedPref(this)
-
-        initUI()
-        initListeners()
-
+        initActivity(binding)
         configureGoogleSignIn()
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso!!)
         mAuth = FirebaseAuth.getInstance()
     }
 
     override fun initUI() {
-        binding.signInButton?.isEnabled = false
+        binding.signInButton.isEnabled = false
         startBackgroundAnimation()
     }
 
@@ -71,10 +75,6 @@ class ActivityLogin : AppCompatActivity(), BaseActivity, View.OnClickListener {
     override fun initListeners() {
         binding.signInButton.setOnClickListener(this)
         binding.checkBox.setOnClickListener { checkBoxListener() }
-    }
-
-    override fun getArguments() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     public override fun onStart() {
@@ -97,7 +97,6 @@ class ActivityLogin : AppCompatActivity(), BaseActivity, View.OnClickListener {
             }
         }
     }
-
 
     private fun configureGoogleSignIn() {
         gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -170,13 +169,9 @@ class ActivityLogin : AppCompatActivity(), BaseActivity, View.OnClickListener {
     }
 
     private fun updateUI(user: FirebaseUser?) {
-        if (user != null) {
-
+        user?.let {
+            registerUser(user)
             findViewById<View>(R.id.sign_in_button).visibility = View.GONE
-            val i = Intent(this@ActivityLogin, ActivityMain::class.java)
-            i.putExtra(Constant.IS_FIRST_OPEN, true)
-            startActivity(i)
-            finish()
         }
     }
 
@@ -207,8 +202,73 @@ class ActivityLogin : AppCompatActivity(), BaseActivity, View.OnClickListener {
         }
     }
 
+    private fun registerUser(user: FirebaseUser) {
+        // initialize firebase
+        ThisApplication.instance?.firebaseApp = FirebaseApp.initializeApp(this)
+
+        // obtain regId & registering device to server
+        obtainFirebaseToken(user, ThisApplication.instance?.firebaseApp)
+    }
+
+    private fun obtainFirebaseToken(user: FirebaseUser, firebaseApp: FirebaseApp?) {
+        if (!Tools.checkConnection(this)) return
+        fcmCount++
+
+        val resultTask = FirebaseInstanceId.getInstance().instanceId
+        resultTask.addOnSuccessListener { instanceIdResult ->
+            val regId = instanceIdResult.token
+            if (!TextUtils.isEmpty(regId)) sendRegistrationToServer(user, regId)
+        }
+
+        resultTask.addOnFailureListener(OnFailureListener { e ->
+            Log.e(LOG_TAG, "Failed obtain fcmID : " + e.message)
+            if (fcmCount > FCM_MAX_COUNT) return@OnFailureListener
+            obtainFirebaseToken(user, firebaseApp)
+        })
+    }
+
+    /**
+     * --------------------------------------------------------------------------------------------
+     * For Firebase Cloud Messaging
+     */
+    private fun sendRegistrationToServer(user: FirebaseUser, token: String) {
+        if (Tools.checkConnection(this) && !TextUtils.isEmpty(token) && sharedPref!!.isOpenAppCounterReach) {
+            val api = RetrofitService.createService(DeviceAPI::class.java)
+            val deviceInfo = Tools.getDeviceInfo(this)
+            deviceInfo.regid = token
+            deviceInfo.email = user.email
+
+            callback = api.registerDevice(deviceInfo)
+            callback!!.enqueue(object : retrofit2.Callback<CallbackDevice> {
+                override fun onResponse(
+                    call: Call<CallbackDevice>,
+                    response: Response<CallbackDevice>
+                ) {
+                    val resp = response.body()
+                    if (resp != null) {
+                        if (resp.status == "success") {
+                            sharedPref!!.setOpenAppCounter(0)
+                            openMainActivity()
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<CallbackDevice>, t: Throwable) {
+                    t.printStackTrace()
+                    openMainActivity()
+                }
+            })
+        }
+    }
+
+    private fun openMainActivity() {
+        val i = Intent(this@ActivityLogin, ActivityMain::class.java)
+        i.putExtra(Constant.IS_FIRST_OPEN, true)
+        startActivity(i)
+        finish()
+    }
+
     companion object {
-        private val TAG = "ActivityLogin"
         private val RC_SIGN_IN = 9001
     }
 }

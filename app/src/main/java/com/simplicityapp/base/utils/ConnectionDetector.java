@@ -12,9 +12,7 @@ public class ConnectionDetector {
         this.context = context;
     }
  
-    /**
-     * Checking for all possible internet providers
-     * **/
+    /** Checking for all possible internet providers **/
     public boolean isConnectingToInternet(){
         ConnectivityManager connectivity = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
           if (connectivity != null) {

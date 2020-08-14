@@ -39,7 +39,7 @@
                 android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/et_search"
+                    android:id="@+id/editText_search"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -56,7 +56,7 @@
                 </EditText>
 
                 <ImageButton
-                    android:id="@+id/bt_clear"
+                    android:id="@+id/btn_clear"
                     android:layout_width="@dimen/spacing_xxlarge"
                     android:layout_height="@dimen/spacing_xxlarge"
                     android:background="@android:color/transparent"

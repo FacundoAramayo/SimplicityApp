@@ -40,27 +40,30 @@ public class AppConfig {
     // vibrate duration in millisecond in FCM notification
     public static int VIBRATION_TIME = 500;
 
-    //WhatsApp API string
-    public static String WHATSAPP_API_STRING = "https://api.whatsapp.com/send?phone=";
-    public static String WHATSAPP_TEXT_STRING = "&text=";
-
-
-    /**************************CONSTANTS****************************/
-
-    // si la app abrió por primera vez, utilizar lo siguiente
-    public static final int FIRST_RUN = -1;
-
-    // si la app abrió de forma normal se usará lo siguiente
-    public static final int NORMAL_RUN = 0;
-
-    // si la app abrió luego de una actualización, utilizar lo siguiente
-    public static final int UPGRADE_RUN = 1;
+    //Zoom to show map in lat/lng position
+    public static final float CITY_ZOOM = 13;
 
     // si la DB cuenta con menos de este valor, actualizar siempre que inicie para traer nuevos contenidos
     public static final int LIMIT_PLACES_TO_UPDATE = 100;
 
+    //URL TO FORMS
+    public static final String LINK_TO_SUBSCRIPTION_FORM = "http://bit.ly/2TZkzQN";
+    public static final String LINK_TO_SUGGESTIONS_FORM = "http://bit.ly/36tYrkd";
+
+    //PARAMS SEND EMAIL
+    public static final String CONTACT_EMAIL = "contacto@simplicityapp.com.ar";
+    public static final String SUBJECT_EMAIL = "CONTACTO - APLICACIÓN";
+    public static final String FOOTER_MESSAGE = "\n\n--\nMensaje enviado desde Simplicity App.";
+
+    //FONT-FAMILY STYLES
+    public static final String FONT_FAMILY = "<style>@import url('https://fonts.googleapis.com/css?family=Raleway:400,700&display=swap');</style>";
+
     public static String getWebURL() {
         return BuildConfig.SERVER_URL;
     }
+
+    public static final int DATABASE_VERSION = 6;
+
+    public static final String DATABASE_NAME = "simplicity_app";
 
 }
