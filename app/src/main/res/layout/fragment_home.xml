@@ -30,9 +30,9 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Title"
                     android:textColor="@color/colorPrimary"
                     android:text="@string/title_nav_featured"
-                    android:layout_marginLeft="@dimen/spacing_normal"
-                    android:layout_marginRight="@dimen/spacing_normal"
-                    android:layout_marginTop="@dimen/spacing_normal" />
+                    android:layout_marginLeft="@dimen/spacing_medium"
+                    android:layout_marginRight="@dimen/spacing_medium"
+                    android:layout_marginTop="@dimen/spacing_medium" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerFeatured"
@@ -53,9 +53,9 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Title"
                     android:textColor="@color/colorPrimary"
                     android:text="@string/title_nav_news"
-                    android:layout_marginLeft="@dimen/spacing_normal"
-                    android:layout_marginRight="@dimen/spacing_normal"
-                    android:layout_marginTop="@dimen/spacing_normal" />
+                    android:layout_marginLeft="@dimen/spacing_medium"
+                    android:layout_marginRight="@dimen/spacing_medium"
+                    android:layout_marginTop="@dimen/spacing_medium" />
 
                 <LinearLayout
                     android:id="@+id/lyt_news"
@@ -63,9 +63,9 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/container_rounded_bordered"
                     android:elevation="@dimen/elevation_container"
-                    android:layout_marginTop="@dimen/spacing_middle"
-                    android:layout_marginStart="@dimen/spacing_normal"
-                    android:layout_marginEnd="@dimen/spacing_normal"
+                    android:layout_marginTop="@dimen/spacing_standard"
+                    android:layout_marginStart="@dimen/spacing_medium"
+                    android:layout_marginEnd="@dimen/spacing_medium"
                     android:visibility="gone"
                     tools:visibility="visible"
                     android:orientation="vertical">
@@ -76,10 +76,10 @@
                         android:layout_height="@dimen/news_list_height"
                         android:scrollbars="vertical"
                         android:scrollingCache="true"
-                        android:layout_marginTop="@dimen/spacing_middle"
-                        android:layout_marginStart="@dimen/spacing_normal"
-                        android:layout_marginEnd="@dimen/spacing_normal"
-                        android:padding="@dimen/spacing_normal"
+                        android:layout_marginTop="@dimen/spacing_standard"
+                        android:layout_marginStart="@dimen/spacing_medium"
+                        android:layout_marginEnd="@dimen/spacing_medium"
+                        android:padding="@dimen/spacing_medium"
                         tools:listitem="@layout/item_news_horizontal"
                         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
@@ -88,9 +88,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/spacing_medium"
-                        android:layout_marginStart="@dimen/spacing_normal"
-                        android:layout_marginEnd="@dimen/spacing_normal"
-                        android:layout_marginBottom="@dimen/spacing_middle"
+                        android:layout_marginStart="@dimen/spacing_medium"
+                        android:layout_marginEnd="@dimen/spacing_medium"
+                        android:layout_marginBottom="@dimen/spacing_standard"
                         style="@style/Widget.AppCompat.Button.Borderless.Colored"
                         android:text="Ver más"/>
 
@@ -106,18 +106,18 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Title"
                     android:textColor="@color/colorPrimary"
                     android:text="@string/title_home_quick_access"
-                    android:layout_marginLeft="@dimen/spacing_normal"
-                    android:layout_marginRight="@dimen/spacing_normal"
-                    android:layout_marginTop="@dimen/spacing_normal"
-                    android:layout_marginBottom="@dimen/spacing_middle"
+                    android:layout_marginLeft="@dimen/spacing_medium"
+                    android:layout_marginRight="@dimen/spacing_medium"
+                    android:layout_marginTop="@dimen/spacing_medium"
+                    android:layout_marginBottom="@dimen/spacing_standard"
                     />
 
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/spacing_normal"
-                    android:layout_marginRight="@dimen/spacing_normal"
+                    android:layout_marginLeft="@dimen/spacing_medium"
+                    android:layout_marginRight="@dimen/spacing_medium"
                     android:orientation="horizontal">
 
                     <LinearLayout
@@ -280,8 +280,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/spacing_normal"
-                    android:layout_marginRight="@dimen/spacing_normal"
+                    android:layout_marginLeft="@dimen/spacing_medium"
+                    android:layout_marginRight="@dimen/spacing_medium"
                     android:orientation="horizontal">
 
                     <LinearLayout
@@ -443,10 +443,10 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/container_rounded_bordered"
                 android:elevation="@dimen/elevation_container"
-                android:layout_marginTop="@dimen/spacing_normal"
+                android:layout_marginTop="@dimen/spacing_medium"
                 android:layout_marginBottom="@dimen/spacing_large"
-                android:layout_marginLeft="@dimen/spacing_normal"
-                android:layout_marginRight="@dimen/spacing_normal"
+                android:layout_marginLeft="@dimen/spacing_medium"
+                android:layout_marginRight="@dimen/spacing_medium"
                 android:orientation="vertical">
 
                 <Button
@@ -454,7 +454,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/horizontal_image_button_height"
                     android:drawablePadding="@dimen/spacing_large"
-                    android:layout_margin="@dimen/spacing_middle"
+                    android:layout_margin="@dimen/spacing_standard"
                     android:paddingStart="@dimen/spacing_large"
                     android:paddingEnd="@dimen/spacing_large"
                     android:background="@color/white"
@@ -469,7 +469,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/horizontal_image_button_height"
                     android:drawablePadding="@dimen/spacing_large"
-                    android:layout_margin="@dimen/spacing_middle"
+                    android:layout_margin="@dimen/spacing_standard"
                     android:paddingStart="@dimen/spacing_large"
                     android:paddingEnd="@dimen/spacing_large"
                     android:background="@color/white"

@@ -16,8 +16,8 @@
         style="@style/textStyleRegular"
         android:maxLines="1"
         android:ellipsize="end"
-        android:layout_marginTop="@dimen/spacing_normal"
-        android:layout_marginBottom="@dimen/spacing_normal"
+        android:layout_marginTop="@dimen/spacing_medium"
+        android:layout_marginBottom="@dimen/spacing_medium"
         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
         tools:text="Región"/>
 

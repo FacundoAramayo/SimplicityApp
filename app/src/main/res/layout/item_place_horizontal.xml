@@ -30,7 +30,7 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="@dimen/news_item_img_horizontal_list"
                     android:layout_height="@dimen/news_item_img_horizontal_list"
-                    android:layout_margin="@dimen/spacing_middle"
+                    android:layout_margin="@dimen/spacing_standard"
                     app:cardElevation="@dimen/spacing_empty"
                     app:cardCornerRadius="@dimen/card_corner_radius">
 
@@ -56,7 +56,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="top"
-                    android:padding="@dimen/spacing_middle"
+                    android:padding="@dimen/spacing_standard"
                     android:layout_marginBottom="@dimen/spacing_small"
                     android:orientation="vertical">
 
@@ -95,8 +95,8 @@
                         tools:visibility="visible">
 
                         <ImageView
-                            android:layout_width="@dimen/spacing_middle"
-                            android:layout_height="@dimen/spacing_middle"
+                            android:layout_width="@dimen/spacing_standard"
+                            android:layout_height="@dimen/spacing_standard"
                             android:src="@drawable/ic_info_distance"
                             android:tint="@color/colorLink" />
 

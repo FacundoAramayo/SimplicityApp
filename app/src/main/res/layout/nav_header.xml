@@ -74,7 +74,7 @@
                     android:id="@+id/imageView_change_region"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:layout_margin="@dimen/spacing_normal"
+                    android:layout_margin="@dimen/spacing_medium"
                     android:src="@android:drawable/arrow_down_float"/>
 
             </LinearLayout>
@@ -83,7 +83,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/spacing_xsmall"
+            android:layout_height="@dimen/spacing_micro"
             android:background="@color/grey_soft" />
     </LinearLayout>
 

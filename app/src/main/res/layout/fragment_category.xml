@@ -14,7 +14,7 @@
         android:scrollingCache="true"
         android:paddingStart="@dimen/action_bar_margin"
         android:paddingEnd="@dimen/action_bar_margin"
-        android:layout_marginBottom="@dimen/spacing_normal"
+        android:layout_marginBottom="@dimen/spacing_medium"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <include

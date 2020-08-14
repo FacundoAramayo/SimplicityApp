@@ -52,7 +52,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="top"
-                    android:padding="@dimen/spacing_middle"
+                    android:padding="@dimen/spacing_standard"
                     android:layout_marginBottom="@dimen/spacing_small"
                     android:orientation="vertical">
 

@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/spacing_medium"
-            android:layout_marginLeft="@dimen/spacing_middle"
+            android:layout_marginLeft="@dimen/spacing_standard"
             android:layout_marginRight="@dimen/spacing_medium"
             android:layout_marginTop="@dimen/spacing_large"
             app:cardCornerRadius="@dimen/card_corner_radius"
@@ -40,9 +40,9 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="@dimen/spacing_mlarge"
-                        android:layout_height="@dimen/spacing_mlarge"
-                        android:layout_margin="@dimen/spacing_middle"
+                        android:layout_width="@dimen/spacing_large"
+                        android:layout_height="@dimen/spacing_large"
+                        android:layout_margin="@dimen/spacing_standard"
                         android:src="@drawable/ic_info_distance"
                         android:tint="@color/colorPrimary" />
 
@@ -68,9 +68,9 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="@dimen/spacing_mlarge"
-                        android:layout_height="@dimen/spacing_mlarge"
-                        android:layout_margin="@dimen/spacing_middle"
+                        android:layout_width="@dimen/spacing_large"
+                        android:layout_height="@dimen/spacing_large"
+                        android:layout_margin="@dimen/spacing_standard"
                         android:src="@drawable/ic_info_address"
                         android:tint="@color/colorPrimary" />
 
@@ -126,9 +126,9 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="@dimen/spacing_mlarge"
-                        android:layout_height="@dimen/spacing_mlarge"
-                        android:layout_margin="@dimen/spacing_middle"
+                        android:layout_width="@dimen/spacing_large"
+                        android:layout_height="@dimen/spacing_large"
+                        android:layout_margin="@dimen/spacing_standard"
                         android:src="@drawable/ic_info_phone"
                         android:tint="@color/colorPrimary" />
 
@@ -154,9 +154,9 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="@dimen/spacing_mlarge"
-                        android:layout_height="@dimen/spacing_mlarge"
-                        android:layout_margin="@dimen/spacing_middle"
+                        android:layout_width="@dimen/spacing_large"
+                        android:layout_height="@dimen/spacing_large"
+                        android:layout_margin="@dimen/spacing_standard"
                         android:src="@drawable/ic_info_web"
                         android:tint="@color/colorPrimary" />
 
@@ -179,8 +179,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/spacing_medium"
-            android:layout_marginLeft="@dimen/spacing_middle"
-            android:layout_marginRight="@dimen/spacing_middle"
+            android:layout_marginLeft="@dimen/spacing_standard"
+            android:layout_marginRight="@dimen/spacing_standard"
             android:layout_marginTop="@dimen/spacing_medium"
             app:cardCornerRadius="@dimen/card_corner_radius"
             app:cardElevation="@dimen/elevation_card">
@@ -234,8 +234,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/spacing_medium"
-            android:layout_marginLeft="@dimen/spacing_middle"
-            android:layout_marginRight="@dimen/spacing_middle"
+            android:layout_marginLeft="@dimen/spacing_standard"
+            android:layout_marginRight="@dimen/spacing_standard"
             android:layout_marginTop="@dimen/spacing_large"
             app:cardCornerRadius="@dimen/card_corner_radius"
             app:cardElevation="@dimen/elevation_card">

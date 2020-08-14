@@ -5,18 +5,23 @@
 
     <!--genaral spacing-->
     <dimen name="spacing_empty">0dp</dimen>
-    <dimen name="spacing_micro">0.5dp</dimen>
-    <dimen name="spacing_xsmall">1dp</dimen>
-    <dimen name="spacing_small">2dp</dimen>
-    <dimen name="spacing_medium">4dp</dimen>
-    <dimen name="spacing_middle">8dp</dimen>
-    <dimen name="spacing_normal">12dp</dimen>
+    <dimen name="spacing_xxmicro">0.5dp</dimen>
+    <dimen name="spacing_xmicro">1dp</dimen>
+    <dimen name="spacing_micro">2dp</dimen>
+    <dimen name="spacing_xxsmall">4dp</dimen>
+    <dimen name="spacing_xsmall">5dp</dimen>
+    <dimen name="spacing_small">6dp</dimen>
+    <dimen name="spacing_standard">8dp</dimen>
+    <dimen name="spacing_medium">12dp</dimen>
     <dimen name="spacing_large">16dp</dimen>
-    <dimen name="spacing_mlarge">20dp</dimen>
-    <dimen name="spacing_mxlarge">24dp</dimen>
-    <dimen name="spacing_xlarge">28dp</dimen>
-    <dimen name="spacing_xmlarge">36dp</dimen>
-    <dimen name="spacing_xxlarge">40dp</dimen>
+    <dimen name="spacing_xlarge">20dp</dimen>
+    <dimen name="spacing_xxlarge">24dp</dimen>
+    <dimen name="spacing_xxxlarge">28dp</dimen>
+    <dimen name="spacing_huge">32dp</dimen>
+    <dimen name="spacing_xhuge">40dp</dimen>
+    <dimen name="spacing_xxhuge">48dp</dimen>
+    <dimen name="spacing_xxxhuge">56dp</dimen>
+    <dimen name="spacing_xxxxhuge">64dp</dimen>
 
     <dimen name="popup_margin_top">80dp</dimen>
     <dimen name="popup_margin_bottom">80dp</dimen>

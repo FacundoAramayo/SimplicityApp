@@ -53,8 +53,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/item_place_tag_height"
                     android:background="@color/grid_title_bg"
-                    android:paddingLeft="@dimen/spacing_middle"
-                    android:paddingRight="@dimen/spacing_middle">
+                    android:paddingLeft="@dimen/spacing_standard"
+                    android:paddingRight="@dimen/spacing_standard">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -84,8 +84,8 @@
                             tools:visibility="visible">
 
                             <ImageView
-                                android:layout_width="@dimen/spacing_middle"
-                                android:layout_height="@dimen/spacing_middle"
+                                android:layout_width="@dimen/spacing_standard"
+                                android:layout_height="@dimen/spacing_standard"
                                 android:src="@drawable/ic_info_distance"
                                 android:tint="@color/colorLink" />
 

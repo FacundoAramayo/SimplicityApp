@@ -15,7 +15,6 @@
         android:layout_marginStart="@dimen/spacing_large"
         android:layout_marginEnd="40pt"
         android:layout_marginTop="@dimen/spacing_large"
-        android:layout_marginBottom="@dimen/spacing_medium"
         android:paddingStart="@dimen/spacing_medium"
         android:paddingEnd="@dimen/spacing_medium"
         style="@style/textStyleSemibold"
@@ -29,9 +28,9 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/spacing_middle"
-        android:layout_marginRight="@dimen/spacing_middle"
-        android:layout_marginTop="@dimen/spacing_large"
+        android:layout_marginLeft="@dimen/spacing_standard"
+        android:layout_marginRight="@dimen/spacing_standard"
+        android:layout_marginTop="@dimen/spacing_medium"
         app:cardCornerRadius="@dimen/card_corner_radius"
         app:cardElevation="@dimen/elevation_card">
 
@@ -54,9 +53,9 @@
                 tools:visibility="visible">
 
                 <ImageView
-                    android:layout_width="@dimen/spacing_mlarge"
-                    android:layout_height="@dimen/spacing_mlarge"
-                    android:layout_margin="@dimen/spacing_middle"
+                    android:layout_width="@dimen/spacing_large"
+                    android:layout_height="@dimen/spacing_large"
+                    android:layout_margin="@dimen/spacing_standard"
                     android:src="@drawable/ic_navigation"
                     android:tint="@color/colorPrimary" />
 
@@ -82,9 +81,9 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="@dimen/spacing_mlarge"
-                    android:layout_height="@dimen/spacing_mlarge"
-                    android:layout_margin="@dimen/spacing_middle"
+                    android:layout_width="@dimen/spacing_large"
+                    android:layout_height="@dimen/spacing_large"
+                    android:layout_margin="@dimen/spacing_standard"
                     android:src="@drawable/ic_navigation_circle"
                     android:tint="@color/colorPrimary" />
 
@@ -138,9 +137,9 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="@dimen/spacing_mlarge"
-                    android:layout_height="@dimen/spacing_mlarge"
-                    android:layout_margin="@dimen/spacing_middle"
+                    android:layout_width="@dimen/spacing_large"
+                    android:layout_height="@dimen/spacing_large"
+                    android:layout_margin="@dimen/spacing_standard"
                     android:src="@drawable/ic_phone"
                     android:tint="@color/colorPrimary" />
 
@@ -161,10 +160,10 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/spacing_medium"
-        android:layout_marginLeft="@dimen/spacing_middle"
-        android:layout_marginRight="@dimen/spacing_middle"
-        android:layout_marginTop="@dimen/spacing_middle"
+        android:layout_marginBottom="@dimen/spacing_standard"
+        android:layout_marginLeft="@dimen/spacing_standard"
+        android:layout_marginRight="@dimen/spacing_standard"
+        android:layout_marginTop="@dimen/spacing_standard"
         app:cardCornerRadius="@dimen/card_corner_radius"
         app:cardElevation="@dimen/elevation_card">
 
@@ -185,9 +184,9 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="@dimen/spacing_mlarge"
-                    android:layout_height="@dimen/spacing_mlarge"
-                    android:layout_margin="@dimen/spacing_middle"
+                    android:layout_width="@dimen/spacing_large"
+                    android:layout_height="@dimen/spacing_large"
+                    android:layout_margin="@dimen/spacing_standard"
                     android:src="@drawable/ic_whatsapp"
                     android:tint="@color/colorPrimary" />
 
@@ -213,9 +212,9 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="@dimen/spacing_mlarge"
-                    android:layout_height="@dimen/spacing_mlarge"
-                    android:layout_margin="@dimen/spacing_middle"
+                    android:layout_width="@dimen/spacing_large"
+                    android:layout_height="@dimen/spacing_large"
+                    android:layout_margin="@dimen/spacing_standard"
                     android:src="@drawable/ic_instagram"
                     android:tint="@color/colorPrimary" />
 
@@ -241,9 +240,9 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="@dimen/spacing_mlarge"
-                    android:layout_height="@dimen/spacing_mlarge"
-                    android:layout_margin="@dimen/spacing_middle"
+                    android:layout_width="@dimen/spacing_large"
+                    android:layout_height="@dimen/spacing_large"
+                    android:layout_margin="@dimen/spacing_standard"
                     android:src="@drawable/ic_facebook"
                     android:tint="@color/colorPrimary" />
 
@@ -269,9 +268,9 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="@dimen/spacing_mlarge"
-                    android:layout_height="@dimen/spacing_mlarge"
-                    android:layout_margin="@dimen/spacing_middle"
+                    android:layout_width="@dimen/spacing_large"
+                    android:layout_height="@dimen/spacing_large"
+                    android:layout_margin="@dimen/spacing_standard"
                     android:src="@drawable/ic_web"
                     android:tint="@color/colorPrimary" />
 
@@ -294,9 +293,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/spacing_medium"
-        android:layout_marginLeft="@dimen/spacing_middle"
-        android:layout_marginRight="@dimen/spacing_middle"
-        android:layout_marginTop="@dimen/spacing_medium"
+        android:layout_marginLeft="@dimen/spacing_standard"
+        android:layout_marginRight="@dimen/spacing_standard"
+        android:layout_marginTop="@dimen/spacing_standard"
         app:cardCornerRadius="@dimen/card_corner_radius"
         app:cardElevation="@dimen/elevation_card">
 
@@ -333,8 +332,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/spacing_medium"
-        android:layout_marginLeft="@dimen/spacing_middle"
-        android:layout_marginRight="@dimen/spacing_middle"
+        android:layout_marginLeft="@dimen/spacing_standard"
+        android:layout_marginRight="@dimen/spacing_standard"
         android:layout_marginTop="@dimen/spacing_medium"
         app:cardCornerRadius="@dimen/card_corner_radius"
         app:cardElevation="@dimen/elevation_card">

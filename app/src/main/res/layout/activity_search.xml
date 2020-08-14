@@ -94,8 +94,8 @@
             android:id="@+id/lyt_suggestion"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/spacing_middle"
-            android:layout_marginRight="@dimen/spacing_middle"
+            android:layout_marginLeft="@dimen/spacing_standard"
+            android:layout_marginRight="@dimen/spacing_standard"
             android:orientation="vertical"
             android:visibility="gone">
 

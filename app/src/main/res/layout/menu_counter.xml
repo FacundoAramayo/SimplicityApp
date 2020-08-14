@@ -8,8 +8,8 @@
 
     <TextView
         android:id="@+id/counter"
-        android:layout_width="@dimen/spacing_mxlarge"
-        android:layout_height="@dimen/spacing_mxlarge"
+        android:layout_width="@dimen/spacing_xxlarge"
+        android:layout_height="@dimen/spacing_xxlarge"
         android:background="@drawable/round_shape"
         style="@style/textStyleBold"
         android:gravity="center"
