@@ -31,11 +31,10 @@
 
         <Button
             android:id="@+id/btn_welcome_back"
-            style="@style/Widget.AppCompat.Button.Borderless"
+            style="@style/buttonBorderless"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:fontFamily="@font/raleway"
             android:text="@string/welcome_back"
             android:textAppearance="@style/TextAppearance.AppCompat.Title.Inverse"
             android:theme="@style/Widget.AppCompat.Button.Colored"
@@ -43,11 +42,10 @@
 
         <Button
             android:id="@+id/btn_welcome_next"
-            style="@style/Widget.AppCompat.Button.Borderless"
+            style="@style/buttonBorderless"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:fontFamily="@font/raleway"
             android:text="@string/welcome_next"
             android:textAppearance="@style/TextAppearance.AppCompat.Title.Inverse"
             android:theme="@style/Widget.AppCompat.Button.Colored" />

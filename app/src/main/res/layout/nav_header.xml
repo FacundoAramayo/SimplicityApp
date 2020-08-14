@@ -55,7 +55,7 @@
                         android:layout_width="180dp"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/spacing_small"
-                        android:fontFamily="@font/raleway_semibold"
+                        style="@style/textStyleSemibold"
                         android:text="@string/city_name"
                         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                         android:textColor="@color/colorPrimaryDark" />
@@ -64,7 +64,7 @@
                         android:id="@+id/textView_country"
                         android:layout_width="180dp"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/raleway"
+                        style="@style/textStyleRegular"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:text="@string/city_address"
                         android:textColor="@color/colorPrimaryDark" />

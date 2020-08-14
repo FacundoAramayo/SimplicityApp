@@ -52,7 +52,7 @@
             android:layout_marginTop="@dimen/spacing_normal"
             android:layout_marginStart="@dimen/spacing_normal"
             android:layout_marginEnd="@dimen/spacing_normal"
-            android:fontFamily="@font/raleway_semibold"
+            style="@style/textStyleSemibold"
             android:text="@string/region_selector_title"
             android:textColor="@color/colorPrimary"
             app:layout_constraintTop_toTopOf="parent"
@@ -66,7 +66,7 @@
             android:layout_marginTop="@dimen/spacing_normal"
             android:layout_marginStart="@dimen/spacing_normal"
             android:layout_marginEnd="@dimen/spacing_normal"
-            android:fontFamily="@font/raleway"
+            style="@style/textStyleRegular"
             android:text="@string/region_selector_subtitle"
             app:layout_constraintTop_toBottomOf="@id/textView_title"
             tools:text="Selecciona en el listado la ciudad o región en la que te encuentras"/>

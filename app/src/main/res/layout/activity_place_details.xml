@@ -48,7 +48,7 @@
                 android:layout_width="@dimen/place_title_width"
                 android:layout_height="?attr/actionBarSize"
                 android:layout_gravity="bottom"
-                android:fontFamily="@font/raleway_semibold"
+                style="@style/textStyleSemibold"
                 android:gravity="center_vertical"
                 android:shadowColor="@color/grey_dark"
                 android:shadowDx="2"

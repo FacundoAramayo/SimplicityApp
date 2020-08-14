@@ -81,7 +81,7 @@
                     android:layout_marginRight="@dimen/spacing_middle"
                     android:layout_marginLeft="@dimen/spacing_middle"
                     android:text="-"
-                    android:fontFamily="@font/raleway"
+                    style="@style/textStyleRegular"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                     android:textColor="@color/grey_hard" />
 

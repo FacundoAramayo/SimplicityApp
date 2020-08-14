@@ -50,7 +50,7 @@
                         android:id="@+id/textView3"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/raleway_bold_italic"
+                        style="@style/textStyleBoldItalic"
                         android:text="@string/pref_title_term"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
@@ -58,7 +58,7 @@
                         android:id="@+id/textView4"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/raleway_light"
+                        style="@style/textStyleLight"
                         android:text="@string/content_term"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
@@ -72,7 +72,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:buttonTint="@color/grey_soft"
-                android:fontFamily="@font/raleway_semibold"
+                style="@style/textStyleSemibold"
                 android:text="@string/check_term"
                 android:textColor="#fff"/>
 

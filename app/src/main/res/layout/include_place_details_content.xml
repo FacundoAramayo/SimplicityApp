@@ -18,7 +18,7 @@
         android:layout_marginBottom="@dimen/spacing_medium"
         android:paddingStart="@dimen/spacing_medium"
         android:paddingEnd="@dimen/spacing_medium"
-        android:fontFamily="@font/raleway_semibold"
+        style="@style/textStyleSemibold"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="@color/material_grey_800"
         android:textStyle="italic"
@@ -65,7 +65,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/spacing_medium"
-                    android:fontFamily="@font/raleway_semibold"
+                    style="@style/textStyleSemibold"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:textColor="@color/material_grey_800" />
 
@@ -103,7 +103,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
                         android:layout_margin="@dimen/spacing_medium"
-                        android:fontFamily="@font/raleway_semibold"
+                        style="@style/textStyleSemibold"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:maxLines="1"
                         android:ellipsize="end"
@@ -118,7 +118,7 @@
                         android:maxLines="1"
                         android:ellipsize="end"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                        android:fontFamily="@font/raleway_semibold"
+                        style="@style/textStyleSemibold"
                         android:textColor="@color/colorLink"
                         android:text="@string/how_to_get"
                         />
@@ -149,7 +149,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/spacing_medium"
-                    android:fontFamily="@font/raleway_semibold"
+                    style="@style/textStyleSemibold"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:textColor="@color/colorLink" />
 
@@ -196,7 +196,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/spacing_medium"
-                    android:fontFamily="@font/raleway_semibold"
+                    style="@style/textStyleSemibold"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:textColor="@color/colorLink" />
 
@@ -224,7 +224,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/spacing_medium"
-                    android:fontFamily="@font/raleway_semibold"
+                    style="@style/textStyleSemibold"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:textColor="@color/colorLink" />
 
@@ -252,7 +252,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/spacing_medium"
-                    android:fontFamily="@font/raleway_semibold"
+                    style="@style/textStyleSemibold"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:textColor="@color/colorLink" />
 
@@ -280,7 +280,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/spacing_medium"
-                    android:fontFamily="@font/raleway_semibold"
+                    style="@style/textStyleSemibold"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:textColor="@color/colorLink" />
 
@@ -308,7 +308,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/raleway_semibold"
+                style="@style/textStyleSemibold"
                 android:paddingLeft="@dimen/spacing_large"
                 android:paddingTop="@dimen/spacing_large"
                 android:paddingBottom="@dimen/spacing_medium"
@@ -348,7 +348,7 @@
                 android:id="@+id/place_description_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/raleway_semibold"
+                style="@style/textStyleSemibold"
                 android:padding="@dimen/spacing_large"
                 android:text="@string/description_title"
                 android:textAppearance="@style/TextAppearance.AppCompat.Title"

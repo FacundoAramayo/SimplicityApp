@@ -43,7 +43,7 @@
                     android:layout_marginEnd="@dimen/spacing_large"
                     android:text="Delivery a cargo del local"
                     android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                    android:fontFamily="@font/raleway_semibold"
+                    style="@style/textStyleSemibold"
                     android:textColor="@color/white"
                     android:maxLines="2"
                     android:ellipsize="end" />

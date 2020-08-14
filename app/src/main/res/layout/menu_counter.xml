@@ -11,7 +11,7 @@
         android:layout_width="@dimen/spacing_mxlarge"
         android:layout_height="@dimen/spacing_mxlarge"
         android:background="@drawable/round_shape"
-        android:fontFamily="@font/raleway_bold"
+        style="@style/textStyleBold"
         android:gravity="center"
         android:text="20"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
