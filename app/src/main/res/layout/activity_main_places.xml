@@ -102,7 +102,7 @@
         android:scrollbars="none"
         android:background="@android:color/white"
         app:headerLayout="@layout/nav_header"
-        app:itemIconTint="@color/colorPrimary"
+        app:itemIconTint="@color/colorMenuIconTint"
         app:itemTextAppearance="@style/RalewayTextViewStyle"
         app:menu="@menu/menu_drawer">
     </com.google.android.material.navigation.NavigationView>

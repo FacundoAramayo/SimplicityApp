@@ -10,6 +10,10 @@
                 android:icon="@drawable/ic_nav_home"
                 android:title="@string/title_home" />
             <item
+                android:id="@+id/nav_search"
+                android:icon="@drawable/ic_search"
+                android:title="@string/title_nav_search" />
+            <item
                 android:id="@+id/nav_featured"
                 android:icon="@drawable/ic_nav_featured"
                 android:title="@string/title_nav_featured" />
@@ -18,8 +22,13 @@
                 android:icon="@drawable/ic_store"
                 android:title="@string/title_nav_commercial_guide" />
             <item
+                android:id="@+id/nav_map"
+                android:icon="@drawable/ic_nav_map"
+                android:title="@string/title_nav_map" />
+            <item
                 android:id="@+id/nav_jobs_guide"
                 android:icon="@drawable/ic_nav_jobs"
+                android:visible="false"
                 android:title="@string/title_nav_jobs" />
             <item
                 android:id="@+id/nav_favorites"
@@ -32,14 +41,6 @@
 <!--                android:icon="@drawable/ic_nav_all"-->
 <!--                android:title="@string/title_nav_all" />-->
 
-            <item
-                android:id="@+id/nav_search"
-                android:icon="@drawable/ic_search"
-                android:title="@string/title_nav_search" />
-            <item
-                android:id="@+id/nav_map"
-                android:icon="@drawable/ic_nav_map"
-                android:title="@string/title_nav_map" />
 
             <item
                 android:id="@+id/nav_news"
@@ -54,7 +55,6 @@
 
     </group>
 
-
     <group android:id="@+id/bottom_menu_drawer">
         <item
             android:id="@+id/nav_subscription"
@@ -63,14 +63,14 @@
         <item
             android:id="@+id/nav_suggestions"
             android:icon="@drawable/ic_suggestions"
+            android:visible="false"
             android:title="@string/title_nav_suggestions" />
         <item
             android:id="@+id/nav_get_in_touch"
             android:icon="@drawable/ic_info_web"
+            android:visible="false"
             android:title="@string/title_nav_get_in_touch" />
     </group>
-
-
 
     <group android:id="@+id/settings_menu_drawer">
         <item
@@ -82,16 +82,5 @@
             android:icon="@drawable/ic_nav_setting"
             android:title="@string/activity_title_settings" />
     </group>
-
-    <!--Tourist Destination-->
-    <!--Food & Drink-->
-    <!--Hotels-->
-    <!--Entertainment-->
-    <!--Sport-->
-    <!--Shopping-->
-    <!--Transportation-->
-    <!--Religion-->
-    <!--Public Services-->
-    <!--Money-->
 
 </menu>

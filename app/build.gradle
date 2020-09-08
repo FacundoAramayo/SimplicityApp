@@ -20,7 +20,7 @@ android {
             applicationId "com.simplicityapp"
             buildConfigField "String", "SERVER_URL", "\"http://ciudadanovirtualdemo.smartsolutions.com.ar/\""
             buildConfigField "String", "FIREBASE_CLIENT_ID", "\"952435693298-e22spc0j5pnf1r5qsk3hv3k2lu5tas8q.apps.googleusercontent.com\""
-            manifestPlaceholders = [ appIcon: "@mipmap/ic_launcher_simplicity" ]
+            manifestPlaceholders = [appIcon: "@mipmap/ic_launcher_simplicity"]
         }
 
         simplicityAppDev {
@@ -28,15 +28,15 @@ android {
             buildConfigField "String", "SERVER_URL", "\"http://simplicityapp.com.ar/content_manager/\""
             buildConfigField "String", "FIREBASE_CLIENT_ID", "\"738836934516-hgaduu8708t67ad92mohb671211g58mb.apps.googleusercontent.com\""
             versionNameSuffix "-DEV"
-            manifestPlaceholders = [ appIcon: "@mipmap/ic_launcher_debug" ]
+            manifestPlaceholders = [appIcon: "@mipmap/ic_launcher_debug"]
         }
 
         soccoAppDev {
             applicationId "com.soccoapp.dev"
-            buildConfigField "String", "SERVER_URL", "\"http://simplicityapp.com.ar/content_manager/\""
-            buildConfigField "String", "FIREBASE_CLIENT_ID", "\"738836934516-hgaduu8708t67ad92mohb671211g58mb.apps.googleusercontent.com\""
+            buildConfigField "String", "SERVER_URL", "\"http://inmobiliariademo.smartsolutions.com.ar/\""
+            buildConfigField "String", "FIREBASE_CLIENT_ID", "\"55499442971-7pfgtbblb6jbmne61l9posf6sdbm7buq.apps.googleusercontent.com\""
             versionNameSuffix "-DEV"
-            manifestPlaceholders = [ appIcon: "@mipmap/ic_launcher_debug" ]
+            manifestPlaceholders = [appIcon: "@mipmap/ic_launcher_debug"]
         }
     }
 

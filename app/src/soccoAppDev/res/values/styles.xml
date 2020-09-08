@@ -86,7 +86,7 @@
 
     <style name="DrawerArrowStyle" parent="@style/Widget.AppCompat.DrawerArrowToggle">
         <item name="spinBars">true</item>
-        <item name="color">@color/colorPrimary</item>
+        <item name="color">@color/colorAccent</item>
     </style>
 
     <style name="RalewayTextViewStyle" parent="android:Widget.TextView">

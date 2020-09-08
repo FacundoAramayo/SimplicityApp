@@ -24,9 +24,10 @@
         android:supportsRtl="true"
         android:theme="@style/BaseTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".modules.start.activity.ActivityLoginSuccessful"></activity>
         <activity
             android:name=".modules.main.activity.RegionSelectorActivity"
-            android:theme="@style/AppTheme.GradientBackground"/>
+            android:theme="@style/AppTheme.GradientBackground" />
         <activity android:name=".modules.categories.activity.CategoriesSelectorActivity" />
         <activity
             android:name=".modules.start.activity.ActivityWelcome"

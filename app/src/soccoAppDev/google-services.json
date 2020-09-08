@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "738836934516",
-    "firebase_url": "https://simplicity-app-7830-dev.firebaseio.com",
-    "project_id": "simplicity-app-7830-dev",
-    "storage_bucket": "simplicity-app-7830-dev.appspot.com"
+    "project_number": "55499442971",
+    "firebase_url": "https://socco-app-dev.firebaseio.com",
+    "project_id": "socco-app-dev",
+    "storage_bucket": "socco-app-dev.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:738836934516:android:81a872d26b0945d2954621",
+        "mobilesdk_app_id": "1:55499442971:android:be27a9cadfa6a5ceffe1be",
         "android_client_info": {
           "package_name": "com.soccoapp.dev"
         }
       },
       "oauth_client": [
         {
-          "client_id": "738836934516-gvo7jpsjjh7515202u7qkmq9q9klfop0.apps.googleusercontent.com",
+          "client_id": "55499442971-5qdhs47b2s3se167p0ivrc18rgf6isr7.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.soccoapp.dev",
@@ -23,20 +23,20 @@
           }
         },
         {
-          "client_id": "738836934516-hgaduu8708t67ad92mohb671211g58mb.apps.googleusercontent.com",
+          "client_id": "55499442971-7pfgtbblb6jbmne61l9posf6sdbm7buq.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBNj-qJAJie3F6qKlpLnDXKTUHu-PKA3Wo"
+          "current_key": "AIzaSyD1nRIh2ZkuLEo_QcHcDt1yMIm3NzMV4F4"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "738836934516-hgaduu8708t67ad92mohb671211g58mb.apps.googleusercontent.com",
+              "client_id": "55499442971-7pfgtbblb6jbmne61l9posf6sdbm7buq.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

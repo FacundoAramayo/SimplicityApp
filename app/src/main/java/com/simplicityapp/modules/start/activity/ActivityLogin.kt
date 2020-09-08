@@ -237,6 +237,7 @@ class ActivityLogin : BaseActivity(), View.OnClickListener {
             val deviceInfo = Tools.getDeviceInfo(this)
             deviceInfo.regid = token
             deviceInfo.email = user.email
+            deviceInfo.name = user.displayName
 
             callback = api.registerDevice(deviceInfo)
             callback!!.enqueue(object : retrofit2.Callback<CallbackDevice> {
@@ -262,7 +263,7 @@ class ActivityLogin : BaseActivity(), View.OnClickListener {
     }
 
     private fun openMainActivity() {
-        val i = Intent(this@ActivityLogin, ActivityMain::class.java)
+        val i = Intent(this@ActivityLogin, ActivityLoginSuccessful::class.java)
         i.putExtra(Constant.IS_FIRST_OPEN, true)
         startActivity(i)
         finish()

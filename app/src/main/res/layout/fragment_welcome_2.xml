@@ -22,11 +22,11 @@
         android:layout_width="@dimen/text_title_width"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        style="@style/textStyleBold"
+        style="@style/textStyleSemibold"
         android:gravity="center_horizontal"
         android:text="@string/welcome_title_2"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:textColor="@color/welcomeButtonTextColor"
+        android:textColor="@color/welcomeTitleTextColor"
         tools:layout_editor_absoluteX="166dp"
         tools:layout_editor_absoluteY="270dp" />
 
@@ -41,7 +41,7 @@
         android:gravity="center"
         android:text="@string/welcome_description_2"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="15sp"
+        android:textSize="17sp"
         android:textColor="@color/welcomeButtonTextColor" />
 
 </RelativeLayout>

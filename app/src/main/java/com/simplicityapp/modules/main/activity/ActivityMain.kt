@@ -200,7 +200,7 @@ class ActivityMain : BaseActivity() {
         actionBar?.title = title
     }
 
-    fun onItemSelected(id: Int, title: String, logAnalytics: Boolean = true, backToHome: Boolean = false): Boolean {
+    private fun onItemSelected(id: Int, title: String, logAnalytics: Boolean = true, backToHome: Boolean = false): Boolean {
         this.backToHome = backToHome
         when (id) {
             R.id.nav_home -> {

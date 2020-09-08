@@ -15,22 +15,19 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@color/grid_title_bg">
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/action_bar_margin"
-                android:elevation="@dimen/elevation_container"
-                android:background="@drawable/container_gradient_rounded_bordered"
                 android:orientation="horizontal">
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="match_parent"
-                    android:layout_height="70dp"
+                    android:layout_height="100dp"
                     android:textAlignment="center"
-                    app:srcCompat="@drawable/logo_splash_screen" />
+                    app:srcCompat="@drawable/logo_nav_header" />
 
             </LinearLayout>
 

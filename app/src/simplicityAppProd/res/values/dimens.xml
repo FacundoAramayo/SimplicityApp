@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="custom_radius">10dp</dimen>
+
+    <dimen name="margin_card">8dp</dimen>
+    <dimen name="elevation_card">4dp</dimen>
+    <dimen name="elevation_container">4dp</dimen>
+    <dimen name="elevation_action_bar">8dp</dimen>
+    <dimen name="card_corner_radius">10dp</dimen>
 </resources>

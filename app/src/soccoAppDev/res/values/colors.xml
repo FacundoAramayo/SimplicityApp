@@ -2,13 +2,15 @@
 <resources>
 
     <color name="colorPrimaryGradient">#F9F9F9</color>
-    <color name="colorPrimary">#1C0F34</color>
+    <color name="colorPrimary">#0d0630</color>
     <color name="colorPrimaryDark">#1C0F34</color>
+    <color name="colorMenuIconTint">@color/colorAccent</color>
 
-    <color name="colorAccent">#EE2B3D</color>
+    <color name="colorAccent">#ed1c24</color>
     <color name="colorAccentGradient">#F9F9F9</color>
 
     <color name="welcomeTextColor">@color/colorPrimary</color>
+    <color name="welcomeTitleTextColor">@color/colorAccent</color>
     <color name="welcomeButtonTextColor">@color/colorPrimary</color>
 
     <color name="greyVisualIdentity">#B7C4CC</color>

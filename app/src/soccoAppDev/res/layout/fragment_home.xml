@@ -92,6 +92,9 @@
                         android:layout_marginEnd="@dimen/spacing_medium"
                         android:layout_marginBottom="@dimen/spacing_standard"
                         style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                        app:fontFamily="@font/myriadpro_semibold"
+                        android:elevation="@dimen/spacing_xxmicro"
+                        android:textAllCaps="false"
                         android:text="@string/see_more"/>
 
                 </LinearLayout>
@@ -118,6 +121,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/spacing_medium"
                     android:layout_marginRight="@dimen/spacing_medium"
+                    android:visibility="gone"
                     android:orientation="horizontal">
 
                     <LinearLayout
@@ -282,6 +286,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/spacing_medium"
                     android:layout_marginRight="@dimen/spacing_medium"
+                    android:visibility="gone"
                     android:orientation="horizontal">
 
                     <LinearLayout
@@ -462,6 +467,7 @@
                     style="@style/buttonBorderless"
                     android:textAlignment="textStart"
                     android:textColor="@color/colorPrimary"
+                    android:drawableTint="@color/colorPrimary"
                     android:drawableStart="@drawable/ic_share"/>
 
                 <Button
@@ -477,6 +483,7 @@
                     style="@style/buttonBorderless"
                     android:textAlignment="textStart"
                     android:textColor="@color/colorPrimary"
+                    android:drawableTint="@color/colorPrimary"
                     android:drawableStart="@drawable/ic_add"/>
 
             </LinearLayout>

@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-<!--    <color name="colorPrimary">#1D88BA</color>-->
     <color name="colorPrimaryGradient">#16C8E1</color>
     <color name="colorPrimary">#0D5389</color>
     <color name="colorPrimaryDark">#171C30</color>
+    <color name="colorMenuIconTint">@color/colorPrimary</color>
 
-<!--    <color name="colorAccent">#EA68AF</color>-->
     <color name="colorAccent">#c2185b</color>
     <color name="colorAccentGradient">#F504FD</color>
 

@@ -2,72 +2,10 @@
 
     <string name="empty_string" translatable="false"></string>
 
-
-    <string name="app_name">Simplicity App</string>
-
-    <string name="city_name">Dpto. San Martín, Salta</string>
-    <string name="city_address">Argentina</string>
-    <string name="about_text">Simplicity App
-        \nAll rights reserved © 2019–2020</string>
-    <string name="welcome_to_app_message">Welcome to Simplicity App</string>
-    <string name="message_from_app">Message sent from *Simplicity App*: </string>
-
-    <!--=== GOOGLE API KEY STRING ============================================================== -->
-    <!-- API KEY FOR MAP -->
-    <string name="api_key" translatable="false">AIzaSyBU1DdVV8niV8y085zeocdXUN6zL6YUrg4</string>
-
-
     <!--=== Nav Drawer Menu Items ============================================================== -->
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="title_home">Home</string>
-    <string name="title_nav_all">All Places</string>
-    <string name="title_nav_map">Map</string>
-    <string name="title_nav_search">Search</string>
-    <string name="title_nav_fav">Favorites</string>
-    <string name="title_nav_news">News</string>
-    <string name="title_nav_profile">Profile</string>
 
-    <string name="title_nav_featured">Featured</string>
-    <string name="title_nav_commercial_guide">Commercial guide</string>
-    <string name="title_nav_shop">Shopping</string>
-    <string name="title_nav_pharmacy">Pharmacy</string>
-    <string name="title_nav_gym">Gym Center</string>
-    <string name="title_nav_food">Restaurants</string>
-    <string name="title_nav_bar">Bar</string>
-    <string name="title_nav_fast_food">Fast Food</string>
-    <string name="title_nav_delivery">Delivery</string>
-    <string name="title_nav_icecream_store">Ice cream Store</string>
-    <string name="title_nav_hotels">Hotels</string>
-    <string name="title_nav_temporary_rent">Temporary rent</string>
-    <string name="title_nav_tour">Tourist Destination</string>
-    <string name="title_nav_money">Money</string>
-    <string name="title_nav_bill_payments">Bill Payments</string>
-    <string name="title_nav_apartment_rental">Apartment Rental</string>
-    <string name="title_nav_taxi">Taxi</string>
-    <string name="title_nav_gas_station">Gas Station</string>
-    <string name="title_nav_transport">Transportation</string>
-    <string name="title_nav_transport_tickets">Bus Tickets</string>
-    <string name="title_nav_clothing_stores">Clothes Stores</string>
-    <string name="title_nav_big_stores">Big Stores</string>
-    <string name="title_nav_industrial_stores">Industrial Stores</string>
-    <string name="title_nav_art">Art and design</string>
-    <string name="title_nav_jobs">Jobs</string>
-    <string name="title_nav_emergency">Emergency</string>
-
-    <string name="title_nav_subscription">Add my commerce</string>
-    <string name="title_nav_website">Website</string>
-    <string name="title_nav_get_in_touch">Get in touch</string>
-    <string name="title_nav_suggestions">Suggestions</string>
-
-    <string name="title_home_subscription">Add my commerce</string>
-
-    <string name="title_home_quick_access">Quick access</string>
-    <string name="item_home_quick_access_delivery">Delivery</string>
-    <string name="item_home_quick_access_gastronomy">Gastronomy</string>
-    <string name="item_home_quick_access_taxi">Taxi</string>
-    <string name="item_home_quick_access_emergency">SOS</string>
-    <string name="item_home_quick_access_pharmacy">Pharmacy</string>
 
     <!--=== activity FullScreenImage =========================================================== -->
     <string name="image_of">%1$d of %2$d</string>
@@ -75,29 +13,16 @@
     <!--=== activity Main ====================================================================== -->
     <string name="press_again_exit_app">Press again to exit</string>
 
+    <!--=== Activity LoginSuccessful =========================================================== -->
+    <string name="login_successfull_title">Welcome %1$s!</string>
+    <string name="login_successfull_subtitle">We are glad that you use our app</string>
+
     <!--=== activity Maps ====================================================================== -->
     <string name="no_item_at">No Item at</string>
     <string name="dialog_content_gps">
         GPS is disabled in your device. Would you like to enable it?
     </string>
-    <string name="activity_title_maps">@string/title_nav_all</string>
-
-    <!--=== activity PlaceDetails ============================================================== -->
-    <string name="add_favorite">added to favorites</string>
-    <string name="remove_favorite">remove from favorites</string>
-    <string name="no_phone_number">do not have a phone</string>
-    <string name="no_website">do not have a website</string>
-    <string name="fail_dial_number">Cannot dial phone number</string>
-    <string name="fail_open_whatsapp">Cannot open WhatsApp</string>
-    <string name="fail_open_website">Cannot open website</string>
-    <string name="unable_create_map">Sorry! unable to create maps</string>
-    <string name="failed_load_details">Failed load place details</string>
-    <string name="how_to_get">How to get?</string>
-    <string name="photos_title">Photos</string>
-    <string name="description_title">Contenido</string>
-    <string name="map_title">Map</string>
-    <string name="map_view">VIEW</string>
-    <string name="map_navigate">NAVIGATE</string>
+    <string name="activity_title_maps">All places</string>
 
     <!--=== activity Search ==================================================================== -->
     <string name="hint_search">Search Place…</string>
@@ -105,8 +30,7 @@
 
     <!--=== activity Setting =================================================================== -->
     <string name="default_notification_channel_id">Default</string>
-    <string name="developer_name">Simplicity App</string>
-    <string name="copyright">Copyright © 2019–2020 Simplicity App. \nAll right reserved</string>
+
     <string name="pref_category_notif">Notifications</string>
     <string name="pref_category_display">Display</string>
     <string name="pref_category_other">Others</string>
@@ -136,59 +60,9 @@
     <string name="message_after_clear_image_cache">Image cache successfully clear</string>
     <string name="title_dialog_theme">Color Theme</string>
     <string name="grant_permission_account_storage">Grant account, storage permission to enable</string>
-    <string name="content_term">
-        \nSimplicity App proporciona esta aplicación como un SERVICIO sin costo y está diseñado para usarse tal cuál.
-        \n\nEsta sección se usa para informar a los visitantes sobre nuestras políticas con la recopilación, uso y divulgación de información personal si alguien decide usar nuestro servicio.
-        \n\nSi elige utilizar nuestro Servicio, acepta la recopilación y el uso de información en relación con esta política. La información personal que recopilamos se utiliza para proporcionar y mejorar el Servicio. No utilizaremos ni compartiremos su información con nadie, excepto como se describe en esta Política de Privacidad.
 
-        \n\nResponsabilidad sobre el servicio
-        \n\nSimplicity App publicita y difunde servicios, comercios, productos y anuncios de los clientes, pero no se responsabiliza por transacciones, eventualidades, y quejas que vinculen indirectamente a la plataforma.
-        \n\nRecolección de información y uso
-        \nSimplicity App puede regular los contenidos y en base a quejas de los usuarios, también quitarlos.
-        \nLos comercios y servicios registrados en la plataforma pueden ofrecer pagos online. Simplicity App solo se responsabiliza por aquellas transacciones marcadas como "TRANSACCIÓN MEDIANTE SIMPLICITY APP".
-        \n\nPara una mejor experiencia, mientras usa nuestro Servicio, es posible que le solicitemos que nos brinde cierta información de identificación personal, que incluye, entre otros, almacenamiento, ubicación y contactos. La información que solicitamos será retenida por nosotros y utilizada como se describe en esta política de privacidad.
-        \n\nLa aplicación utiliza servicios de terceros que pueden recopilar información utilizada para identificarlo. Para más información, visite las Políticas de Privacidad de los proovedores de servicios utilizados por la aplicación:
-        \n - Google Play Services
-        \n - Firebase Analytics
-        \n - Firebase Crashlytics
-
-        \n\nRegistro de datos
-        \n\nQueremos informarle que cada vez que utiliza nuestro Servicio, en caso de un error en la aplicación, recopilamos datos e información (a través de productos de terceros) en su teléfono. Estos datos incluir información como la dirección del Protocolo de Internet ("IP") de su dispositivo, el nombre del dispositivo, la versión del sistema operativo, la configuración de la aplicación cuando utiliza nuestro Servicio, la hora y la fecha de uso del Servicio y otras estadísticas.
-
-        \n\nCookies
-        \n\nLas cookies son archivos con una pequeña cantidad de datos que se usan comúnmente como identificadores únicos anónimos. Estos se envían a su navegador desde los sitios web que visita y se almacenan en la memoria interna de su dispositivo.
-        \n\nEste servicio no utiliza estas "cookies" explícitamente. Sin embargo, la aplicación puede usar código de terceros y bibliotecas que usan "cookies" para recopilar información y mejorar sus servicios. Tiene la opción de aceptar o rechazar estas cookies y saber cuándo se envía una cookie a su dispositivo. Si elige rechazar nuestras cookies, es posible que no pueda usar algunas partes de este Servicio.
-
-        \n\nProveedores de servicio
-        \n\nPodemos emplear a empresas e individuos de terceros debido a las siguientes razones:
-        \n - Para facilitar nuestro servicio;
-        \n - Para proporcionar el Servicio en nuestro nombre;
-        \n - Para realizar servicios relacionados con el Servicio; o
-        \n - Para ayudarnos a analizar cómo se utiliza nuestro Servicio.
-        \n\nQueremos informar a los usuarios de este Servicio que estos terceros tienen acceso a su Información personal. El motivo es realizar las tareas que se les asignan en nuestro nombre. Sin embargo, están obligados a no divulgar ni utilizar la información para ningún otro propósito.
-
-        \n\nSeguridad
-        \n\nValoramos su confianza en proporcionarnos su información personal, por lo tanto, nos esforzamos por utilizar medios comercialmente aceptables para protegerla. Pero recuerde que ningún método de transmisión por Internet o método de almacenamiento electrónico es 100% seguro y confiable, y no podemos garantizar su seguridad absoluta.
-
-        \n\nEnlaces a otros sitios
-        \n\nEste servicio puede contener enlaces a otros sitios. Si hace clic en un enlace de un tercero, será dirigido a ese sitio. Tenga en cuenta que estos sitios externos no son operados por nosotros. Por lo tanto, le recomendamos encarecidamente que revise la Política de privacidad de estos sitios web. No tenemos control ni asumimos ninguna responsabilidad por el contenido, las políticas de privacidad o las prácticas de sitios o servicios de terceros.
-
-        \n\nPrivacidad de los niños
-        \n\nEstos Servicios no se dirigen a ninguna persona menor de 13 años. No recopilamos intencionalmente información de identificación personal de niños menores de 13 años. En el caso de que descubramos que un niño menor de 13 años nos ha proporcionado información personal, la eliminamos inmediatamente de nuestros servidores. Si usted es padre o tutor y sabe que su hijo nos ha proporcionado información personal, contáctenos para que podamos realizar las acciones necesarias.
-
-        \n\nCambios a esta política de privacidad
-        \n\nPodemos actualizar nuestra Política de privacidad de vez en cuando. Por lo tanto, se recomienda que revise esta página periódicamente en busca de cambios. Le notificaremos cualquier cambio publicando la nueva Política de privacidad en esta página. Estos cambios son efectivos inmediatamente después de su publicación en esta página.
-
-        \n\nContáctenos
-        \n\nSi tiene alguna pregunta o sugerencia sobre nuestra Política de privacidad, no dude en contactarnos en contacto@simplicityapp.com.ar.
-
-    </string>
     <string name="check_term">Accept Term &amp; Policies</string>
 
-
-    <!--=== activity Splash ==================================================================== -->
-    <string name="splash_welcome_text">WELCOME!</string>
-    <string name="splash_desc_text">Browse all the interesting place using The City app</string>
 
     <!--=== fragment Category ================================================================== -->
     <string name="refresh_failed">Refresh failed</string>
@@ -201,7 +75,6 @@
     <string name="findInApp">Using app</string>
     <string name="shareAppButton">Share app</string>
     <string name="shareUsing">Share using</string>
-    <string name="shareApp">Download this app</string>
 
     <!-- ==================== OTHERS STRING ==================================================== -->
     <string name="action_settings">Settings</string>
@@ -222,12 +95,7 @@
     <string name="DETAILS">DETAILS</string>
     <string name="FAILED">FAILED</string>
     <string name="see_more">See more</string>
-    <string name="welcome_description">Welcome to Simplicity App. A fast and free digital tool that will be very useful in your city.</string>
-    <string name="welcome_description_2">Shops, places and services available on your phone to make your life easier.\nSoon much more!</string>
-    <string name="welcome_description_3">If you have a business, this is the easiest and most economical way to promote it.\nReach more customers today!</string>
-    <string name="welcome_title">Hello!</string>
-    <string name="welcome_title_2">What you need, in one place</string>
-    <string name="welcome_title_3">Grow your business</string>
+
     <string name="welcome_next">NEXT</string>
     <string name="welcome_back">BACK</string>
     <string name="welcome_start">START</string>
@@ -298,17 +166,5 @@
     <string name="delete">Delete</string>
     <string name="scan">SCAN</string>
 
-    <string name="help_us_grow">Help us grow!</string>
-    <string name="have_you_a_commerce">Have you a commerce?</string>
-
-    <!--Region selector-->
-    <string name="region_selector_cancel_warning">You must select a region available</string>
-    <string name="region_selector_ok_warning">First, you must select a region</string>
-
-
-    <!--Categories selector-->
-    <string name="categories_selector_title">Categories</string>
-    <string name="region_selector_title">Set your location</string>
-    <string name="region_selector_subtitle">Choose your city or region</string>
 
 </resources>

@@ -25,6 +25,7 @@
                 android:layout_marginEnd="@dimen/action_bar_margin"
                 android:layout_marginTop="@dimen/spacing_medium"
                 android:layout_marginBottom="@dimen/spacing_medium"
+                android:visibility="gone"
                 android:gravity="center_vertical"
                 android:elevation="@dimen/elevation_card">
 

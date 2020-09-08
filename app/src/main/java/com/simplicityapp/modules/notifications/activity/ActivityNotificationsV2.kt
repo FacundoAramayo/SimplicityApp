@@ -7,7 +7,6 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.ActionBar
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,8 +16,6 @@ import com.simplicityapp.base.BaseActivity
 import com.simplicityapp.base.config.Constant
 import com.simplicityapp.base.config.analytics.AnalyticsConstants
 import com.simplicityapp.base.config.analytics.AnalyticsConstants.Companion.logAnalyticsEvent
-import com.simplicityapp.base.persistence.db.DatabaseHandler
-import com.simplicityapp.base.persistence.preferences.SharedPref
 import com.simplicityapp.base.utils.ActionTools.Companion.aboutAction
 import com.simplicityapp.base.utils.ActionTools.Companion.rateAction
 import com.simplicityapp.base.utils.Tools.Companion.checkConnection
@@ -214,7 +211,7 @@ class ActivityNotificationsV2 : BaseActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_activiy_notifications, menu)
+        menuInflater.inflate(R.menu.menu_activity_notifications, menu)
         return true
     }
 

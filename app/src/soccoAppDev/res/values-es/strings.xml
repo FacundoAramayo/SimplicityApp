@@ -1,0 +1,89 @@
+<resources>
+
+    <string name="app_name">Socco App</string>
+    <string name="city_name">Salta</string>
+    <string name="city_address">Argentina</string>
+    <string name="about_text">Socco &amp; SmartSolutions.com.ar
+        \nTodos los derechos reservados © 2020</string>
+    <string name="welcome_to_app_message">Bienvenidos a Socco App</string>
+    <string name="message_from_app">Enviado desde *Socco App*: \n</string>
+
+    <string name="title_home">Inicio</string>
+    <string name="title_nav_all">Todos los lugares</string>
+    <string name="title_nav_map">Ver mapa</string>
+    <string name="title_nav_search">Buscar propiedades</string>
+    <string name="title_nav_fav">Guardados</string>
+    <string name="title_nav_news">Notificaciones</string>
+    <string name="title_nav_profile">Perfil</string>
+
+    <string name="title_nav_featured">Destacados</string>
+    <string name="title_nav_commercial_guide">Categorías</string>
+    <string name="title_nav_delivery">Delivery</string>
+    <string name="title_nav_jobs">Oficios</string>
+    <string name="title_nav_emergency">Emergencias</string>
+
+    <string name="title_nav_subscription">Publicar una propiedad</string>
+    <string name="title_nav_website">Ir al sitio web</string>
+    <string name="title_nav_get_in_touch">Contacto</string>
+    <string name="title_nav_suggestions">Sugerencias</string>
+
+    <string name="title_home_subscription">Publicar una propiedad</string>
+
+    <string name="title_home_quick_access">Acceso rápido</string>
+    <string name="item_home_quick_access_delivery">Delivery</string>
+    <string name="item_home_quick_access_gastronomy">Gastronomía</string>
+    <string name="item_home_quick_access_taxi">Remis</string>
+    <string name="item_home_quick_access_emergency">SOS</string>
+    <string name="item_home_quick_access_pharmacy">Farmacia</string>
+
+    <!--=== activity PlaceDetails ============================================================== -->
+    <string name="add_favorite">añadido a favoritos</string>
+    <string name="remove_favorite">removido de favoritos</string>
+    <string name="no_phone_number">No tiene telefono</string>
+    <string name="no_website">No tiene sitio web</string>
+    <string name="fail_dial_number">No se puede marcar el número de teléfono</string>
+    <string name="fail_open_whatsapp">No se pudo enviar WhatsApp</string>
+    <string name="fail_open_website">No se puede abrir el sitio web</string>
+    <string name="unable_create_map">¡Lo siento! No se puede crear mapas</string>
+    <string name="failed_load_details">Falló la carga de detalles del lugar</string>
+    <string name="how_to_get">¿Cómo llegar?</string>
+    <string name="photos_title">Fotos</string>
+    <string name="description_title">Contenido</string>
+
+    <!--=== activity Setting =================================================================== -->
+    <string name="developer_name">SmartSolutions</string>
+    <string name="copyright">Copyright © 2020 Socco &amp; SmartSolutions. \nTodos los derechos reservados</string>
+
+    <string name="shareApp">Descarga ahora Socco App en Google Play Store.</string>
+
+
+    <!--=== activity Splash ==================================================================== -->
+    <string name="splash_welcome_text">Socco</string>
+
+    <!--=== activity Welcome =================================================================== -->
+    <string name="welcome_description">¡Encuentra tu próxima vivienda de la manera más fácil! Recorre las ubicaciones, navega por las categorías e inicia el trámite con nosotros.</string>
+    <string name="welcome_description_2">Con Socco puedes invertir en tu próxima vivienda mediante distintos programas de financiamiento</string>
+    <string name="welcome_description_3">La mejor herramienta para dar a conocer tu propiedad en alquiler, de la manera más segura y eficaz ¡Házlo ahora!</string>
+    <string name="welcome_title">¡Bienvenido!</string>
+    <string name="welcome_title_2">Conseguí la casa de tus sueños</string>
+    <string name="welcome_title_3">Publica tu propiedad a alquilar o vender</string>
+
+    <!--=== Activity LoginSuccessful =========================================================== -->
+    <string name="login_successfull_title">¡Te extrañamos %1$s!</string>
+    <string name="login_successfull_subtitle">Esperamos que puedas encontrar lo que estás buscando</string>
+
+    <string name="help_us_grow">¡Comparte la app!</string>
+    <string name="have_you_a_commerce">Registra tu comercio</string>
+
+    <!--Region selector-->
+    <string name="region_selector_cancel_warning">Tienes que seleccionar una región de la lista</string>
+    <string name="region_selector_ok_warning">Primero tiene que seleccionar una región</string>
+    <string name="region_selector_title">Selecciona tu ubicación</string>
+    <string name="region_selector_subtitle">Selecciona en el siguiente listado la provincia en la que te encuentras</string>
+
+    <!--Categories selector-->
+    <string name="categories_selector_title">Categorías</string>
+
+
+
+</resources>
