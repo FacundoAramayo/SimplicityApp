@@ -20,5 +20,8 @@ data class News (
     val image: String,
 
     @SerializedName("last_update")
-    val last_update: Long = 0
+    val last_update: Long = 0,
+
+    @SerializedName("client_reg_id")
+    val reg_id: String? = null
 ): Serializable

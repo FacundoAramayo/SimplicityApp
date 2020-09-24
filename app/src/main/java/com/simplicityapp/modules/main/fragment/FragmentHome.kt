@@ -34,6 +34,7 @@ import com.simplicityapp.databinding.FragmentHomeBinding
 import com.simplicityapp.modules.main.activity.ActivityMain
 import com.simplicityapp.modules.notifications.activity.ActivityNotificationDetails.Companion.navigate
 import com.simplicityapp.modules.notifications.model.News
+import com.simplicityapp.modules.notifications.model.NewsResponse
 import com.simplicityapp.modules.notifications.repository.NewsRepository
 import com.simplicityapp.modules.places.activity.ActivityPlaceDetail
 import com.simplicityapp.modules.places.model.Place
@@ -58,7 +59,6 @@ class FragmentHome : Fragment() {
     private var backToHome = false
     private var featuredOnProcess = false
     private var newsOnProcess = false
-    private var newsPostTotal = 0
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
@@ -291,7 +291,6 @@ class FragmentHome : Fragment() {
         newsOnProcess = true
         isLoadComplete(false)
         showNews(false)
-        newsPostTotal = 0
         actionRefreshNews(1)
     }
 
@@ -326,18 +325,29 @@ class FragmentHome : Fragment() {
             val response = newsRepository.getNews(page_no, Constant.LIMIT_NEWS_REQUEST)?.body()
             response?.let {
                 if (it.status == SUCCESS_RESPONSE) {
+                    val news = filterUserNews(it)
                     if (page_no == 1) {
                         adapterNews?.resetListData()
                         db.refreshTableContentInfo()
                     }
-                    newsPostTotal = it.countTotal
-                    db.insertListContentInfo(it.newsList)
-                    displayNewsResult(it.newsList)
+                    db.insertListContentInfo(news)
+                    displayNewsResult(news)
                 } else {
                     onFailRequestNews()
                 }
             } ?: onFailRequestNews()
         }
+    }
+
+    private fun filterUserNews(newsResponse: NewsResponse): List<News> {
+        val newsFiltered = mutableListOf<News>()
+        val regId = sharedPref.fcmRegId
+        newsResponse.newsList.forEach {
+            if (it.reg_id.isNullOrEmpty() or (it.reg_id == regId)) {
+                newsFiltered.add(it)
+            }
+        }
+        return newsFiltered.toList()
     }
 
     private fun displayNewsResult(items: List<News>) {

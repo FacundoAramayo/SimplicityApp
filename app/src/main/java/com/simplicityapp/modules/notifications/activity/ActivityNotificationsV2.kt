@@ -25,6 +25,7 @@ import com.simplicityapp.baseui.utils.UITools.Companion.dpToPx
 import com.simplicityapp.databinding.ActivityNotificationsBinding
 import com.simplicityapp.modules.notifications.activity.ActivityNotificationDetails.Companion.navigate
 import com.simplicityapp.modules.notifications.model.News
+import com.simplicityapp.modules.notifications.model.NewsResponse
 import com.simplicityapp.modules.notifications.repository.NewsRepository
 import com.simplicityapp.modules.settings.activity.ActivitySetting
 import kotlinx.coroutines.Dispatchers
@@ -117,13 +118,14 @@ class ActivityNotificationsV2 : BaseActivity() {
                 val response = newsRepository.getNews(page_no, Constant.LIMIT_NEWS_REQUEST)?.body()
                 response?.let {
                     if (it.status == Constant.SUCCESS_RESPONSE) {
+                        val news = filterUserNews(it)
                         if (page_no == 1) {
                             mAdapter?.resetListData()
                             db?.refreshTableContentInfo()
                         }
                         newsPostTotal = it.countTotal
-                        db?.insertListContentInfo(it.newsList)
-                        displayNewsResult(it.newsList)
+                        db?.insertListContentInfo(news)
+                        displayNewsResult(news)
                     } else {
                         onFailRequest(page_no)
                     }
@@ -137,6 +139,17 @@ class ActivityNotificationsV2 : BaseActivity() {
             val items = db?.getContentInfoByPage(limit, offset)
             displayNewsResult(items)
         }
+    }
+
+    private fun filterUserNews(newsResponse: NewsResponse): List<News> {
+        val newsFiltered = mutableListOf<News>()
+        val regId = sharedPref.fcmRegId
+        newsResponse.newsList.forEach {
+            if (it.reg_id.isNullOrEmpty() or (it.reg_id == regId)) {
+                newsFiltered.add(it)
+            }
+        }
+        return newsFiltered.toList()
     }
 
     private fun onFailRequest(page_no: Int) {

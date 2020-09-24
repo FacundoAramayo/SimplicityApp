@@ -10,6 +10,7 @@
     <color name="colorAccentGradient">#F504FD</color>
 
     <color name="welcomeTextColor">@android:color/white</color>
+    <color name="welcomeTitleTextColor">@android:color/white</color>
     <color name="welcomeButtonTextColor">@android:color/white</color>
 
     <color name="colorSeparatorLight">#789CAF</color>

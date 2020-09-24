@@ -138,7 +138,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + KEY_NEWS_BRIEF_CONTENT+ " TEXT, "
                 + KEY_NEWS_FULL_CONTENT+ " TEXT, "
                 + KEY_NEWS_IMAGE+ " TEXT, "
-                + KEY_NEWS_LAST_UPDATE+ " NUMERIC "
+                + KEY_NEWS_LAST_UPDATE+ " NUMERIC, "
+                + KEY_CLIENT_REG_ID+ " TEXT "
                 + ")";
         db.execSQL(CREATE_TABLE);
     }
@@ -378,7 +379,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 cur.getString(cur.getColumnIndex(KEY_NEWS_BRIEF_CONTENT)),
                 cur.getString(cur.getColumnIndex(KEY_NEWS_FULL_CONTENT)),
                 cur.getString(cur.getColumnIndex(KEY_NEWS_IMAGE)),
-                cur.getLong(cur.getColumnIndex(KEY_NEWS_LAST_UPDATE))
+                cur.getLong(cur.getColumnIndex(KEY_NEWS_LAST_UPDATE)),
+                cur.getString(cur.getColumnIndex(KEY_CLIENT_REG_ID))
         );
         return n;
     }

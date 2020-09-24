@@ -73,7 +73,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:buttonTint="@color/colorAccent"
+                android:buttonTint="@color/welcomeTitleTextColor"
                 style="@style/textStyleSemibold"
                 android:text="@string/check_term"
                 android:textColor="@color/welcomeButtonTextColor"/>

@@ -57,6 +57,7 @@ object DatabaseConstants {
     const val KEY_NEWS_FULL_CONTENT = "full_content"
     const val KEY_NEWS_IMAGE = "image"
     const val KEY_NEWS_LAST_UPDATE = "last_update"
+    const val KEY_CLIENT_REG_ID = "client_reg_id"
 
     // Table Relational Columns names TABLE_PLACE_CATEGORY
     const val KEY_RELATION_PLACE_ID = KEY_PLACE_ID
