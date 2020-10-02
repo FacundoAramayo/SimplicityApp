@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.simplicityapp.baseui.utils.UITools
 import com.simplicityapp.modules.categories.model.Category
 import com.simplicityapp.R
+import com.simplicityapp.base.config.AppConfig.getWebURL
 
 class AdapterCategoriesSelectorGrid(
     private val categories: List<Category>,
@@ -43,6 +44,7 @@ class CategoryViewHolder(itemView: View) :
 
     fun bindView(category: Category) {
         background?.let {
-            UITools.displayImage(itemView.context, it, category.backgroundResource) }
+            val imageUrl = getWebURL() + category.backgroundResource
+            UITools.displayImage(itemView.context, it, imageUrl) }
     }
 }
