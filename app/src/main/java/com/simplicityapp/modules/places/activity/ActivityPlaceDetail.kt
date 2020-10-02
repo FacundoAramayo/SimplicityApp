@@ -50,6 +50,7 @@ import com.simplicityapp.base.config.Constant.*
 import com.simplicityapp.base.config.analytics.AnalyticsConstants.Companion.SELECT_PLACE_FACEBOOK
 import com.simplicityapp.base.config.analytics.AnalyticsConstants.Companion.SELECT_PLACE_INSTAGRAM
 import com.simplicityapp.base.config.analytics.AnalyticsConstants.Companion.SELECT_PLACE_WHATSAPP
+import com.simplicityapp.base.utils.show
 import java.lang.Exception
 
 class ActivityPlaceDetail : BaseActivity() {
@@ -94,16 +95,17 @@ class ActivityPlaceDetail : BaseActivity() {
             ) {
                 val distance = place.distance
                 placeLytDistance.visibility = VISIBLE
+                cardViewContact?.show()
                 placeDistance.text = Tools.getFormattedDistance(distance)
             }
-            if (place.address.isNullOrEmpty()) { placeLytAddress.visibility = GONE }
-            if (place.hasLatLngPosition().not()) { placeHowToGet.visibility = GONE }
-            if (place.phone.isNullOrEmpty()) { placeLytPhone.visibility = GONE }
+            if (place.address.isNullOrEmpty()) { placeLytAddress.visibility = GONE } else cardViewContact?.show()
+            if (place.hasLatLngPosition().not()) { placeHowToGet.visibility = GONE } else cardViewContact?.show()
+            if (place.phone.isNullOrEmpty()) { placeLytPhone.visibility = GONE } else cardViewContact?.show()
 
-            if (place.whatsapp.isNullOrEmpty()) { placeLytWhatsapp?.visibility = GONE }
-            if (place.instagram.isNullOrEmpty()) { placeLytInstagram?.visibility = GONE }
-            if (place.facebook.isNullOrEmpty()) { placeLytFacebook?.visibility = GONE }
-            if (place.website.isNullOrEmpty()) { placeLytWebsite.visibility = GONE }
+            if (place.whatsapp.isNullOrEmpty()) { placeLytWhatsapp?.visibility = GONE } else cardViewSocialMedia?.show()
+            if (place.instagram.isNullOrEmpty()) { placeLytInstagram?.visibility = GONE } else cardViewSocialMedia?.show()
+            if (place.facebook.isNullOrEmpty()) { placeLytFacebook?.visibility = GONE } else cardViewSocialMedia?.show()
+            if (place.website.isNullOrEmpty()) { placeLytWebsite.visibility = GONE } else cardViewSocialMedia?.show()
 
             if (place.description.isNullOrEmpty()) { placeCardViewDescription.visibility = GONE }
 

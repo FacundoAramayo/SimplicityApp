@@ -26,13 +26,16 @@
         tools:text="Panadería, Carnicería, Salón velatorio"/>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardView_contact"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/spacing_standard"
         android:layout_marginRight="@dimen/spacing_standard"
         android:layout_marginTop="@dimen/spacing_medium"
         app:cardCornerRadius="@dimen/card_corner_radius"
-        app:cardElevation="@dimen/elevation_card">
+        app:cardElevation="@dimen/elevation_card"
+        android:visibility="gone"
+        tools:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -161,6 +164,7 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardView_social_media"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/spacing_standard"
@@ -168,7 +172,9 @@
         android:layout_marginRight="@dimen/spacing_standard"
         android:layout_marginTop="@dimen/spacing_standard"
         app:cardCornerRadius="@dimen/card_corner_radius"
-        app:cardElevation="@dimen/elevation_card">
+        app:cardElevation="@dimen/elevation_card"
+        android:visibility="gone"
+        tools:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"
