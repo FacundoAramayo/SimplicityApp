@@ -87,7 +87,7 @@
                         android:id="@+id/btn_news"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_medium"
+                        android:layout_marginTop="@dimen/spacing_standard"
                         android:layout_marginStart="@dimen/spacing_medium"
                         android:layout_marginEnd="@dimen/spacing_medium"
                         android:layout_marginBottom="@dimen/spacing_standard"

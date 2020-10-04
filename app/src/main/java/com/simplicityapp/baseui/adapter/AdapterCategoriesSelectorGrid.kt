@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.simplicityapp.baseui.utils.UITools
 import com.simplicityapp.modules.categories.model.Category
@@ -36,15 +37,21 @@ class CategoryViewHolder(itemView: View) :
     RecyclerView.ViewHolder(itemView) {
     private var layoutParent: View? = null
     private var background: ImageView? = null
+    private var title: TextView? = null
 
     init {
         layoutParent = itemView.findViewById(R.id.lyt_parent)
         background = itemView.findViewById(R.id.image)
+        title = itemView.findViewById(R.id.textView_category_name)
     }
 
     fun bindView(category: Category) {
         background?.let {
             val imageUrl = getWebURL() + category.backgroundResource
-            UITools.displayImage(itemView.context, it, imageUrl) }
+            UITools.displayImage(itemView.context, it, imageUrl)
+        }
+        title?.apply {
+            text = category.title
+        }
     }
 }
