@@ -9,7 +9,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.simplicityapp.baseui.utils.UITools
 import com.simplicityapp.modules.categories.model.Category
 import com.simplicityapp.R
+import com.simplicityapp.base.config.AppConfig.SHOW_CATEGORY_NAME
 import com.simplicityapp.base.config.AppConfig.getWebURL
+import com.simplicityapp.base.utils.hide
+import com.simplicityapp.base.utils.show
 
 class AdapterCategoriesSelectorGrid(
     private val categories: List<Category>,
@@ -50,8 +53,13 @@ class CategoryViewHolder(itemView: View) :
             val imageUrl = getWebURL() + category.backgroundResource
             UITools.displayImage(itemView.context, it, imageUrl)
         }
-        title?.apply {
-            text = category.title
+        if (SHOW_CATEGORY_NAME) {
+            title?.apply {
+                show()
+                text = category.title
+            }
+        } else {
+            title?.hide()
         }
     }
 }

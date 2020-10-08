@@ -58,12 +58,12 @@ public class AppConfig {
     //FONT-FAMILY STYLES
     public static final String FONT_FAMILY = "<style>@import url('https://fonts.googleapis.com/css?family=Raleway:400,700&display=swap');</style>";
 
-    public static String getWebURL() {
-        return BuildConfig.SERVER_URL;
-    }
+    public static String getWebURL() { return BuildConfig.SERVER_URL; }
 
-    public static final int DATABASE_VERSION = 7;
+    public static final int DATABASE_VERSION = BuildConfig.DATABASE_VERSION;
 
-    public static final String DATABASE_NAME = "simplicity_app";
+    public static final String DATABASE_NAME = BuildConfig.DATABASE_NAME;
+
+    public static final Boolean SHOW_CATEGORY_NAME = BuildConfig.SHOW_CATEGORY_NAME;
 
 }
