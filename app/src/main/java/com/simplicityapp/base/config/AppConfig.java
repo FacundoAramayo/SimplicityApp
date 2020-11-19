@@ -47,8 +47,8 @@ public class AppConfig {
     public static final int LIMIT_PLACES_TO_UPDATE = 100;
 
     //URL TO FORMS
-    public static final String LINK_TO_SUBSCRIPTION_FORM = "http://bit.ly/2TZkzQN";
-    public static final String LINK_TO_SUGGESTIONS_FORM = "http://bit.ly/36tYrkd";
+    public static final String LINK_TO_SUBSCRIPTION_FORM = BuildConfig.SUBSCRIPTION_LINK;
+    public static final String LINK_TO_SUGGESTIONS_FORM = BuildConfig.SUGGESTIONS_LINK;
 
     //PARAMS SEND EMAIL
     public static final String CONTACT_EMAIL = "contacto@simplicityapp.com.ar";

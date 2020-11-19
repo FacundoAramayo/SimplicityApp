@@ -19,6 +19,8 @@ android {
         simplicityAppProd {
             applicationId "com.simplicityapp"
             buildConfigField "String", "SERVER_URL", "\"http://ciudadanovirtualdemo.smartsolutions.com.ar/\""
+            buildConfigField "String", "SUGGESTIONS_LINK", "\"http://bit.ly/36tYrkd\""
+            buildConfigField "String", "SUBSCRIPTION_LINK", "\"http://bit.ly/2TZkzQN\""
             buildConfigField "String", "FIREBASE_CLIENT_ID", "\"952435693298-e22spc0j5pnf1r5qsk3hv3k2lu5tas8q.apps.googleusercontent.com\""
 
             buildConfigField "String", "DATABASE_NAME", "\"simplicity_app\""
@@ -31,6 +33,8 @@ android {
         simplicityAppDev {
             applicationId "com.simplicityapp.dev"
             buildConfigField "String", "SERVER_URL", "\"http://simplicityapp.com.ar/content_manager/\""
+            buildConfigField "String", "SUGGESTIONS_LINK", "\"http://bit.ly/36tYrkd\""
+            buildConfigField "String", "SUBSCRIPTION_LINK", "\"http://bit.ly/2TZkzQN\""
             buildConfigField "String", "FIREBASE_CLIENT_ID", "\"738836934516-hgaduu8708t67ad92mohb671211g58mb.apps.googleusercontent.com\""
             versionNameSuffix "-DEV"
 
@@ -44,6 +48,8 @@ android {
         soccoAppDev {
             applicationId "com.soccoapp.dev"
             buildConfigField "String", "SERVER_URL", "\"http://inmobiliariademo.smartsolutions.com.ar/\""
+            buildConfigField "String", "SUGGESTIONS_LINK", "\"https://www.soccogroups.com/\""
+            buildConfigField "String", "SUBSCRIPTION_LINK", "\"https://www.soccogroups.com/\""
             buildConfigField "String", "FIREBASE_CLIENT_ID", "\"55499442971-7pfgtbblb6jbmne61l9posf6sdbm7buq.apps.googleusercontent.com\""
             versionNameSuffix "-DEV"
 
