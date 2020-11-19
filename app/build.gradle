@@ -48,8 +48,8 @@ android {
         soccoAppDev {
             applicationId "com.soccoapp.dev"
             buildConfigField "String", "SERVER_URL", "\"http://inmobiliariademo.smartsolutions.com.ar/\""
-            buildConfigField "String", "SUGGESTIONS_LINK", "\"https://www.soccogroups.com/\""
-            buildConfigField "String", "SUBSCRIPTION_LINK", "\"https://www.soccogroups.com/\""
+            buildConfigField "String", "SUGGESTIONS_LINK", "\"https://form.jotform.com/203237419037654\""
+            buildConfigField "String", "SUBSCRIPTION_LINK", "\"https://form.jotform.com/203237419037654\""
             buildConfigField "String", "FIREBASE_CLIENT_ID", "\"55499442971-7pfgtbblb6jbmne61l9posf6sdbm7buq.apps.googleusercontent.com\""
             versionNameSuffix "-DEV"
 

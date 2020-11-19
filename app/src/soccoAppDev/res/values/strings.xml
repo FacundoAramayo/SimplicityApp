@@ -26,12 +26,12 @@
     <string name="title_nav_jobs">Jobs</string>
     <string name="title_nav_emergency">Emergency</string>
 
-    <string name="title_nav_subscription">Add my commerce</string>
+    <string name="title_nav_subscription">Publish my property</string>
     <string name="title_nav_website">Website</string>
     <string name="title_nav_get_in_touch">Get in touch</string>
     <string name="title_nav_suggestions">Suggestions</string>
 
-    <string name="title_home_subscription">Add my commerce</string>
+    <string name="title_home_subscription">Publish my property</string>
 
     <string name="title_home_quick_access">Quick access</string>
     <string name="item_home_quick_access_delivery">Delivery</string>
@@ -108,12 +108,12 @@
     <string name="splash_welcome_text">Socco</string>
 
     <!--=== activity welcome =================================================================== -->
-    <string name="welcome_description">Welcome to Socco App.</string>
-    <string name="welcome_description_2"></string>
-    <string name="welcome_description_3"></string>
+    <string name="welcome_description">Find your next home in the easiest way! Browse the locations, browse the categories and start the process with us.</string>
+    <string name="welcome_description_2">With Socco you can invest in your next home through different financing programs</string>
+    <string name="welcome_description_3">The best tool to publicize your rental property, in the safest and most efficient way. Do it now!</string>
     <string name="welcome_title">Hello, friend!</string>
     <string name="welcome_title_2">Get the house of your dreams</string>
-    <string name="welcome_title_3"></string>
+    <string name="welcome_title_3">Publish your property to rent or sell</string>
 
     <!--=== Activity LoginSuccessful =========================================================== -->
     <string name="login_successfull_title">Welcome %1$s!</string>
