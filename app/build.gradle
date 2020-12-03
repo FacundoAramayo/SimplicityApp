@@ -4,12 +4,10 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
     defaultConfig {
         minSdkVersion 23
-        targetSdkVersion 28
-        versionCode 6
-        versionName "1.4.0"
+        targetSdkVersion 29
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -18,6 +16,8 @@ android {
     productFlavors {
         simplicityAppProd {
             applicationId "com.simplicityapp"
+            versionName "1.4.0"
+            versionCode 6
             buildConfigField "String", "SERVER_URL", "\"http://ciudadanovirtualdemo.smartsolutions.com.ar/\""
             buildConfigField "String", "SUGGESTIONS_LINK", "\"http://bit.ly/36tYrkd\""
             buildConfigField "String", "SUBSCRIPTION_LINK", "\"http://bit.ly/2TZkzQN\""
@@ -32,6 +32,8 @@ android {
 
         simplicityAppDev {
             applicationId "com.simplicityapp.dev"
+            versionName "1.4.0"
+            versionCode 6
             buildConfigField "String", "SERVER_URL", "\"http://simplicityapp.com.ar/content_manager/\""
             buildConfigField "String", "SUGGESTIONS_LINK", "\"http://bit.ly/36tYrkd\""
             buildConfigField "String", "SUBSCRIPTION_LINK", "\"http://bit.ly/2TZkzQN\""
@@ -47,6 +49,8 @@ android {
 
         soccoAppDev {
             applicationId "com.soccoapp.dev"
+            versionName "1.0.0"
+            versionCode 1
             buildConfigField "String", "SERVER_URL", "\"http://inmobiliariademo.smartsolutions.com.ar/\""
             buildConfigField "String", "SUGGESTIONS_LINK", "\"https://form.jotform.com/203237419037654\""
             buildConfigField "String", "SUBSCRIPTION_LINK", "\"https://form.jotform.com/203237419037654\""
@@ -54,6 +58,22 @@ android {
             versionNameSuffix "-DEV"
 
             buildConfigField "String", "DATABASE_NAME", "\"socco_app_dev\""
+            buildConfigField "int", "DATABASE_VERSION", "1"
+            buildConfigField "boolean", "SHOW_CATEGORY_NAME", "true"
+
+            manifestPlaceholders = [appIcon: "@mipmap/ic_launcher_debug"]
+        }
+
+        soccoAppProd {
+            applicationId "com.soccoapp"
+            versionName "1.0.0"
+            versionCode 1
+            buildConfigField "String", "SERVER_URL", "\"http://soccoappcms.smartsolutions.com.ar/\""
+            buildConfigField "String", "SUGGESTIONS_LINK", "\"https://form.jotform.com/203237419037654\""
+            buildConfigField "String", "SUBSCRIPTION_LINK", "\"https://form.jotform.com/203237419037654\""
+            buildConfigField "String", "FIREBASE_CLIENT_ID", "\"897490629581-d4vq8js0drhbqjuqod6h74q30oi84uc1.apps.googleusercontent.com\""
+
+            buildConfigField "String", "DATABASE_NAME", "\"socco_app\""
             buildConfigField "int", "DATABASE_VERSION", "1"
             buildConfigField "boolean", "SHOW_CATEGORY_NAME", "true"
 

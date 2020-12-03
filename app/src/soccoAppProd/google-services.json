@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "897490629581",
+    "firebase_url": "https://socco-app.firebaseio.com",
+    "project_id": "socco-app",
+    "storage_bucket": "socco-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:897490629581:android:22b2942eec0081b5138a84",
+        "android_client_info": {
+          "package_name": "com.soccoapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "897490629581-aua4pcglok804tuvkg0msjhuq58bri3t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.soccoapp",
+            "certificate_hash": "78676c15bf61f55a43586fa20858dedff808e3a7"
+          }
+        },
+        {
+          "client_id": "897490629581-d4vq8js0drhbqjuqod6h74q30oi84uc1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9iOjxVp13dFWV7sgLpGuVnVbd0EY8lhI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "897490629581-d4vq8js0drhbqjuqod6h74q30oi84uc1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

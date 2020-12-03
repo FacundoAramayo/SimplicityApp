@@ -1,0 +1,135 @@
+<resources>
+
+    <string name="app_name">Socco App</string>
+    <string name="city_name">Salta</string>
+    <string name="city_address">Argentina</string>
+    <string name="about_text">SmartSolutions
+        \nAll rights reserved © 2020</string>
+    <string name="welcome_to_app_message">Welcome to Socco App</string>
+    <string name="message_from_app">Message sent from *Socco App*: </string>
+
+    <!--=== GOOGLE API KEY STRING ============================================================== -->
+    <!-- API KEY FOR MAP -->
+    <string name="api_key" translatable="false">AIzaSyBU1DdVV8niV8y085zeocdXUN6zL6YUrg4</string>
+
+    <string name="title_home">Home</string>
+    <string name="title_nav_all">All Places</string>
+    <string name="title_nav_map">Map</string>
+    <string name="title_nav_search">Search</string>
+    <string name="title_nav_fav">Favorites</string>
+    <string name="title_nav_news">News</string>
+    <string name="title_nav_profile">Profile</string>
+
+    <string name="title_nav_featured">Featured</string>
+    <string name="title_nav_commercial_guide">Property categories</string>
+    <string name="title_nav_delivery">Delivery</string>
+    <string name="title_nav_jobs">Jobs</string>
+    <string name="title_nav_emergency">Emergency</string>
+
+    <string name="title_nav_subscription">Publish my property</string>
+    <string name="title_nav_website">Website</string>
+    <string name="title_nav_get_in_touch">Get in touch</string>
+    <string name="title_nav_suggestions">Suggestions</string>
+
+    <string name="title_home_subscription">Publish my property</string>
+
+    <string name="title_home_quick_access">Quick access</string>
+    <string name="item_home_quick_access_delivery">Delivery</string>
+    <string name="item_home_quick_access_gastronomy">Gastronomy</string>
+    <string name="item_home_quick_access_taxi">Taxi</string>
+    <string name="item_home_quick_access_emergency">SOS</string>
+    <string name="item_home_quick_access_pharmacy">Pharmacy</string>
+
+
+    <!--=== activity PlaceDetails ============================================================== -->
+    <string name="add_favorite">added to favorites</string>
+    <string name="remove_favorite">remove from favorites</string>
+    <string name="no_phone_number">do not have a phone</string>
+    <string name="no_website">do not have a website</string>
+    <string name="fail_dial_number">Cannot dial phone number</string>
+    <string name="fail_open_whatsapp">Cannot open WhatsApp</string>
+    <string name="fail_open_website">Cannot open website</string>
+    <string name="unable_create_map">Sorry! unable to create maps</string>
+    <string name="failed_load_details">Failed load place details</string>
+    <string name="how_to_get">How to get?</string>
+    <string name="photos_title">Photos</string>
+    <string name="description_title">Content</string>
+
+    <!--=== activity Setting =================================================================== -->
+    <string name="developer_name">SmartSolutions</string>
+    <string name="copyright">Copyright © 2020 Socco &amp; SmartSolutions. \nAll right reserved</string>
+
+    <string translatable="false" name="content_term">
+        \nSocco y SmartSolutions proporcionan esta aplicación como un SERVICIO sin costo y está diseñado para usarse tal cual.
+        \n\nEsta sección se usa para informar a los visitantes sobre nuestras políticas con la recopilación, uso y divulgación de información personal si alguien decide usar nuestro servicio.
+        \n\nSi elige utilizar nuestro Servicio, acepta la recopilación y el uso de información en relación con esta política. La información personal que recopilamos se utiliza para proporcionar y mejorar el Servicio. No utilizaremos ni compartiremos su información con nadie, excepto como se describe en esta Política de Privacidad.
+
+        \n\nPara una mejor experiencia, mientras usa nuestro Servicio, es posible que le solicitemos que nos brinde cierta información de identificación personal, que incluye, entre otros, almacenamiento, ubicación y contactos. La información que solicitamos será retenida por nosotros y utilizada como se describe en esta política de privacidad.
+        \n\nLa aplicación utiliza servicios de terceros que pueden recopilar información utilizada para identificarlo. Para más información, visite las Políticas de Privacidad de los proveedores de servicios utilizados por la aplicación:
+        \n - Google Play Services
+        \n - Firebase Analytics
+        \n - Firebase Crashlytics
+
+        \n\nRegistro de datos
+        \n\nQueremos informarle que cada vez que utiliza nuestro Servicio, en caso de un error en la aplicación, recopilamos datos e información (a través de productos de terceros) en su teléfono. Estos datos incluyen información como la dirección del Protocolo de Internet ("IP") de su dispositivo, el nombre del dispositivo, la versión del sistema operativo, la configuración de la aplicación cuando utiliza nuestro Servicio, la hora y la fecha de uso del Servicio y otras estadísticas.
+
+        \n\nCookies
+        \n\nLas cookies son archivos con una pequeña cantidad de datos que se usan comúnmente como identificadores únicos anónimos. Estos se envían a su navegador desde los sitios web que visita y se almacenan en la memoria interna de su dispositivo.
+        \n\nEste servicio no utiliza estas "cookies" explícitamente. Sin embargo, la aplicación puede usar código de terceros y bibliotecas que usan "cookies" para recopilar información y mejorar sus servicios. Tiene la opción de aceptar o rechazar estas cookies y saber cuándo se envía una cookie a su dispositivo. Si elige rechazar nuestras cookies, es posible que no pueda usar algunas partes de este Servicio.
+
+        \n\nProveedores de servicio
+        \n\nPodemos emplear a empresas e individuos de terceros debido a las siguientes razones:
+        \n - Para facilitar nuestro servicio;
+        \n - Para proporcionar el Servicio en nuestro nombre;
+        \n - Para realizar servicios relacionados con el Servicio; o
+        \n - Para ayudarnos a analizar cómo se utiliza nuestro Servicio.
+        \n\nQueremos informar a los usuarios de este Servicio que estos terceros tienen acceso a su Información personal. El motivo es realizar las tareas que se les asignan en nuestro nombre. Sin embargo, están obligados a no divulgar ni utilizar la información para ningún otro propósito.
+
+        \n\nSeguridad
+        \n\nValoramos su confianza en proporcionarnos su información personal, por lo tanto, nos esforzamos por utilizar medios comercialmente aceptables para protegerla. Pero recuerde que ningún método de transmisión por Internet o método de almacenamiento electrónico es 100% seguro y confiable, y no podemos garantizar su seguridad absoluta.
+
+        \n\nEnlaces a otros sitios
+        \n\nEste servicio puede contener enlaces a otros sitios. Si hace clic en un enlace de un tercero, será dirigido a ese sitio. Tenga en cuenta que estos sitios externos no son operados por nosotros. Por lo tanto, le recomendamos encarecidamente que revise la Política de privacidad de estos sitios web. No tenemos control ni asumimos ninguna responsabilidad por el contenido, las políticas de privacidad o las prácticas de sitios o servicios de terceros.
+
+        \n\nPrivacidad de los niños
+        \n\nEstos Servicios no se dirigen a ninguna persona menor de 13 años. No recopilamos intencionalmente información de identificación personal de niños menores de 13 años. En el caso de que descubramos que un niño menor de 13 años nos ha proporcionado información personal, la eliminaremos inmediatamente de nuestros servidores. Si usted es padre o tutor y sabe que su hijo nos ha proporcionado información personal, contáctenos para que podamos realizar las acciones necesarias.
+
+        \n\nCambios a esta política de privacidad
+        \n\nPodemos actualizar nuestra Política de privacidad de vez en cuando. Por lo tanto, se recomienda que revise esta página periódicamente en busca de cambios. Le notificaremos cualquier cambio publicando la nueva Política de privacidad en esta página. Estos cambios son efectivos inmediatamente después de su publicación en esta página.
+
+        \n\nContáctenos
+        \n\nSi tiene alguna pregunta o sugerencia sobre nuestra Política de privacidad, no dude en contactarnos en contacto@smartsolutions.com.ar.
+
+    </string>
+    <string name="shareApp">Download this app</string>
+
+
+    <!--=== activity Splash ==================================================================== -->
+    <string name="splash_welcome_text">Socco</string>
+
+    <!--=== activity welcome =================================================================== -->
+    <string name="welcome_description">Find your next home in the easiest way! Browse the locations, browse the categories and start the process with us.</string>
+    <string name="welcome_description_2">With Socco you can invest in your next home through different financing programs</string>
+    <string name="welcome_description_3">The best tool to publicize your rental property, in the safest and most efficient way. Do it now!</string>
+    <string name="welcome_title">Hello, friend!</string>
+    <string name="welcome_title_2">Get the house of your dreams</string>
+    <string name="welcome_title_3">Publish your property to rent or sell</string>
+
+    <!--=== Activity LoginSuccessful =========================================================== -->
+    <string name="login_successfull_title">Welcome %1$s!</string>
+    <string name="login_successfull_subtitle">We are glad that you use our app</string>
+
+
+    <string name="help_us_grow">Share with your contacts</string>
+    <string name="have_you_a_commerce">Do you want to publish?</string>
+
+    <!--Region selector-->
+    <string name="region_selector_title">Set your location</string>
+    <string name="region_selector_subtitle">Choose your city or region</string>
+    <string name="region_selector_cancel_warning">You must select a city or region available</string>
+    <string name="region_selector_ok_warning">First, you must select a city or region</string>
+
+    <!--Categories selector-->
+    <string name="categories_selector_title">Categories</string>
+
+</resources>

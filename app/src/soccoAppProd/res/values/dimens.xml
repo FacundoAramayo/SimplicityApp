@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="custom_radius">5dp</dimen>
+
+    <dimen name="margin_card">8dp</dimen>
+    <dimen name="elevation_card">0dp</dimen>
+    <dimen name="elevation_container">0dp</dimen>
+    <dimen name="elevation_action_bar">0dp</dimen>
+    <dimen name="card_corner_radius">5dp</dimen>
+</resources>

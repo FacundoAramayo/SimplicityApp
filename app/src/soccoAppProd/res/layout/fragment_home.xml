@@ -1,0 +1,515 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_app">
+
+        <ScrollView
+            android:id="@+id/main_scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="visible"
+                android:paddingBottom="@dimen/spacing_xlarge"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/tv_featured_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/textStyleBold"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                    android:textColor="@color/colorPrimary"
+                    android:text="@string/title_nav_featured"
+                    android:layout_marginLeft="@dimen/spacing_medium"
+                    android:layout_marginRight="@dimen/spacing_medium"
+                    android:layout_marginTop="@dimen/spacing_medium" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerFeatured"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scrollbars="vertical"
+                    android:scrollingCache="true"
+                    android:padding="5dp"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+                <TextView
+                    android:id="@+id/tv_news_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/textStyleBold"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                    android:textColor="@color/colorPrimary"
+                    android:text="@string/title_nav_news"
+                    android:layout_marginLeft="@dimen/spacing_medium"
+                    android:layout_marginRight="@dimen/spacing_medium"
+                    android:layout_marginTop="@dimen/spacing_medium" />
+
+                <LinearLayout
+                    android:id="@+id/lyt_news"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/container_rounded_bordered"
+                    android:elevation="@dimen/elevation_container"
+                    android:layout_marginTop="@dimen/spacing_standard"
+                    android:layout_marginStart="@dimen/spacing_medium"
+                    android:layout_marginEnd="@dimen/spacing_medium"
+                    android:visibility="gone"
+                    tools:visibility="visible"
+                    android:orientation="vertical">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerNews"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/news_list_height"
+                        android:scrollbars="vertical"
+                        android:scrollingCache="true"
+                        android:layout_marginTop="@dimen/spacing_standard"
+                        android:layout_marginStart="@dimen/spacing_medium"
+                        android:layout_marginEnd="@dimen/spacing_medium"
+                        android:padding="@dimen/spacing_medium"
+                        tools:listitem="@layout/item_news_horizontal"
+                        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+                    <Button
+                        android:id="@+id/btn_news"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_medium"
+                        android:layout_marginStart="@dimen/spacing_medium"
+                        android:layout_marginEnd="@dimen/spacing_medium"
+                        android:layout_marginBottom="@dimen/spacing_standard"
+                        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                        app:fontFamily="@font/myriadpro_semibold"
+                        android:elevation="@dimen/spacing_xxmicro"
+                        android:textAllCaps="false"
+                        android:text="@string/see_more"/>
+
+                </LinearLayout>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/textStyleBold"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                    android:textColor="@color/colorPrimary"
+                    android:text="@string/title_home_quick_access"
+                    android:layout_marginLeft="@dimen/spacing_medium"
+                    android:layout_marginRight="@dimen/spacing_medium"
+                    android:layout_marginTop="@dimen/spacing_medium"
+                    android:layout_marginBottom="@dimen/spacing_standard"
+                    />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/spacing_medium"
+                    android:layout_marginRight="@dimen/spacing_medium"
+                    android:visibility="gone"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:id="@+id/lyt_quick_access_gastronomy"
+                        style="@style/AppTheme.QuickAccessButtons"
+                        android:elevation="@dimen/elevation_container"
+                        android:background="@drawable/gradient_box_rounded_1">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                tools:layout_editor_absoluteX="132dp"
+                                tools:layout_editor_absoluteY="130dp"
+                                android:tint="@color/white"
+                                app:srcCompat="@drawable/ic_nav_restaurant" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="20dp"
+                                android:layout_gravity="center_horizontal"
+                                style="@style/textStyleLight"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/text_size_small"
+                                android:gravity="center"
+                                android:text="@string/item_home_quick_access_gastronomy"
+                                android:maxLines="1"
+                                android:ellipsize="end"
+                                android:textAlignment="center"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:id="@+id/lyt_quick_access_taxi"
+                        style="@style/AppTheme.QuickAccessButtons"
+                        android:elevation="@dimen/elevation_container"
+                        android:background="@drawable/gradient_box_rounded_1">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                tools:layout_editor_absoluteX="132dp"
+                                tools:layout_editor_absoluteY="130dp"
+                                app:srcCompat="@drawable/ic_nav_taxi" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="20dp"
+                                android:layout_gravity="center_horizontal"
+                                style="@style/textStyleLight"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/text_size_small"
+                                android:gravity="center"
+                                android:text="@string/item_home_quick_access_taxi"
+                                android:maxLines="1"
+                                android:ellipsize="end"
+                                android:textAlignment="center"/>
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:id="@+id/lyt_quick_access_jobs"
+                        style="@style/AppTheme.QuickAccessButtons"
+                        android:elevation="@dimen/elevation_container"
+                        android:background="@drawable/gradient_box_rounded_1">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                tools:layout_editor_absoluteX="132dp"
+                                tools:layout_editor_absoluteY="130dp"
+                                app:srcCompat="@drawable/ic_nav_jobs"
+                                android:tint="@color/white"/>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="20dp"
+                                android:layout_gravity="center_horizontal"
+                                style="@style/textStyleLight"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/text_size_small"
+                                android:gravity="center"
+                                android:text="@string/title_nav_jobs"
+                                android:maxLines="1"
+                                android:ellipsize="end"
+                                android:textAlignment="center"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:id="@+id/lyt_quick_access_pharmacy"
+                        style="@style/AppTheme.QuickAccessButtons"
+                        android:elevation="@dimen/elevation_container"
+                        android:background="@drawable/gradient_box_rounded_1">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                tools:layout_editor_absoluteX="132dp"
+                                tools:layout_editor_absoluteY="130dp"
+                                app:srcCompat="@drawable/ic_pharmacy" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="20dp"
+                                android:layout_gravity="center_horizontal"
+                                style="@style/textStyleLight"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/text_size_small"
+                                android:gravity="center"
+                                android:text="@string/item_home_quick_access_pharmacy"
+                                android:maxLines="1"
+                                android:ellipsize="end"
+                                android:textAlignment="center"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/spacing_medium"
+                    android:layout_marginRight="@dimen/spacing_medium"
+                    android:visibility="gone"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:id="@+id/lyt_quick_access_search"
+                        style="@style/AppTheme.QuickAccessButtons"
+                        android:elevation="@dimen/elevation_container"
+                        android:background="@drawable/gradient_box_rounded_1">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                tools:layout_editor_absoluteX="132dp"
+                                tools:layout_editor_absoluteY="130dp"
+                                app:srcCompat="@drawable/ic_search" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="20dp"
+                                android:layout_gravity="center_horizontal"
+                                style="@style/textStyleLight"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/text_size_small"
+                                android:gravity="center"
+                                android:text="@string/title_nav_search"
+                                android:maxLines="1"
+                                android:ellipsize="end"
+                                android:textAlignment="center"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:id="@+id/lyt_quick_access_fav"
+                        style="@style/AppTheme.QuickAccessButtons"
+                        android:elevation="@dimen/elevation_container"
+                        android:background="@drawable/gradient_box_rounded_1">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                tools:layout_editor_absoluteX="132dp"
+                                tools:layout_editor_absoluteY="130dp"
+                                app:srcCompat="@drawable/ic_favorite_white" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="20dp"
+                                android:layout_gravity="center_horizontal"
+                                style="@style/textStyleLight"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/text_size_small"
+                                android:gravity="center"
+                                android:text="@string/title_nav_fav"
+                                android:maxLines="1"
+                                android:ellipsize="end"
+                                android:textAlignment="center"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:id="@+id/lyt_quick_access_map"
+                        style="@style/AppTheme.QuickAccessButtons"
+                        android:elevation="@dimen/elevation_container"
+                        android:background="@drawable/gradient_box_rounded_1">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                tools:layout_editor_absoluteX="132dp"
+                                tools:layout_editor_absoluteY="130dp"
+                                app:srcCompat="@drawable/ic_map_white" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="20dp"
+                                android:layout_gravity="center_horizontal"
+                                style="@style/textStyleLight"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/text_size_small"
+                                android:gravity="center"
+                                android:text="@string/title_nav_map"
+                                android:maxLines="1"
+                                android:ellipsize="end"
+                                android:textAlignment="center"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:id="@+id/lyt_quick_access_emergency"
+                        style="@style/AppTheme.QuickAccessButtons"
+                        android:elevation="@dimen/elevation_container"
+                        android:background="@drawable/gradient_box_rounded_1">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+                                tools:layout_editor_absoluteX="132dp"
+                                tools:layout_editor_absoluteY="130dp"
+                                app:srcCompat="@drawable/ic_nav_emergency" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="20dp"
+                                android:layout_gravity="center_horizontal"
+                                style="@style/textStyleLight"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/text_size_small"
+                                android:gravity="center"
+                                android:text="@string/title_nav_emergency"
+                                android:maxLines="1"
+                                android:ellipsize="end"
+                                android:textAlignment="center"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/container_rounded_bordered"
+                android:elevation="@dimen/elevation_container"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:layout_marginBottom="@dimen/spacing_large"
+                android:layout_marginLeft="@dimen/spacing_medium"
+                android:layout_marginRight="@dimen/spacing_medium"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/button_home_share_app"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/horizontal_image_button_height"
+                    android:drawablePadding="@dimen/spacing_large"
+                    android:layout_margin="@dimen/spacing_standard"
+                    android:paddingStart="@dimen/spacing_large"
+                    android:paddingEnd="@dimen/spacing_large"
+                    android:background="@color/white"
+                    android:text="@string/shareAppButton"
+                    style="@style/buttonBorderless"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/colorPrimary"
+                    android:drawableTint="@color/colorPrimary"
+                    android:drawableStart="@drawable/ic_share"/>
+
+                <Button
+                    android:id="@+id/button_home_subscription"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/horizontal_image_button_height"
+                    android:drawablePadding="@dimen/spacing_large"
+                    android:layout_margin="@dimen/spacing_standard"
+                    android:paddingStart="@dimen/spacing_large"
+                    android:paddingEnd="@dimen/spacing_large"
+                    android:background="@color/white"
+                    android:text="@string/title_home_subscription"
+                    style="@style/buttonBorderless"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/colorPrimary"
+                    android:drawableTint="@color/colorPrimary"
+                    android:drawableStart="@drawable/ic_add"/>
+
+            </LinearLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_view_container"
+        android:layout_width="@dimen/spacing_empty"
+        android:layout_height="@dimen/spacing_empty"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone"
+        tools:visibility="gone">
+
+        <ImageView
+            android:layout_width="@dimen/splash_icon_size"
+            android:layout_height="@dimen/splash_icon_size"
+            android:layout_gravity="center"
+            android:tint="@color/colorAccent"
+            android:src="@drawable/logo_splash_screen" />
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
