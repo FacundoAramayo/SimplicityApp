@@ -61,7 +61,7 @@ android {
             buildConfigField "int", "DATABASE_VERSION", "1"
             buildConfigField "boolean", "SHOW_CATEGORY_NAME", "true"
 
-            manifestPlaceholders = [appIcon: "@mipmap/ic_launcher_debug"]
+            manifestPlaceholders = [appIcon: "@mipmap/ic_launcher"]
         }
 
         soccoAppProd {
@@ -77,7 +77,7 @@ android {
             buildConfigField "int", "DATABASE_VERSION", "1"
             buildConfigField "boolean", "SHOW_CATEGORY_NAME", "true"
 
-            manifestPlaceholders = [appIcon: "@mipmap/ic_launcher_debug"]
+            manifestPlaceholders = [appIcon: "@mipmap/ic_launcher"]
         }
     }
 

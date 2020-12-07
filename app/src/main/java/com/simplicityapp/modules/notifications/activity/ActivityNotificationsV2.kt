@@ -6,6 +6,7 @@ import android.os.Handler
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.view.WindowManager
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -51,6 +52,7 @@ class ActivityNotificationsV2 : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        window.setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE)
         overridePendingTransition(R.anim.enter_slide_in, R.anim.enter_slide_out)
         binding = ActivityNotificationsBinding.inflate(layoutInflater)
         initActivity(binding)

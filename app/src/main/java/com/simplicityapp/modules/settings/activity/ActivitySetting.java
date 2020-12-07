@@ -52,6 +52,7 @@ public class ActivitySetting extends PreferenceActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
         addPreferencesFromResource(R.xml.setting_notification);
 
         sharedPref = new SharedPref(getApplicationContext());

@@ -36,6 +36,8 @@
 
     <color name="material_grey">#ff424242</color>
 
+    <color name="ic_launcher_background">#ffffff</color>
+
     <string-array name="arr_main_color_name">
         <item >Default</item>
         <item >Red</item>

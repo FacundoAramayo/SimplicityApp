@@ -2,6 +2,7 @@ package com.simplicityapp.modules.categories.activity
 
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.WindowManager
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.simplicityapp.modules.categories.fragment.CategoriesSelectorFragment
@@ -20,6 +21,7 @@ class CategoriesSelectorActivity : BaseActivity()  {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        window.setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE)
         binding = CategoriesSelectorActivityBinding.inflate(layoutInflater)
         initActivity(binding)
         if (savedInstanceState == null) {

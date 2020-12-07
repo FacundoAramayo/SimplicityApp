@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
+import android.view.WindowManager
 import androidx.core.app.ActivityCompat
 import androidx.core.content.PermissionChecker.PERMISSION_GRANTED
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -54,6 +55,7 @@ class ActivityLogin : BaseActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        window.setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         initActivity(binding)
         configureGoogleSignIn()

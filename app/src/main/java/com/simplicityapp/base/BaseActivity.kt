@@ -1,5 +1,6 @@
 package com.simplicityapp.base
 
+import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
 import com.simplicityapp.base.persistence.db.DatabaseHandler
@@ -11,6 +12,7 @@ open class BaseActivity: AppCompatActivity() {
     var db: DatabaseHandler? = null
 
     fun initActivity(binding: ViewBinding) {
+        window.setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE)
         setContentView(binding.root)
         db = DatabaseHandler(this)
         sharedPref = SharedPref(this)

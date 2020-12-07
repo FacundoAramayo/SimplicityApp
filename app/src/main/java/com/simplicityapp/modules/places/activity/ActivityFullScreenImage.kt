@@ -2,6 +2,7 @@ package com.simplicityapp.modules.places.activity
 
 import android.os.Bundle
 import android.view.View
+import android.view.WindowManager
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -20,6 +21,7 @@ class ActivityFullScreenImage : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        window.setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE)
         setContentView(R.layout.activity_full_screen_image)
 
         viewPager = findViewById<View>(R.id.pager) as ViewPager

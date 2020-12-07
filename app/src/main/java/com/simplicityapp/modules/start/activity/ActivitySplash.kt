@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
+import android.view.WindowManager
 import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
 import com.simplicityapp.base.config.analytics.AnalyticsConstants
@@ -25,6 +26,7 @@ class ActivitySplash : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        window.setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE)
         setContentView(R.layout.activity_splash)
         instance = this
 
