@@ -11,7 +11,7 @@
         android:id="@+id/img_welcome"
         android:layout_width="250dp"
         android:layout_height="210dp"
-        android:layout_above="@+id/tv_welcome_title"
+        android:layout_above="@+id/tv_welcome_title_2"
         android:layout_centerHorizontal="true"
         android:src="@drawable/welcome_2"
         tools:layout_editor_absoluteX="132dp"
@@ -19,7 +19,7 @@
         android:layout_marginBottom="25dp"/>
 
     <TextView
-        android:id="@+id/tv_welcome_title"
+        android:id="@+id/tv_welcome_title_2"
         android:layout_width="@dimen/text_title_width"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
@@ -35,7 +35,7 @@
         android:id="@+id/tv_welcome_description"
         android:layout_width="@dimen/text_desc_width"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_welcome_title"
+        android:layout_below="@+id/tv_welcome_title_2"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="35dp"
         android:fontFamily="@font/raleway_light"
