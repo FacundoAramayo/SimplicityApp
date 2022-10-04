@@ -4,7 +4,6 @@ import androidx.test.espresso.intent.Intents
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.simplicityapp.robot.WelcomeRobot
-import com.simplicityapp.modules.start.*
 import com.simplicityapp.modules.start.activity.ActivityWelcome
 import org.junit.After
 import org.junit.Before
@@ -41,6 +40,8 @@ class ActivityWelcomeTest {
     fun verifySecondScreenIsShownCorrectly() {
         WelcomeRobot()
             .launch()
+            .next()
+            .verifySecondTitle("La guía más completa")
     }
 
     @Test
